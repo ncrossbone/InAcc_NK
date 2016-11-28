@@ -16,7 +16,7 @@ Ext.define('InAcc.view.map.CoreMap', {
 	},
 	
 	mapRendered: function(p){
-        var me = this;   
+       var me = this;   
         
         var timerId = window.setInterval(function(){
         	

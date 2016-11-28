@@ -12,7 +12,6 @@ Ext.define("InAcc.view.west.WestContainer", {
     defaults: {
         styleHtmlContent: true
     },
-    
     collapsible: true,
     
     width: 300,

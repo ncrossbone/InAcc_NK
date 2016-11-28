@@ -7,7 +7,7 @@ Ext.define("InAcc.view.main.Main", {
 	
 	xtype: "inacc-main",
 	
-	title: "panel test",
+	title: "",
 	
 	layout: {
 		type: "absolute"
@@ -22,9 +22,6 @@ Ext.define("InAcc.view.main.Main", {
 	initComponent: function(){
 		
 		this.callParent();
-		
-		console.info(Ext.getBody().getWidth());
-		console.info(Ext.getBody().getHeight());
 		this.setWidth(Ext.getBody().getWidth());
 		this.setHeight(Ext.getBody().getHeight());
 	}
