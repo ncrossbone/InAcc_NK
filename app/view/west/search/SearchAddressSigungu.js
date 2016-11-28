@@ -11,16 +11,12 @@ Ext.define("InAcc.view.west.search.SearchAddressSigungu", {
     height: "100%",
     items:[{
     	xtype:"container",
-    	width:30
-    },{
-    	xtype:"label",
-    	text:"시군구"
-    },{
-    	xtype:"container",
-    	width:37
+    	width:50
     },{
     	xtype:"combo",
-    	width: 100,
-    	editable: false
+    	fieldLabel:"시군구",
+    	width: 200,
+    	editable: false,
+    	disabled:true
     }]
 });

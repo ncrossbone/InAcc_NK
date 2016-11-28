@@ -1,8 +1,8 @@
-Ext.define("InAcc.view.west.search.SearchAddressSido", {
+Ext.define("InAcc.view.west.search.SearchAddressDoro", {
 	
 	extend: "Ext.panel.Panel",
 	
-	xtype: "inacc-west-search-SearchAddressSido",
+	xtype: "inacc-west-search-SearchAddressDoro",
 
     layout :{
     	type:"hbox"
@@ -13,9 +13,9 @@ Ext.define("InAcc.view.west.search.SearchAddressSido", {
     	xtype:"container",
     	width:50
     },{
-    	xtype:"combo",
-    	fieldLabel: "시도",
+    	xtype:"textfield",
+    	fieldLabel: '도로명',
     	width: 200,
-    	editable: false
+    	disabled:true
     }]
 });
