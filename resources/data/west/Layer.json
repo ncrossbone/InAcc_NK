@@ -1,21 +1,298 @@
 [{
-	"success" : true,
-	"children" : [{
-				"id" : 1,
-				"name" : "Phil",
-				"leaf" : true
-			}, {
-				"id" : 2,
-				"name" : "Nico",
-				"expanded" : true,
-				"children" : [{
-							"id" : 3,
-							"name" : "Mitchell",
-							"leaf" : true
-						}]
-			}, {
-				"id" : 4,
-				"name" : "Sue",
-				"loaded" : true
-			}]
+	"id": "0",
+	"text": "수계",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "tmdl:tkdaeyuyeok",
+		"sUrl": "",
+		"text": "한강 특대유역",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "tmdl:kktkdaeyuyeok",
+		"text": "금강 특대유역",
+		"iconCls": "layerIconSize layer2",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "tmdl:9hangang",
+		"text": "한강 단위유역",
+		"iconCls": "layerIconSize layer3",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "tmdl:12nak",
+		"text": "낙동강 단위유역",
+		"iconCls": "layerIconSize layer4",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "tmdl:10km",
+		"text": "금강 단위유역",
+		"iconCls": "layerIconSize layer5",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "tmdl:11yeoung",
+		"text": "영산강·섬진강 단위유역",
+		"iconCls": "layerIconSize layer6",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "tmdl:jinAdan",
+		"text": "진위천 단위유역",
+		"iconCls": "layerIconSize layer7",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "8",
+	"text": "수질측정지점",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "9",
+		"text": "수질측정소_하천수",
+		"iconCls": "layerIconSize layer9",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "10",
+		"text": "수질측정소_호소수",
+		"iconCls": "layerIconSize layer10",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "11",
+		"text": "수질측정소_농업용수",
+		"iconCls": "layerIconSize layer11",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "12",
+		"text": "수질측정소_공단배수",
+		"iconCls": "layerIconSize layer12",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "13",
+		"text": "수질측정소_도시관류",
+		"iconCls": "layerIconSize layer13",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "14",
+		"text": "보",
+		"iconCls": "layerIconSize layer14",
+		"leaf": true,
+		"checked": false
+	}]
+},{
+	"id": "15",
+	"text": "수질자동측정지점",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "16",
+		"text": "수질측정소_자동",
+		"iconCls": "layerIconSize layer16",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "17",
+		"text": "수질TMS",
+		"iconCls": "layerIconSize layer17",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "18",
+	"text": "기타측정지점",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "19",
+		"text": "수리수문기상_수위",
+		"iconCls": "layerIconSize layer19",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "20",
+		"text": "수리수문기상_유량",
+		"iconCls": "layerIconSize layer20",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "21",
+		"text": "수리수문기상_우량",
+		"iconCls": "layerIconSize layer21",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "22",
+		"text": "수리수문기상_AWS",
+		"iconCls": "layerIconSize layer22",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "23",
+		"text": "수리수문기상_댐",
+		"iconCls": "layerIconSize layer23",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "24",
+		"text": "지상기상관측소",
+		"iconCls": "layerIconSize layer24",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "25",
+	"text": "환경기초시설",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "26",
+		"text": "농공단지처리시설",
+		"iconCls": "layerIconSize layer26",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "27",
+		"text": "기타공동처리시설",
+		"iconCls": "layerIconSize layer27",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "28",
+		"text": "분뇨처리시설",
+		"iconCls": "layerIconSize layer28",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "29",
+		"text": "산업폐수종말처리시설",
+		"iconCls": "layerIconSize layer29",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "30",
+		"text": "매립장침출수처리시설",
+		"iconCls": "layerIconSize layer30",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "31",
+		"text": "축산폐수공공처리시설",
+		"iconCls": "layerIconSize layer31",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "32",
+		"text": "마을하수도",
+		"iconCls": "layerIconSize layer32",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "33",
+		"text": "하수종말처리시설",
+		"iconCls": "layerIconSize layer33",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "34",
+		"text": "취수장",
+		"iconCls": "layerIconSize layer34",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "35",
+	"text": "하천",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "36",
+		"text": "국가하천",
+		"iconCls": "layerIconSize layer36",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "37",
+		"text": "지방하천",
+		"iconCls": "layerIconSize layer37",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "38",
+		"text": "지방하천상세",
+		"iconCls": "layerIconSize layer38",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "39",
+	"text": "수질영향권역",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "40",
+		"text": "대권역",
+		"iconCls": "layerIconSize layer40",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "41",
+		"text": "중권역",
+		"iconCls": "layerIconSize layer41",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "42",
+		"text": "소권역",
+		"iconCls": "layerIconSize layer42",
+		"leaf": true,
+		"checked": false
+	}]
+},{
+	"id": "43",
+	"text": "행정구역",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "44",
+		"text": "법정동_시도",
+		"iconCls": "layerIconSize layer44",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "45",
+		"text": "법정동_시군구",
+		"iconCls": "layerIconSize layer45",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "46",
+		"text": "법정동_읍면동",
+		"iconCls": "layerIconSize layer46",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "47",
+		"text": "법정동_동리",
+		"iconCls": "layerIconSize layer47",
+		"leaf": true,
+		"checked": false
+	}]
 }]

@@ -16,4 +16,5 @@ Ext.define("InAcc.store.west.Layer", {
 	constructor: function(){
 		this.callParent();
 	}
+	
 });
