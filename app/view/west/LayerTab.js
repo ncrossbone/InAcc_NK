@@ -33,7 +33,7 @@ Ext.define("InAcc.view.west.LayerTab", {
 					for(var i = 0; i < node.childNodes.length; i++){
 						if(node.data.checked==false){
 							node.childNodes[i].set('checked',false);
-							//dLayer.layerOff(node.childNodes[i].id);
+							dLayer.layerOff(node.childNodes[i].id);
 						}else{
 							node.childNodes[i].set('checked',true);
 							dLayer.layerOn(node.childNodes[i].id);
