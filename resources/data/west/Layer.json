@@ -55,37 +55,37 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "9",
+		"id": "tmdl:4suji_ha",
 		"text": "수질측정소_하천수",
 		"iconCls": "layerIconSize layer9",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "10",
+		"id": "tmdl:4suji_ho",
 		"text": "수질측정소_호소수",
 		"iconCls": "layerIconSize layer10",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "11",
+		"id": "tmdl:4suji_nong",
 		"text": "수질측정소_농업용수",
 		"iconCls": "layerIconSize layer11",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "12",
+		"id": "tmdl:4suji_gong",
 		"text": "수질측정소_공단배수",
 		"iconCls": "layerIconSize layer12",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "13",
+		"id": "tmdl:4suji_do",
 		"text": "수질측정소_도시관류",
 		"iconCls": "layerIconSize layer13",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "14",
+		"id": "tmdl:14bo",
 		"text": "보",
 		"iconCls": "layerIconSize layer14",
 		"leaf": true,
@@ -94,17 +94,17 @@
 },{
 	"id": "15",
 	"text": "수질자동측정지점",
-	"iconCls": "layerNoneImg",
+	"iconCls": "tmdl:layerNoneImg",
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "16",
+		"id": "tmdl:5suzi_ja",
 		"text": "수질측정소_자동",
 		"iconCls": "layerIconSize layer16",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "17",
+		"id": "tmdl:5suzi_tms",
 		"text": "수질TMS",
 		"iconCls": "layerIconSize layer17",
 		"leaf": true,
@@ -117,37 +117,37 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "19",
+		"id": "tmdl:6suri_su",
 		"text": "수리수문기상_수위",
 		"iconCls": "layerIconSize layer19",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "20",
+		"id": "tmdl:6suri_yu",
 		"text": "수리수문기상_유량",
 		"iconCls": "layerIconSize layer20",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "21",
+		"id": "tmdl:6suri_woo",
 		"text": "수리수문기상_우량",
 		"iconCls": "layerIconSize layer21",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "22",
+		"id": "tmdl:6suri_aws",
 		"text": "수리수문기상_AWS",
 		"iconCls": "layerIconSize layer22",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "23",
+		"id": "tmdl:6suri_dam",
 		"text": "수리수문기상_댐",
 		"iconCls": "layerIconSize layer23",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "24",
+		"id": "tmdl:6ji",
 		"text": "지상기상관측소",
 		"iconCls": "layerIconSize layer24",
 		"leaf": true,
@@ -160,55 +160,55 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "26",
+		"id": "tmdl:17nong",
 		"text": "농공단지처리시설",
 		"iconCls": "layerIconSize layer26",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "27",
+		"id": "tmdl:17etc",
 		"text": "기타공동처리시설",
 		"iconCls": "layerIconSize layer27",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "28",
+		"id": "tmdl:17boon",
 		"text": "분뇨처리시설",
 		"iconCls": "layerIconSize layer28",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "29",
+		"id": "tmdl:17san",
 		"text": "산업폐수종말처리시설",
 		"iconCls": "layerIconSize layer29",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "30",
+		"id": "tmdl:17me",
 		"text": "매립장침출수처리시설",
 		"iconCls": "layerIconSize layer30",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "31",
+		"id": "tmdl:17chok",
 		"text": "축산폐수공공처리시설",
 		"iconCls": "layerIconSize layer31",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "32",
+		"id": "tmdl:17ma",
 		"text": "마을하수도",
 		"iconCls": "layerIconSize layer32",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "33",
+		"id": "tmdl:17ha",
 		"text": "하수종말처리시설",
 		"iconCls": "layerIconSize layer33",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "34",
+		"id": "tmdl:15chi",
 		"text": "취수장",
 		"iconCls": "layerIconSize layer34",
 		"leaf": true,
@@ -221,19 +221,19 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "36",
+		"id": "tmdl:13kuk",
 		"text": "국가하천",
 		"iconCls": "layerIconSize layer36",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "37",
+		"id": "tmdl:13ji",
 		"text": "지방하천",
 		"iconCls": "layerIconSize layer37",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "38",
+		"id": "tmdl:13ji2",
 		"text": "지방하천상세",
 		"iconCls": "layerIconSize layer38",
 		"leaf": true,
@@ -246,19 +246,19 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "40",
+		"id": "tmdl:3dae",
 		"text": "대권역",
 		"iconCls": "layerIconSize layer40",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "41",
+		"id": "tmdl:3jong",
 		"text": "중권역",
 		"iconCls": "layerIconSize layer41",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "42",
+		"id": "tmdl:3so",
 		"text": "소권역",
 		"iconCls": "layerIconSize layer42",
 		"leaf": true,
@@ -271,25 +271,25 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "44",
+		"id": "tmdl:2sido",
 		"text": "법정동_시도",
 		"iconCls": "layerIconSize layer44",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "45",
+		"id": "tmdl:2sigungu",
 		"text": "법정동_시군구",
 		"iconCls": "layerIconSize layer45",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "46",
+		"id": "tmdl:2um",
 		"text": "법정동_읍면동",
 		"iconCls": "layerIconSize layer46",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "47",
+		"id": "tmdl:2ri",
 		"text": "법정동_동리",
 		"iconCls": "layerIconSize layer47",
 		"leaf": true,

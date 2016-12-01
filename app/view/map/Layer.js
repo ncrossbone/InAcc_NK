@@ -29,7 +29,8 @@ Ext.define('InAcc.view.map.Layer', {
 					yx : {'EPSG:4326' : true}
 				} 
 		);
-
+		console.info(layer);
+		
 		coreMap.map.addLayers([layer]);
 		
 		layer.setVisibility(true);
@@ -46,7 +47,6 @@ Ext.define('InAcc.view.map.Layer', {
 		this.layers[layerIdx].layer.setVisibility(false);*/
 	},
 	layerOff: function(id){
-		
 		var layerIdx = this.layers.map(function(layer){
 			//console.info(layer.id);
 			return layer.id;
