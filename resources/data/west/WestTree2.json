@@ -1,0 +1,38 @@
+[{
+	"id": "0",
+	"text": "환경부",
+	"expanded": false,
+	"children": [{
+		"id": "1",
+		"text": "토지피복도",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "2",
+	"text": "산림청",
+	"expanded": false,
+	"children": [{
+		"id": "3",
+		"text": "산림황패도",
+		"iconCls": "layerIconSize layer9",
+		"leaf": true,
+		"checked": false
+	}]
+},{
+	"id": "4",
+	"text": "농림수산부",	
+	"expanded": false,
+	"children": [{
+		"id": "5",
+		"text": "경작도",
+		"iconCls": "layerIconSize layer16",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "10",
+	"text": "",
+	"expanded": false,
+}]

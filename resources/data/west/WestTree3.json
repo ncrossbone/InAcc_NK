@@ -1,0 +1,59 @@
+[{
+	"id": "0",
+	"text": "기본지리정보",
+	"expanded": false,
+	"children": [{
+		"id": "1",
+		"text": "시설",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "2",
+		"text": "건물",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "3",
+		"text": "주기",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "4",
+		"text": "교통",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "5",
+		"text": "수계",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "6",
+		"text": "경계",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "7",
+	"text": "행정구역",
+	"expanded": false,
+	"children": [{
+		"id": "8",
+		"text": "시도경계",
+		"iconCls": "layerIconSize layer9",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "9",
+		"text": "시군경계",
+		"iconCls": "layerIconSize layer9",
+		"leaf": true,
+		"checked": false
+	}]
+}]

@@ -1,0 +1,115 @@
+[{
+	"id": "0",
+	"text": "농지",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "1",
+		"sUrl": "",
+		"text": "밭",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "2",
+		"text": "논",
+		"iconCls": "layerIconSize layer2",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "3",
+		"text": "과수원",
+		"iconCls": "layerIconSize layer2",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "4",
+	"text": "산업에너지",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "5",
+		"text": "소공업지구",
+		"iconCls": "layerIconSize layer9",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "6",
+		"text": "대공업지구",
+		"iconCls": "layerIconSize layer10",
+		"leaf": true,
+		"checked": false
+	}]
+},{
+	"id": "7",
+	"text": "산지",
+	"iconCls": "tmdl:layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "8",
+		"text": "임목지",
+		"iconCls": "layerIconSize layer16",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "9",
+		"text": "나지",
+		"iconCls": "layerIconSize layer17",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "10",
+	"text": "주택도시",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "11",
+		"text": "제1종전용",
+		"iconCls": "layerIconSize layer19",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "12",
+		"text": "제2종전용",
+		"iconCls": "layerIconSize layer20",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "13",
+		"text": "준주거",
+		"iconCls": "layerIconSize layer21",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "14",
+	"text": "환경",
+	"iconCls": "layerNoneImg",
+	"checked": false,
+	"expanded": false,
+	"children": [{
+		"id": "15",
+		"text": "초지",
+		"iconCls": "layerIconSize layer26",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "16",
+		"text": "습지",
+		"iconCls": "layerIconSize layer27",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "17",
+		"text": "수역",
+		"iconCls": "layerIconSize layer28",
+		"leaf": true,
+		"checked": false
+	}]
+}]

@@ -1,0 +1,41 @@
+[{
+	"id": "0",
+	"text": "행정구역",
+	"expanded": false,
+	"children": [{
+		"id": "1",
+		"text": "시도별 인구수",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "2",
+		"text": "시군별 인구수",
+		"iconCls": "layerIconSize layer2",
+		"leaf": true,
+		"checked": false
+	}]
+}, {
+	"id": "3",
+	"text": "실태DB",
+	"expanded": false,
+	"children": [{
+		"id": "4",
+		"text": "시도별 농지면적",
+		"iconCls": "layerIconSize layer9",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "5",
+		"text": "시도별 산지면적",
+		"iconCls": "layerIconSize layer10",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "6",
+		"text": "시도별 주거지역비율",
+		"iconCls": "layerIconSize layer10",
+		"leaf": true,
+		"checked": false
+	}]
+}]
