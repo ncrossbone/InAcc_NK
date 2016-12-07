@@ -9,16 +9,21 @@ Ext.define("InAcc.view.north.NorthContainer", {
 	},
 	bodyStyle:{"background-color": "#ececec"},
 	border:false,
-	height:35,
+	height:50,
 	items:[{
 		xtype:"container",
-		width:500
+		width:330
 	},{
 		xtype: 'combobox',
+		labelStyle:"font-weight: bold;",
+		style:" margin-top:8px;",
+		fieldLabel: "시범지역위치이동",
+		labelWidth: 120,
+		width:280,
 		editable: false
 	},{
 		xtype:"container",
-		width:200
+		width:400
 	},{
 		xtype:'form',
 		reference : 'form',
@@ -26,17 +31,17 @@ Ext.define("InAcc.view.north.NorthContainer", {
 			type:"hbox"
 		},
 		bodyStyle:{"background-color": "#ececec"},
-		//style:"margin-top:6px;",
+		style:"margin-top:5px;",
 		items:[{
 			xtype:"container",
-			width:10
-			//height:37
+			width:10,
+			height:38
 		},{
 			xtype:"combobox",
 			labelStyle:"font-weight: bold;",
-			//style:" margin-top:7px;",
+			style:" margin-top:3px;",
 			fieldLabel: "시도",
-			width:250,
+			width:220,
 			editable: false
 		},{
 			xtype:"container",
@@ -44,9 +49,9 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		},{
 			xtype:"combobox",
 			labelStyle:"font-weight: bold;",
-			//style:" margin-top:7px;",
+			style:" margin-top:3px;",
 			fieldLabel: "시군구",
-			width:250,
+			width:220,
 			editable: false
 		},{
 			xtype:"container",
@@ -54,8 +59,8 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		},{
 			xtype:"button",
 			text:"검색",
-			//style:" margin-top:7px;",
-			width:60,
+			style:" margin-top:3px;",
+			width:80,
 			handler: function() {
 				var searchResultWindow = Ext.create("InAcc.view.south.SouthContainer");
 				
@@ -69,15 +74,5 @@ Ext.define("InAcc.view.north.NorthContainer", {
 	},{
 		xtype:"container",
 		width:100
-	}/*,{
-		xtype:"button",
-		text:"일반지도",
-		style:" margin-top:13px;",
-		width:100
-	},{
-		xtype:"button",
-		text:"위성지도",
-		style:" margin-top:13px;",
-		width:100
-	}*/]
+	}]
 });
