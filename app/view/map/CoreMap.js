@@ -28,8 +28,8 @@ Ext.define('InAcc.view.map.CoreMap', {
         			source: new ol.source.OSM()
         		})],
         		view: new ol.View({
-        			center: ol.proj.fromLonLat([37.41, 8.82]),
-        			zoom: 4
+        			center: ol.proj.fromLonLat([127, 36]),
+        			zoom: 8
         		})
         	});
         	
