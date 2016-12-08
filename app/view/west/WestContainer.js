@@ -5,7 +5,7 @@ Ext.define("InAcc.view.west.WestContainer", {
     collapsible: true,
     collapseDirection: 'left',
     width: 320,
-    style:"margin-top:50px;",
+    style:"margin-top:70px;",
     title:"Layers",
     
     layout:{
@@ -132,6 +132,6 @@ Ext.define("InAcc.view.west.WestContainer", {
     initComponent: function(){
     	
     	this.callParent();
-    	this.setHeight(Ext.getBody().getHeight()-50);
+    	this.setHeight(Ext.getBody().getHeight()-70);
     }
 });
