@@ -26,8 +26,6 @@ Ext.define('InAcc.view.map.CoreMap', {
         	me.initBaseMap();
         	me.baseMapLayers[1].setVisible(true);
         	me.baseMapLayers[2].setVisible(true);
-        	console.info(me.map.layer);
-        	console.info(me.map.layers);
         	
             window.clearInterval(timerId);
 		}, 1);
@@ -53,33 +51,101 @@ Ext.define('InAcc.view.map.CoreMap', {
     		source: new ol.source.OSM()
     	}));
     	
-    	var tmp = ol.proj.fromLonLat([123.81636217878827,38.18199192485683])[0] + "," + ol.proj.fromLonLat([123.81636217878827,38.18199192485683])[1] + "," +  ol.proj.fromLonLat([131.35748315880258,42.992671531968845])[0] + "," + ol.proj.fromLonLat([131.35748315880258,42.992671531968845])[1];
     	
+    	var projection = ol.proj.get('EPSG:4326');
+    	var projectionExtent = projection.getExtent();
+    	
+    	var tileSize = 512;
+    	
+    	var maxResolution = ol.extent.getWidth(projectionExtent) / (tileSize * 2);
+    	var resolutions = new Array(16);
+    	var z;
+    	for (z = 0; z < 16; ++z) {
+    	  resolutions[z] = maxResolution / Math.pow(2, z);
+    	}
+    	//118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845
     	///http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml&VERSION=1.3.0&REQUEST=GetMap&Layer=%EC%8B%9C%EA%B5%B0%EA%B2%BD%EA%B3%84&FORMAT=image/png&width=300&height=300&CRS=EPSG:4326&BBOX=123.81636217878827%2038.18199192485683%20131.35748315880258%2042.992671531968845
-    	me.baseMapLayers.push(new ol.layer.Tile({
-            //extent: [-13884991, 2870341, -7455066, 6338219],
-            source: new ol.source.TileWMS({
-              url: 'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&width=300&height=300&CRS=EPSG:3857&bbox=' + tmp + '&layers=시군경계&styles=default',
-             //params: {'Layer': '시도경계',
-            	 	  //'BBOX': [123.81636217878827,2038.18199192485683,20131.35748315880258,2042.992671531968845]}
+    	me.baseMapLayers.push(new ol.layer.Image({
+            extent: [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
+            source: new ol.source.ImageWMS({
+              //url: 'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&width=512&height=512&CRS=EPSG:4326&bbox=123.81636217878827,38.18199192485683,131.35748315880258,42.992671531968845&layers=시도경계&styles=default'
+             url:'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml'
+            	 +'&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&TRANSPARENT=true&LAYERS=%EC%8B%9C%EB%8F%84%EA%B2%BD%EA%B3%84'
+            	 +'&SRS=EPSG%3A4326&format=image%2Fpng&bgcolor=0xffffff&exceptions=INIMAGE&label=HIDE_OVERLAP'
+            	 + '&graphic_buffer=64&ANTI=true&TEXT_ANTI=true&CRS=EPSG%3A4326&STYLES=default'
+            	 + '&bbox=118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845'
+            	// + '&width=512&height=512',
+             /*tileUrlFunction: function(tileCoord, pixelRatio, projection) {
+            	 var z = tileCoord[0];
+                 var x = tileCoord[1];
+                 var y = -tileCoord[2] - 1;
+                 console.info(tileCoord);
+                 console.info(pixelRatio);
+                 console.info(projection);
+                 // wrap the world on the X axis
+                 var n = Math.pow(2, z + 1); // 2 tiles at z=0
+                 x = x % n;
+                 if (x * n < 0) {
+                   // x and n differ in sign so add n to wrap the result
+                   // to the correct sign
+                   x = x + n;
+                 }
+                 console.info(x);
+                 console.info(y);
+                 return urlTemplate.replace('{z}', z.toString())
+                     .replace('{y}', y.toString())
+                     .replace('{x}', x.toString());
+             },*/
+             
+            /* params : {
+            	 LAYERS : '시도지역',
+                 SRS : 'EPSG:4326',
+                 format : 'image/png',
+                 bgcolor : '0xffffff', 
+                 exceptions : 'BLANK',
+                 //label : 'HIDE_OVERLAP',
+                 //graphic_buffer : '64',
+                 //ANTI : 'true',
+                 //TEXT_ANTI : 'true',
+                 VERSION:'1.3.0',
+                 STYLES:'default'
+                 //BBOX:'123.81636217878827,38.18199192485683,131.35748315880258,42.992671531968845'
+     		}*/
+            	/* ,params: {'LAYERS':'시도경계',
+            	  		'CRS':'EPSG:4326'}*/
              // serverType: 'geoserver'
             })
           }));
-		
-    	console.info(tmp);
-    	console.info(ol.proj.fromLonLat([123.81636217878827,38.18199192485683]));
-    	console.info(ol.proj.fromLonLat([131.35748315880258,42.992671531968845]));
-    	
+		console.info(ol.proj.get( "EPSG:4326" ).getExtent());
+    	//ol.proj.get('EPSG:4326').setExtent( [-180.0000, -90.0000, 180.0000, 90.0000] );
     	//console.info(me.baseMapLayers[2]);
+		
+		/*me.baseMapLayers.push(new ol.layer.Image({
+            //extent: [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
+            source: new ol.source.ImageWMS({
+             url:'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml'
+            	 +'&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&TRANSPARENT=true&LAYERS=%EC%8B%9C%EB%8F%84%EA%B2%BD%EA%B3%84'
+            	 +'&SRS=EPSG%3A4326&format=image%2Fpng&bgcolor=0xffffff&exceptions=INIMAGE&label=HIDE_OVERLAP'
+            	 + '&graphic_buffer=64&ANTI=true&TEXT_ANTI=true&CRS=EPSG%3A4326&STYLES=default'
+            	 + '&bbox=118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845'
+            	 + '&width=512&height=512'
+            })
+          }));*/
+		
+		
     	me.map = new ol.Map({
     		target: '_mapDiv_',
     		layers: me.baseMapLayers,
+    		//extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
+    		extent : ol.proj.get( "EPSG:4326" ).getExtent(),
     		view: new ol.View({
-    			center: ol.proj.fromLonLat([127, 37]),
-    			//center: [127, 37],
-    			zoom: 8
+    			projection: 'EPSG:4326',
+    		    center: [127.58692266879542, 40.387331728412835],
+    		    zoom: 8
     		})
     	});
+    	
+    	
     	
     }
 });
