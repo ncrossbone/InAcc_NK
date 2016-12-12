@@ -39,9 +39,10 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		},{
 			xtype:"combobox",
 			labelStyle:"font-weight: bold;",
-			style:" margin-top:3px;",
+			style:"margin-top:3px;",
 			fieldLabel: "시도",
 			width:220,
+			store: Ext.create('InAcc.store.north.Sido'),
 			editable: false
 		},{
 			xtype:"container",
@@ -49,7 +50,7 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		},{
 			xtype:"combobox",
 			labelStyle:"font-weight: bold;",
-			style:" margin-top:3px;",
+			style:"margin-top:3px;",
 			fieldLabel: "시군구",
 			width:220,
 			editable: false

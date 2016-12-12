@@ -1,9 +1,21 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="EUC-KR">
+<meta charset="UTF-8">
 <title>Insert title here</title>
-<script type="text/javascript" src="./openLayers-3.19.1/ol.js"></script>
+
+<script rel="text/javascript" src="./openLayers-3.19.1/ol.js"/>
+
+<!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.19.1/ol.js"></script> -->
+    
+    
+	
+	
+	
+	<!-- OpenLayers3 LayerSwicher Script -->
+
+<script type="text/javascript" src="http://221.148.35.76:8880/ol3-UIT/WebMap/js/plugin/jquery.xml2json.js"></script>
+<link rel="alternate" type="application/rss+xml" title="ugistech" href="http://www.ugistech.net/feed.xml">
 
 <!-- localhost:8070 -->
 <!-- <script language="JavaScript" type="text/javascript" src="http://map.vworld.kr/js/apis.do?type=Base&apiKey=A8024419-242F-3817-A18B-D43CB6B83762"></script> -->
@@ -14,6 +26,9 @@
 <link rel="stylesheet" type="text/css" href="./openLayers-3.19.1/ol.css"/>
 <link rel="stylesheet" type="text/css" href="./ext-6.2.0/build/classic/theme-triton/resources/theme-triton-all.css">
 <script type ="text/javascript" src="app.js"></script>
+<script type="text/javascript">
+ol.ProxyHost = "./resources/Proxy.jsp?resourceUrl="; // 크로스도메인 해결
+</script>
 </head>
 <body>
 
