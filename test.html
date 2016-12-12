@@ -1,0 +1,79 @@
+<!doctype html>
+<html>
+    <head>
+ 
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.6.0/css/ol.css" type="text/css">
+    <script type="text/javascript" src="http://openlayers.org/en/v3.6.0/build/ol-debug.js"></script>
+    <script type="text/javascript" src="./proj4-src.js"></script>
+     
+    </head>
+    <body>
+ 
+    <div id="map" class="map"></div>
+ 
+    <script>
+ 
+        proj4.defs("EPSG:2096","+proj=tmerc +lat_0=38 +lon_0=129 +k=1 +x_0=200000 +y_0=500000 +ellps=bessel +units=m +no_defs");
+       
+        ol.proj.get('EPSG:2096').setExtent( [108158.32, 111012.87, 256584.86, 571234.42] );
+     
+        var mapHostUrl = "http://221.148.35.76:8880/geonuris/";
+        var mapExtent = [142155.649972905, 304513.8472, 221317.40489452498, 377017.9048];
+        var mapCRS = "EPSG:2096";
+        var gdxFile = "andong_pgms-2096.xml";       
+         
+        var serviceUrl = mapHostUrl + 'wms?GDX=' + gdxFile;
+        //var trans = new ol.proj.transform([256584.86, 571234.42], 'EPSG:2096','EPSG:4326');
+       // console.info(trans);
+         
+        var map = new ol.Map({
+            target : 'map',
+            renderer : 'canvas'
+        });
+ 
+ 		console.info(ol.proj.get( mapCRS ).getExtent());
+        var view = new ol.View({
+            projection : mapCRS,
+            center: [179619.9228263658, 340425.31890091544],
+            zoom: 4,
+            extent : ol.proj.get( mapCRS ).getExtent()
+        });                 
+ 
+        map.setView( view );
+         
+        console.info(serviceUrl);
+        var wmsSource = new ol.source.TileWMS({
+            url : serviceUrl,
+            params : {
+                LAYERS : 'ROOT',
+                CRS : mapCRS,
+                format : 'image/png',
+                bgcolor : '0xffffff', 
+                exceptions : 'BLANK',
+                label : 'HIDE_OVERLAP',
+                graphic_buffer : '64',
+                ANTI : 'true',
+                TEXT_ANTI : 'true'
+            }
+        });
+         
+        wmsLayer = new ol.layer.Tile({
+            source : wmsSource
+        });
+         
+         
+        function addTileWMS() {
+            map.addLayer( wmsLayer );
+        }
+         
+        function removeTileWMS() {
+            map.removeLayer( wmsLayer );
+        }
+         
+        addTileWMS();
+         console.info(map.getView());
+     
+    </script>
+ 
+    </body>
+</html>
