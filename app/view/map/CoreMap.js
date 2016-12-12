@@ -52,7 +52,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     	}));
     	
     	
-    	var projection = ol.proj.get('EPSG:4326');
+    	/*var projection = ol.proj.get('EPSG:4326');
     	var projectionExtent = projection.getExtent();
     	
     	var tileSize = 512;
@@ -62,19 +62,20 @@ Ext.define('InAcc.view.map.CoreMap', {
     	var z;
     	for (z = 0; z < 16; ++z) {
     	  resolutions[z] = maxResolution / Math.pow(2, z);
-    	}
+    	}*/
     	//118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845
     	///http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml&VERSION=1.3.0&REQUEST=GetMap&Layer=%EC%8B%9C%EA%B5%B0%EA%B2%BD%EA%B3%84&FORMAT=image/png&width=300&height=300&CRS=EPSG:4326&BBOX=123.81636217878827%2038.18199192485683%20131.35748315880258%2042.992671531968845
-    	me.baseMapLayers.push(new ol.layer.Image({
-            extent: [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
-            source: new ol.source.ImageWMS({
+    	me.baseMapLayers.push(new ol.layer.Tile({
+            //extent: [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
+            source: new ol.source.TileWMS({
               //url: 'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&width=512&height=512&CRS=EPSG:4326&bbox=123.81636217878827,38.18199192485683,131.35748315880258,42.992671531968845&layers=시도경계&styles=default'
-             url:'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml'
+             /*url:'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml'
             	 +'&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&TRANSPARENT=true&LAYERS=%EC%8B%9C%EB%8F%84%EA%B2%BD%EA%B3%84'
             	 +'&SRS=EPSG%3A4326&format=image%2Fpng&bgcolor=0xffffff&exceptions=INIMAGE&label=HIDE_OVERLAP'
             	 + '&graphic_buffer=64&ANTI=true&TEXT_ANTI=true&CRS=EPSG%3A4326&STYLES=default'
             	 + '&bbox=118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845'
-            	// + '&width=512&height=512',
+            	 + '&width=512&height=512',*/
+            	url: 'http://202.68.238.117:8080/geoserver/wms',
              /*tileUrlFunction: function(tileCoord, pixelRatio, projection) {
             	 var z = tileCoord[0];
                  var x = tileCoord[1];
@@ -96,21 +97,16 @@ Ext.define('InAcc.view.map.CoreMap', {
                      .replace('{y}', y.toString())
                      .replace('{x}', x.toString());
              },*/
-             
-            /* params : {
-            	 LAYERS : '시도지역',
-                 SRS : 'EPSG:4326',
-                 format : 'image/png',
-                 bgcolor : '0xffffff', 
-                 exceptions : 'BLANK',
-                 //label : 'HIDE_OVERLAP',
-                 //graphic_buffer : '64',
-                 //ANTI : 'true',
-                 //TEXT_ANTI : 'true',
-                 VERSION:'1.3.0',
-                 STYLES:'default'
+             /*projection: projection,
+             tileGrid: new ol.tilegrid.TileGrid({
+                   origin: ol.extent.getTopLeft(projectionExtent),
+                   resolutions: resolutions,
+                   tileSize: 512
+             })*/
+            params : {
+            	 LAYERS : 'sf:lt_c_tnadsido'
                  //BBOX:'123.81636217878827,38.18199192485683,131.35748315880258,42.992671531968845'
-     		}*/
+     		}
             	/* ,params: {'LAYERS':'시도경계',
             	  		'CRS':'EPSG:4326'}*/
              // serverType: 'geoserver'
@@ -137,11 +133,12 @@ Ext.define('InAcc.view.map.CoreMap', {
     		target: '_mapDiv_',
     		layers: me.baseMapLayers,
     		//extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
-    		extent : ol.proj.get( "EPSG:4326" ).getExtent(),
+    		//extent : ol.proj.get( "EPSG:4326" ).getExtent(),
     		view: new ol.View({
     			projection: 'EPSG:4326',
     		    center: [127.58692266879542, 40.387331728412835],
-    		    zoom: 8
+    		    zoom: 8,
+    		    extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845]
     		})
     	});
     	
