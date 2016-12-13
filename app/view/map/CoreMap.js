@@ -27,6 +27,8 @@ Ext.define('InAcc.view.map.CoreMap', {
         	me.baseMapLayers[1].setVisible(true);
         	me.baseMapLayers[2].setVisible(true);
         	
+        	console.info(me.baseMapLayers[2].getSource());
+        	
             window.clearInterval(timerId);
 		}, 1);
     },

@@ -1,82 +1,169 @@
-<%@page session="false"%>
-<%@page import="java.net.*,java.io.*,java.util.*" %>
-<%@ page language="java" pageEncoding="UTF-8"%> 
-<%
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@page import="java.util.HashMap"%>
+<%@page import="java.util.Iterator"%>
+<%@page import="java.util.Set"%>
+<%@page import="java.util.Map"%>
+<%@page import="java.io.InputStream"%>
+<%@page import="java.io.OutputStream"%>
+<%@page import="java.io.IOException"%>
+<%@page import="java.util.Enumeration"%>
+<%@page import="java.net.HttpURLConnection"%>
+<%@page import="java.net.URL"%>
+<%@page import="java.net.MalformedURLException"%>
+<%@page import="java.io.BufferedReader"%>
+<%@page import="java.io.InputStreamReader"%>
+
+<%@page import="java.nio.CharBuffer"%>
+<%@page import="java.nio.ByteBuffer"%>
+<%@page import="java.nio.charset.Charset"%>
+
+<%@page import="java.io.ByteArrayOutputStream"%>
+<%@page import="java.lang.Exception"%>
+
+
+<%!public static String getParam(HttpServletRequest request, String name) {
+	 
+		String paramsToString = "";
 	
-	HttpURLConnection connection = null;
-	InputStream istream = null;
-	OutputStream ostream = null;
-	InputStream ristream = null;
-	OutputStream rostream = null;
-	
-	try {
-		if(request.getParameter("resourceUrl") != null && request.getParameter("resourceUrl") != "") {
-			String resourceUrlStr = request.getParameter("resourceUrl");					
-			Enumeration enu = request.getParameterNames();
-			while(enu.hasMoreElements()) {
-				String name = (String)enu.nextElement();
-				if(name.equalsIgnoreCase("resourceUrl") == false) {
-					resourceUrlStr = resourceUrlStr + "&" + name + "=" + request.getParameter(name);
-				}
-			}
-			URL resourceUrl = new URL(resourceUrlStr);
-			//URL resourceUrl = new URL(request.getParameter("resourceUrl"));				
-			connection = (HttpURLConnection)resourceUrl.openConnection();
-			connection.setDoInput(true);
-			connection.setRequestMethod(request.getMethod());
-			response.setContentType(connection.getContentType());
-			// what's this for
-			out.clear();
-			out = pageContext.pushBody();
-			ristream = connection.getInputStream();
-			rostream = response.getOutputStream();
-			final int length = 5000;
-			byte[] bytes = new byte[length];
-			int bytesRead = 0;
-			while ((bytesRead = ristream.read(bytes, 0, length)) > 0) {
-				rostream.write(bytes, 0, bytesRead);
-			}
-		} else if(request.getParameter("targetUrl") != null && request.getParameter("targetUrl") != "") {
-			URL targetUrl = new URL(request.getParameter("targetUrl"));		
-			connection = (HttpURLConnection)targetUrl.openConnection();
-			connection.setDoOutput(true);
-			connection.setRequestMethod(request.getMethod());
+		Map map = (Map) request.getAttribute("Map");
+		if (map == null) {
+			map = new HashMap();
 			
-			int clength = request.getContentLength();
-			if(clength > 0) {
-				connection.setDoInput(true);
-				istream = request.getInputStream();
-				ostream = connection.getOutputStream();
-				final int length = 5000;
-				byte[] bytes = new byte[length];
-				int bytesRead = 0;
-				while((bytesRead = istream.read(bytes, 0, length)) > 0) {
-					ostream.write(bytes, 0, bytesRead);
+			Enumeration e = request.getParameterNames();
+			while (e.hasMoreElements()) {
+				String key = (String) e.nextElement();
+				String value = request.getParameter(key);
+				
+				paramsToString += ( "&" + key + "=" + value );
+				
+				//System.out.println( "paramsToString : " + paramsToString );
+				
+				try {
+					//value = new String(value.getBytes("8859_1"), "UTF-8");
+				} catch (Exception ex) {
+				}
+				//map.put(key.toUpperCase(), value);
+			}
+			paramsToString = paramsToString.replaceFirst( "&url=", "" );
+			//request.setAttribute("Map", map);
+		}
+		System.out.println();
+		//System.out.println( "paramsToString : " + paramsToString );
+		
+		//return (String) map.get(name.toUpperCase());
+		return paramsToString;
+	}
+
+	public static void proxy(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException, Exception {
+		String urlParam = getParam(request, "URL");
+		
+		
+		
+		/* 
+		String originalStr = urlParam; // 테스트 
+		String[] charSet = { "utf-8", "euc-kr", "ksc5601", "iso-8859-1",
+				"x-windows-949" };
+
+		for (int i = 0; i < charSet.length; i++) {
+			for (int j = 0; j < charSet.length; j++) {
+				try {
+					System.out.println("["
+							+ charSet[i]
+							+ ","
+							+ charSet[j]
+							+ "] = "
+							+ new String(originalStr.getBytes(charSet[i]),
+									charSet[j]));
+				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
-			// what's this for
-			out.clear();
-			out = pageContext.pushBody();
-			rostream = response.getOutputStream();
-			response.setContentType(connection.getContentType());
-			ristream = connection.getInputStream();
-			final int length = 5000;
-			byte[] bytes = new byte[length];
-			int bytesRead = 0;
-			while ((bytesRead = ristream.read(bytes, 0, length)) > 0) {
-				rostream.write(bytes, 0, bytesRead);
-			}
-		} else {
+		}
+		 */
+
+		System.out.println(urlParam);
+		if (urlParam == null || urlParam.trim().length() == 0) {
+			response.sendError(HttpServletResponse.SC_BAD_REQUEST);
 			return;
 		}
-	} catch(IOException e) {
-		response.setStatus(500);
-//		e.printStackTrace();
-		System.out.println(e.toString());
-	} finally {
-		if(istream != null) { istream.close(); }			
-		if(ostream != null) { ostream.close(); }
-		if(ristream != null) { ristream.close(); }
-		if(rostream != null) { rostream.close(); }			
+		boolean doPost = request.getMethod().equalsIgnoreCase("POST");
+		URL url = new URL(urlParam.replaceAll(" ", "%20"));
+		HttpURLConnection http = (HttpURLConnection) url.openConnection();
+		Enumeration headerNames = request.getHeaderNames();
+		while (headerNames.hasMoreElements()) {
+			String key = (String) headerNames.nextElement();
+			if (!key.equalsIgnoreCase("Host")) {
+				http.setRequestProperty(key, request.getHeader(key));
+			}
+		}
+
+		http.setDoInput(true);
+		http.setDoOutput(doPost);
+
+		byte[] buffer = new byte[8192];
+		int read = -1;
+
+		if (doPost) {
+			OutputStream os = http.getOutputStream();
+			ServletInputStream sis = request.getInputStream();
+			while ((read = sis.read(buffer)) != -1) {
+				os.write(buffer, 0, read);
+			}
+			os.close();
+		}
+
+		InputStream is = http.getInputStream();
+		response.setStatus(http.getResponseCode());
+
+		Map headerKeys = http.getHeaderFields();
+		Set keySet = headerKeys.keySet();
+		Iterator iter = keySet.iterator();
+		while (iter.hasNext()) {
+
+			String key = (String) iter.next();
+			String value = http.getHeaderField(key);
+			if (key != null && value != null) {
+				if (value.indexOf("text/xml") > -1
+						&& value.indexOf("ISO-8859-1") > -1) {
+					value = value.replaceAll("ISO-8859-1", "UTF-8");
+				}
+				if ( !(key.equals("Transfer-Encoding")) ) {
+					response.setHeader(key, value);
+				}
+			}
+		}
+
+		//response.setContentType("text/xml");
+		//response.setCharacterEncoding("UTF-8");
+
+		ServletOutputStream sos = response.getOutputStream();
+
+		//response.setContentType("text/xml");
+		//response.setCharacterEncoding("UTF-8");
+		response.resetBuffer();
+
+		while ((read = is.read(buffer)) != -1) {
+
+			sos.write(buffer, 0, read);
+		}
+		sos.println();
+		response.flushBuffer();
+		sos.close();
+		http.disconnect();
+
+	}
+%><%
+	try {
+		out.clear();
+		proxy(request, response);
+	} catch (Exception e) {
+		response.setStatus(HttpServletResponse.SC_INTERNAL_SERVER_ERROR);
+		response.setContentType("text/plain");
+		%><%=e.getStackTrace()[0].getMethodName() + ":" + e.getStackTrace()[0].getLineNumber()%><%
+	}
+	if (true) {
+		return;
 	}
 %>
