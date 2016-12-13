@@ -5,20 +5,20 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "1",
+		"id": "	NK:NONGJI_BA",
 		"sUrl": "",
 		"text": "밭",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "2",
+		"id": "NK:NONGJI_NON",
 		"text": "논",
 		"iconCls": "layerIconSize layer2",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "3",
+		"id": "NK:NONGJI_KWA",
 		"text": "과수원",
 		"iconCls": "layerIconSize layer2",
 		"leaf": true,
@@ -31,83 +31,149 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "5",
-		"text": "소공업지구",
+		"id": "NK:SANEOB_GONG",
+		"text": "공업",
 		"iconCls": "layerIconSize layer9",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "6",
-		"text": "대공업지구",
+		"id": "NK:SANEOB_KWAO",
+		"text": "광산업",
+		"iconCls": "layerIconSize layer10",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "NK:SANEOB_SI",
+		"text": "시장",
+		"iconCls": "layerIconSize layer9",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "NK:SANEOB_ENG",
+		"text": "에너지",
+		"iconCls": "layerIconSize layer10",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "NK:SANEOB_EUI",
+		"text": "의료산업",
+		"iconCls": "layerIconSize layer9",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "NK:SANEOB_HG",
+		"text": "항공산업",
+		"iconCls": "layerIconSize layer10",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "NK:SANEOB_HM",
+		"text": "항만산업",
 		"iconCls": "layerIconSize layer10",
 		"leaf": true,
 		"checked": false
 	}]
 },{
-	"id": "7",
+	"id": "12",
 	"text": "산지",
 	"iconCls": "tmdl:layerNoneImg",
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "8",
+		"id": "NK:SANJI_IM",
 		"text": "임목지",
 		"iconCls": "layerIconSize layer16",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "9",
+		"id": "NK:SANJI_MU",
+		"text": "무립목지",
+		"iconCls": "layerIconSize layer16",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "NK:SANJI_NA",
 		"text": "나지",
 		"iconCls": "layerIconSize layer17",
 		"leaf": true,
 		"checked": false
 	}]
 }, {
-	"id": "10",
+	"id": "16",
 	"text": "주택도시",
 	"iconCls": "layerNoneImg",
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "11",
+		"id": "NK:BLDGCITY_1JY",
 		"text": "제1종전용",
 		"iconCls": "layerIconSize layer19",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "12",
+		"id": "NK:BLDGCITY_2JY",
 		"text": "제2종전용",
 		"iconCls": "layerIconSize layer20",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "13",
+		"id": "NK:BLDGCITY_JUN",
 		"text": "준주거",
+		"iconCls": "layerIconSize layer21",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "NK:BLDGCITY_1IB",
+		"text": "제1종일반",
+		"iconCls": "layerIconSize layer19",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "NK:BLDGCITY_2IB",
+		"text": "제2종일반",
+		"iconCls": "layerIconSize layer20",
+		"leaf": true,
+		"checked": false
+	}, {
+		"id": "NK:BLDGCITY_3IB",
+		"text": "제3종일반",
 		"iconCls": "layerIconSize layer21",
 		"leaf": true,
 		"checked": false
 	}]
 }, {
-	"id": "14",
+	"id": "23",
 	"text": "환경",
 	"iconCls": "layerNoneImg",
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "15",
+		"id": "NK:HWAN_CHO",
 		"text": "초지",
 		"iconCls": "layerIconSize layer26",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "16",
+		"id": "NK:HWAN_SJ",
 		"text": "습지",
 		"iconCls": "layerIconSize layer27",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "17",
+		"id": "NK:HWAN_SU",
 		"text": "수역",
+		"iconCls": "layerIconSize layer28",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "NK:HWAN_GYO",
+		"text": "교통",
+		"iconCls": "layerIconSize layer27",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "NK:HWAN_NA",
+		"text": "나지",
 		"iconCls": "layerIconSize layer28",
 		"leaf": true,
 		"checked": false

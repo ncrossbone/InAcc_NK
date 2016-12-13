@@ -31,8 +31,6 @@ Ext.define('InAcc.view.map.CoreMap', {
 		}, 1);
     },
     
-    
-    
     initBaseMap: function(val){
     	var me = this; 
     	
@@ -104,15 +102,19 @@ Ext.define('InAcc.view.map.CoreMap', {
                    tileSize: 512
              })*/
             params : {
-            	 LAYERS : 'sf:lt_c_tnadsido'
+            	 LAYERS : 'NK:SANJI_IM',
+            	 CQL_FILTER: 'fid=SANJI_IM.168'
                  //BBOX:'123.81636217878827,38.18199192485683,131.35748315880258,42.992671531968845'
-     		}
+     		},
+     		serverType: 'geoserver'
             	/* ,params: {'LAYERS':'시도경계',
             	  		'CRS':'EPSG:4326'}*/
              // serverType: 'geoserver'
             })
           }));
-		console.info(ol.proj.get( "EPSG:4326" ).getExtent());
+    	
+    	Ext.create("InAcc.view.map.Layer");
+		//console.info(ol.proj.get( "EPSG:5179" ).getExtent());
     	//ol.proj.get('EPSG:4326').setExtent( [-180.0000, -90.0000, 180.0000, 90.0000] );
     	//console.info(me.baseMapLayers[2]);
 		
@@ -135,10 +137,11 @@ Ext.define('InAcc.view.map.CoreMap', {
     		//extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
     		//extent : ol.proj.get( "EPSG:4326" ).getExtent(),
     		view: new ol.View({
-    			projection: 'EPSG:4326',
-    		    center: [127.58692266879542, 40.387331728412835],
+    			//projection: 'EPSG:4326',
+    		    //center: [127.58692266879542, 40.387331728412835],
+    			center: ol.proj.fromLonLat([127, 40]),
     		    zoom: 8,
-    		    extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845]
+    		    //extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845]
     		})
     	});
     	

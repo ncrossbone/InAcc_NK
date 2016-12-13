@@ -23,7 +23,31 @@ Ext.define("InAcc.view.west.WestContainer", {
 		useArrows: false,
 		lines:false,
 		border: 0,
-		bufferedRenderer: false
+		bufferedRenderer: false,
+		listeners: {
+			checkchange:function(node){
+				
+				var dLayer = Ext.getCmp("Layer_");
+				
+				if(node.childNodes.length!=0){
+					for(var i = 0; i < node.childNodes.length; i++){
+						if(node.data.checked==false){
+							node.childNodes[i].set('checked',false);
+							dLayer.layerOff(node.childNodes[i].id);
+						}else{
+							node.childNodes[i].set('checked',true);
+							dLayer.layerOn(node.childNodes[i].id);
+						}
+					}
+				}else{
+					if(node.data.checked==false){
+						dLayer.layerOff(node.id);
+					}else{
+						dLayer.layerOn(node.id);
+					}
+				}
+			}
+		}
 	},{
 		title:"수집DB",
 		xtype:"treepanel",
