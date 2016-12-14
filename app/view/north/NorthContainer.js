@@ -41,26 +41,8 @@ Ext.define("InAcc.view.north.NorthContainer", {
 			labelStyle:"font-weight: bold;",
 			style:" margin-top:8px;",
 			fieldLabel: "시도",
-			id: 'cmd_sido',
-			displayField: 'name',
-			valueField: 'id',
 			width:220,
-			store: Ext.create('InAcc.store.north.Sido'),
-			editable: false,
-			listeners:{
-				select: function(){
-					var cmd_sgg = Ext.getCmp("cmd_sgg");
-					cmd_sgg.value = null;
-					var sidoCd = this.value;
-					var sggStore = Ext.create('InAcc.store.north.Sgg',{
-						sidoCd : sidoCd
-					});
-					sggStore.load();
-					
-					
-					cmd_sgg.setStore(sggStore);
-				}
-			}
+			editable: false
 		},{
 			xtype:"container",
 			width:30
@@ -68,10 +50,7 @@ Ext.define("InAcc.view.north.NorthContainer", {
 			xtype:"combobox",
 			labelStyle:"font-weight: bold;",
 			style:" margin-top:8px;",
-			id: "cmd_sgg",
 			fieldLabel: "시군구",
-			displayField: 'name',
-			valueField: 'id',
 			width:220,
 			editable: false
 		},{
