@@ -10,6 +10,26 @@ Ext.define('InAcc.store.north.Sido', {
 	listeners: {
 		load: function(store) {
 
+/*			var featureRequest = new ol.format.WFS().writeGetFeature({
+                srsName : "EPSG:4326",
+                featureTypes : ['시도경계'],
+                outputFormat : 'application/json',
+                geometryName : 'SHAPE',
+                maxFeatures : 300
+            });
+            
+            $.ajax({
+                url : proxy+'http://202.68.238.117:8880/geonuris/wfs?GDX=NK_Service.xml',
+                type : 'POST',
+                data : new XMLSerializer().serializeToString( featureRequest ),
+                async : false,
+                contentType : 'text/xml',
+                success : function(response_) {
+            var features = new ol.format.GeoJSON().readFeatures( response_ );   
+            console.log( features );
+                }
+            });*/
+			
 			var coreMap = Ext.getCmp("_mapDiv_");
 			coreMap.sidoGeometry = [];
 			
@@ -23,11 +43,11 @@ Ext.define('InAcc.store.north.Sido', {
                 maxFeatures : 300
             });
             
-            $.ajax({
+			$.ajax({
                 url : proxy+'http://202.68.238.117:8080/geoserver/wfs',
                 type : 'POST',
                 data : new XMLSerializer().serializeToString( featureRequest ),
-                async : false,
+                async : true,
                 contentType : 'text/xml',
                 success : function(response_) {
             var features = new ol.format.GeoJSON().readFeatures( response_ );   

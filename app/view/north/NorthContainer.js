@@ -83,22 +83,8 @@ Ext.define("InAcc.view.north.NorthContainer", {
 			style:" margin-top:8px;",
 			width:80,
 			handler: function() {
-				var searchResultWindow = Ext.create("InAcc.view.south.SouthContainer");
-				
-				searchResultWindow.show();
 				
 				ZoomToExtent();
-								
-			}
-		},{
-			xtype:"button",
-			text:"검색",
-			style:" margin-top:8px;",
-			width:80,
-			handler: function() {
-				var coreMap = Ext.getCmp("_mapDiv_");
-				
-				console.info(coreMap.map)
 								
 			}
 		},{
