@@ -5,20 +5,20 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "	NK:NONGJI_BA",
+		"id": "	NONGJI_BA",
 		"sUrl": "",
 		"text": "밭",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:NONGJI_NON",
+		"id": "NONGJI_NON",
 		"text": "논",
 		"iconCls": "layerIconSize layer2",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:NONGJI_KWA",
+		"id": "NONGJI_KWA",
 		"text": "과수원",
 		"iconCls": "layerIconSize layer2",
 		"leaf": true,
@@ -31,43 +31,43 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "NK:SANEOB_GONG",
+		"id": "SANEOB_GONG",
 		"text": "공업",
 		"iconCls": "layerIconSize layer9",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "NK:SANEOB_KWAO",
+		"id": "SANEOB_KWAO",
 		"text": "광산업",
 		"iconCls": "layerIconSize layer10",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:SANEOB_SI",
+		"id": "SANEOB_SI",
 		"text": "시장",
 		"iconCls": "layerIconSize layer9",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "NK:SANEOB_ENG",
+		"id": "SANEOB_ENG",
 		"text": "에너지",
 		"iconCls": "layerIconSize layer10",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:SANEOB_EUI",
+		"id": "SANEOB_EUI",
 		"text": "의료산업",
 		"iconCls": "layerIconSize layer9",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "NK:SANEOB_HG",
+		"id": "SANEOB_HG",
 		"text": "항공산업",
 		"iconCls": "layerIconSize layer10",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "NK:SANEOB_HM",
+		"id": "SANEOB_HM",
 		"text": "항만산업",
 		"iconCls": "layerIconSize layer10",
 		"leaf": true,
@@ -80,19 +80,19 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "NK:SANJI_IM",
+		"id": "SANJI_IM",
 		"text": "임목지",
 		"iconCls": "layerIconSize layer16",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:SANJI_MU",
+		"id": "SANJI_MU",
 		"text": "무립목지",
 		"iconCls": "layerIconSize layer16",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:SANJI_NA",
+		"id": "SANJI_NA",
 		"text": "나지",
 		"iconCls": "layerIconSize layer17",
 		"leaf": true,
@@ -105,37 +105,37 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "NK:BLDGCITY_1JY",
+		"id": "BLDGCITY_1JY",
 		"text": "제1종전용",
 		"iconCls": "layerIconSize layer19",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "NK:BLDGCITY_2JY",
+		"id": "BLDGCITY_2JY",
 		"text": "제2종전용",
 		"iconCls": "layerIconSize layer20",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "NK:BLDGCITY_JUN",
+		"id": "BLDGCITY_JUN",
 		"text": "준주거",
 		"iconCls": "layerIconSize layer21",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:BLDGCITY_1IB",
+		"id": "BLDGCITY_1IB",
 		"text": "제1종일반",
 		"iconCls": "layerIconSize layer19",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "NK:BLDGCITY_2IB",
+		"id": "BLDGCITY_2IB",
 		"text": "제2종일반",
 		"iconCls": "layerIconSize layer20",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "NK:BLDGCITY_3IB",
+		"id": "BLDGCITY_3IB",
 		"text": "제3종일반",
 		"iconCls": "layerIconSize layer21",
 		"leaf": true,
@@ -148,31 +148,31 @@
 	"checked": false,
 	"expanded": false,
 	"children": [{
-		"id": "NK:HWAN_CHO",
+		"id": "HWAN_CHO",
 		"text": "초지",
 		"iconCls": "layerIconSize layer26",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:HWAN_SJ",
+		"id": "HWAN_SJ",
 		"text": "습지",
 		"iconCls": "layerIconSize layer27",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:HWAN_SU",
+		"id": "HWAN_SU",
 		"text": "수역",
 		"iconCls": "layerIconSize layer28",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:HWAN_GYO",
+		"id": "HWAN_GYO",
 		"text": "교통",
 		"iconCls": "layerIconSize layer27",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK:HWAN_NA",
+		"id": "HWAN_NA",
 		"text": "나지",
 		"iconCls": "layerIconSize layer28",
 		"leaf": true,

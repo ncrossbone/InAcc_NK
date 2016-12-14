@@ -21,11 +21,19 @@ Ext.define('InAcc.view.map.Layer', {
 
 			var layer = new ol.layer.Tile({
 				source: new ol.source.TileWMS({
-					url: 'http://202.68.238.117:8080/geoserver/wms',
+					url: 'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Test.xml',
 					params : {
-						LAYERS : id
-					},
-					serverType: 'geoserver'
+		            	 LAYERS : id,
+		                 CRS : "EPSG:5179",
+		                 format : 'image/png',
+		                 bgcolor : '0xffffff', 
+		                 exceptions : 'BLANK',
+		                 label : 'HIDE_OVERLAP',
+		                 graphic_buffer : '64',
+		                 ANTI : 'true',
+		                 TEXT_ANTI : 'true'
+		             }
+					//serverType: 'geoserver'
 				})
 			})
 
