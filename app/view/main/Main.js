@@ -2,9 +2,12 @@ Ext.define("InAcc.view.main.Main", {
 	
 	extend: "Ext.panel.Panel",
 	
-	requires: ["InAcc.view.west.WestContainer",
+	/*requires: ["InAcc.view.west.WestContainer",
 	           "InAcc.view.map.CoreMap",
-	           "InAcc.view.north.NorthContainer"],
+	           "InAcc.view.north.NorthContainer"],*/
+	           
+	requires: ["InAcc.view.west.WestContainer",
+	           "InAcc.view.map.CoreMap"],
 	
 	xtype: "inacc-main",
 	
@@ -14,10 +17,14 @@ Ext.define("InAcc.view.main.Main", {
 		type: "absolute"
 	},
 	
-	items: [{
+	items: [/*{
 		xtype: "inacc-coremap"
 	},{
 		xtype:"inacc-northcontainer"
+	},{
+		xtype: "inacc-westcontainer"
+	},*/{
+		xtype: "inacc-coremap"
 	},{
 		xtype: "inacc-westcontainer"
 	},{

@@ -1,0 +1,133 @@
+<!doctype html>
+<html>
+    <head>
+ 
+    <link rel="stylesheet" href="http://openlayers.org/en/v3.6.0/css/ol.css" type="text/css">
+    <script type="text/javascript" src="http://openlayers.org/en/v3.6.0/build/ol-debug.js"></script>
+    <script type="text/javascript" src="./proj4-src.js"></script>
+     
+    </head>
+    <body>
+ 
+    <div id="map" class="map"></div>
+ 
+    <script>
+	
+proj4.defs("EPSG:4019", "+proj=longlat +ellps=GRS80 +no_defs");
+proj4.defs("EPSG:3857", "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs");
+proj4.defs("EPSG:900913", "+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0 +x_0=0.0 +y_0=0 +k=1.0 +units=m +nadgrids=@null +no_defs");
+//UTM-K
+proj4.defs("EPSG:5179", "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs");
+//중부원점(50만)
+proj4.defs("EPSG:5181", "+proj=tmerc +lat_0=38 +lon_0=127 +k=1 +x_0=200000 +y_0=500000 +ellps=GRS80 +units=m +no_defs");
+//서부원점
+proj4.defs("EPSG:5185", "+proj=tmerc +lat_0=38 +lon_0=125 +k=1 +x_0=200000 +y_0=600000 +ellps=GRS80 +units=m +no_defs");
+//중부원점-o
+proj4.defs("EPSG:5186", "+proj=tmerc +lat_0=38 +lon_0=127 +k=1 +x_0=200000 +y_0=600000 +ellps=GRS80 +units=m +no_defs");
+//동부원점
+proj4.defs("EPSG:5187", "+proj=tmerc +lat_0=38 +lon_0=129 +k=1 +x_0=200000 +y_0=600000 +ellps=GRS80 +units=m +no_defs");
+//동해(울릉)원점
+proj4.defs("EPSG:5188", "+proj=tmerc +lat_0=38 +lon_0=131 +k=1 +x_0=200000 +y_0=600000 +ellps=GRS80 +units=m +no_defs");
+ 
+// projection for WGS84
+var projWGS84 = ol.proj.get("EPSG:4326");
+// projection for WMS
+var projWMS = ol.proj.get("EPSG:5186");
+// projection for OSM
+var projOSM = new ol.proj.get("EPSG:3857");
+ 
+//초기 페이지 지도 중심점 (EPSG:5186 -> EPSG:3857) 
+// ex) 제주도청 [EPSG:4326] 126.498197, 33.489004 
+//    <==> [EPSG:5186] 99597.5637890962, 153365.05908124548
+//    <==> [EPSG:3857] 3960392.400920103, 14081714.876307208
+try{
+
+  var center4WMS = ol.proj.transform([126.498197, 33.489004], projWGS84, projWMS);
+  console.log( 'center4WMS : '+center4WMS );
+  //=> center4WMS : 153365.05908124548, 99597.5637890962
+ 
+  var center4OSM = ol.proj.transform([126.498197, 33.489004], projWGS84, projOSM);
+  console.log( 'center4OSM : '+center4OSM );
+  //=> center4OSM : 14081714.876307208, 3960392.400920103
+ 
+  var mapCenter = ol.proj.transform([153365.05908124548, 99597.5637890962], projWMS, projOSM);
+  console.log( 'mapCenter : '+mapCenter );
+  //=> mapCenter : 14081714.876307214, 3960392.400919703
+}catch(e){
+	console.info(e);
+}
+ 
+        //proj4.defs("EPSG:2096","+proj=tmerc +lat_0=38 +lon_0=129 +k=1 +x_0=200000 +y_0=500000 +ellps=bessel +units=m +no_defs");
+        //ol.proj.get('EPSG:2096').setExtent( [108158.32, 111012.87, 256584.86, 571234.42] );
+		projWGS84.setExtent([123.22128401694141, 32.5353772091844, 132.7591122599643, 39.059887845567815]);
+     
+        var mapHostUrl = "http://221.148.35.76:8880/geonuris/";
+        var mapExtent = [123.22128401694141, 32.5353772091844, 132.7591122599643, 39.059887845567815];
+        var mapCRS = projWGS84;
+        var gdxFile = "KNPS_FMS_4326.xml";       
+         
+        var serviceUrl = mapHostUrl + 'wms?GDX=' + gdxFile;
+         
+         
+        var map = new ol.Map({
+            target : 'map',
+            renderer : 'canvas'
+        });
+ console.info(ol.proj.get( mapCRS ).getExtent());
+ 
+        var view = new ol.View({
+            projection : mapCRS,
+            center: [127.9901981384529, 35.79763252737591],
+            zoom: 4,
+            extent : ol.proj.get( mapCRS ).getExtent()
+        });                 
+ 
+        map.setView( view );
+         
+         
+        var wmsSource = new ol.source.TileWMS({
+            url : serviceUrl,
+            params : {
+                LAYERS : 'ADMIN_DO_K',
+                CRS : mapCRS,
+                format : 'image/png',
+                bgcolor : '0xffffff', 
+                exceptions : 'BLANK',
+                label : 'HIDE_OVERLAP',
+                graphic_buffer : '64',
+                ANTI : 'true',
+                TEXT_ANTI : 'true'
+            }
+        });
+         
+        wmsLayer = new ol.layer.Tile({
+            source : wmsSource
+        });
+         
+         
+        function addTileWMS() {
+            map.addLayer( wmsLayer );
+        }
+         
+        function removeTileWMS() {
+            map.removeLayer( wmsLayer );
+        }
+         
+        addTileWMS();
+		
+		var geolocation = new ol.Geolocation({
+			projection: map.getView().getProjection()
+		});
+		
+		console.info(geolocation);
+		console.info(geolocation.getPosition());
+		
+		geolocation.on("change", function(e){
+			console.info(e);
+		});
+         
+     
+    </script>
+ 
+    </body>
+</html>
