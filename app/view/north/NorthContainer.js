@@ -49,13 +49,15 @@ Ext.define("InAcc.view.north.NorthContainer", {
 			editable: false,
 			listeners:{
 				select: function(){
-					console.info(this);
+					var cmd_sgg = Ext.getCmp("cmd_sgg");
+					cmd_sgg.value = null;
 					var sidoCd = this.value;
 					var sggStore = Ext.create('InAcc.store.north.Sgg',{
 						sidoCd : sidoCd
 					});
 					sggStore.load();
-					var cmd_sgg = Ext.getCmp("cmd_sgg");
+					
+					
 					cmd_sgg.setStore(sggStore);
 				}
 			}
@@ -86,6 +88,17 @@ Ext.define("InAcc.view.north.NorthContainer", {
 				searchResultWindow.show();
 				
 				ZoomToExtent();
+								
+			}
+		},{
+			xtype:"button",
+			text:"검색",
+			style:" margin-top:8px;",
+			width:80,
+			handler: function() {
+				var coreMap = Ext.getCmp("_mapDiv_");
+				
+				console.info(coreMap.map)
 								
 			}
 		},{

@@ -27,9 +27,12 @@ Ext.define('InAcc.view.map.CoreMap', {
         	me.baseMapLayers[1].setVisible(true);
         	me.baseMapLayers[2].setVisible(true);
         	
-        	console.info(me.baseMapLayers[2].getSource());
+        	console.info(me.baseMapLayers[1]);
         	
             window.clearInterval(timerId);
+            
+            
+            console.info(ol.proj.fromLonLat([127, 40]));
 		}, 1);
     },
     
@@ -142,6 +145,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     			//projection: 'EPSG:4326',
     		    //center: [127.58692266879542, 40.387331728412835],
     			center: ol.proj.fromLonLat([127, 40]),
+    			//center: [1973973.7833936,901685.98167699,2025860.60526776,952737.74617981,],
     		    zoom: 8,
     		    //extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845]
     		})

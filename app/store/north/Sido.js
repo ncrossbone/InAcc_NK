@@ -16,7 +16,7 @@ Ext.define('InAcc.store.north.Sido', {
 			var	proxy = "./resources/Proxy.jsp?url="
 			
 			var featureRequest = new ol.format.WFS().writeGetFeature({
-                srsName : "EPSG:5179",
+                srsName : "EPSG:3857",
                 featureTypes : ['NK_SIDO'],
                 outputFormat : 'application/json',
                 geometryName : 'SHAPE',
@@ -34,10 +34,8 @@ Ext.define('InAcc.store.north.Sido', {
 
             var receiveData = [];
 
-            
+            //containsXY
 			Ext.each(features, function(media, index) {
-	            console.info(media);
-	            console.info(media.values_.geometry.getExtent());
 	            
 	            coreMap.sidoGeometry.push(media.values_);
 	            
