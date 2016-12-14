@@ -25,7 +25,7 @@ Ext.define('InAcc.view.map.CoreMap', {
         	
         	me.initBaseMap();
         	me.baseMapLayers[1].setVisible(true);
-        	me.baseMapLayers[2].setVisible(true);
+        	me.baseMapLayers[2].setVisible(false);
         	
             window.clearInterval(timerId);
 		}, 1);
@@ -49,7 +49,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     		source: new ol.source.OSM()
     	}));
     	
-    	
+    	proj4.defs("EPSG:5179", "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs");
     	/*var projection = ol.proj.get('EPSG:4326');
     	var projectionExtent = projection.getExtent();
     	
@@ -67,13 +67,13 @@ Ext.define('InAcc.view.map.CoreMap', {
             //extent: [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
             source: new ol.source.TileWMS({
               //url: 'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml&VERSION=1.3.0&REQUEST=GetMap&FORMAT=image/png&width=512&height=512&CRS=EPSG:4326&bbox=123.81636217878827,38.18199192485683,131.35748315880258,42.992671531968845&layers=시도경계&styles=default'
-             /*url:'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Service.xml'
-            	 +'&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&TRANSPARENT=true&LAYERS=%EC%8B%9C%EB%8F%84%EA%B2%BD%EA%B3%84'
+             url:'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Test.xml',
+            	 /*+'&SERVICE=WMS&VERSION=1.3.0&REQUEST=GetMap&TRANSPARENT=true&LAYERS=%EC%8B%9C%EB%8F%84%EA%B2%BD%EA%B3%84'
             	 +'&SRS=EPSG%3A4326&format=image%2Fpng&bgcolor=0xffffff&exceptions=INIMAGE&label=HIDE_OVERLAP'
             	 + '&graphic_buffer=64&ANTI=true&TEXT_ANTI=true&CRS=EPSG%3A4326&STYLES=default'
             	 + '&bbox=118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845'
             	 + '&width=512&height=512',*/
-            	url: 'http://202.68.238.117:8080/geoserver/wms',
+            	//url: 'http://202.68.238.117:8080/geoserver/wms',
              /*tileUrlFunction: function(tileCoord, pixelRatio, projection) {
             	 var z = tileCoord[0];
                  var x = tileCoord[1];
@@ -101,12 +101,32 @@ Ext.define('InAcc.view.map.CoreMap', {
                    resolutions: resolutions,
                    tileSize: 512
              })*/
-            params : {
-            	 LAYERS : 'NK:SANJI_IM',
-            	 CQL_FILTER: 'fid=SANJI_IM.168'
-                 //BBOX:'123.81636217878827,38.18199192485683,131.35748315880258,42.992671531968845'
-     		},
-     		serverType: 'geoserver'
+             /*params : {
+                 LAYERS : 'ROOT',
+                 CRS : "EPSG:5179",
+                 format : 'image/png',
+                 bgcolor : '0xffffff', 
+                 exceptions : 'INIMAGE',
+                 label : 'HIDE_OVERLAP',
+                 graphic_buffer : '64',
+                 ANTI : 'true',
+                 TEXT_ANTI : 'true'
+                 //SRS:"EPSG:5179"
+             }*/
+             
+             params : {
+            	 LAYERS : 'lt_c_tnadsido',
+                 CRS : "EPSG:5179",
+                 format : 'image/png',
+                 bgcolor : '0xffffff', 
+                 exceptions : 'BLANK',
+                 label : 'HIDE_OVERLAP',
+                 graphic_buffer : '64',
+                 ANTI : 'true',
+                 TEXT_ANTI : 'true'
+             }
+            
+     		//serverType: 'geoserver'
             	/* ,params: {'LAYERS':'시도경계',
             	  		'CRS':'EPSG:4326'}*/
              // serverType: 'geoserver'
@@ -114,6 +134,7 @@ Ext.define('InAcc.view.map.CoreMap', {
           }));
     	
     	Ext.create("InAcc.view.map.Layer");
+    	 
 		//console.info(ol.proj.get( "EPSG:5179" ).getExtent());
     	//ol.proj.get('EPSG:4326').setExtent( [-180.0000, -90.0000, 180.0000, 90.0000] );
     	//console.info(me.baseMapLayers[2]);
@@ -131,7 +152,7 @@ Ext.define('InAcc.view.map.CoreMap', {
           }));*/
 		
 		
-    	me.map = new ol.Map({
+    	/*me.map = new ol.Map({
     		target: '_mapDiv_',
     		layers: me.baseMapLayers,
     		//extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
@@ -143,9 +164,17 @@ Ext.define('InAcc.view.map.CoreMap', {
     		    zoom: 8,
     		    //extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845]
     		})
+    	});*/
+    	me.map = new ol.Map({
+    		target: '_mapDiv_',
+    		layers: me.baseMapLayers,
+    		//extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
+    		//extent : ol.proj.get( "EPSG:4326" ).getExtent(),
+    		view: new ol.View({
+    			projection : "EPSG:5179",
+    	        center: ol.proj.transform([127, 40], 'EPSG:4326', 'EPSG:5179'),
+    	        zoom: 7
+    		})
     	});
-    	
-    	
-    	
     }
 });

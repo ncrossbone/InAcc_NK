@@ -1,6 +1,6 @@
 [{
 	"id": "0",
-	"text": "농지",
+	"text": "농지 <input type='image' src='./resources/images/icons/search.png' id='nongji' width='13px' height='12.5px' style='margin-left:185px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
 	"iconCls": "layerNoneImg",
 	"checked": false,
 	"expanded": false,
@@ -26,7 +26,7 @@
 	}]
 }, {
 	"id": "4",
-	"text": "산업에너지",
+	"text": "산업에너지 <input type='image' src='./resources/images/icons/search.png' id='saneob' width='13px' height='12.5px' style='margin-left:146px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
 	"iconCls": "layerNoneImg",
 	"checked": false,
 	"expanded": false,
@@ -75,7 +75,7 @@
 	}]
 },{
 	"id": "12",
-	"text": "산지",
+	"text": "산지 <input type='image' src='./resources/images/icons/search.png' id='sanji' width='13px' height='12.5px' style='margin-left:185px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
 	"iconCls": "tmdl:layerNoneImg",
 	"checked": false,
 	"expanded": false,
@@ -100,7 +100,7 @@
 	}]
 }, {
 	"id": "16",
-	"text": "주택도시",
+	"text": "주택도시 <input type='image' src='./resources/images/icons/search.png' id='bldgcity' width='13px' height='12.5px' style='margin-left:159px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
 	"iconCls": "layerNoneImg",
 	"checked": false,
 	"expanded": false,
@@ -143,7 +143,7 @@
 	}]
 }, {
 	"id": "23",
-	"text": "환경",
+	"text": "환경 <input type='image' src='./resources/images/icons/search.png' id='hwan' width='13px' height='12.5px' style='margin-left:185px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
 	"iconCls": "layerNoneImg",
 	"checked": false,
 	"expanded": false,

@@ -40,7 +40,7 @@ Ext.define('InAcc.view.map.Layer', {
 			me.layers[layerIdx].layer.setVisible(true);
 
 		}
-
+		
 	},
 	layerOff: function(id){
 
