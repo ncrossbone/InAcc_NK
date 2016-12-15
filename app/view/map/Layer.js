@@ -21,7 +21,7 @@ Ext.define('InAcc.view.map.Layer', {
 
 			var layer = new ol.layer.Tile({
 				source: new ol.source.TileWMS({
-					url: 'http://202.68.238.117:8880/geonuris/wms?GDX=NK_Test.xml',
+					url: 'http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml',
 					params : {
 		            	 LAYERS : id,
 		                 CRS : "EPSG:5179",

@@ -182,5 +182,8 @@ Ext.define('InAcc.view.map.CoreMap', {
     	        zoom: 7
     		})
     	});
+    	
+    	//var zoomslider = new ol.control.ZoomSlider();
+    	//me.map.addControl(zoomslider);
     }
 });
