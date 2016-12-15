@@ -16,7 +16,7 @@ Ext.define('InAcc.store.north.Sgg', {
 			var	proxy = "./resources/Proxy.jsp?url="
 			
 			var featureRequest = new ol.format.WFS().writeGetFeature({
-                srsName : "EPSG:3857",
+                srsName : "EPSG:5179",
                 featureTypes : ['NK_SGG'],
                 outputFormat : 'application/json',
                 geometryName : 'SHAPE',
