@@ -44,7 +44,7 @@ Ext.define('InAcc.store.north.Sido', {
             });
             
 			$.ajax({
-                url : proxy+'http://202.68.238.117:8080/geoserver/wfs',
+                url : proxy+'http://202.68.238.120:8080/geoserver/wfs',
                 type : 'POST',
                 data : new XMLSerializer().serializeToString( featureRequest ),
                 async : true,

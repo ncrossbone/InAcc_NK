@@ -36,6 +36,18 @@ Ext.define('InAcc.view.map.CoreMap', {
 		}, 1);
     },
     
+    prevExtentMove:function(){
+		var me = this;
+		console.info(me);
+		me.extentRegAble = false;
+		me.extentUnReIdx--;
+		if(me.extentUnReIdx > -1){
+			me.map.setExtent(me.extentReg[me.extentUnReIdx], true);
+		}else{
+			me.extentUnReIdx == 0;
+		}
+	},
+    
     initBaseMap: function(val){
     	var me = this; 
     	
