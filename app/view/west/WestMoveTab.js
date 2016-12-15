@@ -3,7 +3,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 	extend: "Ext.Panel",
 	
 	xtype: "inacc-westmovetab",
-	title:"이동",
+	title:"검색",
 	layout:{
 		type:"vbox"
 	},

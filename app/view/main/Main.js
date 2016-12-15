@@ -7,7 +7,8 @@ Ext.define("InAcc.view.main.Main", {
 	           "InAcc.view.north.NorthContainer"],*/
 	           
 	requires: ["InAcc.view.west.WestContainer",
-	           "InAcc.view.map.CoreMap"],
+	           "InAcc.view.map.CoreMap",
+	           "InAcc.view.center.CenterContainer"],
 	
 	xtype: "inacc-main",
 	
@@ -28,40 +29,7 @@ Ext.define("InAcc.view.main.Main", {
 	},{
 		xtype: "inacc-westcontainer"
 	},{
-		xtype:"buttongroup",
-		title:"Map Controller",
-		closable:true,
-		//draggable:true,
-		x:1710,
-		y:70,
-		width:210,
-		height:70,
-		bodyStyle:{"background-color": "#ececec"},
-		items:[{
-			xtype:"image",
-			src:"resources/images/icons/util_01.png",
-			style:"border:solid 1px; border-color: gray;"
-		},{
-			xtype:"image",
-			src:"resources/images/icons/util_02.png",
-			style:"border:solid 1px; border-color: gray;"
-		},{
-			xtype:"image",
-			src:"resources/images/icons/util_03.png",
-			style:"border:solid 1px; border-color: gray;"
-		},{
-			xtype:"image",
-			src:"resources/images/icons/util_04.png",
-			style:"border:solid 1px; border-color: gray;"
-		},{
-			xtype:"image",
-			src:"resources/images/icons/util_05.png",
-			style:"border:solid 1px; border-color: gray;"
-		},{
-			xtype:"image",
-			src:"resources/images/icons/util_06.png",
-			style:"border:solid 1px; border-color: gray;"
-		}]
+		xtype: "inacc-centercontainer"
 	}],
 	
 	initComponent: function(){

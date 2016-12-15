@@ -5,6 +5,8 @@ Ext.define("InAcc.view.west.WestContainer", {
     collapsible: true,
     collapseDirection: 'left',
     width: 330,
+    split: true,
+   
     requires: ["InAcc.view.west.WestLayerTab",
                "InAcc.view.west.WestMoveTab"],
     tabBarPosition: 'top',
@@ -18,7 +20,7 @@ Ext.define("InAcc.view.west.WestContainer", {
     },{
     	xtype:"inacc-westmovetab"
     }],
-    border:false,
+    
     initComponent: function(){
     	
     	this.callParent();
