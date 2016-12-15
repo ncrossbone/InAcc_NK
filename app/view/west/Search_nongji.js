@@ -27,7 +27,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
 			width:200,
-			editable: false
+			editable: false,
+			colName: "column1",
+			comparison: "LIKE"
 		},{
 			xtype:"container",
 			width:20
