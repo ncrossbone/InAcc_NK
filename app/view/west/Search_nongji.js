@@ -28,7 +28,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			xtype:"combobox",
 			//store: Ext.create('InAcc.store.west.Search_nongji')
 			width:200,
-			editable: false
+			editable: false,
+			colName: "column1",
+			comparison: "LIKE"
 		},{
 			xtype:"container",
 			width:20
