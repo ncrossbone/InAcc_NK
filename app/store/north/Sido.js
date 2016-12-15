@@ -43,14 +43,14 @@ Ext.define('InAcc.store.north.Sido', {
                 maxFeatures : 300
             });
             
-			$.ajax({
-                url : proxy+'http://202.68.238.120:8080/geoserver/wfs',
+            $.ajax({
+                url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
                 type : 'POST',
                 data : new XMLSerializer().serializeToString( featureRequest ),
-                async : true,
+                async : false,
                 contentType : 'text/xml',
                 success : function(response_) {
-            var features = new ol.format.GeoJSON().readFeatures( response_ );   
+            var features = new ol.format.GeoJSON().readFeatures( response_ );
 
             var receiveData = [];
 

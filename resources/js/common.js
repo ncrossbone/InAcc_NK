@@ -5,7 +5,6 @@ ZoomToExtent = function(){
 	var cmd_sido = Ext.getCmp("cmd_sido");
 	var cmd_sgg = Ext.getCmp("cmd_sgg");
 	
-	console.info(cmd_sgg.value);
 	if(cmd_sgg.value != null){
 		for(var i = 0 ; i < coreMap.sggGeometry.length;i++){
 			if(coreMap.sggGeometry[i].ADMCD == cmd_sgg.value){
@@ -20,7 +19,6 @@ ZoomToExtent = function(){
 		}
 	}
 	
-	console.info(extent);
 	coreMap.map.getView().fit(extent, coreMap.map.getSize());
 		
 }
