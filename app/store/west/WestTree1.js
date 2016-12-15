@@ -15,6 +15,15 @@ Ext.define("InAcc.store.west.WestTree1", {
 	
 	constructor: function(){
 		this.callParent();
-	}
-	
+		console.info(this);
+	},
+	listeners: {
+
+		load: function(store) {
+
+		
+		console.info(store);
+			
+        }
+	}	
 });

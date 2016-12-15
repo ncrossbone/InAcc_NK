@@ -9,7 +9,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 	closable:false,
 	x:1000,
 	y:70,
-	width:350,
+	width:250,
 	height:72,
 	bodyStyle:{"background-color": "#ececec"},
 
@@ -43,7 +43,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 		style:"border:solid 1px; border-color: #dbdbdb; margin-top:1px;",
 		width:27,
 		height:27
-	},{
+	}/*,{
 		xtype:'splitbutton',
 		text:'배경지도',
 		height:28,
@@ -85,5 +85,5 @@ Ext.define("InAcc.view.center.CenterContainer", {
 				}
 			}
 		}]
-	}]
+	}*/]
 });

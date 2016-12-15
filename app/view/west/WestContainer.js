@@ -5,7 +5,8 @@ Ext.define("InAcc.view.west.WestContainer", {
     collapsible: true,
     collapseDirection: 'left',
     width: 330,
-    split: true,
+    style:"border-right:solid 8px #ede5dc;",
+    
    
     requires: ["InAcc.view.west.WestLayerTab",
                "InAcc.view.west.WestMoveTab"],
