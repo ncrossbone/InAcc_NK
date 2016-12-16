@@ -2,6 +2,10 @@ var _coreMap = null;
 
 Ext.application({
     name   : 'InAcc',
+    
+    requires: [
+    	"InAcc.global.Variable"
+    ],
 
     launch : function() {
 

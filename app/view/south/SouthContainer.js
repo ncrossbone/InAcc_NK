@@ -4,6 +4,8 @@ Ext.define("InAcc.view.south.SouthContainer", {
 	
 	xtype: "inacc-southcontainer",
 	
+	itemId: "southContainer",
+	
 	height:250,
 	width:1400,
 	x:322,
@@ -11,6 +13,8 @@ Ext.define("InAcc.view.south.SouthContainer", {
     title:"Search Result",
     items:[{ 
     	xtype:'tabpanel',
+    	
+    	itemId: "tabContainer",
 
     	items: [{
     		title:"tab1",

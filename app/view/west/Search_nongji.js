@@ -86,6 +86,8 @@ Ext.define("InAcc.view.west.Search_nongji", {
 		},{
 			fieldLabel: "세부구분",
 			width:200,
+			displayField: 'name',
+			valueField: 'id',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
 			editable: false,
@@ -169,10 +171,11 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			xtype:"button",
 			text:"검색",
 			width:60,
-			handler:function(a,b,c,d){
-				InAcc.global.Function.getGeoNurisStore("nongjiWindow");
-				//InAcc.global.Function.createGrid();
-				Ext.create("InAcc.view.south.SouthContainer").show();
+			handler:function(){
+				
+				var dataStore = InAcc.global.Function.getGeoNurisStore("nongjiWindow");
+				InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
+
 			}
 		}]
 	}],
@@ -181,9 +184,8 @@ Ext.define("InAcc.view.west.Search_nongji", {
 		this.callParent();
 
 		var id = ["ASG"];
-		
+		var storeData = [];
 		var store = Ext.create('Ext.data.Store', {
-			
 			proxy : {
 				type : 'ajax',
 				url : './resources/data/tableInfo.json',
@@ -198,14 +200,15 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			for(var j=0; j<id.length; j++){
 				for(var i=0; i<record.length; i++){
 					var code = record[i].data.L_CODE;
+					
 					if(id[j]==code){
-						var receiveData = [];
+						//var receiveData = [];
 						for(var k = 0; k<record[i].data.S_ITEM.length; k++){
 							//console.info(record[i].data.S_ITEM[k].S_NAME);
-							receiveData.push({id: record[i].data.S_ITEM[k].S_CODE, name: record[i].data.S_ITEM[k].S_NAME});
+							storeData.push({id: record[i].data.S_ITEM[k].S_CODE, name: record[i].data.S_ITEM[k].S_NAME});
 						}
 						//console.info(receiveData);
-						Ext.getCmp(code).setStore(receiveData);
+
 						//console.info(Ext.getCmp(code));
 					}
 
@@ -215,6 +218,14 @@ Ext.define("InAcc.view.west.Search_nongji", {
 
 		});
 		
-		console.info(store);
+		
+		var test = Ext.create('Ext.data.Store', {
+			fields: ['id', 'name'],
+			data:storeData
+		});
+		
+		
+		console.info(test);
+		Ext.getCmp(id[0]).bindStore(test);
 	}
 });
