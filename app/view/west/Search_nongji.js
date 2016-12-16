@@ -174,9 +174,8 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			width:60,
 			handler:function(){
 				
-				InAcc.global.Function.getGeoNurisStore("nongjiWindow");
-				//InAcc.global.Function.createGrid();
-				Ext.create("InAcc.view.south.SouthContainer").show();
+				var dataStore = InAcc.global.Function.getGeoNurisStore("nongjiWindow");
+				InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
 			}
 		}]
 	}]

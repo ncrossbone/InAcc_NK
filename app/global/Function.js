@@ -9,12 +9,132 @@
 Ext.define("InAcc.global.Function", {
 	singleton : true, // 요게 있어야 set, get 메서드 사용가능..
 	colMapArray: [],
+	/** GIS 데이터 가져오기 
+	 * pContainer :  */
 	getGeoNurisStore: function(pContainer){
 		
 		//console.info(Ext.isString(param));
 		//console.info(Ext.isObject({}));
 		//console.info(Ext.isArray([]));
 		//console.info(Ext.isNumeric(0.3232));
+		
+		var container = this.chkContainer(pContainer);
+		
+		if(container){
+			
+			this.getColArray(container);
+			//console.info(this.colMapArray);
+			var queryFilter = this.getQueryFilter();
+			//console.info(queryWhere);
+			var dataStore = this.getMapStore(queryFilter);
+			
+			this.colMapArray = [];
+			
+			return dataStore;
+		}
+		
+		return false;
+	},
+	createGrid: function(data, confUrl){
+		
+		var me = this;
+		
+		var recordData = null;
+		var gridStore = null;
+		
+		var confStore = Ext.create('Ext.data.Store', {
+			
+			proxy : {
+				type : 'ajax',
+				url : confUrl,
+				reader : {
+					type : 'json'
+				}
+			}
+		});
+
+		confStore.load(function(record) {
+			
+			gridStore = Ext.create("Ext.data.Store", {
+				//autoLoad: true,
+				data: data
+			});
+			
+			recordData = record[0].data;
+		});
+		
+		var interval = 10; // 타이머 interval
+		var interCnt = 0; // 타이머 실행 횟수
+		var limitSec = 5; // 타이머 실행 제한 (초)
+		var limitCnt = limitSec * 1000 / interval; // 타이머 실행 제한 횟수
+		
+		var timer = window.setInterval(function(){
+			
+			if(recordData != null){
+				
+				// 타이머 중지
+				window.clearInterval(timer);
+				
+				var windowContainer = Ext.ComponentQuery.query("#southContainer")[0];
+				
+				if(windowContainer == undefined){
+					
+					windowContainer = Ext.create("InAcc.view.south.SouthContainer");
+				}
+				
+				var tabContainer = windowContainer.query("#tabContainer")[0];
+				
+				if(tabContainer){
+					
+					var grid = Ext.create("Ext.grid.Panel", {
+						closable: true,
+						itemId: recordData.itemId,
+						title: recordData.title,
+						width: recordData.width,
+						height: recordData.height,
+						//width: 500,
+						//height: 300,
+						columns: recordData.columns,
+						store: gridStore
+					});
+					
+					tabContainer.add(grid);
+					tabContainer.setActiveTab(grid);
+					windowContainer.show();
+				}
+				else{
+					
+					Ext.create("Ext.grid.Panel", {
+						floating: true,
+						draggable: true,
+						closable: true,
+						x: 300,
+						y: 300,
+						itemId: recordData.itemId,
+						title: recordData.title,
+						//width: recordData.width,
+						//height: recordData.height,
+						width: 500,
+						height: 300,
+						columns: recordData.columns,
+						store: gridStore
+					}).show();
+				}
+			}
+			else{
+				
+				interCnt++;
+				
+				if(interCnt >= limitCnt){
+					
+					// 타이머 중지
+					window.clearInterval(timer);
+					alert("제한시간 " + limitSec + "초를 초과하였습니다. 프로세스를 종료합니다.");
+				}
+			}
+		}, interval);
+	},
+	chkContainer: function (pContainer){
 		
 		var container = null;
 		
@@ -26,27 +146,17 @@ Ext.define("InAcc.global.Function", {
 			
 			container = pContainer;
 		}
+		else if(pContainer == null){
+			
+			container = pContainer;
+		}
 		else{
 			
 			alert("파라메터 타입이 명확하지 않습니다.");
 			return false;
 		}
 		
-		if(container == null){
-			
-			alert("컨테이너를 찾을 수 없습니다.");
-			return false;
-		}
-		
-		this.getColArray(container);
-		//console.info(this.colMapArray);
-		var queryWhere = this.getQueryWhere();
-		//console.info(queryWhere);
-		var dataStore = this.getDataStore(queryWhere);
-		
-		this.createGrid(dataStore);
-		
-		this.colMapArray = [];
+		return container;
 	},
 	getColArray: function(container){
 		
@@ -123,103 +233,98 @@ Ext.define("InAcc.global.Function", {
 			}
 		}
 	},
-	getQueryWhere: function(){
-		
-		var queryWhere = "";
-		
-		for(var i = 0; i < this.colMapArray.length; i++){
-			
-			queryWhere += this.colMapArray[i].column + " " + this.colMapArray[i].comparison + " "
-			
-			if(this.colMapArray[i].comparison == "LIKE"){
-				
-				queryWhere += "'%" + this.colMapArray[i].value + "%'";
-			}
-			else if(Ext.isString(this.colMapArray[i].value)){
-				
-				queryWhere += "'" + this.colMapArray[i].value + "'";
-			}
-			else if(Ext.isArray(this.colMapArray[i].value)){
-				
-				queryWhere += "(";
-				
-				for(var j = 0; j < this.colMapArray[i].value.length; j++){
-					
-					if(Ext.isString(this.colMapArray[i].value[j])){
-						
-						queryWhere += "'" + this.colMapArray[i].value[j] + "', ";
-					}
-					else if(Ext.isNumeric(this.colMapArray[i].value[j])){
-						
-						queryWhere += this.colMapArray[i].value[j] + ", ";
-					}
-				}
-				
-				queryWhere = queryWhere.substring(0, queryWhere.length - 2) + ")";
-			}
-			else if(Ext.isNumeric(this.colMapArray[i].value)){
-				
-				queryWhere += this.colMapArray[i].value;
-			}
-			
-			if(i < this.colMapArray.length - 1){
-				
-				queryWhere += " AND ";
-			}
-		}
-		
-		return queryWhere;
-	},
 	getQueryFilter: function(){
 		
-		var filter = ol.format.filter;
-		
-		var queryWhere = "";
+		var andFilter = ol.format.filter.and();
 		
 		for(var i = 0; i < this.colMapArray.length; i++){
 			
-			queryWhere += this.colMapArray[i].column + " " + this.colMapArray[i].comparison + " "
+			var orFilter = ol.format.filter.or();
+			var tmpFilter = null;
 			
 			if(this.colMapArray[i].comparison == "LIKE"){
 				
-				queryWhere += "'%" + this.colMapArray[i].value + "%'";
+				tmpFilter = ol.format.filter.like(this.colMapArray[i].column, this.colMapArray[i].value);
 			}
-			else if(Ext.isString(this.colMapArray[i].value)){
+			else if(this.colMapArray[i].comparison == "="){
 				
-				queryWhere += "'" + this.colMapArray[i].value + "'";
+				tmpFilter = ol.format.filter.equalTo(this.colMapArray[i].column, this.colMapArray[i].value);
 			}
-			else if(Ext.isArray(this.colMapArray[i].value)){
+			else if(this.colMapArray[i].comparison == ">"){
 				
-				queryWhere += "(";
+				tmpFilter = ol.format.filter.greaterThan(this.colMapArray[i].column, this.colMapArray[i].value);
+			}
+			else if(this.colMapArray[i].comparison == ">="){
+				
+				tmpFilter = ol.format.filter.greaterThanOrEqualTo(this.colMapArray[i].column, this.colMapArray[i].value);
+			}
+			else if(this.colMapArray[i].comparison == "<"){
+				
+				tmpFilter = ol.format.filter.lessThan(this.colMapArray[i].column, this.colMapArray[i].value);
+			}
+			else if(this.colMapArray[i].comparison == "<="){
+				
+				tmpFilter = ol.format.filter.lessThanOrEqualTo(this.colMapArray[i].column, this.colMapArray[i].value);
+			}
+			else if(this.colMapArray[i].comparison == "<>"){
+				
+				tmpFilter = ol.format.filter.notEqualTo(this.colMapArray[i].column, this.colMapArray[i].value);
+			}
+			else if(this.colMapArray[i].comparison == "IN"){
 				
 				for(var j = 0; j < this.colMapArray[i].value.length; j++){
 					
-					if(Ext.isString(this.colMapArray[i].value[j])){
+					tmpFilter = ol.format.filter.equalTo(this.colMapArray[i].column, this.colMapArray[i].value[j]);
+					
+					if(orFilter.conditionA == undefined){
 						
-						queryWhere += "'" + this.colMapArray[i].value[j] + "', ";
+						orFilter.conditionA = tmpFilter;
 					}
-					else if(Ext.isNumeric(this.colMapArray[i].value[j])){
+					else if(orFilter.conditionB == undefined){
 						
-						queryWhere += this.colMapArray[i].value[j] + ", ";
+						orFilter.conditionB = tmpFilter;
+					}
+					else{
+						
+						var tmpOrFilter = ol.format.filter.or();
+						tmpOrFilter.conditionA = orFilter;
+						tmpOrFilter.conditionB = tmpFilter;
+						orFilter = tmpOrFilter;
 					}
 				}
 				
-				queryWhere = queryWhere.substring(0, queryWhere.length - 2) + ")";
-			}
-			else if(Ext.isNumeric(this.colMapArray[i].value)){
-				
-				queryWhere += this.colMapArray[i].value;
+				//console.info(orFilter);
+				tmpFilter = orFilter;
 			}
 			
-			if(i < this.colMapArray.length - 1){
+			if(andFilter.conditionA == undefined){
 				
-				queryWhere += " AND ";
+				andFilter.conditionA = tmpFilter;
+			}
+			else if(andFilter.conditionB == undefined){
+				
+				andFilter.conditionB = tmpFilter;
+			}
+			else{
+				
+				var tmpAndFilter = ol.format.filter.and();
+				tmpAndFilter.conditionA = andFilter;
+				tmpAndFilter.conditionB = tmpFilter;
+				andFilter = tmpAndFilter;
 			}
 		}
 		
-		return queryWhere;
+		//console.info(andFilter);
+		return andFilter;
 	},
-	getMapStore: function(where){
+	getMapStore: function(queryFilter){
+		
+		/* 조건설정 완료 후 삭제할 것 */
+		queryFilter = ol.format.filter.or(
+    		ol.format.filter.like('NGJI_IDN','414*'),
+    		ol.format.filter.like('NGJI_IDN','2637*')
+        );
+		/* 조건설정 완료 후 삭제할 것 끝 */
 		
 		var	proxy = "./resources/Proxy.jsp?url=";
 		
@@ -229,14 +334,7 @@ Ext.define("InAcc.global.Function", {
             outputFormat : 'application/json',
             geometryName : 'SHAPE',
             maxFeatures : 300,
-            filter: ol.format.filter.or(
-            		ol.format.filter.like('NGJI_IDN','414*'),
-            		ol.format.filter.like('NGJI_IDN','2637*')
-            ),
-            //filter: ol.format.filter.like('NGJI_IDN','2637*')
-            /*params: {
-            	CQL_FILTER: "NGJI_IDN = 414"
-            }*/
+            filter: queryFilter,
         });
         
 		var data = [];
@@ -258,80 +356,7 @@ Ext.define("InAcc.global.Function", {
             	}
             }
         });
-        console.info(data);
+        
         return data;
-	},
-	createGrid: function(dataStore){
-		
-		var store = Ext.create('Ext.data.Store', {
-
-			proxy : {
-				type : 'ajax',
-				url : './resources/config/GridNongji.conf',
-				reader : {
-					type : 'json'
-				}
-			}
-		});
-
-		store.load(function(record) {
-			
-			/*var gridStore = Ext.create("Ext.data.Store", {
-				//autoLoad: true,
-				data: [{
-					ADMCD: "ldkjflsaj",
-					SECT_ARA: "aaa"
-				}, {
-					ADMCD: "sss",
-					SECT_ARA: "bbb"
-				}]
-			});*/
-			//console.info(gridData);
-			var gridStore = Ext.create("Ext.data.Store", {
-				//autoLoad: true,
-				data: dataStore
-			});
-			
-			var data = record[0].data;
-			
-			Ext.create("Ext.grid.Panel", {
-				floating: true,
-				draggable: true,
-				closable: true,
-				x: 300,
-				y: 300,
-				id: data.id,
-				title: data.title,
-				//width: data.width,
-				//height: data.height,
-				width: 500,
-				height: 300,
-				columns: data.columns,
-				store: gridStore
-			}).show();
-		});
-		
-		/*Ext.create("Ext.grid.Panel", {
-			floating: true,
-			x: 300,
-			y: 300,
-			initComponent: function(){
-				
-				this.id = "ddd";
-				this.title = "테스트";
-				this.width = 500;
-				this.height = 300;				
-				this.columns = [{
-					id: "col1",
-					text: "col1",
-					dataIndex: "col1",
-					width: 100,
-					sortable: true
-				}];
-				
-				this.callParent();
-				console.info("dd");
-			}
-		});*/
 	}
 });
