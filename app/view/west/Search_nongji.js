@@ -32,11 +32,10 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			fieldLabel: "시범지역",
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			//store: Ext.create('InAcc.store.west.Search_nongji')
 			width:200,
 			editable: false,
 			colName: "SLTE_NAM",
-			comparison: "="
+			comparison: "=",
 		},{
 			xtype:"container",
 			width:20
@@ -44,8 +43,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			fieldLabel: "구획면적",
 			width:200,
 			labelStyle:"font-weight: bold;",
-			xtype:"combobox",
-			editable: false,
+			xtype:"textfield",
 			colName: "SECT_ARA",
 			comparison: ">="
 		},{
@@ -59,9 +57,8 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			xtype:"container",
 			width:20
 		},{
-			xtype:"combobox",
+			xtype:"textfield",
 			width:90,
-			editable: false,
 			colName: "SECT_ARA",
 			comparison: "<="
 		},{
@@ -92,7 +89,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
 			editable: false,
-			colName: "ASGB_CDE",
+			id: "ASG",
 			comparison: "="
 		}]
 	},{
@@ -179,5 +176,46 @@ Ext.define("InAcc.view.west.Search_nongji", {
 				Ext.create("InAcc.view.south.SouthContainer").show();
 			}
 		}]
-	}]
+	}],
+	
+	initComponent:function(){
+		this.callParent();
+
+		var id = ["ASG"];
+		
+		var store = Ext.create('Ext.data.Store', {
+			
+			proxy : {
+				type : 'ajax',
+				url : './resources/data/tableInfo.json',
+				reader : {
+					type : 'json'
+				}
+			}
+		});
+		//store.setFields() = ['id','name'];
+		store.load(function(record) {
+			
+			for(var j=0; j<id.length; j++){
+				for(var i=0; i<record.length; i++){
+					var code = record[i].data.L_CODE;
+					if(id[j]==code){
+						var receiveData = [];
+						for(var k = 0; k<record[i].data.S_ITEM.length; k++){
+							//console.info(record[i].data.S_ITEM[k].S_NAME);
+							receiveData.push({id: record[i].data.S_ITEM[k].S_CODE, name: record[i].data.S_ITEM[k].S_NAME});
+						}
+						//console.info(receiveData);
+						Ext.getCmp(code).setStore(receiveData);
+						//console.info(Ext.getCmp(code));
+					}
+
+				}
+			}
+			//console.info(Ext.getCmp(code).getStore());
+
+		});
+		
+		console.info(store);
+	}
 });

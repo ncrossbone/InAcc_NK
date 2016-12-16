@@ -3,24 +3,23 @@ Ext.define("InAcc.view.center.CenterContainer", {
 	extend: "Ext.ButtonGroup",
 
 	xtype: "inacc-centercontainer",
-	title:"Map Controller",
-	closable:true,
-	draggable:true,
+	//closable:true,
+	//draggable:true,
 	closable:false,
-	x:1000,
-	y:70,
-	width:250,
-	height:72,
+	x:350,
+	y:34,
+	width:245,
+	height:40,
 	bodyStyle:{"background-color": "#ececec"},
 
 	items:[{
 		xtype:"image",
 		src:"resources/images/icons/util_01.png",
-		style:"border:solid 1px; border-color: #dbdbdb; argin-top:1px;"
+		style:"border:solid 1px; border-color: #dbdbdb; cursor:pointer;"
 	},{
 		xtype:"image",
 		src:"resources/images/icons/util_02.png",
-		style:"border:solid 1px; border-color: #dbdbdb; argin-top:1px;",
+		style:"border:solid 1px; border-color: #dbdbdb; cursor:pointer;",
 		listeners:{
 			el:{
 				click:function(){
@@ -42,7 +41,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 	},{
 		xtype:"image",
 		src:"resources/images/icons/util_03.png",
-		style:"border:solid 1px; border-color: #dbdbdb; argin-top:1px;",
+		style:"border:solid 1px; border-color: #dbdbdb; cursor:pointer;",
 		listeners:{
 			el:{
 				click:function(){
@@ -65,7 +64,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 	},{
 		xtype:"image",
 		src:"resources/images/icons/util_04.png",
-		style:"border:solid 1px; border-color: #dbdbdb; argin-top:1px;",
+		style:"border:solid 1px; border-color: #dbdbdb; cursor:pointer;",
 		listeners:{
 			el:{
 				click: function(){
@@ -80,7 +79,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 	},{
 		xtype:"image",
 		src:"resources/images/icons/util_05.png",
-		style:"border:solid 1px; border-color: #dbdbdb; argin-top:1px;",
+		style:"border:solid 1px; border-color: #dbdbdb; cursor:pointer;",
 		listeners:{
 			el:{
 				click:function(){
@@ -97,7 +96,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 	},{
 		xtype:"image",
 		src:"resources/images/icons/util_06.png",
-		style:"border:solid 1px; border-color: #dbdbdb; argin-top:1px;",
+		style:"border:solid 1px; border-color: #dbdbdb; cursor:pointer;",
 		listeners:{
 			el:{
 				click:function(){
@@ -112,7 +111,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 	},{
 		xtype:"image",
 		src:"resources/images/icons/util_07.png",
-		style:"border:solid 1px; border-color: #dbdbdb; margin-top:1px;",
+		style:"border:solid 1px; border-color: #dbdbdb; cursor:pointer;",
 		width:27,
 		height:27
 	}/*,{
