@@ -8,6 +8,8 @@ Ext.define("InAcc.view.main.Main", {
 	           
 	requires: ["InAcc.view.west.WestContainer",
 	           "InAcc.view.map.CoreMap",
+	           "InAcc.view.north.NorthLogo",
+	           "InAcc.view.north.NorthContainer",
 	           "InAcc.view.center.CenterContainer"],
 	
 	xtype: "inacc-main",
@@ -27,10 +29,13 @@ Ext.define("InAcc.view.main.Main", {
 	},*/{
 		xtype: "inacc-coremap"
 	},{
-		xtype: "inacc-westcontainer",
-		style:"margin-top:100px;"
+		xtype: "inacc-westcontainer"
 	},{
-		xtype: "inacc-centercontainer"
+		xtype: "inacc-northcontainer"
+	},{
+		xtype: "inacc-northlogo"
+	},{
+		xtype:"inacc-centercontainer"
 	}],
 	
 	initComponent: function(){

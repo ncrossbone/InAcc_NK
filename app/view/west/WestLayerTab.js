@@ -6,7 +6,6 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		type:'accordion'
 	},
 	title:"주제도",
-
 	items:[{
 		title:"실태DB",
 		xtype:"treepanel",
