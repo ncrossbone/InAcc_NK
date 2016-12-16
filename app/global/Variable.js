@@ -16,9 +16,6 @@ Ext.define("InAcc.global.Variable", {
 		
 		var me = this;
 		
-		var recordData = null;
-		var gridStore = null;
-		
 		var confStore = Ext.create('Ext.data.Store', {
 			
 			proxy : {
@@ -33,13 +30,10 @@ Ext.define("InAcc.global.Variable", {
 		confStore.load(function(record) {
 			
 			console.info(record);
+			me.setMapServiceUrl(record[0].data.mapServiceUrl);
+			me.setProxyUrl(record[0].data.proxyUrl);
 			
-			/*gridStore = Ext.create("Ext.data.Store", {
-				//autoLoad: true,
-				data: data
-			});
-			
-			recordData = record[0].data;*/
+			console.info(me.getMapServiceUrl());
 		});
 	}
 });

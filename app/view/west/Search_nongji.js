@@ -11,6 +11,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 	title:"농지 속성 조회",
 	
 	itemId: "nongjiWindow",
+	queryLayerName: "NONGJI_BA",
 
 	height:210,
 	width:1050,
@@ -184,6 +185,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 				
 				var dataStore = InAcc.global.Function.getGeoNurisStore("nongjiWindow");
 				InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
+
 			}
 		}]
 	}],

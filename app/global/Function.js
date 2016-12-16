@@ -8,6 +8,7 @@
  *    - https://wikidocs.net/3384 5.글로벌 변수 사용 */
 Ext.define("InAcc.global.Function", {
 	singleton : true, // 요게 있어야 set, get 메서드 사용가능..
+	queryLayerName: "",
 	colMapArray: [],
 	comboArray: [],
 	/** GIS 데이터 가져오기 
@@ -22,6 +23,8 @@ Ext.define("InAcc.global.Function", {
 		var container = this.chkContainer(pContainer);
 		
 		if(container){
+			
+			this.queryLayerName = container.queryLayerName;
 			
 			this.getColArray(container);
 			//console.info(this.colMapArray);
@@ -138,7 +141,6 @@ Ext.define("InAcc.global.Function", {
 	chkContainer: function (pContainer){
 		
 		var container = null;
-		
 		if(Ext.isString(pContainer)){
 			
 			container = Ext.ComponentQuery.query("#" + pContainer)[0];
@@ -320,6 +322,8 @@ Ext.define("InAcc.global.Function", {
 	},
 	getMapStore: function(queryFilter){
 		
+		var me = this;
+		
 		/* 조건설정 완료 후 삭제할 것 */
 		queryFilter = ol.format.filter.or(
     		ol.format.filter.like('NGJI_IDN','414*'),
@@ -327,11 +331,9 @@ Ext.define("InAcc.global.Function", {
         );
 		/* 조건설정 완료 후 삭제할 것 끝 */
 		
-		var	proxy = "./resources/Proxy.jsp?url=";
-		
 		var featureRequest = new ol.format.WFS().writeGetFeature({
             srsName : "EPSG:5179",
-            featureTypes : ['NONGJI_BA'],
+            featureTypes : [me.queryLayerName],
             outputFormat : 'application/json',
             geometryName : 'SHAPE',
             maxFeatures : 300,
@@ -339,9 +341,9 @@ Ext.define("InAcc.global.Function", {
         });
         
 		var data = [];
-		
+		//console.info(InAcc.global.Variable.getMapServiceUrl());
         $.ajax({
-            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+            url : InAcc.global.Variable.getProxyUrl() + InAcc.global.Variable.getMapServiceUrl(),
             type : 'POST',
             data : new XMLSerializer().serializeToString( featureRequest ),
             async : false,
