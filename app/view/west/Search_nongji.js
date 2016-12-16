@@ -172,8 +172,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			xtype:"button",
 			text:"검색",
 			width:60,
-			handler:function(){
-				
+			handler:function(a,b,c,d){
 				InAcc.global.Function.getGeoNurisStore("nongjiWindow");
 				//InAcc.global.Function.createGrid();
 				Ext.create("InAcc.view.south.SouthContainer").show();

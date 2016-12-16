@@ -17,7 +17,6 @@ Ext.define("InAcc.global.Function", {
 		//console.info(Ext.isNumeric(0.3232));
 		
 		var container = null;
-		
 		if(Ext.isString(pContainer)){
 			
 			container = Ext.ComponentQuery.query("#" + pContainer)[0];
@@ -37,11 +36,11 @@ Ext.define("InAcc.global.Function", {
 			alert("컨테이너를 찾을 수 없습니다.");
 			return false;
 		}
-		
+		console.info(container);
 		this.getColArray(container);
 		//console.info(this.colMapArray);
 		var queryWhere = this.getQueryWhere();
-		//console.info(queryWhere);
+		console.info(queryWhere);
 		var dataStore = this.getMapStore(queryWhere);
 		
 		this.createGrid(dataStore);
@@ -220,7 +219,7 @@ Ext.define("InAcc.global.Function", {
 		return queryWhere;
 	},
 	getMapStore: function(where){
-		
+		console.info(where);
 		var	proxy = "./resources/Proxy.jsp?url=";
 		
 		var featureRequest = new ol.format.WFS().writeGetFeature({
@@ -286,7 +285,7 @@ Ext.define("InAcc.global.Function", {
 					SECT_ARA: "bbb"
 				}]
 			});*/
-			console.info(gridData);
+			//console.info(gridData);
 			var gridStore = Ext.create("Ext.data.Store", {
 				//autoLoad: true,
 				data: dataStore
