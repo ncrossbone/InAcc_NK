@@ -40,7 +40,6 @@ Ext.define("InAcc.global.Function", {
 		this.getColArray(container);
 		//console.info(this.colMapArray);
 		var queryWhere = this.getQueryWhere();
-		
 		var dataStore = this.getMapStore(queryWhere);
 		
 		this.createGrid(dataStore);
@@ -219,7 +218,7 @@ Ext.define("InAcc.global.Function", {
 		return queryWhere;
 	},
 	getMapStore: function(where){
-		console.info(where);
+		//console.info(where);
 		var	proxy = "./resources/Proxy.jsp?url=";
 		
 		var featureRequest = new ol.format.WFS().writeGetFeature({
@@ -261,7 +260,7 @@ Ext.define("InAcc.global.Function", {
         return data;
 	},
 	createGrid: function(dataStore){
-		console.info(dataStore);
+		
 		var store = Ext.create('Ext.data.Store', {
 
 			proxy : {
