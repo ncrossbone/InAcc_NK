@@ -25,7 +25,6 @@ Ext.define("InAcc.view.center.CenterContainer", {
 			el:{
 				click:function(){
 					var coreMap = Ext.getCmp("_mapDiv_");
-					
 					if (coreMap.history_now > 0) {
 						coreMap.click = true;
 						coreMap.history_now--;
