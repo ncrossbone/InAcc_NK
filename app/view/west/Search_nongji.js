@@ -75,10 +75,15 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			fieldLabel: "구분",
 			width:150,
 			labelWidth: 50,
+			displayField: 'name',
+			valueField: 'id',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
 			editable: false,
 			colName: "LYGB_NAM",
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "LAY01",
 			comparison: "="
 		},{
 			xtype:"container",
@@ -86,12 +91,13 @@ Ext.define("InAcc.view.west.Search_nongji", {
 		},{
 			fieldLabel: "세부구분",
 			width:200,
-			displayField: 'name',
-			valueField: 'id',
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
+            colName: "ASGB_CDE",
 			editable: false,
-			id: "ASG",
+			lCode: "ASG",
 			comparison: "="
 		}]
 	},{
@@ -110,8 +116,8 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			fieldLabel: "경사율",
 			width:200,
 			labelStyle:"font-weight: bold;",
-			xtype:"combobox",
-			editable: false,
+			xtype:"textfield",
+			//editable: false,
 			colName: "SLOP_RAT",
 			comparison: ">="
 		},{
@@ -125,9 +131,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			xtype:"container",
 			width:20
 		},{
-			xtype:"combobox",
+			xtype:"textfield",
 			width:90,
-			editable: false,
+			//editable: false,
 			colName: "SLOP_RAT",
 			comparison: "<="
 		},{
@@ -139,9 +145,12 @@ Ext.define("InAcc.view.west.Search_nongji", {
 		},{
 			fieldLabel: "경사등급",
 			width:200,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
 			editable: false,
+			lCode: "SLP",
 			colName: "SLOP_CDE",
 			comparison: "="
 		},{
@@ -181,9 +190,11 @@ Ext.define("InAcc.view.west.Search_nongji", {
 	
 	initComponent:function(){
 		this.callParent();
-
-		var id = ["ASG"];
-		var storeData = [];
+		
+		InAcc.global.Function.getComboArray(this);
+		var arrCombo = InAcc.global.Function.comboArray;
+		
+		
 		var store = Ext.create('Ext.data.Store', {
 			proxy : {
 				type : 'ajax',
@@ -193,38 +204,30 @@ Ext.define("InAcc.view.west.Search_nongji", {
 				}
 			}
 		});
-		//store.setFields() = ['id','name'];
+		
+		
 		store.load(function(record) {
 			
-			for(var j=0; j<id.length; j++){
-				for(var i=0; i<record.length; i++){
-					var code = record[i].data.L_CODE;
+			for(var arrCnt = 0; arrCnt < arrCombo.length; arrCnt++){
+				
+				var recIdx = record.map(function(obj){
 					
-					if(id[j]==code){
-						//var receiveData = [];
-						for(var k = 0; k<record[i].data.S_ITEM.length; k++){
-							//console.info(record[i].data.S_ITEM[k].S_NAME);
-							storeData.push({id: record[i].data.S_ITEM[k].S_CODE, name: record[i].data.S_ITEM[k].S_NAME});
-						}
-						//console.info(receiveData);
-
-						//console.info(Ext.getCmp(code));
-					}
-
-				}
+					return obj.data.L_CODE;
+				}).indexOf(arrCombo[arrCnt].lCode);
+				
+				var storeData = [];
+				
+				var sItem = record[recIdx].data.S_ITEM;
+				
+				var storeBind = Ext.create('Ext.data.Store', {
+					fields: ['S_CODE', 'S_NAME'],
+					data:sItem
+				});
+				
+				arrCombo[arrCnt].bindStore(storeBind);
+				
 			}
-			//console.info(Ext.getCmp(code).getStore());
-
 		});
 		
-		
-		var test = Ext.create('Ext.data.Store', {
-			fields: ['id', 'name'],
-			data:storeData
-		});
-		
-		
-		console.info(test);
-		Ext.getCmp(id[0]).bindStore(test);
 	}
 });

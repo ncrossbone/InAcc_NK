@@ -9,6 +9,7 @@
 Ext.define("InAcc.global.Function", {
 	singleton : true, // 요게 있어야 set, get 메서드 사용가능..
 	colMapArray: [],
+	comboArray: [],
 	/** GIS 데이터 가져오기 
 	 * pContainer :  */
 	getGeoNurisStore: function(pContainer){
@@ -358,5 +359,34 @@ Ext.define("InAcc.global.Function", {
         });
         
         return data;
+	},
+	getComboArray: function(container){
+		
+		var tmpItems = container.items;
+		
+		if(tmpItems != undefined){
+			
+			if(Ext.isArray(tmpItems)){
+				
+				for(var i = 0; i < tmpItems.length; i++){
+					
+					if(tmpItems[i].lCode != undefined){
+						
+						if(tmpItems[i].xtype == "combobox"){
+							
+							//console.info(tmpItems[i].getValue());
+							//console.info(tmpItems[i].getDisplayValue());
+							this.comboArray.push(tmpItems[i]);
+						}
+					}
+					
+					this.getComboArray(tmpItems[i]);
+				}
+			}
+			else{
+				
+				this.getComboArray(tmpItems);
+			}
+		}
 	}
 });
