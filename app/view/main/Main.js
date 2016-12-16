@@ -27,7 +27,8 @@ Ext.define("InAcc.view.main.Main", {
 	},*/{
 		xtype: "inacc-coremap"
 	},{
-		xtype: "inacc-westcontainer"
+		xtype: "inacc-westcontainer",
+		style:"margin-top:100px;"
 	},{
 		xtype: "inacc-centercontainer"
 	}],
