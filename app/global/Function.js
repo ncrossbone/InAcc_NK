@@ -154,15 +154,8 @@ Ext.define("InAcc.global.Function", {
 			alert("파라메터 타입이 명확하지 않습니다.");
 			return false;
 		}
-		console.info(container);
-		this.getColArray(container);
-		//console.info(this.colMapArray);
-		var queryWhere = this.getQueryWhere();
-		var dataStore = this.getMapStore(queryWhere);
 		
-		this.createGrid(dataStore);
-		
-		this.colMapArray = [];
+		return container;
 	},
 	getColArray: function(container){
 		
