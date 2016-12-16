@@ -40,13 +40,8 @@ Ext.define("InAcc.global.Function", {
 		this.getColArray(container);
 		//console.info(this.colMapArray);
 		var queryWhere = this.getQueryWhere();
-<<<<<<< HEAD
-		console.info(queryWhere);
+		
 		var dataStore = this.getMapStore(queryWhere);
-=======
-		//console.info(queryWhere);
-		var dataStore = this.getDataStore(queryWhere);
->>>>>>> de090d1749b6ed434b7369573d1ed80f211296f7
 		
 		this.createGrid(dataStore);
 		
@@ -266,7 +261,7 @@ Ext.define("InAcc.global.Function", {
         return data;
 	},
 	createGrid: function(dataStore){
-		
+		console.info(dataStore);
 		var store = Ext.create('Ext.data.Store', {
 
 			proxy : {
