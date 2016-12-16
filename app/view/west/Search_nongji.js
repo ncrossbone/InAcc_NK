@@ -32,6 +32,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			fieldLabel: "시범지역",
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
+			//store: Ext.create('InAcc.store.west.Search_nongji')
 			width:200,
 			editable: false,
 			colName: "SLTE_NAM",

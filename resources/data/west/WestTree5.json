@@ -3,13 +3,13 @@
 	"text": "영상지도",
 	"expanded": false,
 	"children": [{
-		"id": "1",
+		"id": "CHEONGJIN_Aspect_10m_UTMK",
 		"text": "1m 해상도",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "2",
+		"id": "CHEONGJIN_Aspect_10m_UTMK",
 		"text": "0.5m 해상도",
 		"iconCls": "layerIconSize layer2",
 		"leaf": true,
@@ -20,25 +20,25 @@
 	"text": "DEM",
 	"expanded": false,
 	"children": [{
-		"id": "4",
+		"id": "CHEONGJIN_Aspect_10m_UTMK",
 		"text": "10m DEM",
 		"iconCls": "layerIconSize layer9",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "5",
+		"id": "CHEONGJIN_Aspect_10m_UTMK",
 		"text": "10m Aspect",
 		"iconCls": "layerIconSize layer10",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "6",
+		"id": "CHEONGJIN_Aspect_10m_UTMK",
 		"text": "10m Slope",
 		"iconCls": "layerIconSize layer10",
 		"leaf": true,
 		"checked": false
 	}, {
-		"id": "7",
+		"id": "CHEONGJIN_Aspect_10m_UTMK",
 		"text": "10m 음영기복도",
 		"iconCls": "layerIconSize layer10",
 		"leaf": true,

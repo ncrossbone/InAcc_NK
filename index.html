@@ -5,15 +5,13 @@
 <title>Insert title here</title>
 
 <script type="text/javascript" src="./openLayers-3.19.1/ol-debug.js"></script>
+<script type="text/javascript" src="./openLayers-3.19.1/ol3-layerswitcher.js"></script>
 
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.19.1/ol.js"></script> -->
 
 <script type="text/javascript" src="./resources/jquery.js"></script>
 
 <script type="text/javascript"   src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
-
-	<!-- OpenLayers3 LayerSwicher Script -->
-<script type="text/javascript" src="http://221.148.35.76:8880/ol3-UIT/WebMap/resources/ol3-layerswitcher/ol3-layerswitcher.js"></script>
 
 <script type="text/javascript" src="http://221.148.35.76:8880/ol3-UIT/WebMap/js/plugin/jquery.xml2json.js"></script>
 <link rel="alternate" type="application/rss+xml" title="ugistech" href="http://www.ugistech.net/feed.xml">
@@ -25,6 +23,7 @@
 <!-- <script language="JavaScript" type="text/javascript" src="http://map.vworld.kr/js/apis.do?type=Base&apiKey=1E6F5767-16C5-3645-B52E-931DB6CDC454"></script>-->
 <script type="text/javascript" src="./ext-6.2.0/build/ext-all.js"></script>
 <link rel="stylesheet" type="text/css" href="./openLayers-3.19.1/ol.css"/>
+<link rel="stylesheet" type="text/css" href="./openLayers-3.19.1/ol3-layerswitcher.css"/>
 <link rel="stylesheet" type="text/css" href="./ext-6.2.0/build/classic/theme-triton/resources/theme-triton-all.css">
 <script type="text/javascript" src="proj4-src.js"></script>
 <script type="text/javascript" src="./resources/js/common.js"></script>
@@ -32,7 +31,27 @@
 <script type="text/javascript">
 ol.ProxyHost = "./resources/Proxy.jsp?resourceUrl="; // 크로스도메인 해결
 </script>
+<style type="text/css">
+/* .ol-zoom {
+	left: unset;
+	right: 10px;
+}
 
+.ol-zoomslider {
+	left: unset;
+	right: 10px;
+	background-color: transparent;
+    top: 2.3em;
+}
+
+.ol-zoom .ol-zoom-out {
+	margin-top: 204px;
+} */
+#tool-1058{
+ top:150px;
+ position:absolute;
+}
+</style>
 </head>
 <body>
 
