@@ -42,7 +42,7 @@ Ext.define("InAcc.global.Function", {
 		//console.info(this.colMapArray);
 		var queryWhere = this.getQueryWhere();
 		//console.info(queryWhere);
-		var dataStore = this.getMapStore(queryWhere);
+		var dataStore = this.getDataStore(queryWhere);
 		
 		this.createGrid(dataStore);
 		
@@ -286,7 +286,7 @@ Ext.define("InAcc.global.Function", {
 					SECT_ARA: "bbb"
 				}]
 			});*/
-			console.info(gridData);
+			//console.info(gridData);
 			var gridStore = Ext.create("Ext.data.Store", {
 				//autoLoad: true,
 				data: dataStore
