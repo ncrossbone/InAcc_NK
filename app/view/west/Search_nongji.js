@@ -3,8 +3,14 @@ Ext.define("InAcc.view.west.Search_nongji", {
 	extend: "Ext.window.Window",
 
 	xtype: "inacc-searchnongji",
+	
+	requires: [
+		"InAcc.global.Function"
+	],
 
 	title:"농지 속성 조회",
+	
+	itemId: "nongjiWindow",
 
 	height:210,
 	width:1050,
@@ -28,8 +34,8 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			xtype:"combobox",
 			width:200,
 			editable: false,
-			colName: "column1",
-			comparison: "LIKE"
+			colName: "SLTE_NAM",
+			comparison: "="
 		},{
 			xtype:"container",
 			width:20
@@ -38,7 +44,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			width:200,
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			editable: false
+			editable: false,
+			colName: "SECT_ARA",
+			comparison: ">="
 		},{
 			xtype:"container",
 			width:20
@@ -52,7 +60,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 		},{
 			xtype:"combobox",
 			width:90,
-			editable: false
+			editable: false,
+			colName: "SECT_ARA",
+			comparison: "<="
 		},{
 			xtype:"container",
 			width:10
@@ -69,7 +79,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			labelWidth: 50,
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			editable: false
+			editable: false,
+			colName: "LYGB_NAM",
+			comparison: "="
 		},{
 			xtype:"container",
 			width:20
@@ -78,7 +90,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			width:200,
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			editable: false
+			editable: false,
+			colName: "ASGB_CDE",
+			comparison: "="
 		}]
 	},{
 		xtype:"container",
@@ -97,7 +111,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			width:200,
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			editable: false
+			editable: false,
+			colName: "SLOP_RAT",
+			comparison: ">="
 		},{
 			xtype:"container",
 			width:20
@@ -111,7 +127,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 		},{
 			xtype:"combobox",
 			width:90,
-			editable: false
+			editable: false,
+			colName: "SLOP_RAT",
+			comparison: "<="
 		},{
 			xtype:"label",
 			text:"O"
@@ -123,7 +141,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			width:200,
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			editable: false
+			editable: false,
+			colName: "SLOP_CDE",
+			comparison: "="
 		},{
 			xtype:"container",
 			width:80
@@ -152,6 +172,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			text:"검색",
 			width:60,
 			handler:function(){
+				
+				InAcc.global.Function.getGeoNurisStore("nongjiWindow");
+				//InAcc.global.Function.createGrid();
 				Ext.create("InAcc.view.south.SouthContainer").show();
 			}
 		}]
