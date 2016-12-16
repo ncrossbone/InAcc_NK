@@ -10,7 +10,7 @@ Ext.define("InAcc.view.west.Search_sanji", {
 
 	title:"산지 속성 조회",
 	
-	itemId: "saneobWindow",
+	itemId: "sanjiWindow",
 
 	height:210,
 	width:1050,
