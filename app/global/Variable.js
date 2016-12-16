@@ -15,7 +15,7 @@ Ext.define("InAcc.global.Variable", {
 	constructor: function(){
 		
 		var me = this;
-		
+		console.info("dd");
 		var confStore = Ext.create('Ext.data.Store', {
 			
 			proxy : {

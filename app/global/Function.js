@@ -10,6 +10,17 @@ Ext.define("InAcc.global.Function", {
 	singleton : true, // 요게 있어야 set, get 메서드 사용가능..
 	queryLayerName: "",
 	colMapArray: [],
+	comboArray: [],
+	
+	tableInfo: Ext.create('Ext.data.Store', {
+		proxy : {
+			type : 'ajax',
+			url : './resources/data/tableInfo.json',
+			reader : {
+				type : 'json'
+			}
+		}
+	}),
 	/** GIS 데이터 가져오기 
 	 * pContainer :  */
 	getGeoNurisStore: function(pContainer){
@@ -22,6 +33,11 @@ Ext.define("InAcc.global.Function", {
 		var container = this.chkContainer(pContainer);
 		
 		if(container){
+			console.info(container.queryLayerName);
+			if(container.queryLayerName == ""){
+				
+				alert("레이어(구분)을 선택하세요.");
+			}
 			
 			this.queryLayerName = container.queryLayerName;
 			
@@ -322,12 +338,13 @@ Ext.define("InAcc.global.Function", {
 	getMapStore: function(queryFilter){
 		
 		var me = this;
-		
+		console.info(queryFilter);
+		//return;
 		/* 조건설정 완료 후 삭제할 것 */
-		queryFilter = ol.format.filter.or(
+		/*queryFilter = ol.format.filter.or(
     		ol.format.filter.like('NGJI_IDN','414*'),
     		ol.format.filter.like('NGJI_IDN','2637*')
-        );
+        );*/
 		/* 조건설정 완료 후 삭제할 것 끝 */
 		
 		var featureRequest = new ol.format.WFS().writeGetFeature({
@@ -360,5 +377,60 @@ Ext.define("InAcc.global.Function", {
         });
         
         return data;
+	},
+	getComboArray: function(container){
+		
+		var tmpItems = container.items;
+		
+		if(tmpItems != undefined){
+			
+			if(Ext.isArray(tmpItems)){
+				
+				for(var i = 0; i < tmpItems.length; i++){
+					
+					if(tmpItems[i].lCode != undefined){
+						
+						if(tmpItems[i].xtype == "combobox"){
+							
+							//console.info(tmpItems[i].getValue());
+							//console.info(tmpItems[i].getDisplayValue());
+							this.comboArray.push(tmpItems[i]);
+						}
+					}
+					
+					this.getComboArray(tmpItems[i]);
+				}
+			}
+			else{
+				
+				this.getComboArray(tmpItems);
+			}
+		}
+	},
+	setComboStore: function(container){
+		
+		this.getComboArray(container);
+		var arrCombo = this.comboArray;
+		
+		this.tableInfo.load(function(record) {
+			
+			for(var arrCnt = 0; arrCnt < arrCombo.length; arrCnt++){
+
+				var recIdx = record.map(function(obj){
+					return obj.data.L_CODE;
+				}).indexOf(arrCombo[arrCnt].lCode);
+
+				var storeData = [];
+
+				var sItem = record[recIdx].data.S_ITEM;
+
+				var storeBind = Ext.create('Ext.data.Store', {
+					fields: ['S_CODE', 'S_NAME'],
+					data:sItem
+				});
+
+				arrCombo[arrCnt].bindStore(storeBind);
+			}
+		});
 	}
 });
