@@ -10,7 +10,9 @@ Ext.define("InAcc.view.south.SouthContainer", {
 	width:1400,
 	x:322,
 	y:722,
-    title:"Search Result",
+    title:"검색 결과",
+    maximizable:true,
+    minimizable:true,
     items:[{ 
     	xtype:'tabpanel',
     	

@@ -432,5 +432,47 @@ Ext.define("InAcc.global.Function", {
 				arrCombo[arrCnt].bindStore(storeBind);
 			}
 		});
+	},
+	
+	getSido: function(){
+
+		/*var	proxy = "./resources/Proxy.jsp?url="
+
+			var featureRequest = new ol.format.WFS().writeGetFeature({
+				srsName : "EPSG:5179",
+				featureTypes : ['NK_SIDO'],
+				outputFormat : 'application/json',
+				geometryName : 'SHAPE',
+				maxFeatures : 300
+			});
+
+		$.ajax({
+			url : 'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+			type : 'POST',
+			data : {
+				featureTypes : 'NK_SIDO'
+			},
+			async : false,
+			contentType : 'json',
+			success : function(response_) {
+				
+				console.info(response_.features.properties);
+				var features = new ol.format.GeoJSON().readFeatures( response_ );
+
+				var receiveData = [];
+
+				//containsXY
+				Ext.each(features, function(media, index) {
+					console.info(media);
+					coreMap.sidoGeometry.push(media.values_);
+
+
+			var nameVal = media.values_.SD_NM;
+			var idVal= media.values_.SD_CD;
+
+			receiveData.push({id: idVal, name: nameVal});
+
+			}
+		});	*/
 	}
 });
