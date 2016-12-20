@@ -64,8 +64,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     
     initBaseMap: function(val){
     	var me = this; 
-    	
-    	
+
     	var baseMapGroup = new ol.layer.Group(
     			{
     				'title' : 'Base maps',
@@ -340,5 +339,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     	
     	//var mapHistory = new ol.navigationHistory( this.map );
     	this.map.on('moveend', this.mapExtentChange, this);
+    	
+    	InAcc.global.Function.getSido();
     }
 });
