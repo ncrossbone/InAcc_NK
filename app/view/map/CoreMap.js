@@ -341,5 +341,6 @@ Ext.define('InAcc.view.map.CoreMap', {
     	this.map.on('moveend', this.mapExtentChange, this);
     	
     	InAcc.global.Function.getSido();
+    	
     }
 });

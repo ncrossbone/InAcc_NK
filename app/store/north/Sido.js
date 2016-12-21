@@ -67,6 +67,7 @@ Ext.define('InAcc.store.north.Sido', {
 				
 			});
 			store.setData(receiveData);
+			
                 }
             
             });	

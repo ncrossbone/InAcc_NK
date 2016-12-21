@@ -11,32 +11,22 @@ Ext.define("InAcc.view.north.NorthContainer", {
 	bodyStyle: "background:url('./resources/images/design/top_right_bg.gif') !important",
 	border:false,
 	height:36,
-	html:"<select id='selectSido' style='margin-left: 360px; margin-top: 6px; width: 50px; border: transparent; font-family: notokr; color:gray;'>" +
-			"<option selected disabled>시도</option>" +
-			"<option>나선</option>" +
-			"<option>남포</option>" +
-			"<option>무산</option>" +
-			"<option>신의주</option>" +
-			"<option>원산</option>" +
-			"<option>청진</option>" +
+	html:"<select id='sidoSelect' style='margin-left: 360px; margin-top: 6px; width: 50px; border: transparent; font-family: notokr; color:gray;'>" +
+		 "<option selected disabled >시도</option>" +
 		 "</select>"+
-		 "<select style='margin-left: 10px; margin-top: 6px; width: 60px; border: transparent; font-family: notokr; color:gray;'>" +
-			"<option selected disabled>시군구</option>" +
-			"<option>나선</option>" +
-			"<option>남포</option>" +
-			"<option>무산</option>" +
-			"<option>신의주</option>" +
-			"<option>원산</option>" +
-			"<option>청진</option>" +
+		 "<select id='sggSelect' style='margin-left: 10px; margin-top: 6px; width: 60px; border: transparent; font-family: notokr; color:gray;'>" +
+		 "<option selected disabled >시군구</option>" +
 		 "</select>"+
-		 "<select style='margin-left: 200px; margin-top: 6px; width: 130px; border: transparent; font-family: notokr; color:gray;'>" +
-			"<option selected disabled>시범지역위치이동</option>" +
-			"<option>나선</option>" +
-			"<option>남포</option>" +
-			"<option>무산</option>" +
-			"<option>신의주</option>" +
-			"<option>원산</option>" +
-			"<option>청진</option>" +
+		 "<button id='selectButton' style='margin-left: 10px; margin-top: 6px; width: 60px; border: transparent; font-family: notokr; color:gray;'>" +
+		 "버튼</button>"+
+		 "<select id='demonLocation' style='margin-left: 200px; margin-top: 6px; width: 130px; border: transparent; font-family: notokr; color:gray;'>" +
+			"<option selected disabled >시범지역위치이동</option>" +
+			"<option value='na'>나선</option>" +
+			"<option value='nam'>남포</option>" +
+			"<option value='moo'>무산</option>" +
+			"<option value='sin'>신의주</option>" +
+			"<option value='won'>원산</option>" +
+			"<option value='chang'>청진</option>" +
 		 "</select>" +
 		 "<span style='width: 60px; height: 20px; border: 1px solid #d0d0d0; color: #333; background: #fff; letter-spacing: -1px; font-size: 12px;'> 맵종류 A </span>" +
 		 "<span style='width: 60px; height: 20px; border: 1px solid #d0d0d0; color: #333; background: #fff; letter-spacing: -1px; font-size: 12px;'> 맵종류 B </span>" +
@@ -51,3 +41,30 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		height:36
 	}]
 });
+
+Ext.onReady(function(){ 
+	
+	$('#sidoSelect').change(function() {
+	    var val = $("#sidoSelect option:selected");
+	    InAcc.global.Function.getSgg(val[0].value);
+	});
+	
+	
+	$('#sggSelect').change(function() {
+	    var val = $("#sggSelect option:selected");
+	    console.info(val[0].value);
+	});
+	
+	$('#selectButton').click(function() {
+		ZoomToExtent();
+	});
+	
+	//demonLocation
+	
+	$('#demonLocation').change(function() {
+		var val = $("#demonLocation option:selected");
+		DemonLocation(val);
+	});
+});
+
+
