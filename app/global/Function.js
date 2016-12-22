@@ -442,7 +442,9 @@ Ext.define("InAcc.global.Function", {
 		var coreMap = Ext.getCmp("_mapDiv_");
 		coreMap.sidoGeometry = [];
 		
-		var	proxy = "./resources/Proxy.jsp?url="
+		
+		//var	proxy = "./resources/Proxy.jsp?url="
+		var	proxy = "./resources/Proxy.jsp?url=";
 		
 		var featureRequest = new ol.format.WFS().writeGetFeature({
             srsName : "EPSG:5179",
@@ -451,7 +453,9 @@ Ext.define("InAcc.global.Function", {
             geometryName : 'SHAPE',
             maxFeatures : 300
         });
-        
+		
+		//console.info(coreMap.map.getExtent());
+		
         $.ajax({
             url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
             type : 'POST',
@@ -465,7 +469,7 @@ Ext.define("InAcc.global.Function", {
 		
 		        //containsXY
 				Ext.each(features, function(media, index) {
-		            
+		            console.info(media);
 		            coreMap.sidoGeometry.push(media.values_);
 		            
 		            
