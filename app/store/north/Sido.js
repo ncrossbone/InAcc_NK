@@ -66,7 +66,10 @@ Ext.define('InAcc.store.north.Sido', {
 				receiveData.push({id: idVal, name: nameVal});
 				
 			});
+			store.setData(receiveData);
+			
                 }
+            
             });	
         }
     }
