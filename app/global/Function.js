@@ -33,10 +33,11 @@ Ext.define("InAcc.global.Function", {
 		var container = this.chkContainer(pContainer);
 		
 		if(container){
-			console.info(container.queryLayerName);
+			//console.info(container.queryLayerName);
 			if(container.queryLayerName == ""){
 				
 				alert("레이어(구분)을 선택하세요.");
+				return false;
 			}
 			
 			this.queryLayerName = container.queryLayerName;
@@ -94,16 +95,53 @@ Ext.define("InAcc.global.Function", {
 				// 타이머 중지
 				window.clearInterval(timer);
 				
+				var bodyWidth = Ext.getBody().getWidth();
+				var bodyHeight = Ext.getBody().getHeight();
+				var windowWidth = bodyWidth - 300;
+				var windowHeight = 300;
+				
 				var windowContainer = Ext.ComponentQuery.query("#southContainer")[0];
 				
 				if(windowContainer == undefined){
 					
-					windowContainer = Ext.create("InAcc.view.south.SouthContainer");
+					//windowContainer = Ext.create("InAcc.view.south.SouthContainer");
+					windowContainer = Ext.create("Ext.window.Window", {
+						itemId: "southContainer",
+						title: "검색결과",
+						layout: {
+							type: "fit"
+						}
+					});
 				}
+				
+				windowContainer.show();
+				
+				windowContainer.setWidth(windowWidth);
+				windowContainer.setHeight(windowHeight);
+				
+				windowContainer.setX(bodyWidth - windowWidth);
+				windowContainer.setY(bodyHeight - windowHeight);
 				
 				var tabContainer = windowContainer.query("#tabContainer")[0];
 				
-				if(tabContainer){
+				if(tabContainer == undefined){
+					
+					tabContainer = Ext.create("Ext.tab.Panel", {
+						
+						itemId: "tabContainer",
+						width: "100%",
+						height: "100%"
+					});
+					
+					windowContainer.add(tabContainer);
+				}
+				
+				//tabContainer.setWidth(windowContainer.body.getWidth());
+				//tabContainer.setHeight(windowContainer.body.getHeight());
+				
+				var grid = tabContainer.query("#" + recordData.itemId)[0];
+				
+				if(grid == undefined){
 					
 					var grid = Ext.create("Ext.grid.Panel", {
 						closable: true,
@@ -111,33 +149,16 @@ Ext.define("InAcc.global.Function", {
 						title: recordData.title,
 						width: recordData.width,
 						height: recordData.height,
-						//width: 500,
-						//height: 300,
 						columns: recordData.columns,
 						store: gridStore
 					});
 					
 					tabContainer.add(grid);
 					tabContainer.setActiveTab(grid);
-					windowContainer.show();
 				}
 				else{
 					
-					Ext.create("Ext.grid.Panel", {
-						floating: true,
-						draggable: true,
-						closable: true,
-						x: 300,
-						y: 300,
-						itemId: recordData.itemId,
-						title: recordData.title,
-						//width: recordData.width,
-						//height: recordData.height,
-						width: 500,
-						height: 300,
-						columns: recordData.columns,
-						store: gridStore
-					}).show();
+					grid.setStore(gridStore);
 				}
 			}
 			else{
@@ -274,7 +295,7 @@ Ext.define("InAcc.global.Function", {
 			}
 			else if(this.colMapArray[i].comparison == ">="){
 				
-				tmpFilter = ol.format.filter.greaterThanOrEqualTo(this.colMapArray[i].column, this.colMapArray[i].value);
+				tmpFilter = ol.format.filter.greaterThanOrEqualTo(this.colMapArray[i].column, parseFloat(this.colMapArray[i].value));
 			}
 			else if(this.colMapArray[i].comparison == "<"){
 				
@@ -282,7 +303,7 @@ Ext.define("InAcc.global.Function", {
 			}
 			else if(this.colMapArray[i].comparison == "<="){
 				
-				tmpFilter = ol.format.filter.lessThanOrEqualTo(this.colMapArray[i].column, this.colMapArray[i].value);
+				tmpFilter = ol.format.filter.lessThanOrEqualTo(this.colMapArray[i].column, parseFloat(this.colMapArray[i].value));
 			}
 			else if(this.colMapArray[i].comparison == "<>"){
 				
@@ -338,7 +359,7 @@ Ext.define("InAcc.global.Function", {
 	getMapStore: function(queryFilter){
 		
 		var me = this;
-		console.info(queryFilter);
+		
 		//return;
 		/* 조건설정 완료 후 삭제할 것 */
 		/*queryFilter = ol.format.filter.or(
@@ -357,17 +378,17 @@ Ext.define("InAcc.global.Function", {
         });
         
 		var data = [];
-		//console.info(InAcc.global.Variable.getMapServiceUrl());
+		
         $.ajax({
             url : InAcc.global.Variable.getProxyUrl() + InAcc.global.Variable.getMapServiceUrl(),
             type : 'POST',
             data : new XMLSerializer().serializeToString( featureRequest ),
-            async : false,
+            //async : false,
             contentType : 'text/xml',
             success : function(response_) {
-            	console.info(response_);
+            	//console.info(response_);
             	var features = new ol.format.GeoJSON().readFeatures( response_ );   
-            	console.log( features );
+            	//console.log( features );
             	
             	for(var i = 0; i < features.length; i++){
             		
