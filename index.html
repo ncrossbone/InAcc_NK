@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 
 <script type="text/javascript" src="./openLayers-3.19.1/ol-debug.js"></script>
-<script type="text/javascript" src="./openLayers-3.19.1/ol3-layerswitcher.js"></script>
+<!-- <script type="text/javascript" src="./openLayers-3.19.1/ol3-layerswitcher.js"></script> -->
 
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.19.1/ol.js"></script> -->
 
@@ -23,13 +23,16 @@
 <!-- <script language="JavaScript" type="text/javascript" src="http://map.vworld.kr/js/apis.do?type=Base&apiKey=1E6F5767-16C5-3645-B52E-931DB6CDC454"></script>-->
 <script type="text/javascript" src="./ext-6.2.0/build/ext-all.js"></script>
 <link rel="stylesheet" type="text/css" href="./openLayers-3.19.1/ol.css"/>
-<link rel="stylesheet" type="text/css" href="./openLayers-3.19.1/ol3-layerswitcher.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="./openLayers-3.19.1/ol3-layerswitcher.css"/> -->
 <link rel="stylesheet" type="text/css" href="./ext-6.2.0/build/classic/theme-triton/resources/theme-triton-all.css">
 <script type="text/javascript" src="proj4-src.js"></script>
 <script type="text/javascript" src="./resources/js/common.js"></script>
 <script type ="text/javascript" src="app.js"></script>
 <script type="text/javascript">
 ol.ProxyHost = "./resources/Proxy.jsp?resourceUrl="; // 크로스도메인 해결
+
+
+
 </script>
 <style type="text/css">
 /* .ol-zoom {
@@ -50,10 +53,11 @@ ol.ProxyHost = "./resources/Proxy.jsp?resourceUrl="; // 크로스도메인 해�
 #westcontainer_header-innerCt {
 	position: absolute;
 	top: 300px;
-	background: url("./resources/images/button/btn_arrow_close.png") no-repeat;
+	background: url("./resources/images/button/btn_arrow_close.png")
+		no-repeat;
 }
 
-#westcontainer_header-targetEl div{
+#westcontainer_header-targetEl div {
 	margin-top: 10px;
 	left: -10px;
 	width: 20px;
@@ -61,6 +65,199 @@ ol.ProxyHost = "./resources/Proxy.jsp?resourceUrl="; // 크로스도메인 해�
 	background-color: transparent;
 	z-index: 20000;
 	color: transparent;
+}
+
+@font-face {
+	font-family: notokr_bold;
+	src: url('./resources/font/notokr-black.woff');
+}
+
+@font-face {
+	font-family: notokr;
+	src: url('./resources/font/notokr-regular.woff');
+}
+
+div {
+	font-family: notokr;
+}
+
+.x-accordion-item .x-accordion-hd {
+	background: #445676;
+	border-width: 0;
+	border-color: transparent;
+	padding: 12px 10px;
+}
+
+.x-accordion-hd .x-tool-collapse-top, .x-accordion-hd .x-tool-collapse-bottom
+	{
+	background: url("./resources/images/design/icon_close.png") !important;
+	width: 21px;
+	height: 21px;
+}
+
+.x-accordion-hd .x-tool-img {
+	background-color: transparent;
+	color: transparent;
+	width: 21px;
+	height: 21px;
+}
+
+.x-accordion-hd .x-tool-expand-top, .x-accordion-hd .x-tool-expand-bottom
+	{
+	background-image: url("./resources/images/design/icon_open.png")
+		!important;
+	background-color: transparent;
+	color: transparent;
+	width: 21px;
+	height: 21px;
+}
+
+.x-panel-header-title-default>.x-title-text-default {
+	text-transform: none;
+	padding: 0;
+	color: white;
+}
+
+.x-tab-bar-horizontal>.x-tab-bar-body-default {
+	min-height: 44px;
+	background: url("./resources/images/design/left_tab_bg.gif") 38px
+		!important;
+	border: 0px;
+}
+
+.x-tab.x-tab-active.x-tab-default {
+	width: 160px;
+	font-weight: bold;
+}
+
+.x-tab-default-top {
+	margin: 0 4px 0 0;
+	width: 160px;
+}
+
+.x-grid-cell-inner-treecolumn {
+	padding: 7px 10px 6px 6px;
+	background: #f6f6f6;
+}
+
+.x-grid-view, .x-tree-view {
+	background: #f6f6f6;
+}
+
+.x-tab.x-tab-active.x-tab-default .x-tab-inner-default {
+	color: #4c82b1;
+	font-family: notokr_bold;
+}
+
+.x-tab-inner-default {
+	font: 400 13px/20px 'Open Sans', 'Helvetica Neue', helvetica, arial,
+		verdana, sans-serif;
+	color: #f0f0f0;
+	max-width: 100%;
+	font-family: notokr_bold;
+}
+
+.x-tree-node-text {
+	padding-left: 6px;
+	font-family: notokr_bold;
+}
+
+.x-tree-elbow-plus, .x-tree-elbow-end-plus {
+	font-size: 14px;
+	font-family: FontAwesome;
+	color: #445676;
+}
+
+.x-tree-checkbox {
+	margin-right: 6px;
+	top: 7px;
+	width: 18px;
+	height: 18px;
+	font: 18px/1 ExtJS;
+	color: #445676;
+}
+
+.x-tree-arrows .x-tree-expander {
+	font-size: 16px;
+	font-family: FontAwesome;
+	color: #445676;
+}
+
+.x-tree-icon-parent {
+	font-size: 16px;
+	font-family: FontAwesome;
+	color: #445676;
+}
+
+.x-window-header-default {
+	border-width: 0px !important;
+	background-color: #445676;
+}
+
+.x-window-default {
+	-moz-border-radius-topleft: 0;
+	-webkit-border-top-left-radius: 0;
+	border-top-left-radius: 0;
+	-moz-border-radius-topright: 0;
+	-webkit-border-top-right-radius: 0;
+	border-top-right-radius: 0;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-right-radius: 0;
+	-moz-border-radius-bottomleft: 0;
+	-webkit-border-bottom-left-radius: 0;
+	border-bottom-left-radius: 0;
+	padding: 0 0 0 0;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #445676;
+}
+
+.x-window-header-default .x-tool-img {
+	background-color: transparent;
+}
+
+.x-form-item-label-inner {
+	display: inline-block;
+	font-family: notokr;
+	color: #001437;
+}
+
+.x-column-header-text-inner {
+	background-repeat: no-repeat;
+	font-family: notokr_bold;
+	color: #343f56;
+}
+
+#mapSelect {
+	margin-left: 39%;
+}
+
+#mapSelect a {
+	width: 60px;
+	height: 20px;
+	border: 1px solid #d0d0d0;
+	color: #333;
+	background: #fff;
+	letter-spacing: -1px;
+	font-size: 12px;
+}
+
+#mapSelect a:hover {
+	width: 60px;
+	height: 20px;
+	border: 1px solid #126dae;
+	color: #fff;
+	background: #126dae;
+	font-weight: bold;
+	letter-spacing: -1px;
+	font-size: 12px;
+	border: 1px solid #126dae;
+	color: #fff;
+	background: #126dae;
+	font-weight: bold;
+	letter-spacing: -1px;
+	cursor: pointer;
 }
 </style>
 </head>

@@ -6,10 +6,10 @@ Ext.define("InAcc.view.west.WestContainer", {
     collapseDirection: 'left',
     headerPosition: 'right',
     
-	style:"margin-top:65px;",
+	style:"margin-top:65px;  border-bottom:solid 5px #445676;",
     header:{
     	width:8,
-    	style:"background-color : #ede5dc; border-color: #ede5dc;",
+    	style:"background-color : #445676;",
     	titlePosition:1
     },
     id: "westcontainer",
@@ -43,7 +43,6 @@ Ext.define("InAcc.view.west.WestContainer", {
     	collapse:{
     		fn: function(el){
     			Ext.get("westcontainer_header-innerCt").setStyle("background","url('./resources/images/button/btn_arrow_open.png') no-repeat");
-    			
     		}
     	},
     	expand:{

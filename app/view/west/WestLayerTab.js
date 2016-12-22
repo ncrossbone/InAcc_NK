@@ -5,9 +5,11 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 	layout:{
 		type:'accordion'
 	},
+	border:false,
 	title:"주제도",
+	bodyStyle:"background-color:#f6f6f6;",
 	items:[{
-		title:"실태DB",
+		title:"<img src='./resources/images/design/icon_folder_close.png'/> 실태DB",
 		xtype:"treepanel",
 		scroll: false,
 		viewConfig: {
@@ -44,7 +46,7 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 			}
 		}
 	},{
-		title:"수집DB",
+		title:"<img src='./resources/images/design/icon_folder_close.png'/> 수집DB",
 		xtype:"treepanel",
 		scroll: false,
 		viewConfig: {
@@ -55,9 +57,20 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		useArrows: true,
 		lines:false,
 		border: 0,
-		bufferedRenderer: false
+		bufferedRenderer: false,
+		listeners: {
+			checkchange:function(node){
+				var dLayer = Ext.getCmp("Layer_");
+				
+				if(node.data.checked==false){
+					dLayer.layerOff(node.id);
+				}else{
+					dLayer.layerOn(node.id);
+				}
+			}
+		}
 	},{
-		title:"기본공간정보",
+		title:"<img src='./resources/images/design/icon_folder_close.png'/> 기본공간정보",
 		xtype:"treepanel",
 		scroll: false,
 		viewConfig: {
@@ -68,10 +81,23 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		useArrows: true,
 		lines:false,
 		border: 0,
-		bufferedRenderer: false
+		bufferedRenderer: false,
+		listeners: {
+			checkchange:function(node){
+
+				var dLayer = Ext.getCmp("Layer_");
+
+				
+					if(node.data.checked==false){
+						dLayer.layerOff(node.id);
+					}else{
+						dLayer.layerOn(node.id);
+					}
+			}
+		}
 
 	},{
-		title:"행정구역별통계",
+		title:"<img src='./resources/images/design/icon_folder_close.png'/> 행정구역별통계",
 
 		xtype:"treepanel",
 		scroll: false,
@@ -86,7 +112,7 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		bufferedRenderer: false
 
 	},{
-		title:"영상지도",
+		title:"<img src='./resources/images/design/icon_folder_close.png'/> 영상지도",
 		xtype:"treepanel",
 		scroll: false,
 		viewConfig: {
@@ -99,19 +125,33 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		border: 0,
 		bufferedRenderer: false
 	},{
-		title:"주제도",
-		layout:{
-			type:'vbox'
-		}/*,
-		items:[{
-			xtype:"label",
-			text:"개발가능지"
-		},{
-			xtype:"label",
-			text:"보건적정지"
-		}]*/
+		title:"<img src='./resources/images/design/icon_folder_close.png'/> 주제도",
+		xtype:"treepanel",
+		scroll: false,
+		viewConfig: {
+			style: { overflow: 'auto', overflowX: 'hidden' }
+		},
+		store: Ext.create('InAcc.store.west.WestTree6'),
+		rootVisible: false,
+		useArrows: true,
+		lines:false,
+		border: 0,
+		bufferedRenderer: false,
+		listeners: {
+			checkchange:function(node){
+
+				var dLayer = Ext.getCmp("Layer_");
+
+				
+					if(node.data.checked==false){
+						dLayer.layerOff(node.id);
+					}else{
+						dLayer.layerOn(node.id);
+					}
+			}
+		}
 	},{
-		title:"POI조회",
+		title:"<img src='./resources/images/design/icon_folder_close.png'/> POI조회",
 		items:[{
 			xtype:"container",
 			height:10
