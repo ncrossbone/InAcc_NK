@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 
 <script type="text/javascript" src="./openLayers-3.19.1/ol-debug.js"></script>
-<script type="text/javascript" src="./openLayers-3.19.1/ol3-layerswitcher.js"></script>
+<!-- <script type="text/javascript" src="./openLayers-3.19.1/ol3-layerswitcher.js"></script> -->
 
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.19.1/ol.js"></script> -->
 
@@ -20,7 +20,7 @@
 <!-- <script language="JavaScript" type="text/javascript" src="http://map.vworld.kr/js/apis.do?type=Base&apiKey=1E6F5767-16C5-3645-B52E-931DB6CDC454"></script>-->
 <script type="text/javascript" src="./ext-6.2.0/build/ext-all.js"></script>
 <link rel="stylesheet" type="text/css" href="./openLayers-3.19.1/ol.css"/>
-<link rel="stylesheet" type="text/css" href="./openLayers-3.19.1/ol3-layerswitcher.css"/>
+<!-- <link rel="stylesheet" type="text/css" href="./openLayers-3.19.1/ol3-layerswitcher.css"/> -->
 <link rel="stylesheet" type="text/css" href="./ext-6.2.0/build/classic/theme-triton/resources/theme-triton-all.css">
 <script type="text/javascript" src="proj4-src.js"></script>
 <script type="text/javascript" src="./resources/js/common.js"></script>
@@ -142,86 +142,119 @@ div {
 }
 
 .x-tab.x-tab-active.x-tab-default .x-tab-inner-default {
-    color: #4c82b1;
-    font-family: notokr_bold;
+	color: #4c82b1;
+	font-family: notokr_bold;
 }
+
 .x-tab-inner-default {
-    font: 400 13px/20px 'Open Sans', 'Helvetica Neue', helvetica, arial, verdana, sans-serif;
-    color: #f0f0f0;
-    max-width: 100%;
-    font-family: notokr_bold;
+	font: 400 13px/20px 'Open Sans', 'Helvetica Neue', helvetica, arial,
+		verdana, sans-serif;
+	color: #f0f0f0;
+	max-width: 100%;
+	font-family: notokr_bold;
 }
 
 .x-tree-node-text {
-    padding-left: 6px;
-    font-family: notokr_bold;
+	padding-left: 6px;
+	font-family: notokr_bold;
 }
 
 .x-tree-elbow-plus, .x-tree-elbow-end-plus {
-    font-size: 14px;
-    font-family: FontAwesome;
-    color: #445676;
+	font-size: 14px;
+	font-family: FontAwesome;
+	color: #445676;
 }
 
 .x-tree-checkbox {
-    margin-right: 6px;
-    top: 7px;
-    width: 18px;
-    height: 18px;
-    font: 18px/1 ExtJS;
-    color: #445676; 
+	margin-right: 6px;
+	top: 7px;
+	width: 18px;
+	height: 18px;
+	font: 18px/1 ExtJS;
+	color: #445676;
 }
 
 .x-tree-arrows .x-tree-expander {
-    font-size: 16px;
-    font-family: FontAwesome;
-    color: #445676;
+	font-size: 16px;
+	font-family: FontAwesome;
+	color: #445676;
 }
 
 .x-tree-icon-parent {
-    font-size: 16px;
-    font-family: FontAwesome;
-    color: #445676;
+	font-size: 16px;
+	font-family: FontAwesome;
+	color: #445676;
 }
 
 .x-window-header-default {
-    border-width: 0px !important;
-    background-color: #445676;
+	border-width: 0px !important;
+	background-color: #445676;
 }
 
 .x-window-default {
-    -moz-border-radius-topleft: 0;
-    -webkit-border-top-left-radius: 0;
-    border-top-left-radius: 0;
-    -moz-border-radius-topright: 0;
-    -webkit-border-top-right-radius: 0;
-    border-top-right-radius: 0;
-    -moz-border-radius-bottomright: 0;
-    -webkit-border-bottom-right-radius: 0;
-    border-bottom-right-radius: 0;
-    -moz-border-radius-bottomleft: 0;
-    -webkit-border-bottom-left-radius: 0;
-    border-bottom-left-radius: 0;
-    padding: 0 0 0 0;
-    border-width: 2px;
-    border-style: solid;
-    border-color:#445676;
+	-moz-border-radius-topleft: 0;
+	-webkit-border-top-left-radius: 0;
+	border-top-left-radius: 0;
+	-moz-border-radius-topright: 0;
+	-webkit-border-top-right-radius: 0;
+	border-top-right-radius: 0;
+	-moz-border-radius-bottomright: 0;
+	-webkit-border-bottom-right-radius: 0;
+	border-bottom-right-radius: 0;
+	-moz-border-radius-bottomleft: 0;
+	-webkit-border-bottom-left-radius: 0;
+	border-bottom-left-radius: 0;
+	padding: 0 0 0 0;
+	border-width: 2px;
+	border-style: solid;
+	border-color: #445676;
 }
 
 .x-window-header-default .x-tool-img {
-    background-color: transparent;
+	background-color: transparent;
 }
 
 .x-form-item-label-inner {
-    display: inline-block;
-    font-family: notokr;
-    color:#001437;
+	display: inline-block;
+	font-family: notokr;
+	color: #001437;
 }
 
 .x-column-header-text-inner {
-    background-repeat: no-repeat;
-    font-family: notokr_bold;
-    color: #343f56;
+	background-repeat: no-repeat;
+	font-family: notokr_bold;
+	color: #343f56;
+}
+
+#mapSelect {
+	margin-left: 39%;
+}
+
+#mapSelect a {
+	width: 60px;
+	height: 20px;
+	border: 1px solid #d0d0d0;
+	color: #333;
+	background: #fff;
+	letter-spacing: -1px;
+	font-size: 12px;
+}
+
+#mapSelect a:hover {
+	width: 60px;
+	height: 20px;
+	border: 1px solid #126dae;
+	color: #fff;
+	background: #126dae;
+	font-weight: bold;
+	letter-spacing: -1px;
+	font-size: 12px;
+	border: 1px solid #126dae;
+	color: #fff;
+	background: #126dae;
+	font-weight: bold;
+	letter-spacing: -1px;
+	cursor: pointer;
 }
 </style>
 </head>
