@@ -57,7 +57,18 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		useArrows: true,
 		lines:false,
 		border: 0,
-		bufferedRenderer: false
+		bufferedRenderer: false,
+		listeners: {
+			checkchange:function(node){
+				var dLayer = Ext.getCmp("Layer_");
+				
+				if(node.data.checked==false){
+					dLayer.layerOff(node.id);
+				}else{
+					dLayer.layerOn(node.id);
+				}
+			}
+		}
 	},{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> 기본공간정보",
 		xtype:"treepanel",
@@ -70,7 +81,20 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		useArrows: true,
 		lines:false,
 		border: 0,
-		bufferedRenderer: false
+		bufferedRenderer: false,
+		listeners: {
+			checkchange:function(node){
+
+				var dLayer = Ext.getCmp("Layer_");
+
+				
+					if(node.data.checked==false){
+						dLayer.layerOff(node.id);
+					}else{
+						dLayer.layerOn(node.id);
+					}
+			}
+		}
 
 	},{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> 행정구역별통계",
@@ -102,16 +126,30 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		bufferedRenderer: false
 	},{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> 주제도",
-		layout:{
-			type:'vbox'
-		}/*,
-		items:[{
-			xtype:"label",
-			text:"개발가능지"
-		},{
-			xtype:"label",
-			text:"보건적정지"
-		}]*/
+		xtype:"treepanel",
+		scroll: false,
+		viewConfig: {
+			style: { overflow: 'auto', overflowX: 'hidden' }
+		},
+		store: Ext.create('InAcc.store.west.WestTree6'),
+		rootVisible: false,
+		useArrows: true,
+		lines:false,
+		border: 0,
+		bufferedRenderer: false,
+		listeners: {
+			checkchange:function(node){
+
+				var dLayer = Ext.getCmp("Layer_");
+
+				
+					if(node.data.checked==false){
+						dLayer.layerOff(node.id);
+					}else{
+						dLayer.layerOn(node.id);
+					}
+			}
+		}
 	},{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> POI조회",
 		items:[{

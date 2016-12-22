@@ -12,56 +12,54 @@ Ext.define("InAcc.view.west.Search_saneob", {
 	
 	itemId: "saneobWindow",
 
-	height:210,
-	width:1050,
-	x:322,
-	y:300,
+	height:470,
+	width:400,
+	x:1520,
+	y:36,
 	items:[{
-		xtype:"container",
-		height:20
-	},{
 		xtype:"panel",
 		layout:{
 			type:"hbox"
 		},
+		bodyStyle:"border-bottom: 1px solid #e9e9e9;",
 		border:false,
+		height:42,
 		items:[{
-			xtype:"container",
-			width:20
-		},{
-			fieldLabel: "시범지역",
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 시범지역",
+			labelSeparator : '',
 			labelStyle:"font-weight: bold;",
+			style:"margin-top:5px;",
 			xtype:"combobox",
-			//store: Ext.create('InAcc.store.west.Search_nongji')
 			width:200,
 			editable: false,
 			colName: "SLTE_NAM",
-			comparison: "="
-		},{
-			xtype:"container",
-			width:20
-		},{
-			fieldLabel: "구획면적",
+			comparison: "=",
+		}]
+	},{
+		xtype:"panel",
+		border:false,
+		bodyStyle:"background-color:#f6f6f6;",
+		layout:{
+			type:"hbox"
+		},
+		height:42,
+		items:[{
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 구획면적",
 			width:200,
+			labelSeparator : '',
 			labelStyle:"font-weight: bold;",
-			xtype:"combobox",
-			editable: false,
+			style:"margin-top:5px;",
+			xtype:"textfield",
 			colName: "SECT_ARA",
 			comparison: ">="
 		},{
-			xtype:"container",
-			width:20
-		},{
 			xtype:"label",
-			style:"margin-top:5px; font-weight: bold;",
+			style:"margin-top:10px; font-weight: bold;",
 			text:"~"
 		},{
-			xtype:"container",
-			width:20
-		},{
-			xtype:"combobox",
+			xtype:"textfield",
 			width:90,
-			editable: false,
+			style:"margin-top:5px;",
 			colName: "SECT_ARA",
 			comparison: "<="
 		},{
@@ -69,132 +67,178 @@ Ext.define("InAcc.view.west.Search_saneob", {
 			width:10
 		},{
 			xtype:"label",
-			style:"margin-top:7px;",
+			style:"margin-top:10px;",
 			text:"(Km^2)"
-		},{
-			xtype:"container",
-			width:30
-		},{
-			fieldLabel: "구분",
-			width:150,
-			labelWidth: 50,
-			labelStyle:"font-weight: bold;",
-			xtype:"combobox",
-			editable: false,
-			colName: "LYGB_NAM",
-			comparison: "="
-		},{
-			xtype:"container",
-			width:20
-		},{
-			fieldLabel: "세부구분",
-			width:200,
-			labelStyle:"font-weight: bold;",
-			xtype:"combobox",
-			editable: false,
-			colName: "ASGB_CDE",
-			comparison: "="
 		}]
-	},{
-		xtype:"container",
-		height:20
+
 	},{
 		xtype:"panel",
+		border:false,
 		layout:{
 			type:"hbox"
 		},
-		border:false,
+		height:42,
 		items:[{
-			xtype:"container",
-			width:20
-		},{
-			fieldLabel: "경사율",
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 구분",
+			labelSeparator : '',
 			width:200,
+			style:"margin-top:5px;",
+			displayField: 'name',
+			valueField: 'id',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
 			editable: false,
+			//colName: "LYGB_NAM",
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "LAY01",
+			comparison: "=",
+			listeners:{
+				select: function(combo){
+
+					//alert(combo.getValue());
+					this.up("window").queryLayerName = combo.getValue();
+				}
+			}
+		}]
+	},{
+		xtype:"panel",
+		border:false,
+		bodyStyle:"background-color:#f6f6f6;",
+		height:42,
+		layout:{
+			type:"hbox"
+		},
+
+		items:[{
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 세부구분",
+			labelSeparator : '',
+			style:"margin-top:5px;",
+			width:200,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			labelStyle:"font-weight: bold;",
+			xtype:"combobox",
+			colName: "ASGB_CDE",
+			editable: false,
+			lCode: "ASG",
+			comparison: "="
+		}]
+	},{
+		xtype:"panel",
+		border:false,
+		layout:{
+			type:"hbox"
+		},
+		height:42,
+		items:[{
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 경사율",
+			labelSeparator : '',
+			style:"margin-top:5px;",
+			width:200,
+			labelStyle:"font-weight: bold;",
+			xtype:"textfield",
 			colName: "SLOP_RAT",
 			comparison: ">="
 		},{
-			xtype:"container",
-			width:20
-		},{
 			xtype:"label",
-			style:"margin-top:5px; font-weight: bold;",
+			style:"margin-top:10px; font-weight: bold;",
 			text:"~"
 		},{
-			xtype:"container",
-			width:20
-		},{
-			xtype:"combobox",
+			xtype:"textfield",
+			style:"margin-top:5px;",
 			width:90,
-			editable: false,
+			//editable: false,
 			colName: "SLOP_RAT",
 			comparison: "<="
 		},{
 			xtype:"label",
-			text:"O"
-		},{
-			xtype:"container",
-			width:20
-		},{
-			fieldLabel: "경사등급",
+			style:"margin-top:5px;",
+			text:"o"
+		}]
+
+	},{
+		xtype:"panel",
+		border:false,
+		bodyStyle:"background-color:#f6f6f6;",
+		layout:{
+			type:"hbox"
+		},
+		height:42,
+		items:[{
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 경사등급",
+			labelSeparator : '',
+			style:"margin-top:5px;",
 			width:200,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
 			editable: false,
+			lCode: "SLP",
 			colName: "SLOP_CDE",
 			comparison: "="
-		},{
-			xtype:"container",
-			width:20
-		},{
-			fieldLabel: "출처",
-			width:150,
-			labelWidth: 50,
-			labelStyle:"font-weight: bold;",
-			xtype:"combobox",
-			editable: false
-		},{
-			xtype:"container",
-			width:30
-		},{
-			width:150,
-			labelWidth: 50,
-			labelStyle:"font-weight: bold;",
-			xtype:"combobox",
-			editable: false
-		},{
-			xtype:"container",
-			width:20
-		},{
-			width:150,
-			labelWidth: 50,
-			labelStyle:"font-weight: bold;",
-			xtype:"combobox",
-			editable: false
 		}]
-	},{
-		xtype:"container",
-		height:10
 	},{
 		xtype:"panel",
 		border:false,
 		layout:{
 			type:"hbox"
 		},
+		height:42,
 		items:[{
-			xtype:"container",
-			width:970
-		},{
-			xtype:"button",
-			text:"검색",
-			width:60,
-			handler:function(a,b,c,d){
-				InAcc.global.Function.getGeoNurisStore("saneobWindow");
-				//InAcc.global.Function.createGrid();
-				Ext.create("InAcc.view.south.SouthContainer").show();
-			}
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 출처",
+			bodyStyle:"border-bottom: 1px solid #e9e9e9;",
+			labelSeparator : '',
+			style:"margin-top:5px;",
+			width:200,
+			labelStyle:"font-weight: bold;",
+			xtype:"combobox",
+			editable: false
 		}]
+	},{
+		xtype:"panel",
+		border:false,
+		bodyStyle:"background-color:#f6f6f6;",
+		layout:{
+			type:"hbox"
+		},
+		height:42,
+		items:[{
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 지구명 입력",
+			bodyStyle:"border-bottom: 1px solid #e9e9e9;",
+			labelSeparator : '',
+			style:"margin-top:5px;",
+			width:200,
+			labelStyle:"font-weight: bold;",
+			xtype:"textfield"
+		}]
+	},{
+		xtype:"panel",
+		border:false,
+		layout:{
+			type:"hbox"
+		},
+		height:42,
+		items:[{
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 생산품 입력",
+			bodyStyle:"border-bottom: 1px solid #e9e9e9;",
+			labelSeparator : '',
+			style:"margin-top:5px;",
+			width:200,
+			labelStyle:"font-weight: bold;",
+			xtype:"textfield"
+		}]
+	},{
+		xtype:"button",
+		width:65,
+		height:25,
+		style:"background:url('./resources/images/design/btn_search.gif'); margin-left:170px; margin-top:10px;",
+		border:false,
+		handler:function(){
+			var dataStore = InAcc.global.Function.getGeoNurisStore("nongjiWindow");
+			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
+
+		}
 	}]
 });
