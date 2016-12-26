@@ -236,14 +236,15 @@ Ext.define("InAcc.view.west.Search_saneob", {
 		style:"background:url('./resources/images/design/btn_search.gif'); margin-left:170px; margin-top:10px;",
 		border:false,
 		handler:function(){
-			var dataStore = InAcc.global.Function.getGeoNurisStore("nongjiWindow");
-			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
+			var dataStore = InAcc.global.Function.getGeoNurisStore("saneobWindow");
+			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridSaneob.conf");
 
 		}
 	}],
 	
 	initComponent:function(){
 		this.callParent();		
+		InAcc.global.Function.setComboStore(this);
 		this.x = Ext.getBody().getWidth() - this.width;
 	}
 });

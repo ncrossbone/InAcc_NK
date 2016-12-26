@@ -211,7 +211,8 @@ Ext.define("InAcc.view.west.Search_hwan", {
 	}],
 	
 	initComponent:function(){
-		this.callParent();		
+		this.callParent();
+		InAcc.global.Function.setComboStore(this);
 		this.x = Ext.getBody().getWidth() - this.width;
 	}
 });

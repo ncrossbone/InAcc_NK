@@ -226,14 +226,15 @@ Ext.define("InAcc.view.west.Search_sanji", {
 		style:"background:url('./resources/images/design/btn_search.gif'); margin-left:170px; margin-top:10px;",
 		border:false,
 		handler:function(){
-			var dataStore = InAcc.global.Function.getGeoNurisStore("nongjiWindow");
-			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
+			var dataStore = InAcc.global.Function.getGeoNurisStore("sanjiWindow");
+			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridSanji.conf");
 
 		}
 	}],
 	
 	initComponent:function(){
-		this.callParent();		
+		this.callParent();
+		InAcc.global.Function.setComboStore(this);
 		this.x = Ext.getBody().getWidth() - this.width;
 	}
 });

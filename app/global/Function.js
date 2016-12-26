@@ -372,13 +372,11 @@ Ext.define("InAcc.global.Function", {
 			url : InAcc.global.Variable.getProxyUrl() + InAcc.global.Variable.getMapServiceUrl(),
 			type : 'POST',
 			data : new XMLSerializer().serializeToString(featureRequest),
-			// async : false,
+			async : false,
 			contentType : 'text/xml',
 			success : function(response_) {
-				// console.info(response_);
-				var features = new ol.format.GeoJSON()
-						.readFeatures(response_);
-				// console.log( features );
+				var features = new ol.format.GeoJSON().readFeatures(response_);
+				 console.log( features );
 
 				for (var i = 0; i < features.length; i++) {
 
@@ -386,7 +384,7 @@ Ext.define("InAcc.global.Function", {
 				}
 			}
 		});
-
+		console.info(data);
 		return data;
 	},
 	getComboArray : function(container) {
