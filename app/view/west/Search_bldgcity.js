@@ -410,8 +410,8 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 		style:"background:url('./resources/images/design/btn_search.gif'); margin-left:170px; margin-top:10px;",
 		border:false,
 		handler:function(){
-			var dataStore = InAcc.global.Function.getGeoNurisStore("nongjiWindow");
-			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
+			var dataStore = InAcc.global.Function.getGeoNurisStore("bldgcityWindow");
+			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridBldgcity.conf");
 
 		}
 	}],
