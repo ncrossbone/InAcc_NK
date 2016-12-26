@@ -96,7 +96,7 @@ Ext.define("InAcc.view.west.Search_saneob", {
 			listeners:{
 				select: function(combo){
 
-					//alert(combo.getValue());
+					alert(combo.getValue());
 					this.up("window").queryLayerName = combo.getValue();
 				}
 			}
@@ -237,6 +237,7 @@ Ext.define("InAcc.view.west.Search_saneob", {
 		border:false,
 		handler:function(){
 			var dataStore = InAcc.global.Function.getGeoNurisStore("saneobWindow");
+			console.info(dataStore);
 			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridSaneob.conf");
 
 		}

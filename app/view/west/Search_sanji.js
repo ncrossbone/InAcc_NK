@@ -119,7 +119,7 @@ Ext.define("InAcc.view.west.Search_sanji", {
 			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			colName: "ASGB_CDE",
+			colName: "FSGB_CDE",
 			editable: false,
 			lCode: "FSG",
 			comparison: "="
@@ -141,7 +141,7 @@ Ext.define("InAcc.view.west.Search_sanji", {
 			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			colName: "ASGB_CDE",
+			colName: "FRST_CDE",
 			editable: false,
 			lCode: "FRT",
 			comparison: "="
