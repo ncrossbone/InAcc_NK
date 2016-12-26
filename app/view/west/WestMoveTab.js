@@ -55,7 +55,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 						sidoCd : sidoCd
 					});
 					sggStore.load();
-					console.info(sggStore);
+					//console.info(sggStore);
 					
 					cmd_sgg.setStore(sggStore);
 				}
