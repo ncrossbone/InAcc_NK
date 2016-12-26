@@ -10,7 +10,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 
 	title:"주택도시 속성 조회",
 	
-	itemId: "bldgityhWindow",
+	itemId: "bldgcityWindow",
 
 	height:640,
 	width:400,
@@ -119,7 +119,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			colName: "ASGB_CDE",
+			colName: "BSGB_CDE",
 			editable: false,
 			lCode: "BSG",
 			comparison: "="
@@ -194,7 +194,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			colName: "ASGB_CDE",
+			colName: "BDTY_CDE",
 			editable: false,
 			lCode: "BDT",
 			comparison: "="
@@ -216,7 +216,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			colName: "ASGB_CDE",
+			colName: "DNST_CDE",
 			editable: false,
 			lCode: "DNT",
 			comparison: "="

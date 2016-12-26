@@ -44,6 +44,7 @@ Ext.define("InAcc.global.Function", {
 			this.getColArray(container);
 			// console.info(this.colMapArray);
 			var queryFilter = this.getQueryFilter();
+			console.info(queryFilter);
 			// console.info(queryWhere);
 			var dataStore = this.getMapStore(queryFilter);
 
@@ -348,8 +349,10 @@ Ext.define("InAcc.global.Function", {
 		return andFilter;
 	},
 	getMapStore : function(queryFilter) {
-
+		
+		console.info(queryFilter);
 		var me = this;
+		console.info(me.queryLayerName);
 
 		// return;
 		/* 조건설정 완료 후 삭제할 것 */
