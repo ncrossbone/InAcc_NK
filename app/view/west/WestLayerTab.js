@@ -87,7 +87,6 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 
 				var dLayer = Ext.getCmp("Layer_");
 
-				
 					if(node.data.checked==false){
 						dLayer.layerOff(node.id);
 					}else{

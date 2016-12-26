@@ -90,6 +90,7 @@
 		}
 		boolean doPost = request.getMethod().equalsIgnoreCase("POST");
 		URL url = new URL(urlParam.replaceAll(" ", "%20"));
+		
 		HttpURLConnection http = (HttpURLConnection) url.openConnection();
 		Enumeration headerNames = request.getHeaderNames();
 		while (headerNames.hasMoreElements()) {
