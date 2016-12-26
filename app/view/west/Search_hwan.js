@@ -119,7 +119,7 @@ Ext.define("InAcc.view.west.Search_hwan", {
 			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			colName: "ASGB_CDE",
+			colName: "SEGB_CDE",
 			editable: false,
 			lCode: "ESG",
 			comparison: "="
@@ -204,15 +204,14 @@ Ext.define("InAcc.view.west.Search_hwan", {
 		style:"background:url('./resources/images/design/btn_search.gif'); margin-left:170px; margin-top:10px;",
 		border:false,
 		handler:function(){
-			var dataStore = InAcc.global.Function.getGeoNurisStore("nongjiWindow");
-			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
+			var dataStore = InAcc.global.Function.getGeoNurisStore("hwanWindow");
+			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridHyangyeong.conf");
 
 		}
 	}],
 	
 	initComponent:function(){
-		this.callParent();		
-
+		this.callParent();
 		InAcc.global.Function.setComboStore(this);
 		this.x = Ext.getBody().getWidth() - this.width;
 	}
