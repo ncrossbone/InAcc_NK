@@ -246,12 +246,12 @@ div {
 	border: 1px solid #d0d0d0;
 	color: #333;
 	background: #fff;
-	//letter-spacing: -1px;
+	letter-spacing: -1px;
 	font-size: 12px;
 }
 
 #mapSelect a:hover {
-	width: 60px;
+	width: 100px;
 	height: 20px;
 	border: 1px solid #126dae;
 	color: #fff;
@@ -265,6 +265,18 @@ div {
 	font-weight: bold;
 	letter-spacing: -1px;
 	cursor: pointer;
+}
+
+select::-ms-expand { 
+  display: none;
+}
+
+select {
+  -webkit-appearance: none;  /* 네이티브 외형 감추기 */
+  -moz-appearance: none;
+  appearance: none;
+  background: url('./resources/images/button/arrow.jpg') no-repeat 98% 50%; /* 화살표 모양의 이미지 */
+  background-size: 20px 20px; 
 }
 </style>
 </head>
