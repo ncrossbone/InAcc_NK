@@ -97,9 +97,10 @@ Ext.define("InAcc.global.Function", {
 
 				var bodyWidth = Ext.getBody().getWidth();
 				var bodyHeight = Ext.getBody().getHeight();
-				var windowWidth = bodyWidth - 300;
+				var windowWidth = bodyWidth - 350;
 				var windowHeight = 300;
-
+		    	
+		    	
 				var windowContainer = Ext.ComponentQuery.query("#southContainer")[0];
 
 				if (windowContainer == undefined) {
@@ -109,6 +110,8 @@ Ext.define("InAcc.global.Function", {
 					windowContainer = Ext.create("Ext.window.Window", {
 						itemId : "southContainer",
 						title : "검색결과",
+						maximizable:true,
+					    minimizable:true,
 						layout : {
 							type : "fit"
 						}

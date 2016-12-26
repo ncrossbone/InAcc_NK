@@ -91,7 +91,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			//colName: "LYGB_NAM",
 			displayField: 'S_NAME',
 			valueField: 'S_CODE',
-			lCode: "LAY01",
+			lCode: "LAY04",
 			comparison: "=",
 			listeners:{
 				select: function(combo){
@@ -121,7 +121,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			xtype:"combobox",
 			colName: "ASGB_CDE",
 			editable: false,
-			lCode: "ASG",
+			lCode: "BSG",
 			comparison: "="
 		}]
 	},{
@@ -196,7 +196,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			xtype:"combobox",
 			colName: "ASGB_CDE",
 			editable: false,
-			lCode: "ASG",
+			lCode: "BDT",
 			comparison: "="
 		}]
 	},{
@@ -218,7 +218,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			xtype:"combobox",
 			colName: "ASGB_CDE",
 			editable: false,
-			lCode: "ASG",
+			lCode: "DNT",
 			comparison: "="
 		}]
 	},{
@@ -418,6 +418,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 	
 	initComponent:function(){
 		this.callParent();		
+		InAcc.global.Function.setComboStore(this);
 		this.x = Ext.getBody().getWidth() - this.width;
 	}
 });

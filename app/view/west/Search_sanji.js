@@ -91,7 +91,7 @@ Ext.define("InAcc.view.west.Search_sanji", {
 			//colName: "LYGB_NAM",
 			displayField: 'S_NAME',
 			valueField: 'S_CODE',
-			lCode: "LAY01",
+			lCode: "LAY03",
 			comparison: "=",
 			listeners:{
 				select: function(combo){
@@ -121,7 +121,7 @@ Ext.define("InAcc.view.west.Search_sanji", {
 			xtype:"combobox",
 			colName: "ASGB_CDE",
 			editable: false,
-			lCode: "ASG",
+			lCode: "FSG",
 			comparison: "="
 		}]
 	},{
@@ -143,7 +143,7 @@ Ext.define("InAcc.view.west.Search_sanji", {
 			xtype:"combobox",
 			colName: "ASGB_CDE",
 			editable: false,
-			lCode: "ASG",
+			lCode: "FRT",
 			comparison: "="
 		}]
 	},{
@@ -234,6 +234,7 @@ Ext.define("InAcc.view.west.Search_sanji", {
 	
 	initComponent:function(){
 		this.callParent();		
+		InAcc.global.Function.setComboStore(this);
 		this.x = Ext.getBody().getWidth() - this.width;
 	}
 });
