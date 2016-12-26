@@ -3,7 +3,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 	extend: "Ext.window.Window",
 
 	xtype: "inacc-searchnongji",
-	
+	id:"test",
 	requires: [
 		"InAcc.global.Function",
 		"InAcc.global.Variable"
@@ -210,5 +210,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 	initComponent:function(){
 		this.callParent();
 		InAcc.global.Function.setComboStore(this);
+		
+		this.x = Ext.getBody().getWidth() - this.width;
 	}
 });

@@ -10,7 +10,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 
 	title:"주택도시 속성 조회",
 	
-	itemId: "sanjiWindow",
+	itemId: "bldgityhWindow",
 
 	height:640,
 	width:400,
@@ -414,5 +414,10 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
 
 		}
-	}]
+	}],
+	
+	initComponent:function(){
+		this.callParent();		
+		this.x = Ext.getBody().getWidth() - this.width;
+	}
 });

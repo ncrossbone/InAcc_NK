@@ -15,7 +15,7 @@ Ext.define("InAcc.global.Variable", {
 	constructor: function(){
 		
 		var me = this;
-		console.info("dd");
+		//console.info("dd");
 		var confStore = Ext.create('Ext.data.Store', {
 			
 			proxy : {
@@ -29,11 +29,11 @@ Ext.define("InAcc.global.Variable", {
 
 		confStore.load(function(record) {
 			
-			console.info(record);
+			//console.info(record);
 			me.setMapServiceUrl(record[0].data.mapServiceUrl);
 			me.setProxyUrl(record[0].data.proxyUrl);
 			
-			console.info(me.getMapServiceUrl());
+			//console.info(me.getMapServiceUrl());
 		});
 	}
 });

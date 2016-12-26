@@ -230,5 +230,10 @@ Ext.define("InAcc.view.west.Search_sanji", {
 			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
 
 		}
-	}]
+	}],
+	
+	initComponent:function(){
+		this.callParent();		
+		this.x = Ext.getBody().getWidth() - this.width;
+	}
 });

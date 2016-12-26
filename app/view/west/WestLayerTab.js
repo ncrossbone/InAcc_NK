@@ -109,8 +109,20 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		useArrows: true,
 		lines:false,
 		border: 0,
-		bufferedRenderer: false
+		bufferedRenderer: false,
+		listeners: {
+			checkchange:function(node){
 
+				var dLayer = Ext.getCmp("Layer_");
+
+				
+					if(node.data.checked==false){
+						dLayer.layerOff(node.id);
+					}else{
+						dLayer.layerOn(node.id);
+					}
+			}
+		}
 	},{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> 영상지도",
 		xtype:"treepanel",

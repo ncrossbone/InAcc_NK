@@ -10,7 +10,7 @@ Ext.define("InAcc.view.west.Search_hwan", {
 
 	title:"환경 속성 조회",
 	
-	itemId: "sanjiWindow",
+	itemId: "hwanWindow",
 
 	height:390,
 	width:400,
@@ -208,5 +208,10 @@ Ext.define("InAcc.view.west.Search_hwan", {
 			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
 
 		}
-	}]
+	}],
+	
+	initComponent:function(){
+		this.callParent();		
+		this.x = Ext.getBody().getWidth() - this.width;
+	}
 });

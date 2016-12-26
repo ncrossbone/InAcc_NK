@@ -26,7 +26,7 @@
 	}]
 }, {
 	"id": "4",
-	"text": "산업에너지 <input type='image' src='./resources/images/icons/search.png' id='saneob' width='13px' height='12.5px' style='margin-left:146px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
+	"text": "산업에너지 <input type='image' src='./resources/images/icons/search.png' id='saneob' width='13px' height='12.5px' style='margin-left:149px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
 	"iconCls": "layerNoneImg",
 	"checked": false,
 	"expanded": false,
@@ -100,7 +100,7 @@
 	}]
 }, {
 	"id": "16",
-	"text": "주택도시 <input type='image' src='./resources/images/icons/search.png' id='bldgcity' width='13px' height='12.5px' style='margin-left:159px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
+	"text": "주택도시 <input type='image' src='./resources/images/icons/search.png' id='bldgcity' width='13px' height='12.5px' style='margin-left:161px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
 	"iconCls": "layerNoneImg",
 	"checked": false,
 	"expanded": false,
@@ -143,7 +143,7 @@
 	}]
 }, {
 	"id": "23",
-	"text": "환경 <input type='image' src='./resources/images/icons/search.png' id='hwan' width='13px' height='12.5px' style='margin-left:185px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
+	"text": "환경 <input type='image' src='./resources/images/icons/search.png' id='hwan' width='13px' height='12.5px' style='margin-left:186px;' onclick=Ext.create('InAcc.view.west.SearchRealDB').searchCase(this.id);>",
 	"iconCls": "layerNoneImg",
 	"checked": false,
 	"expanded": false,

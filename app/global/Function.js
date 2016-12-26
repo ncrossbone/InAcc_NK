@@ -33,7 +33,7 @@ Ext.define("InAcc.global.Function", {
 		var container = this.chkContainer(pContainer);
 		
 		if(container){
-			console.info(container.queryLayerName);
+			//console.info(container.queryLayerName);
 			if(container.queryLayerName == ""){
 				
 				alert("레이어(구분)을 선택하세요.");
@@ -338,7 +338,7 @@ Ext.define("InAcc.global.Function", {
 	getMapStore: function(queryFilter){
 		
 		var me = this;
-		console.info(queryFilter);
+		//console.info(queryFilter);
 		//return;
 		/* 조건설정 완료 후 삭제할 것 */
 		/*queryFilter = ol.format.filter.or(
@@ -365,9 +365,9 @@ Ext.define("InAcc.global.Function", {
             async : false,
             contentType : 'text/xml',
             success : function(response_) {
-            	console.info(response_);
+            	//console.info(response_);
             	var features = new ol.format.GeoJSON().readFeatures( response_ );   
-            	console.log( features );
+            	//console.log( features );
             	
             	for(var i = 0; i < features.length; i++){
             		

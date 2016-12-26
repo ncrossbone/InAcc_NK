@@ -7,8 +7,7 @@ Ext.define("InAcc.view.south.SouthContainer", {
 	itemId: "southContainer",
 	
 	height:250,
-	width:1400,
-	x:322,
+	x:350,
 	y:722,
     title:"검색 결과",
     maximizable:true,
@@ -118,6 +117,9 @@ Ext.define("InAcc.view.south.SouthContainer", {
     initComponent: function(){
     	
     	this.callParent();
-    	this.setWidth(Ext.getBody().getWidth() - 322);
+    	
+    	this.setWidth(Ext.getBody().getWidth() - 350);
+    	this.x = Ext.getBody().getWidth() - this.width;
+    	this.y = Ext.getBody().getHeight() - this.height;
     }
 });
