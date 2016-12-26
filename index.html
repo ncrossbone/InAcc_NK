@@ -9,12 +9,9 @@
 
 <!-- <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/ol3/3.19.1/ol.js"></script> -->
 
-<script type="text/javascript" src="./resources/jquery.js"></script>
+<script type="text/javascript" src="./resources/jquery-3.1.1.min.js"></script>
 
-<script type="text/javascript"   src="http://ajax.googleapis.com/ajax/libs/jquery/1.6.1/jquery.min.js"></script>
 
-<script type="text/javascript" src="http://221.148.35.76:8880/ol3-UIT/WebMap/js/plugin/jquery.xml2json.js"></script>
-<link rel="alternate" type="application/rss+xml" title="ugistech" href="http://www.ugistech.net/feed.xml">
 
 <!-- localhost:8070 -->
 <!-- <script language="JavaScript" type="text/javascript" src="http://map.vworld.kr/js/apis.do?type=Base&apiKey=A8024419-242F-3817-A18B-D43CB6B83762"></script> -->
@@ -230,16 +227,26 @@ div {
 }
 
 #mapSelect {
-	margin-left: 39%;
+	position: absolute;
+	top:7px;
+	right:40px;
+	resize: both;
+	max-width:1074px; 
+}
+#selectArea {
+	position: absolute;
+	top:7px;
+	left:360px;
+	resize: both;
 }
 
 #mapSelect a {
-	width: 60px;
+	width: 100px;
 	height: 20px;
 	border: 1px solid #d0d0d0;
 	color: #333;
 	background: #fff;
-	letter-spacing: -1px;
+	//letter-spacing: -1px;
 	font-size: 12px;
 }
 

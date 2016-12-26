@@ -177,12 +177,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     	me.map = new ol.Map({
     		target: '_mapDiv_',
     		layers: this.baseMapLayers,
-    		controls : [ new ol.control.Zoom(), new ol.control.ZoomSlider(),
-    		 			new ol.control.FullScreen(), new ol.control.ScaleLine(), new ol.control.OverviewMap({
-    		 				collapsed : true
-    		 			}), new ol.control.Attribution({
-    		 				collapsed : true
-    		 			})],
+    		controls : [],
     		//extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
     		//extent : ol.proj.get( "EPSG:4326" ).getExtent(),
     		view: new ol.View({
