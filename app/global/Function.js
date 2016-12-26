@@ -460,12 +460,35 @@ Ext.define("InAcc.global.Function", {
 		//$('#sidoSelect').append('<option>aaa</option>');
 		
 		
-		var coreMap = Ext.getCmp("_mapDiv_");
-		coreMap.sidoGeometry = [];
+		Ext.Ajax.request({
+			url:'./resources/data/SidoJson.json',
+			success: function(response, opts) {
+			   var features = Ext.decode(response.responseText);
+			   var receiveData = [];
+				
+			        //containsXY
+					Ext.each(features, function(media, index) {
+			           console.info(media); 
+						var nameVal = media.name;
+						var idVal= media.id;
+						
+						receiveData.push({id: idVal, name: nameVal});
+						
+					});
+					
+					for(var i = 0 ; i < receiveData.length ; i++){
+						$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
+					}
+			   },
+			   failure: function(response, opts) {
+			      console.log('server-side failure with status code ' + response.status);
+			   }
+		});
+		
 		
 		
 		//var	proxy = "./resources/Proxy.jsp?url="
-		var	proxy = "./resources/Proxy.jsp?url=";
+		/*var	proxy = "./resources/Proxy.jsp?url=";
 		
 		var featureRequest = new ol.format.WFS().writeGetFeature({
             srsName : "EPSG:5179",
@@ -485,7 +508,6 @@ Ext.define("InAcc.global.Function", {
             contentType : 'text/xml',
             success : function(response_) {
 		        var features = new ol.format.GeoJSON().readFeatures( response_ );
-		
 		        var receiveData = [];
 		
 		        //containsXY
@@ -501,60 +523,119 @@ Ext.define("InAcc.global.Function", {
 					
 				});
 				
+				var jsonData = JSON.stringify(receiveData) ;
+		         
+		        console.info(jsonData) ;
+				
 				for(var i = 0 ; i < receiveData.length ; i++){
 					$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
 				}
 				
             }
         
-        });	
+        });	*/
 		
         
 		
 	},
+
+	   getSido: function(){
+
+		      //$('#sidoSelect').append('<option>aaa</option>');
+		      
+		      
+		      var coreMap = Ext.getCmp("_mapDiv_");
+		      coreMap.sidoGeometry = [];
+		      
+		      var   proxy = "./resources/Proxy.jsp?url="
+		      
+		      var featureRequest = new ol.format.WFS().writeGetFeature({
+		            srsName : "EPSG:5179",
+		            featureTypes : ['NK_SIDO'],
+		            outputFormat : 'application/json',
+		            geometryName : 'SHAPE',
+		            maxFeatures : 300
+		        });
+		        
+		        $.ajax({
+		            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+		            type : 'POST',
+		            data : new XMLSerializer().serializeToString( featureRequest ),
+		            async : false,
+		            contentType : 'text/xml',
+		            success : function(response_) {
+		              var features = new ol.format.GeoJSON().readFeatures( response_ );
+		      
+		              var receiveData = [];
+		      
+		              //containsXY
+		            Ext.each(features, function(media, index) {
+		                  
+		                  coreMap.sidoGeometry.push(media.values_);
+		                  
+		                  
+		               var nameVal = media.values_.SD_NM;
+		               var idVal= media.values_.SD_CD;
+		               
+		               receiveData.push({id: idVal, name: nameVal});
+		               
+		            });
+		            
+		            for(var i = 0 ; i < receiveData.length ; i++){
+		               $('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
+		            }
+		            
+		            }
+		        
+		        });   
+		      
+		        
+		      
+		   },
+		   
+		   getSgg: function(sidoCd){
+		      
+		      var coreMap = Ext.getCmp("_mapDiv_");
+		      coreMap.sggGeometry = [];
+		      
+		      var   proxy = "./resources/Proxy.jsp?url="
+		      
+		         var featureRequest = new ol.format.WFS().writeGetFeature({
+		                srsName : "EPSG:5179",
+		                featureTypes : ['NK_SGG'],
+		                outputFormat : 'application/json',
+		                geometryName : 'SHAPE',
+		                maxFeatures : 300,
+		                filter: ol.format.filter.like('ADMCD',sidoCd+'*')
+		            });
+		            
+		            $.ajax({
+		                url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+		                type : 'POST',
+		                data : new XMLSerializer().serializeToString( featureRequest ),
+		                async : false,
+		                contentType : 'text/xml',
+		               success : function(response_) {
+		                  var features = new ol.format.GeoJSON().readFeatures( response_ );
+		                  var receiveData = [];
+		               Ext.each(features, function(media, index) {
+		                     
+		                     coreMap.sggGeometry.push(media.values_);
+		                     
+		                  var nameVal = media.values_.SGG_NM;
+		                  var idVal= media.values_.ADMCD;
+		                  
+		                  receiveData.push({id: idVal, name: nameVal});
+		                  
+		               });
+		               $('#sggSelect *').remove();
+		               $('#sggSelect').append('<option>시군구</option>');
+		               for(var i = 0 ; i < receiveData.length ; i++){
+		                  $('#sggSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
+		               }
+		              }
+		       });
+		      
+		   }
 	
-	getSgg: function(sidoCd){
-		
-		var coreMap = Ext.getCmp("_mapDiv_");
-		coreMap.sggGeometry = [];
-		
-		var	proxy = "./resources/Proxy.jsp?url="
-		
-			var featureRequest = new ol.format.WFS().writeGetFeature({
-                srsName : "EPSG:5179",
-                featureTypes : ['NK_SGG'],
-                outputFormat : 'application/json',
-                geometryName : 'SHAPE',
-                maxFeatures : 300,
-                filter: ol.format.filter.like('ADMCD',sidoCd+'*')
-            });
-            
-            $.ajax({
-                url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
-                type : 'POST',
-                data : new XMLSerializer().serializeToString( featureRequest ),
-                async : false,
-                contentType : 'text/xml',
-	            success : function(response_) {
-		            var features = new ol.format.GeoJSON().readFeatures( response_ );
-		            var receiveData = [];
-					Ext.each(features, function(media, index) {
-			            
-			            coreMap.sggGeometry.push(media.values_);
-			            
-						var nameVal = media.values_.SGG_NM;
-						var idVal= media.values_.ADMCD;
-						
-						receiveData.push({id: idVal, name: nameVal});
-						
-					});
-					$('#sggSelect *').remove();
-					$('#sggSelect').append('<option>시군구</option>');
-					for(var i = 0 ; i < receiveData.length ; i++){
-						$('#sggSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
-					}
-	           }
-       });
-		
-	}
 });

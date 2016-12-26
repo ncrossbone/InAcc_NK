@@ -10,27 +10,18 @@ Ext.define('InAcc.store.north.Sido', {
 	listeners: {
 		load: function(store) {
 
-/*			var featureRequest = new ol.format.WFS().writeGetFeature({
-                srsName : "EPSG:4326",
-                featureTypes : ['시도경계'],
-                outputFormat : 'application/json',
-                geometryName : 'SHAPE',
-                maxFeatures : 300
-            });
-            
-            $.ajax({
-                url : proxy+'http://202.68.238.117:8880/geonuris/wfs?GDX=NK_Service.xml',
-                type : 'POST',
-                data : new XMLSerializer().serializeToString( featureRequest ),
-                async : false,
-                contentType : 'text/xml',
-                success : function(response_) {
-            var features = new ol.format.GeoJSON().readFeatures( response_ );   
-            console.log( features );
-                }
-            });*/
+			Ext.Ajax.request({
+				url:'./resources/data/SidoJson.json',
+				success: function(response, opts) {
+				   var o = Ext.decode(response.responseText);
+				      console.info(o);
+				   },
+				   failure: function(response, opts) {
+				      console.log('server-side failure with status code ' + response.status);
+				   }
+			})
 			
-			var coreMap = Ext.getCmp("_mapDiv_");
+			/*var coreMap = Ext.getCmp("_mapDiv_");
 			coreMap.sidoGeometry = [];
 			
 			var	proxy = "./resources/Proxy.jsp?url="
@@ -70,7 +61,7 @@ Ext.define('InAcc.store.north.Sido', {
 			
                 }
             
-            });	
+            });	*/
         }
     }
 });
