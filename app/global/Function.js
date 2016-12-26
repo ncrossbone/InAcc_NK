@@ -464,24 +464,55 @@ Ext.define("InAcc.global.Function", {
 		coreMap.sidoGeometry = [];
 		
 		var	proxy = "./resources/Proxy.jsp?url="
+		//var	proxy = "./resources/proxy/proxy.jsp?";
 		
 		var featureRequest = new ol.format.WFS().writeGetFeature({
             srsName : "EPSG:5179",
             featureTypes : ['NK_SIDO'],
             outputFormat : 'application/json',
             geometryName : 'SHAPE',
-            maxFeatures : 300
+            maxFeatures : 300,
+            //startIndex: 11
+            //REQUEST: "GetFeatureInfo"
+            //BBOX: "124.25909313725815,37.652186963089804,130.73356445774925,42.98988702473548"
         });
-        
+		
+		//console.info(featureRequest);
+        //console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
+		
+		/*fetch(proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml', {
+			method: "POST",
+			body: new XMLSerializer().serializeToString(featureRequest)
+		}).then(function(response){
+			console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
+			//console.info(new ol.format.GeoJSON().readFeatures(response.json()));
+			window.setInterval(function(){
+				
+				console.info(response.json().PromiseStatus);
+			}, 1000);
+			Ext.defer(function(){
+				console.info(response.json());
+			}, 1000);
+			
+			return response.json();
+		}).then(function(json){
+			console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
+			var features = new ol.format.GeoJSON().readFeatures(json);
+			console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
+			console.info(features);
+		});*/
+		
         $.ajax({
             url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+        	//url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml&request=GetFeature&typename=NK_SIDO&outputformat=application/json&format_options=geometry:reference_no&SRS=EPSG:5179&BBOX=124.25909313725815,37.652186963089804,130.73356445774925,42.98988702473548',
             type : 'POST',
             data : new XMLSerializer().serializeToString( featureRequest ),
             async : false,
             contentType : 'text/xml',
             success : function(response_) {
+            	//console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
 		        var features = new ol.format.GeoJSON().readFeatures( response_ );
-		
+		        //console.info(features);
 		        var receiveData = [];
 		
 		        //containsXY
@@ -503,7 +534,7 @@ Ext.define("InAcc.global.Function", {
 				
             }
         
-        });	
+        });
 		
         
 		
@@ -532,7 +563,9 @@ Ext.define("InAcc.global.Function", {
                 async : false,
                 contentType : 'text/xml',
 	            success : function(response_) {
+	            	
 		            var features = new ol.format.GeoJSON().readFeatures( response_ );
+		            
 		            var receiveData = [];
 					Ext.each(features, function(media, index) {
 			            
