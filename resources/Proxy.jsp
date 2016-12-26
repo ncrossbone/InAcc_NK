@@ -37,7 +37,7 @@
 				
 				paramsToString += ( "&" + key + "=" + value );
 				
-				//System.out.println( "paramsToString : " + paramsToString );
+				System.out.println( "1 paramsToString : " + paramsToString );
 				
 				try {
 					//value = new String(value.getBytes("8859_1"), "UTF-8");
@@ -97,6 +97,8 @@
 			if (!key.equalsIgnoreCase("Host")) {
 				http.setRequestProperty(key, request.getHeader(key));
 			}
+			
+			System.out.println( "2 paramsToString : " + key );
 		}
 
 		http.setDoInput(true);
@@ -110,6 +112,7 @@
 			ServletInputStream sis = request.getInputStream();
 			while ((read = sis.read(buffer)) != -1) {
 				os.write(buffer, 0, read);
+				System.out.println( "5 paramsToString : " + read);
 			}
 			os.close();
 		}
@@ -133,6 +136,7 @@
 					response.setHeader(key, value);
 				}
 			}
+			System.out.println( "3 paramsToString : " + key );
 		}
 
 		//response.setContentType("text/xml");
@@ -147,6 +151,7 @@
 		while ((read = is.read(buffer)) != -1) {
 
 			sos.write(buffer, 0, read);
+			
 		}
 		sos.println();
 		response.flushBuffer();
