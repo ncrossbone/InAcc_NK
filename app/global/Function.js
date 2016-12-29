@@ -44,7 +44,6 @@ Ext.define("InAcc.global.Function", {
 			this.getColArray(container);
 			// console.info(this.colMapArray);
 			var queryFilter = this.getQueryFilter();
-			console.info(queryFilter);
 			// console.info(queryWhere);
 			var dataStore = this.getMapStore(queryFilter);
 
@@ -288,7 +287,7 @@ Ext.define("InAcc.global.Function", {
 
 				tmpFilter = ol.format.filter.like(this.colMapArray[i].column, this.colMapArray[i].value);
 			} else if (this.colMapArray[i].comparison == "=") {
-
+				
 				tmpFilter = ol.format.filter.equalTo(this.colMapArray[i].column, this.colMapArray[i].value);
 			} else if (this.colMapArray[i].comparison == ">") {
 

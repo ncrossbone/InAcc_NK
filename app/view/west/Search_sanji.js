@@ -32,6 +32,9 @@ Ext.define("InAcc.view.west.Search_sanji", {
 			xtype:"combobox",
 			width:200,
 			editable: false,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "DEMOADM",
 			colName: "SLTE_NAM",
 			comparison: "=",
 		}]

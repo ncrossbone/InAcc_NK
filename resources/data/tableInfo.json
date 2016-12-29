@@ -378,6 +378,48 @@
       ]
    },
    {  
+      L_CODE:"DEMOADM",
+      L_NAME:"시범지역",
+      S_ITEM:[  
+         {  
+            S_CODE:"나선",
+            S_SEQ:"000",
+            S_NAME:"나선",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"남포",
+            S_SEQ:"001",
+            S_NAME:"남포",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"무산",
+            S_SEQ:"002",
+            S_NAME:"무산",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"신의주",
+            S_SEQ:"003",
+            S_NAME:"신의주",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"원산",
+            S_SEQ:"004",
+            S_NAME:"원산",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"청진",
+            S_SEQ:"005",
+            S_NAME:"청진",
+            S_ABBR:""
+         }
+      ]
+   },
+   {  
       L_CODE:"CED",
       L_NAME:"밀집정도",
       S_ITEM:[  
