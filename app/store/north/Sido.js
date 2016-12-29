@@ -10,7 +10,7 @@ Ext.define('InAcc.store.north.Sido', {
 	listeners: {
 		load: function(store) {
 
-			Ext.Ajax.request({
+			/*Ext.Ajax.request({
 				url:'./resources/data/SidoJson.json',
 				success: function(response, opts) {
 				   var o = Ext.decode(response.responseText);
@@ -19,9 +19,9 @@ Ext.define('InAcc.store.north.Sido', {
 				   failure: function(response, opts) {
 				      console.log('server-side failure with status code ' + response.status);
 				   }
-			})
+			})*/
 			
-			/*var coreMap = Ext.getCmp("_mapDiv_");
+			var coreMap = Ext.getCmp("_mapDiv_");
 			coreMap.sidoGeometry = [];
 			
 			var	proxy = "./resources/Proxy.jsp?url="
@@ -61,7 +61,7 @@ Ext.define('InAcc.store.north.Sido', {
 			
                 }
             
-            });	*/
+            });
         }
     }
 });

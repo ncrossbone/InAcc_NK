@@ -237,5 +237,11 @@ Ext.define("InAcc.view.west.Search_sanji", {
 		this.callParent();
 		InAcc.global.Function.setComboStore(this);
 		this.x = Ext.getBody().getWidth() - this.width;
+	},
+	listeners:{
+		'close':function(val){
+			InAcc.global.Function.comboArray=[];
+		}
+
 	}
 });

@@ -3,50 +3,8 @@
 	"text": "행정구역 별 통계",
 	"expanded": false,
 	"children": [{
-		"id": "G0010000_POP",
-		"text": "시도별 인구수",
-		"iconCls": "layerIconSize layer1",
-		"leaf": true,
-		"checked": false
-	},{
-		"id": "G0010000_HOUSE",
-		"text": "시도별 가구수",
-		"iconCls": "layerIconSize layer1",
-		"leaf": true,
-		"checked": false
-	},{
-		"id": "G0010000_NONG",
-		"text": "시도별 농지면적",
-		"iconCls": "layerIconSize layer1",
-		"leaf": true,
-		"checked": false
-	},{
-		"id": "G0010000_GONG",
-		"text": "시도별 공업면적",
-		"iconCls": "layerIconSize layer1",
-		"leaf": true,
-		"checked": false
-	},{
-		"id": "G0010000_SAN",
-		"text": "시도별 산림면적",
-		"iconCls": "layerIconSize layer1",
-		"leaf": true,
-		"checked": false
-	},{
-		"id": "G00100000_POP",
-		"text": "시군별 인구수",
-		"iconCls": "layerIconSize layer1",
-		"leaf": true,
-		"checked": false
-	},{
 		"id": "G00100000_HOUSE",
 		"text": "시군별 가구수",
-		"iconCls": "layerIconSize layer1",
-		"leaf": true,
-		"checked": false
-	},{
-		"id": "G00100000_NONG",
-		"text": "시군별 농지면적",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
@@ -57,8 +15,50 @@
 		"leaf": true,
 		"checked": false
 	},{
+		"id": "G00100000_NONG",
+		"text": "시군별 농지면적",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
 		"id": "G00100000_SAN",
 		"text": "시군별 산림면적",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "G00100000_POP",
+		"text": "시군별 인구수",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "G0010000_HOUSE",
+		"text": "시도별 가구수",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "G0010000_GONG",
+		"text": "시도별 공업면적",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "G0010000_NONG",
+		"text": "시도별 농지면적",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "G0010000_SAN",
+		"text": "시도별 산림면적",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "G0010000_POP",
+		"text": "시도별 인구수",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false

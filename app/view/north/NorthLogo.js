@@ -13,7 +13,7 @@ Ext.define("InAcc.view.north.NorthLogo", {
 		width:20
 	},{
 		xtype:"image",
-		src:"./resources/images/design/logo_new.png",
+		src:"./resources/images/design/logo_new_2.png",
 		style:"margin-top:13px; margin-left:20px;",
 		width:300
 	}]

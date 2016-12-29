@@ -7,28 +7,50 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 	layout:{
 		type:"vbox"
 	},
-	//bodyStyle:{"background-color": "#ececec"},
+	bodyStyle:"background-color:#f6f6f6;",
 	border:false,
 	height:70,
 	items:[{
 		xtype:"panel",
-		title:"시범지역위치이동",
+		title:"<img src='./resources/images/design/blit_st_02_02.png' style='margin-bottom:-3px;'/> 시범지역위치이동",
 		width:330,
-		style:" margin-top:50px;",
+		style:" margin-top:5px; margin-left:5px;",
 		items:[{
 			xtype: 'combobox',
 			labelStyle:"font-weight: bold;",
-			style:" margin-top:20px; margin-left:25px;",
-			fieldLabel: "시범지역위치이동",
+			style:" margin-top:15px; margin-left:15px;",
+			fieldLabel: "<img src='./resources/images/design/blit_st_03.png'/> 시범지역위치이동",
 			labelWidth: 120,
-			width:280,
-			editable: false
+			width:300,
+			labelSeparator : '',
+			editable: false,
+			displayField:'name',
+			valueField:'id',
+			listeners:{
+				select: function(val){
+					var selectValue = val.value;
+					DemonLocation(selectValue);
+					
+				}
+			},
+			store:Ext.create('Ext.data.Store',{
+				fields:['id','name'],
+				data:[['na','나선'],
+				      ['nam','남포'],
+				      ['moo','무산'],
+				      ['sin','신의주'],
+				      ['won','원산'],
+				      ['chang','청진']]
+			})
+		},{
+			xtype:"container",
+			height:35
 		}]
 	},{
 		xtype:'form',
 		reference : 'form',
-		style:" margin-top:100px;",
-		title:"행정구역이동",
+		style:"margin-left:5px;",
+		title:"<img src='./resources/images/design/blit_st_02_02.png' style='margin-bottom:-3px;'/> 행정구역이동",
 		width:330,
 		layout:{
 			type:"vbox"
@@ -38,13 +60,14 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 		items:[{
 			xtype:"combobox",
 			labelStyle:"font-weight: bold;",
-			style:" margin-top:20px; margin-left:50px;",
-			fieldLabel: "시도",
+			style:" margin-top:15px; margin-left:15px;",
+			fieldLabel: "<img src='./resources/images/design/blit_st_03.png'/> 시·도",
+			labelSeparator : '',
 			id: 'cmd_sido',
 			displayField: 'name',
 			valueField: 'id',
 			store: Ext.create('InAcc.store.north.Sido'),
-			width:220,
+			width:290,
 			editable: false,
 			listeners:{
 				select: function(){
@@ -55,103 +78,73 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 						sidoCd : sidoCd
 					});
 					sggStore.load();
-					//console.info(sggStore);
-					
+					console.info(sggStore);
+
 					cmd_sgg.setStore(sggStore);
 				}
 			}
 		},{
 			xtype:"combobox",
 			labelStyle:"font-weight: bold;",
-			style:" margin-top:10px; margin-left:50px;",
-			fieldLabel: "시군구",
+			style:"margin-left:15px;",
+			fieldLabel: "<img src='./resources/images/design/blit_st_03.png'/> 시·군·구",
+			labelSeparator : '',
 			id: "cmd_sgg",
 			displayField: 'name',
 			valueField: 'id',
-			width:220,
+			width:290,
 			editable: false
 		},{
 			xtype:"button",
 			text:"이동",
-			style:" margin-top:20px; margin-left:120px; margin-bottom:10px;",
-			width:80,
+			style:" margin-top:25px; margin-left:120px; margin-bottom:35px; background:#0c61a7; border: 1px solid #004581;",
+			width:90,
 			handler: function() {
 				/*var searchResultWindow = Ext.create("InAcc.view.south.SouthContainer");
-				
-				searchResultWindow.show();*/
-				ZoomToExtent();
-				
-			}
-		}]
-	}/*{
-		xtype:"buttongroup",
-		
-		width:"auto",
-		bodyStyle:{"background-color": "#ececec"},
-		style:" margin-top:9px;",
-		items:[{
-			xtype:'splitbutton',
-			text:'View',
-			menuAlign: 'tr-br',
-			menu: {
-				items: [{
-					text: 'Base Map',
-					iconCls: 'nav',
-					menu:[{
-						xtype: 'menucheckitem',
-						text: 'Road Map',
-						id:"baseMap",
-						checked:true,
-						handler:function(con){
-							var map = Ext.getCmp("_mapDiv_");
-							map.baseMapLayers[0].setVisible(false);
-							map.baseMapLayers[1].setVisible(true);
-							
-							var checkMap = Ext.getCmp("aerialMap");
-							if(checkMap.checked==true){
-								checkMap.setChecked(false);
-							}
-							
-							if(con.checked==false){
-								con.setChecked(true);
-							}
-						}
-					},{
-						xtype: 'menucheckitem',
-						text: 'Aerial Map',
-						id:"aerialMap",
-						handler:function(con){
-							var map = Ext.getCmp("_mapDiv_");
-							map.baseMapLayers[0].setVisible(true);
-							map.baseMapLayers[1].setVisible(false);
-							
-							var checkMap = Ext.getCmp("baseMap");
-							if(checkMap.checked==true){
-								checkMap.setChecked(false);
-							}
-							
-							if(con.checked==false){
-								con.setChecked(true);
-							}
-						}
-					}]
-				},{
-					xtype: 'menucheckitem',
-					text: 'Map Controller',
-					checked:true,
-					handler:function(con){
-					
-					}
-				},{
-					xtype: 'menucheckitem',
-					text: 'Zoom Bar',
-					checked:true,
-					handler:function(con){
-					
-					}
-				}]
-			}
 
+				searchResultWindow.show();*/
+				ZoomToExtentSearchTab();
+
+			}
 		}]
-	}*/]
+	},{
+		xtype:"panel",
+		style:"margin-left:5px;",
+		title:"<img src='./resources/images/design/blit_st_02_02.png' style='margin-bottom:-3px;'/> Vworld POI 검색",
+		width:330,
+		height:130,
+		layout:{
+			type:'hbox'
+		},
+		items:[{
+			style:"margin-left:15px; margin-top:15px;",
+			xtype:"textfield",
+			width:240
+		},{
+			style:"margin-top:15px; background : #555; border: 1px solid #303030",
+			xtype:"button",
+			width:60,
+			text:"검색"
+		}]
+	},{
+		xtype:"panel",
+		style:"margin-left:5px;",
+		title:"<img src='./resources/images/design/blit_st_02_02.png' style='margin-bottom:-3px;'/> 구축Data 통합명칭 검색",
+		width:330,
+		height:130,
+		layout:{
+			type:'hbox'
+		},
+		items:[{
+			style:"margin-left:15px; margin-top:15px;",
+			xtype:"textfield",
+			width:240
+		},{
+			style:"margin-top:15px; background : #555; border: 1px solid #303030",
+			xtype:"button",
+			width:60,
+			text:"검색"
+		}]
+
+	}]
 });

@@ -1,22 +1,21 @@
 ZoomToExtent = function(){
    var coreMap = Ext.getCmp("_mapDiv_");
-   
-   var sidoCd = $("#sidoSelect option:selected");
-   var sggCd = $("#sggSelect option:selected");
+   //var extent = [];
+   var sidoCd = $("#sidoSelect option:selected")[0].value;
+   var sggCd = $("#sggSelect option:selected")[0].value;
 
-   
-   if(sggCd[0].value != null && sggCd[0].value != "시군구"){
+   if(sggCd != null && sggCd != "시군구"){
       for(var i = 0 ; i < coreMap.sggGeometry.length;i++){
-         if(coreMap.sggGeometry[i].ADMCD == sggCd[0].value){
+         if(coreMap.sggGeometry[i].ADMCD == sggCd){
             extent = coreMap.sggGeometry[i].geometry.getExtent();
          }
       }
    }else{
-      if(sidoCd[0].value == "시도" && sggCd[0].value == "시군구"){
+      if(sidoCd == "시도" && sggCd == "시군구"){
          return;
       }
       for(var i = 0 ; i < coreMap.sidoGeometry.length;i++){
-         if(coreMap.sidoGeometry[i].SD_CD == sidoCd[0].value){
+         if(coreMap.sidoGeometry[i].SD_CD == sidoCd){
             extent = coreMap.sidoGeometry[i].geometry.getExtent();
          }
       }
@@ -24,6 +23,33 @@ ZoomToExtent = function(){
    
    coreMap.map.getView().fit(extent, coreMap.map.getSize());
       
+}
+
+ZoomToExtentSearchTab = function(){
+	var coreMap = Ext.getCmp("_mapDiv_");
+	var extent = [];
+	var sidoCd = Ext.getCmp("cmd_sido").lastMutatedValue;
+	var sggCd = Ext.getCmp("cmd_sgg").lastMutatedValue;
+
+	if(sggCd != null && sggCd != "시군구"){
+		for(var i = 0 ; i < coreMap.sggGeometry.length;i++){
+			if(coreMap.sggGeometry[i].ADMCD == sggCd){
+				extent = coreMap.sggGeometry[i].geometry.getExtent();
+			}
+		}
+	}else{
+		if(sidoCd == "시도" && sggCd == "시군구"){
+			return;
+		}
+		for(var i = 0 ; i < coreMap.sidoGeometry.length;i++){
+			if(coreMap.sidoGeometry[i].SD_CD == sidoCd){
+				extent = coreMap.sidoGeometry[i].geometry.getExtent();
+			}
+		}
+	}
+
+	coreMap.map.getView().fit(extent, coreMap.map.getSize());
+
 }
 
 // 무산군 = [1124302.0917757652, 2426551.0481530065, 1172445.817177866, 2492576.5154793495]
@@ -35,7 +61,11 @@ ZoomToExtent = function(){
 
 DemonLocation = function(val){
    var coreMap = Ext.getCmp("_mapDiv_");
-   var val = val[0].value;
+   
+   if(val[0].value!=undefined){
+	   var val = val[0].value;
+   }
+   
    var extent = [];
    
    if(val == "na" ){

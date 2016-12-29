@@ -6,7 +6,7 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		type:'accordion'
 	},
 	border:false,
-	//title:"주제도",
+	title:"주제도",
 	bodyStyle:"background-color:#f6f6f6;",
 	items:[{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> 실태DB",
@@ -161,7 +161,7 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 					}
 			}
 		}
-	},{
+	}/*,{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> POI조회",
 		items:[{
 			xtype:"container",
@@ -197,5 +197,5 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 			}]
 
 		}]
-	}]
+	}*/]
 });

@@ -44,14 +44,14 @@
 	"text": "교통",
 	"expanded": false,
 	"children": [{
-		"id": "A0010000",
-		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=A0010000&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>도로경계",
+		"id": "A0070000",
+		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=A0070000&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>교량",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "A0020000",
-		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=A0020000&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>도로중심선",
+		"id": "A0010000",
+		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=A0010000&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>도로경계",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
@@ -62,20 +62,8 @@
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "A0070000",
-		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=A0070000&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>교량",
-		"iconCls": "layerIconSize layer1",
-		"leaf": true,
-		"checked": false
-	},{
-		"id": "N3A_A0110020",
-		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=N3A_A0110020&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>터널",
-		"iconCls": "layerIconSize layer1",
-		"leaf": true,
-		"checked": false
-	},{
-		"id": "A0140001",
-		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=A0140001&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>철도역",
+		"id": "A0020000",
+		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=A0020000&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>도로중심선",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
@@ -92,8 +80,20 @@
 		"leaf": true,
 		"checked": false
 	},{
+		"id": "A0140001",
+		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=A0140001&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>철도역",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
 		"id": "A0171119",
 		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=A0171119&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>철도중심선",
+		"iconCls": "layerIconSize layer1",
+		"leaf": true,
+		"checked": false
+	},{
+		"id": "N3A_A0110020",
+		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=N3A_A0110020&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>터널",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
@@ -103,14 +103,14 @@
 	"text": "수자원",
 	"expanded": false,
 	"children": [{
-		"id": "E0010001",
-		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=E0010001&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>하천경계",
+		"id": "E0032111",
+		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=E0032111&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>실폭하천",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "E0020000",
-		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=E0020000&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>하천중심선",
+		"id": "E0010001",
+		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=E0010001&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>하천경계",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
@@ -121,8 +121,8 @@
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "E0032111",
-		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=E0032111&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>실폭하천",
+		"id": "E0020000",
+		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=E0020000&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>하천중심선",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
@@ -149,14 +149,14 @@
 	"text": "행정경계",
 	"expanded": false,
 	"children": [{
-		"id": "NK_SIDO",
-		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=NK_SIDO&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>시도경계",
+		"id": "NK_SGG",
+		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=NK_SGG&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>시군구경계",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
 	},{
-		"id": "NK_SGG",
-		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=NK_SGG&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>시군구경계",
+		"id": "NK_SIDO",
+		"text": "<img src='http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test.xml&VERSION=1.3.0&REQUEST=GetLegendGraphic&LAYER=NK_SIDO&FORMAT=image/png' width='12px' height='12px' style='margin-right:5px;'/>시도경계",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
 		"checked": false
