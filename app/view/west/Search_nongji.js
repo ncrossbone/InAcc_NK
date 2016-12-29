@@ -35,6 +35,9 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			xtype:"combobox",
 			width:200,
 			editable: false,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "DEMOADM",
 			colName: "SLTE_NAM",
 			comparison: "=",
 		}]
@@ -87,7 +90,6 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			width:200,
 			style:"margin-top:5px;",
 			displayField: 'name',
-			valueField: 'id',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
 			editable: false,
