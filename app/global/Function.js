@@ -421,28 +421,31 @@ Ext.define("InAcc.global.Function", {
 		}
 	},
 	setComboStore: function(container){
-		
 		this.getComboArray(container);
 		var arrCombo = this.comboArray;
 		
+		//console.info(arrCombo);
 		this.tableInfo.load(function(record) {
 			
 			for(var arrCnt = 0; arrCnt < arrCombo.length; arrCnt++){
-
+				//console.info("1");
 				var recIdx = record.map(function(obj){
 					return obj.data.L_CODE;
 				}).indexOf(arrCombo[arrCnt].lCode);
-
+				
+				
 				var storeData = [];
 
 				var sItem = record[recIdx].data.S_ITEM;
-
+				
 				var storeBind = Ext.create('Ext.data.Store', {
 					fields: ['S_CODE', 'S_NAME'],
 					data:sItem
 				});
-
+				
 				arrCombo[arrCnt].bindStore(storeBind);
+				
+				//console.info(arrCombo);
 			}
 		});
 	},
