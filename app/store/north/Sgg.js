@@ -11,7 +11,7 @@ Ext.define('InAcc.store.north.Sgg', {
 		load: function(store) {
 			
 			var coreMap = Ext.getCmp("_mapDiv_");
-			coreMap.sggGeometry = [];
+			coreMap.sgg2Geometry = [];
 			
 			var	proxy = "./resources/Proxy.jsp?url="
 			
@@ -28,14 +28,14 @@ Ext.define('InAcc.store.north.Sgg', {
 	                url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
 	                type : 'POST',
 	                data : new XMLSerializer().serializeToString( featureRequest ),
-	                async : false,
+	                async : true,
 	                contentType : 'text/xml',
 	                success : function(response_) {
 	            var features = new ol.format.GeoJSON().readFeatures( response_ );
 	            var receiveData = [];
 				Ext.each(features, function(media, index) {
 		            
-		            coreMap.sggGeometry.push(media.values_);
+		            coreMap.sgg2Geometry.push(media.values_);
 		            
 					var nameVal = media.values_.SGG_NM;
 					var idVal= media.values_.ADMCD;

@@ -502,7 +502,7 @@ Ext.define("InAcc.global.Function", {
         	//url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml&request=GetFeature&typename=NK_SIDO&outputformat=application/json&format_options=geometry:reference_no&SRS=EPSG:5179&BBOX=124.25909313725815,37.652186963089804,130.73356445774925,42.98988702473548',
             type : 'POST',
             data : new XMLSerializer().serializeToString( featureRequest ),
-            async : false,
+            async : true,
             contentType : 'text/xml',
             success : function(response_) {
             	//console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
@@ -555,7 +555,7 @@ Ext.define("InAcc.global.Function", {
                 url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
                 type : 'POST',
                 data : new XMLSerializer().serializeToString( featureRequest ),
-                async : false,
+                async : true,
                 contentType : 'text/xml',
 	            success : function(response_) {
 	            	
