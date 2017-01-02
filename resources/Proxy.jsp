@@ -21,7 +21,6 @@
 <%@page import="java.io.ByteArrayOutputStream"%>
 <%@page import="java.lang.Exception"%>
 
-
 <%!public static String getParam(HttpServletRequest request, String name) {
 	 
 		String paramsToString = "";
@@ -148,12 +147,27 @@
 		//response.setContentType("text/xml");
 		//response.setCharacterEncoding("UTF-8");
 		response.resetBuffer();
-
+		//String myString = IOUtils.toString(is, "UTF-8");
+		//System.out.println(myString);
+		int cnt = 0;
 		while ((read = is.read(buffer)) != -1) {
 
+			cnt++;
+			//if(cnt < 10){
+				/* StringBuffer stringBuffer = new StringBuffer();
+				stringBuffer.append(new String(buffer, 0, read)); */
+				
+				//if(stringBuffer.toString().contains("SD_NM") == true){
+					//System.out.println(cnt);
+					//sos.write(buffer, 0, read);
+				//}
+			//}
+			
 			sos.write(buffer, 0, read);
 			
 		}
+		System.out.println("end");
+		//out.println("suc");
 		sos.println();
 		response.flushBuffer();
 		sos.close();

@@ -128,23 +128,28 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 			handler:function(){
 				//http://map.vworld.kr/search.do?apiKey=인증키&[검색 파라미터]
 					
+					var encString = encodeURIComponent("나진");
+					var responseArr = [];
+					//console.info(testString);
 					$.ajax({
 		                url : './resources/Proxy.jsp?url=http://map.vworld.kr/search.do?',
 		                type : 'GET',
-		                //contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
+		                contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
 		                data : {
 		                	apiKey:"E1FC5A1A-C63D-3D29-B716-F64596DEF9E8",
-		                	q:"서울",
+		                	q:encString,
 		                	category:"Poi",
 		                	output:"json"
 		                },
 		                contentType : 'text/xml',
 		                success : function(response_) {
-		                	console.info(response_);
-					
+		                	var parse = JSON.parse(response_);
+		                	console.info(parse.LIST);
 		                }
 		            
 		            });
+					
+					
 				
 			}
 		}]

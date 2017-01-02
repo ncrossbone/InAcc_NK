@@ -35,10 +35,8 @@ Ext.define('InAcc.view.map.Layer', {
 		             }
 					//serverType: 'geoserver'
 				})
-			})
+			});
 
-			/*var test = new ol.format.WMSGetFeatureInfo(["NK_SIDO"]).readFeatures(layer.getSource());
-			console.info(test);*/
 			coreMap.map.addLayer(layer);
 			layer.setVisible(true);
 
