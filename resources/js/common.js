@@ -88,3 +88,70 @@ DemonLocation = function(val){
    coreMap.map.getView().fit(extent, coreMap.map.getSize());
    
 }
+
+
+
+BuildDataSet = function(buildStore){
+	
+	var buildSearch = Ext.getCmp("buildSearch");
+	
+	console.info(buildStore.data.items);
+	
+	buildSearch.remove("build");
+	buildSearch.add({
+        xtype:"panel",
+        id:"build",
+        title:"검색결과",
+        width:360,
+        items:[{
+           xtype:"grid",
+           id: "buildList",
+           columnLines: true,
+            hideHeaders: true,
+           columns:[{
+               align:'center',
+               dataIndex:'name',
+               width: 280
+            },{	 
+				text:'이동',
+				align:'center',
+				xtype:'actioncolumn',
+				width:50,
+				items:[{ 
+					icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
+	                tooltip: 'Edit',
+	                handler: function(grid, rowIndex, colIndex) {
+	                	console.info("이동");
+	                }
+				}]
+			}]
+        }]
+     });
+     
+     var buildList = Ext.getCmp("buildList");
+     buildList.setStore(buildStore);
+	
+	
+	/*for(var i = 0 ; i < buildStore.data.items.length ; i++){
+		buildSearch.add({
+			xtype:'panel',
+			border: false,
+			layout:{
+				type: 'hbox'
+			},
+			items:[{
+				style:"margin-left:15px; margin-top:15px;",
+				xtype:"textfield",
+				value: buildStore.data.items[i].data.name,
+				width:240
+			},{
+				style:"margin-top:15px; background : #555; border: 1px solid #303030",
+				xtype:"button",
+				width:60,
+				text:"이동"
+			}]
+		})
+	}*/
+	
+	
+}

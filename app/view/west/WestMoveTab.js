@@ -227,20 +227,64 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 		xtype:"panel",
 		//style:"margin-left:5px;",
 		title:"<img src='./resources/images/design/blit_st_02_02.png' style='margin-bottom:-3px;'/> 구축Data 통합명칭 검색",
-		width:330,
+		width:360,
+		id:"buildSearch",
 		height:130,
 		layout:{
-			type:'hbox'
+			type:'vbox'
 		},
 		items:[{
-			style:"margin-left:15px; margin-top:15px;",
-			xtype:"textfield",
-			width:240
-		},{
-			style:"margin-top:15px; background : #555; border: 1px solid #303030",
-			xtype:"button",
-			width:60,
-			text:"검색"
+			xtype:"panel",
+			border: false,
+			layout:{
+				type:'hbox'
+			},
+			items:[{
+				style:"margin-left:15px; margin-top:15px;",
+				xtype:"textfield",
+				id: "bildData",
+				width:240
+			},{
+				style:"margin-top:15px; background : #555; border: 1px solid #303030",
+				xtype:"button",
+				width:60,
+				text:"검색",
+				handler: function(){
+					//InAcc.store.west.BuildDataSeachName
+					var bildData = Ext.getCmp("bildData").value;
+					console.info(bildData);
+					var buildStore = Ext.create("InAcc.store.west.BuildDataSearchName",{
+						buildData: bildData
+					});
+					buildStore.load();
+					
+					
+					
+					var timerCnt = 0;
+					var timerId = window.setInterval(function(){
+						
+						if(buildStore.data.items.length > 0 && buildStore.data.items.length > 0){
+
+							window.clearInterval(timerId);
+							
+							BuildDataSet(buildStore);
+							
+						}
+						else{
+							
+							timerCnt++;
+							
+							if(timerCnt > 5){
+								alert("데이터가 없습니다");
+								window.clearInterval(timerId);
+							}
+						}
+					}, 500);
+					
+					
+					
+				}
+			}]
 		}]
 
 	}]
