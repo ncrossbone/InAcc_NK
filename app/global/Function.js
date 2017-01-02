@@ -486,7 +486,7 @@ Ext.define("InAcc.global.Function", {
             }
         });
 	},
-	/*getSgg: function(sidoCd){
+	getSgg: function(sidoCd){
 		
 		var	proxyUrl = InAcc.global.Variable.getProxyUrl();
 		var serviceUrl = InAcc.global.Variable.getMapServiceUrl();
@@ -494,17 +494,36 @@ Ext.define("InAcc.global.Function", {
 		//var filter = '<Filter xmlns:gml="http://www.opengis.net/gml"><And><BBOX><PropertyName>way</PropertyName><gml:Box srsName="urn:x-ogc:def:crs:EPSG:3857"><gml:coord><gml:X>' + extent[0] + '</gml:X> <gml:Y>' + extent[1] + '</gml:Y></gml:coord><gml:coord><gml:X>' + extent[2] + '</gml:X><gml:Y>' + extent[3] + '</gml:Y></gml:coord></gml:Box></BBOX><PropertyIsEqualTo><PropertyName>landuse</PropertyName><Literal>basin</Literal></PropertyIsEqualTo></And></Filter>'
 		//var filter = "<Filter xmlns:gml='http://www.opengis.net/gml'><And><Like><PropertyName>ADMCD</PropertyName><Literal>" + sidoCd + "*</Literal></Like></And></Filter>"
 		//var filter = "<Filter><PropertyIsEqualTo><PropertyName>ADMCD</PropertyName><Literal>3320400000</Literal></PropertyIsEqualTo></Filter>"
-		var filter = "<ogc:Filter><ogc:PropertyIsLike wildCard='%' singleChar='_' escapeChar='\'><ogc:PropertyName>ADMCD</ogc:PropertyName><ogc:Literal>" + sidoCd + "%</ogc:Literal></ogc:PropertyIsLike></ogc:Filter>"
-		//var filter = ol.format.filter.like('ADMCD',sidoCd+'*');
+		var likeVal = sidoCd + "%";
+		likeVal = encodeURIComponent(likeVal);
+		var wildCard = " wildCard=\"%\"";
+		wildCard = encodeURIComponent(wildCard);
 		
-		var params = "&SERVICE=WFS&VERSION=1.1.0";
+		var filter = "<Filter><PropertyIsLike wildCard=\"%\"><PropertyName>ADMCD</PropertyName><Literal>" + sidoCd + "%" + "</Literal></PropertyIsLike></Filter>";
+		filter = encodeURIComponent(filter);
+		//var filter = "<Filter><PropertyIsLike" + wildCard + "><PropertyName>ADMCD</PropertyName><Literal>" + likeVal + "</Literal></PropertyIsLike></Filter>";
+		//var filter = "<Filter><PropertyIsLike%20wildCard%3D%22%25%22><PropertyName>ADMCD</PropertyName><Literal>37%25</Literal></PropertyIsLike></Filter>";
+		//var filter = ol.format.filter.like('ADMCD',sidoCd+'*');
+		//var encFilter = encodeURIComponent(filter);
+		//console.info(encFilter);
+		
+		var params = "&SERVICE=WFS";
 		params += "&REQUEST=GetFeature";
 		params += "&MAXFEATURES=300";
 		params += "&TYPENAME=NK_SGG";
 		params += "&PROPERTYNAME=ADMCD,SGG_NM";
 		params += "&FILTER=" + filter;
 		
+		//params = encodeURIComponent(params);
+		
+		/*var cqlFilter = "ADMCD LIKE '33%'";
+		var encFilter = encodeURIComponent(cqlFilter);
+		console.info(encFilter);*/
+		
 		var url = proxyUrl + serviceUrl + params;
+		
+		console.info(params);
+		console.info(url);
             
         $.ajax({
             url : url,
@@ -531,8 +550,8 @@ Ext.define("InAcc.global.Function", {
 				}
            }
        });
-	},*/
-	getSgg: function(sidoCd){
+	},
+	/*getSgg: function(sidoCd){
 		
 		var coreMap = Ext.getCmp("_mapDiv_");
 		coreMap.sggGeometry = [];
@@ -576,7 +595,7 @@ Ext.define("InAcc.global.Function", {
 					}
 	           }
        });
-	},
+	},*/
 	openSplitMap: function(){
 		
 		var width = Ext.getBody().getWidth();
