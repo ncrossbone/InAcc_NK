@@ -88,3 +88,9 @@ DemonLocation = function(val){
    coreMap.map.getView().fit(extent, coreMap.map.getSize());
    
 }
+
+
+
+BuildDataSet = function(buildStore){
+	console.info(buildStore);
+}

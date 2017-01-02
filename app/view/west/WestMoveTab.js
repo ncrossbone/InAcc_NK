@@ -138,12 +138,25 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 		items:[{
 			style:"margin-left:15px; margin-top:15px;",
 			xtype:"textfield",
+			id: "bildData",
 			width:240
 		},{
 			style:"margin-top:15px; background : #555; border: 1px solid #303030",
 			xtype:"button",
 			width:60,
-			text:"검색"
+			text:"검색",
+			handler: function(){
+				//InAcc.store.west.BuildDataSeachName
+				var bildData = Ext.getCmp("bildData").value;
+				console.info(bildData);
+				var buildStore = Ext.create("InAcc.store.west.BuildDataSearchName",{
+					buildData: bildData
+				});
+				buildStore.load();
+				
+				BuildDataSet(buildStore);
+				
+			}
 		}]
 
 	}]
