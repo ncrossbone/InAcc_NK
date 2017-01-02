@@ -67,7 +67,12 @@ Ext.onReady(function(){
 	});
 	
 	$('#selectButton').click(function() {
-		ZoomToExtent();
+		
+		var sidoCd = $("#sidoSelect option:selected")[0].value;
+		var sggCd = $("#sggSelect option:selected")[0].value;
+		   
+		   
+		ZoomToExtent(sidoCd,sggCd);
 	});
 	
 	//demonLocation

@@ -2,7 +2,7 @@ Ext.define('InAcc.store.west.BuildDataSearchName', {
 	
 	extend: 'Ext.data.Store',
 	
-	fields: ['name'],
+	fields: ['name','x','y'],
 
 	remoteSort: true,
 	
@@ -39,8 +39,9 @@ Ext.define('InAcc.store.west.BuildDataSearchName', {
 					Ext.each(features, function(media, index) {
 			            
 						var nameVal = media.values_.Name;
-						console.info(nameVal);
-						receiveData.push({name: nameVal});
+						var X = media.values_.X;
+						var Y = media.values_.Y;
+						receiveData.push({name: nameVal, x: X, y: Y});
 						
 					});
 					store.setData(receiveData);
