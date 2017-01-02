@@ -17,7 +17,7 @@ Ext.define('InAcc.view.map.CoreMap', {
 	height: "100%",
 	html:"<div style='position:absolute; top:8%; left:96%; width:60px; z-index:20000; height:200px;'>" +
 	  "<div class='zoomText'>" +
-	  	"<div style='top:75px; background: url(./resources/images/zoom.png) -216px 0px;'></div>" +
+	  	//"<div style='top:75px; background: url(./resources/images/zoom.png) -216px 0px;'></div>" +
 	  	"<div style='top:95px; background: url(./resources/images/zoom.png) -245px 0px;'></div>" +
 	  	"<div style='top:115px; background: url(./resources/images/zoom.png) -274px 0px;'></div>" +
 	  	"<div style='top:135px; background: url(./resources/images/zoom.png) -303px 0px;'></div>" +
@@ -432,40 +432,100 @@ Ext.define('InAcc.view.map.CoreMap', {
     		view: new ol.View({
     			projection : "EPSG:5179",
     	        center: ol.proj.transform([127, 40], 'EPSG:4326', 'EPSG:5179'),
-    	        zoom: 7
+    	        zoom: 7,
+    	        minZoom: 7,
+    	        maxZoom: 18
     		})
     	});
     	
     	//var mapHistory = new ol.navigationHistory( this.map );
     	this.map.on('moveend', this.mapExtentChange, this);
-    	
+    	//console.info(ol.MOUSEWHEELZOOM_TIMEOUT_DURATION);
     	//this.map.on('mouse-wheel', this.test, this);
-    	var test = new ol.interaction.MouseWheelZoom
+    	//var test = new ol.interaction.MouseWheelZoom
     	//InAcc.global.Function.getSido();
     	
-    	/*me.map.getView().on('change:resolution', function(evt){
+    	me.map.getView().on('change:resolution', function(evt){
     		
-    	    //console.info(evt);
-    		//var currValue = Math.round(evt.oldValue.timeStamp)/1000;
-    		var currValue = evt.oldValue;
-    		//console.info(evt.oldValue);
+    		var zoomLevel = me.map.getView().getZoom();
+    		me.wheelZoom(zoomLevel);
     		
-    		if(me.preValue > currValue){
-    			alert("2");
-    			$('.plus').trigger('click');
-    		}else{
-    			if(me.preValue == 0){
-    				alert("1");
-    				$('.plus').trigger('click');
-    			}else{
-    				$('.minus').trigger('click');	
-    			}
-
-    		}
-
-    		me.preValue = currValue;
-    		
-    	});*/
+    	});
+    	
+    },
+    
+    wheelZoom:function(zoomLevel){
+    	var me = this; 
+    	//alert("1");
+    	var calc = 0;
+		var val = 0;
+		switch (zoomLevel) {
+		case 18:
+			val = 100;
+			calc = me._minTop;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 17:
+			val = 80;
+			calc = me._minTop + 10;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 16:
+			val = 60;
+			calc = me._minTop + 20;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 15:
+			val = 40;
+			calc = me._minTop + 30;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 14:
+			val = 20;
+			calc = me._minTop + 40;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 13:
+			val = 0;
+			calc = me._minTop + 50;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 12:
+			val = -20;
+			calc = me._minTop + 60;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 11:
+			val = -40;
+			calc = me._minTop + 70;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 10:
+			val = -60;
+			calc = me._minTop + 80;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 9:
+			val = -80;
+			calc = me._minTop + 90;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 8:
+			val = -100;
+			calc = me._minTop + 100;
+			$(".zoomPointer").css("top",calc);
+			break;
+		case 7:
+			val = -120;
+			calc = me._minTop + 110;
+			$(".zoomPointer").css("top",calc);
+			break;
+		default:
+			return;
+		}
+		$(".zoomBar2").height(calc + val);
+		$(".zoomBar2").css("top",calc);
+		//me.zoomEvent(calc);
     	
     },
     onclickMapSelect: function(val){
