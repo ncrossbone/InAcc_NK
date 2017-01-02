@@ -34,7 +34,8 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map1'>&nbsp&nbspMap Box&nbsp&nbsp</a>" +
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map2'>&nbsp&nbspMap BOx(위성)&nbsp&nbsp</a>" +
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map3'>&nbsp&nbspOSM&nbsp&nbsp</a>" +*/
-		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map4' class='mapClick'>&nbsp&nbsp위성사진&nbsp&nbsp</a>" +
+		 	//"<a class='mapClick'>&nbsp&nbsp지도분할&nbsp&nbsp</a>" +
+		 	"<a style='margin-left:50px;'onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map4' class='mapClick'>&nbsp&nbsp위성사진&nbsp&nbsp</a>" +
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map5' class='mapDefault'>&nbsp&nbsp일반지도&nbsp&nbsp</a>" +
 		 	//"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map6'>&nbsp&nbspMangoBaseMap&nbsp&nbsp</a>" +
 		 "</span>",

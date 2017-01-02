@@ -5,16 +5,16 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 	xtype: "inacc-westmovetab",
 	title:"검색",
 	layout:{
-		type:"vbox"
+		type:'accordion'
 	},
 	bodyStyle:"background-color:#f6f6f6;",
 	border:false,
-	height:70,
+	//height:70,
 	items:[{
 		xtype:"panel",
 		title:"<img src='./resources/images/design/blit_st_02_02.png' style='margin-bottom:-3px;'/> 시범지역위치이동",
 		width:330,
-		style:" margin-top:5px; margin-left:5px;",
+		//style:" margin-top:5px; margin-left:5px;",
 		items:[{
 			xtype: 'combobox',
 			labelStyle:"font-weight: bold;",
@@ -49,7 +49,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 	},{
 		xtype:'form',
 		reference : 'form',
-		style:"margin-left:5px;",
+		//style:"margin-left:5px;",
 		title:"<img src='./resources/images/design/blit_st_02_02.png' style='margin-bottom:-3px;'/> 행정구역이동",
 		width:330,
 		layout:{
@@ -109,7 +109,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 		}]
 	},{
 		xtype:"panel",
-		style:"margin-left:5px;",
+		//style:"margin-left:5px;",
 		title:"<img src='./resources/images/design/blit_st_02_02.png' style='margin-bottom:-3px;'/> Vworld POI 검색",
 		width:330,
 		height:130,
@@ -124,11 +124,33 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 			style:"margin-top:15px; background : #555; border: 1px solid #303030",
 			xtype:"button",
 			width:60,
-			text:"검색"
+			text:"검색",
+			handler:function(){
+				//http://map.vworld.kr/search.do?apiKey=인증키&[검색 파라미터]
+					
+					$.ajax({
+		                url : './resources/Proxy.jsp?url=http://map.vworld.kr/search.do?',
+		                type : 'GET',
+		                //contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
+		                data : {
+		                	apiKey:"E1FC5A1A-C63D-3D29-B716-F64596DEF9E8",
+		                	q:"서울",
+		                	category:"Poi",
+		                	output:"json"
+		                },
+		                contentType : 'text/xml',
+		                success : function(response_) {
+		                	console.info(response_);
+					
+		                }
+		            
+		            });
+				
+			}
 		}]
 	},{
 		xtype:"panel",
-		style:"margin-left:5px;",
+		//style:"margin-left:5px;",
 		title:"<img src='./resources/images/design/blit_st_02_02.png' style='margin-bottom:-3px;'/> 구축Data 통합명칭 검색",
 		width:330,
 		height:130,
