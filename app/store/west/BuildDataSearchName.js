@@ -5,11 +5,11 @@ Ext.define('InAcc.store.west.BuildDataSearchName', {
 	fields: ['name'],
 
 	remoteSort: true,
-	autoload: true,
 	
 	listeners: {
 		load: function(store) {
 			
+			console.info(store.buildData);
 			var coreMap = Ext.getCmp("_mapDiv_");
 			
 			var	proxy = "./resources/Proxy.jsp?url="
@@ -25,11 +25,12 @@ Ext.define('InAcc.store.west.BuildDataSearchName', {
             
             $.ajax({
                 url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
-                type : 'GET',
+                type : 'POST',
                 data : new XMLSerializer().serializeToString( featureRequest ),
                 async : true,
                 contentType : 'text/xml',
                 success : function(response_) {
+                	
 		            var features = new ol.format.GeoJSON().readFeatures( response_ );
 		
 		            var receiveData = [];
@@ -37,9 +38,8 @@ Ext.define('InAcc.store.west.BuildDataSearchName', {
 		            //containsXY
 					Ext.each(features, function(media, index) {
 			            
-			            
 						var nameVal = media.values_.Name;
-						
+						console.info(nameVal);
 						receiveData.push({name: nameVal});
 						
 					});
