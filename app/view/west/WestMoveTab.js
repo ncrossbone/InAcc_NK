@@ -103,7 +103,10 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 				/*var searchResultWindow = Ext.create("InAcc.view.south.SouthContainer");
 
 				searchResultWindow.show();*/
-				ZoomToExtentSearchTab();
+				var sidoCd = Ext.getCmp("cmd_sido").value;
+				var sggCd = Ext.getCmp("cmd_sgg").value;
+				
+				ZoomToExtent(sidoCd,sggCd);
 
 			}
 		}]

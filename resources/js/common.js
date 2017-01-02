@@ -1,58 +1,26 @@
-ZoomToExtent = function(){
+ZoomToExtent = function(sidoCd,sggCd){
    var coreMap = Ext.getCmp("_mapDiv_");
-   //var extent = [];
-   var sidoCd = $("#sidoSelect option:selected")[0].value;
-   var sggCd = $("#sggSelect option:selected")[0].value;
-
-   if(sggCd != null && sggCd != "시군구"){
-      for(var i = 0 ; i < coreMap.sggGeometry.length;i++){
-         if(coreMap.sggGeometry[i].ADMCD == sggCd){
-            extent = coreMap.sggGeometry[i].geometry.getExtent();
-         }
-      }
-   }else{
-      if(sidoCd == "시도" && sggCd == "시군구"){
-         return;
-      }
-      for(var i = 0 ; i < coreMap.sidoGeometry.length;i++){
-         if(coreMap.sidoGeometry[i].SD_CD == sidoCd){
-            extent = coreMap.sidoGeometry[i].geometry.getExtent();
-         }
-      }
-   }
+   console.info(sidoCd);
+   console.info(sggCd);
+   var extent = "";
+	if(sggCd != null && sggCd != "시군구"){
+		console.info("시군구");
+		extent = InAcc.global.Function.sggExtent(sggCd);
+		
+	}else{
+		if(sidoCd == "시도" && sggCd == "시군구"){
+			return;
+		}else if(sidoCd == null && sggCd == null){
+			return;
+		}else{
+			console.info("시도");
+			extent = InAcc.global.Function.sidoExtent(sidoCd);
+		}
+		
+	}
    
    coreMap.map.getView().fit(extent, coreMap.map.getSize());
       
-}
-
-ZoomToExtentSearchTab = function(){
-	var coreMap = Ext.getCmp("_mapDiv_");
-	var extent = [];
-	var sidoCd = Ext.getCmp("cmd_sido").lastMutatedValue;
-	var sggCd = Ext.getCmp("cmd_sgg").lastMutatedValue;
-	
-	console.info(sidoCd);
-	console.info(sggCd);
-
-	if(sggCd != ""){
-		for(var i = 0 ; i < coreMap.sgg2Geometry.length;i++){
-			if(coreMap.sgg2Geometry[i].SGG_NM == sggCd){
-				extent = coreMap.sgg2Geometry[i].geometry.getExtent();
-			}
-		}
-	}else{
-		if(sidoCd == "" && sggCd == ""){
-			return;
-		}
-		for(var i = 0 ; i < coreMap.sido2Geometry.length;i++){
-			if(coreMap.sido2Geometry[i].SD_NM == sidoCd){
-				extent = coreMap.sido2Geometry[i].geometry.getExtent();
-			}
-		}
-	}
-
-	coreMap.map.getView().fit(extent, coreMap.map.getSize());
-
 }
 
 // 무산군 = [1124302.0917757652, 2426551.0481530065, 1172445.817177866, 2492576.5154793495]
@@ -106,8 +74,9 @@ BuildDataSet = function(buildStore){
         items:[{
            xtype:"grid",
            id: "buildList",
+           height: 300,
            columnLines: true,
-            hideHeaders: true,
+           hideHeaders: true,
            columns:[{
                align:'center',
                dataIndex:'name',
@@ -121,7 +90,15 @@ BuildDataSet = function(buildStore){
 					icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
 	                tooltip: 'Edit',
 	                handler: function(grid, rowIndex, colIndex) {
-	                	console.info("이동");
+	                	var rec = grid.getStore().getAt(rowIndex);
+                        var x = Number(rec.data.x);
+                        var y = Number(rec.data.y);
+                        var coreMap = Ext.getCmp("_mapDiv_");
+                        
+                        coreMap.map.getView().setCenter([x,y]);
+                        coreMap.map.getView().setZoom(11);
+                        
+                        //coreMap.map.getView().setCenter([rec.data.x,rec.data.y]);
 	                }
 				}]
 			}]
@@ -130,28 +107,5 @@ BuildDataSet = function(buildStore){
      
      var buildList = Ext.getCmp("buildList");
      buildList.setStore(buildStore);
-	
-	
-	/*for(var i = 0 ; i < buildStore.data.items.length ; i++){
-		buildSearch.add({
-			xtype:'panel',
-			border: false,
-			layout:{
-				type: 'hbox'
-			},
-			items:[{
-				style:"margin-left:15px; margin-top:15px;",
-				xtype:"textfield",
-				value: buildStore.data.items[i].data.name,
-				width:240
-			},{
-				style:"margin-top:15px; background : #555; border: 1px solid #303030",
-				xtype:"button",
-				width:60,
-				text:"이동"
-			}]
-		})
-	}*/
-	
 	
 }

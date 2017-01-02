@@ -652,6 +652,7 @@ Ext.define("InAcc.global.Function", {
 		}).show();
 	},
 	
+
 	getVworldPoi:function(){
 		var poisearchname = Ext.ComponentQuery.query("#poisearchname")[0];
 		
@@ -700,5 +701,86 @@ Ext.define("InAcc.global.Function", {
 		}else{
 			alert("검색어를 입력하세요");
 		}
+	
+	},
+	
+	
+	
+	sidoExtent: function(sidoCd){
+		
+		console.info(sidoCd);
+		
+		var	proxy = "./resources/Proxy.jsp?url=";
+		
+		var featureRequest = new ol.format.WFS().writeGetFeature({
+            srsName : "EPSG:5179",
+            featureTypes : ['NK_SIDO'],
+            outputFormat : 'application/json',
+            geometryName : 'SHAPE',
+            maxFeatures : 300,
+            filter: ol.format.filter.like('SD_CD',sidoCd+'*')
+        });
+		
+		//console.info(coreMap.map.getExtent());
+		var extent = "";
+        $.ajax({
+            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+            type : 'POST',
+            data : new XMLSerializer().serializeToString( featureRequest ),
+            async : false,
+            contentType : 'text/xml',
+            success : function(response_) {
+		        var features = new ol.format.GeoJSON().readFeatures( response_ );
+		        Ext.each(features, function(media, index) {
+		            
+		        	//media.values_.geometry.getExtent();
+		        	extent = media.values_.geometry.getExtent();
+		        	
+				});
+		        
+				
+            }
+        
+        });	
+        
+        return extent;
+	},
+	
+	sggExtent: function(sggCd){
+		
+		var	proxy = "./resources/Proxy.jsp?url=";
+		
+		var featureRequest = new ol.format.WFS().writeGetFeature({
+            srsName : "EPSG:5179",
+            featureTypes : ['NK_SGG'],
+            outputFormat : 'application/json',
+            geometryName : 'SHAPE',
+            maxFeatures : 300,
+            filter: ol.format.filter.like('ADMCD',sggCd+'*')
+        });
+		
+		//console.info(coreMap.map.getExtent());
+		var extent = "";
+        $.ajax({
+            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+            type : 'POST',
+            data : new XMLSerializer().serializeToString( featureRequest ),
+            async : false,
+            contentType : 'text/xml',
+            success : function(response_) {
+		        var features = new ol.format.GeoJSON().readFeatures( response_ );
+		        Ext.each(features, function(media, index) {
+		            
+		        	extent = media.values_.geometry.getExtent();
+		        	
+				});
+		        
+				
+            }
+        
+        });	
+        
+        return extent;
 	}
+	
 });

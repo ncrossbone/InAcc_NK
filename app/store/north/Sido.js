@@ -9,59 +9,39 @@ Ext.define('InAcc.store.north.Sido', {
 	
 	listeners: {
 		load: function(store) {
-
-			/*Ext.Ajax.request({
-				url:'./resources/data/SidoJson.json',
-				success: function(response, opts) {
-				   var o = Ext.decode(response.responseText);
-				      console.info(o);
-				   },
-				   failure: function(response, opts) {
-				      console.log('server-side failure with status code ' + response.status);
-				   }
-			})*/
 			
-			var coreMap = Ext.getCmp("_mapDiv_");
-			coreMap.sido2Geometry = [];
+			var	proxyUrl = InAcc.global.Variable.getProxyUrl();
+			var serviceUrl = InAcc.global.Variable.getMapServiceUrl();
 			
-			var	proxy = "./resources/Proxy.jsp?url="
+			var params = "&SERVICE=WFS&VERSION=1.1.0";
+			params += "&REQUEST=GetFeature";
+			params += "&MAXFEATURES=300";
+			params += "&TYPENAME=NK_SIDO";
+			params += "&PROPERTYNAME=SD_NM,SD_CD";
 			
-			var featureRequest = new ol.format.WFS().writeGetFeature({
-                srsName : "EPSG:5179",
-                featureTypes : ['NK_SIDO'],
-                outputFormat : 'application/json',
-                geometryName : 'SHAPE',
-                maxFeatures : 300
-            });
-            
-            $.ajax({
-                url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
-                type : 'POST',
-                data : new XMLSerializer().serializeToString( featureRequest ),
-                async : true,
-                contentType : 'text/xml',
-                success : function(response_) {
-            var features = new ol.format.GeoJSON().readFeatures( response_ );
-
-            var receiveData = [];
-
-            //containsXY
-			Ext.each(features, function(media, index) {
-	            
-	            coreMap.sido2Geometry.push(media.values_);
-	            
-	            
-				var nameVal = media.values_.SD_NM;
-				var idVal= media.values_.SD_CD;
-				
-				receiveData.push({id: idVal, name: nameVal});
-				
-			});
-			store.setData(receiveData);
+			var url = proxyUrl + serviceUrl + params;
 			
-                }
-            
-            });
+	        $.ajax({
+	        	url: url,
+	            type : 'GET',
+	            async : false,
+	            contentType : 'text/xml',
+	            success : function(response_) {
+	            	
+	            	var receiveData = [];
+	            	
+	            	$(response_).find("NK_SIDO").each(function(){
+	            		
+	            		var nameVal = $(this).find("SD_NM").text();
+						var idVal= $(this).find("SD_CD").text();
+						
+						receiveData.push({id: idVal, name: nameVal});
+	            	});
+					
+	            	store.setData(receiveData);
+	            }
+	        });
+			
         }
     }
 });

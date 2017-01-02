@@ -10,42 +10,58 @@ Ext.define('InAcc.store.north.Sgg', {
 	listeners: {
 		load: function(store) {
 			
-			var coreMap = Ext.getCmp("_mapDiv_");
-			coreMap.sgg2Geometry = [];
 			
-			var	proxy = "./resources/Proxy.jsp?url="
 			
-				var featureRequest = new ol.format.WFS().writeGetFeature({
-	                srsName : "EPSG:5179",
-	                featureTypes : ['NK_SGG'],
-	                outputFormat : 'application/json',
-	                geometryName : 'SHAPE',
-	                maxFeatures : 300,
-	                filter: ol.format.filter.like('ADMCD',store.sidoCd+'*')
-	            });
+			var	proxyUrl = InAcc.global.Variable.getProxyUrl();
+			var serviceUrl = InAcc.global.Variable.getMapServiceUrl();
+			var sidoCd = store.sidoCd;
+			var likeVal = sidoCd + "%";
+			likeVal = encodeURIComponent(likeVal);
+			var wildCard = " wildCard=\"%\"";
+			wildCard = encodeURIComponent(wildCard);
+			
+			var filter = "<Filter><PropertyIsLike wildCard=\"%\"><PropertyName>ADMCD</PropertyName><Literal>" + sidoCd + "%" + "</Literal></PropertyIsLike></Filter>";
+			filter = encodeURIComponent(filter);
+			
+			var params = "&SERVICE=WFS";
+			params += "&REQUEST=GetFeature";
+			params += "&MAXFEATURES=300";
+			params += "&TYPENAME=NK_SGG";
+			params += "&PROPERTYNAME=ADMCD,SGG_NM";
+			params += "&FILTER=" + filter;
+			
+			
+			var url = proxyUrl + serviceUrl + params;
+			
+			console.info(params);
+			console.info(url);
 	            
-	            $.ajax({
-	                url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
-	                type : 'POST',
-	                data : new XMLSerializer().serializeToString( featureRequest ),
-	                async : true,
-	                contentType : 'text/xml',
-	                success : function(response_) {
-	            var features = new ol.format.GeoJSON().readFeatures( response_ );
-	            var receiveData = [];
-				Ext.each(features, function(media, index) {
+	        $.ajax({
+	            url : url,
+	            type : 'GET',
+	            async : false,
+	            contentType : 'text/xml',
+	            success : function(response_) {
+	            	console.info(response_);
+		            var receiveData = [];
 		            
-		            coreMap.sgg2Geometry.push(media.values_);
+		            $(response_).find("NK_SGG").each(function(){
+	            		
+	            		var nameVal = $(this).find("SGG_NM").text();
+						var idVal= $(this).find("ADMCD").text();
+						
+						receiveData.push({id: idVal, name: nameVal});
+	            	});
 		            
-					var nameVal = media.values_.SGG_NM;
-					var idVal= media.values_.ADMCD;
+					$('#sggSelect *').remove();
+					$('#sggSelect').append('<option>시군구</option>');
 					
-					receiveData.push({id: idVal, name: nameVal});
+					store.setData(receiveData);
 					
-				});
-				store.setData(receiveData);
 	           }
-           });
+	       });
+			
+			
         }
     }
 });
