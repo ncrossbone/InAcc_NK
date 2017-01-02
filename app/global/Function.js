@@ -650,5 +650,55 @@ Ext.define("InAcc.global.Function", {
 	            }
 	        }]
 		}).show();
+	},
+	
+	getVworldPoi:function(){
+		var poisearchname = Ext.ComponentQuery.query("#poisearchname")[0];
+		
+		var searchStr = poisearchname.lastValue;
+		if(searchStr!=""){
+			var encString = encodeURIComponent(searchStr);
+			var responseArr = [];
+			//console.info(testString);
+			$.ajax({
+				url : './resources/Proxy.jsp?url=http://map.vworld.kr/search.do?',
+				type : 'GET',
+				contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
+				data : {
+					apiKey:"E1FC5A1A-C63D-3D29-B716-F64596DEF9E8",
+					q:encString,
+					category:"Poi",
+					output:"json",
+					pageUnit:100
+				},
+				contentType : 'text/xml',
+				success : function(response_) {
+					var parse = JSON.parse(response_);
+					var poisearchresult = Ext.ComponentQuery.query("#poisearchresult")[0];
+					var poisearchresultgrid = Ext.ComponentQuery.query("#poisearchresultgrid")[0];
+
+					var resultArr =[];
+					if(poisearchresult.isVisible()==false){
+						poisearchresult.show();	
+					}
+
+					Ext.each(parse.LIST, function(media, index) {
+
+						if(media.nameDp=="북한"){
+							resultArr.push(media);
+						}
+
+					});
+
+					var userStore = Ext.create('Ext.data.Store');
+					//console.info(resultArr);
+					userStore.setData(resultArr);
+					poisearchresultgrid.setStore(userStore);
+				}
+
+			});
+		}else{
+			alert("검색어를 입력하세요");
+		}
 	}
 });

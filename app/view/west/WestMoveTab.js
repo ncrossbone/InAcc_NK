@@ -132,54 +132,8 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 				xtype:"button",
 				width:60,
 				text:"검색",
-				handler:function(val){
-						var poisearchname = Ext.ComponentQuery.query("#poisearchname")[0];
-						
-						var searchStr = poisearchname.lastValue;
-						if(searchStr!=""){
-							var encString = encodeURIComponent(searchStr);
-							var responseArr = [];
-							//console.info(testString);
-							$.ajax({
-								url : './resources/Proxy.jsp?url=http://map.vworld.kr/search.do?',
-								type : 'GET',
-								contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
-								data : {
-									apiKey:"E1FC5A1A-C63D-3D29-B716-F64596DEF9E8",
-									q:encString,
-									category:"Poi",
-									output:"json",
-									pageUnit:100
-								},
-								contentType : 'text/xml',
-								success : function(response_) {
-									var parse = JSON.parse(response_);
-									var poisearchresult = Ext.ComponentQuery.query("#poisearchresult")[0];
-									var poisearchresultgrid = Ext.ComponentQuery.query("#poisearchresultgrid")[0];
-
-									var resultArr =[];
-									if(poisearchresult.isVisible()==false){
-										poisearchresult.show();	
-									}
-
-									Ext.each(parse.LIST, function(media, index) {
-
-										if(media.nameDp=="북한"){
-											resultArr.push(media);
-										}
-
-									});
-
-									var userStore = Ext.create('Ext.data.Store');
-									//console.info(resultArr);
-									userStore.setData(resultArr);
-									poisearchresultgrid.setStore(userStore);
-								}
-
-							});
-						}else{
-							alert("검색어를 입력하세요");
-						}
+				handler:function(){
+					InAcc.global.Function.getVworldPoi();
 				}
 			}]
 		},{
@@ -209,16 +163,16 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 		            text:'이동',
 		            align:'center',
 		            xtype:'actioncolumn',
-		            width:50,
+		            width:110,
 		            items:[{ 
-		               icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
-		                   tooltip: 'Edit',
-		                   handler: function(grid, rowIndex, colIndex) {
-		                       var rec = grid.getStore().getAt(rowIndex);
-		                       var coreMap = Ext.getCmp("_mapDiv_");
-		                       coreMap.map.getView().setCenter(ol.proj.transform([rec.data.xpos,rec.data.ypos], 'EPSG:4326', 'EPSG:5179'));
-		                       coreMap.map.getView().setZoom(9);
-		                   }   
+		            	icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
+		            	tooltip: 'Edit',
+		            	handler: function(grid, rowIndex, colIndex) {
+		            		var rec = grid.getStore().getAt(rowIndex);
+		            		var coreMap = Ext.getCmp("_mapDiv_");
+		            		coreMap.map.getView().setCenter(ol.proj.transform([rec.data.xpos,rec.data.ypos], 'EPSG:4326', 'EPSG:5179'));
+		            		coreMap.map.getView().setZoom(11);
+		            	}   
 		            }]
 		         }]
 			}]
