@@ -99,7 +99,6 @@ Ext.define("InAcc.view.west.Search_saneob", {
 			listeners:{
 				select: function(combo){
 
-					alert(combo.getValue());
 					this.up("window").queryLayerName = combo.getValue();
 				}
 			}
@@ -197,7 +196,12 @@ Ext.define("InAcc.view.west.Search_saneob", {
 			width:200,
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			editable: false
+			editable: false,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "ORG_NAM_OB",
+			colName: "ORGN_NAM",
+			comparison: "="
 		}]
 	},{
 		xtype:"panel",

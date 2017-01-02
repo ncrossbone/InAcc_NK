@@ -198,7 +198,12 @@ Ext.define("InAcc.view.west.Search_hwan", {
 			width:200,
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			editable: false
+			editable: false,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "ORG_NAM_HWAN",
+			colName: "ORGN_NAM",
+			comparison: "="
 		}]
 	},{
 		xtype:"button",

@@ -22,7 +22,7 @@ Ext.define('InAcc.store.north.Sido', {
 			})*/
 			
 			var coreMap = Ext.getCmp("_mapDiv_");
-			coreMap.sidoGeometry = [];
+			coreMap.sido2Geometry = [];
 			
 			var	proxy = "./resources/Proxy.jsp?url="
 			
@@ -38,7 +38,7 @@ Ext.define('InAcc.store.north.Sido', {
                 url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
                 type : 'POST',
                 data : new XMLSerializer().serializeToString( featureRequest ),
-                async : false,
+                async : true,
                 contentType : 'text/xml',
                 success : function(response_) {
             var features = new ol.format.GeoJSON().readFeatures( response_ );
@@ -48,7 +48,7 @@ Ext.define('InAcc.store.north.Sido', {
             //containsXY
 			Ext.each(features, function(media, index) {
 	            
-	            coreMap.sidoGeometry.push(media.values_);
+	            coreMap.sido2Geometry.push(media.values_);
 	            
 	            
 				var nameVal = media.values_.SD_NM;

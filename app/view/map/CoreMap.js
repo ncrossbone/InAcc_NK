@@ -442,8 +442,8 @@ Ext.define('InAcc.view.map.CoreMap', {
     	this.map.on('moveend', this.mapExtentChange, this);
     	//console.info(ol.MOUSEWHEELZOOM_TIMEOUT_DURATION);
     	//this.map.on('mouse-wheel', this.test, this);
-    	//var test = new ol.interaction.MouseWheelZoom
     	//InAcc.global.Function.getSido();
+
     	
     	me.map.getView().on('change:resolution', function(evt){
     		

@@ -30,20 +30,23 @@ ZoomToExtentSearchTab = function(){
 	var extent = [];
 	var sidoCd = Ext.getCmp("cmd_sido").lastMutatedValue;
 	var sggCd = Ext.getCmp("cmd_sgg").lastMutatedValue;
+	
+	console.info(sidoCd);
+	console.info(sggCd);
 
-	if(sggCd != null && sggCd != "시군구"){
-		for(var i = 0 ; i < coreMap.sggGeometry.length;i++){
-			if(coreMap.sggGeometry[i].ADMCD == sggCd){
-				extent = coreMap.sggGeometry[i].geometry.getExtent();
+	if(sggCd != ""){
+		for(var i = 0 ; i < coreMap.sgg2Geometry.length;i++){
+			if(coreMap.sgg2Geometry[i].SGG_NM == sggCd){
+				extent = coreMap.sgg2Geometry[i].geometry.getExtent();
 			}
 		}
 	}else{
-		if(sidoCd == "시도" && sggCd == "시군구"){
+		if(sidoCd == "" && sggCd == ""){
 			return;
 		}
-		for(var i = 0 ; i < coreMap.sidoGeometry.length;i++){
-			if(coreMap.sidoGeometry[i].SD_CD == sidoCd){
-				extent = coreMap.sidoGeometry[i].geometry.getExtent();
+		for(var i = 0 ; i < coreMap.sido2Geometry.length;i++){
+			if(coreMap.sido2Geometry[i].SD_NM == sidoCd){
+				extent = coreMap.sido2Geometry[i].geometry.getExtent();
 			}
 		}
 	}
