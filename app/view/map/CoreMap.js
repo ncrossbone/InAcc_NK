@@ -442,6 +442,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     	this.map.on('moveend', this.mapExtentChange, this);
     	//console.info(ol.MOUSEWHEELZOOM_TIMEOUT_DURATION);
     	//this.map.on('mouse-wheel', this.test, this);
+
     	InAcc.global.Function.getSido();
 
     	
