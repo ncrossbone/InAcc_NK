@@ -15,19 +15,8 @@
 	"expanded": false,
 	"children": [{
 		"id": "3",
-		"text": "산림황패도",
+		"text": "산림황폐도",
 		"iconCls": "layerIconSize layer9",
-		"leaf": true,
-		"checked": false
-	}]
-},{
-	"id": "4",
-	"text": "농림수산부",	
-	"expanded": false,
-	"children": [{
-		"id": "5",
-		"text": "경작도",
-		"iconCls": "layerIconSize layer16",
 		"leaf": true,
 		"checked": false
 	}]

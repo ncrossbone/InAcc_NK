@@ -55,7 +55,7 @@ Ext.define("InAcc.global.Function", {
 		return false;
 	},
 	createGrid : function(data, confUrl) {
-
+		console.info(data);
 		var me = this;
 
 		var recordData = null;
@@ -97,9 +97,10 @@ Ext.define("InAcc.global.Function", {
 
 				var bodyWidth = Ext.getBody().getWidth();
 				var bodyHeight = Ext.getBody().getHeight();
-				var windowWidth = bodyWidth - 300;
+				var windowWidth = bodyWidth - 350;
 				var windowHeight = 300;
-
+		    	
+		    	
 				var windowContainer = Ext.ComponentQuery.query("#southContainer")[0];
 
 				if (windowContainer == undefined) {
@@ -109,6 +110,8 @@ Ext.define("InAcc.global.Function", {
 					windowContainer = Ext.create("Ext.window.Window", {
 						itemId : "southContainer",
 						title : "검색결과",
+						maximizable:true,
+					    minimizable:true,
 						layout : {
 							type : "fit"
 						}
@@ -284,7 +287,7 @@ Ext.define("InAcc.global.Function", {
 
 				tmpFilter = ol.format.filter.like(this.colMapArray[i].column, this.colMapArray[i].value);
 			} else if (this.colMapArray[i].comparison == "=") {
-
+				
 				tmpFilter = ol.format.filter.equalTo(this.colMapArray[i].column, this.colMapArray[i].value);
 			} else if (this.colMapArray[i].comparison == ">") {
 
@@ -345,8 +348,10 @@ Ext.define("InAcc.global.Function", {
 		return andFilter;
 	},
 	getMapStore : function(queryFilter) {
-
+		
+		console.info(queryFilter);
 		var me = this;
+		console.info(me.queryLayerName);
 
 		// return;
 		/* 조건설정 완료 후 삭제할 것 */
@@ -372,13 +377,11 @@ Ext.define("InAcc.global.Function", {
 			url : InAcc.global.Variable.getProxyUrl() + InAcc.global.Variable.getMapServiceUrl(),
 			type : 'POST',
 			data : new XMLSerializer().serializeToString(featureRequest),
-			// async : false,
+			async : false,
 			contentType : 'text/xml',
 			success : function(response_) {
-				// console.info(response_);
-				var features = new ol.format.GeoJSON()
-						.readFeatures(response_);
-				// console.log( features );
+				var features = new ol.format.GeoJSON().readFeatures(response_);
+				 console.log( features );
 
 				for (var i = 0; i < features.length; i++) {
 
@@ -386,7 +389,7 @@ Ext.define("InAcc.global.Function", {
 				}
 			}
 		});
-
+		console.info(data);
 		return data;
 	},
 	getComboArray : function(container) {
@@ -418,28 +421,31 @@ Ext.define("InAcc.global.Function", {
 		}
 	},
 	setComboStore: function(container){
-		
 		this.getComboArray(container);
 		var arrCombo = this.comboArray;
 		
+		//console.info(arrCombo);
 		this.tableInfo.load(function(record) {
 			
 			for(var arrCnt = 0; arrCnt < arrCombo.length; arrCnt++){
-
+				//console.info("1");
 				var recIdx = record.map(function(obj){
 					return obj.data.L_CODE;
 				}).indexOf(arrCombo[arrCnt].lCode);
-
+				
+				
 				var storeData = [];
 
 				var sItem = record[recIdx].data.S_ITEM;
-
+				
 				var storeBind = Ext.create('Ext.data.Store', {
 					fields: ['S_CODE', 'S_NAME'],
 					data:sItem
 				});
-
+				
 				arrCombo[arrCnt].bindStore(storeBind);
+				
+				//console.info(arrCombo);
 			}
 		});
 	},
@@ -546,7 +552,7 @@ Ext.define("InAcc.global.Function", {
                 url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
                 type : 'POST',
                 data : new XMLSerializer().serializeToString( featureRequest ),
-                async : false,
+                async : true,
                 contentType : 'text/xml',
 	            success : function(response_) {
 	            	console.info(response_);

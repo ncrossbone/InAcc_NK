@@ -134,7 +134,51 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		useArrows: true,
 		lines:false,
 		border: 0,
-		bufferedRenderer: false
+		bufferedRenderer: false,
+		listeners: {
+			checkchange:function(node){
+				/*var coreMap = Ext.getCmp("_mapDiv_");
+				
+				var layer = new ol.layer.Tile({
+					source: new ol.source.TileWMS({
+						url: 'http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test_2.xml',
+						params : {
+			            	 LAYERS : "suj_C3.tif.prmd",
+			                 CRS : "EPSG:5179",
+			                 format : 'image/png',
+			                 bgcolor : '0xffffff', 
+			                 exceptions : 'BLANK',
+			                 label : 'HIDE_OVERLAP',
+			                 graphic_buffer : '64',
+			                 ANTI : 'true',
+			                 TEXT_ANTI : 'true'
+			             }
+						//serverType: 'geoserver'
+					})
+				})
+				
+				
+				
+				
+				coreMap.map.addLayer(layer);
+				layer.setVisible(true);*/
+			
+				/*var wmsSource = new ol.source.TileWMS({
+		            url : serviceUrl,
+		            params : {
+		                LAYERS : 'ROOT',
+		                CRS : mapCRS,
+		                format : 'image/png',
+		                bgcolor : '0xffffff', 
+		                exceptions : 'BLANK',
+		                label : 'HIDE_OVERLAP',
+		                graphic_buffer : '64',
+		                ANTI : 'true',
+		                TEXT_ANTI : 'true'
+		            }
+		        });*/
+			}
+		}
 	},{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> 주제도",
 		xtype:"treepanel",
@@ -161,7 +205,7 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 					}
 			}
 		}
-	},{
+	}/*,{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> POI조회",
 		items:[{
 			xtype:"container",
@@ -197,5 +241,5 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 			}]
 
 		}]
-	}]
+	}*/]
 });

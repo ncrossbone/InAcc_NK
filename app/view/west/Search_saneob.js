@@ -32,6 +32,9 @@ Ext.define("InAcc.view.west.Search_saneob", {
 			xtype:"combobox",
 			width:200,
 			editable: false,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "DEMOADM",
 			colName: "SLTE_NAM",
 			comparison: "=",
 		}]
@@ -91,12 +94,11 @@ Ext.define("InAcc.view.west.Search_saneob", {
 			//colName: "LYGB_NAM",
 			displayField: 'S_NAME',
 			valueField: 'S_CODE',
-			lCode: "LAY01",
+			lCode: "LAY02",
 			comparison: "=",
 			listeners:{
 				select: function(combo){
 
-					//alert(combo.getValue());
 					this.up("window").queryLayerName = combo.getValue();
 				}
 			}
@@ -121,7 +123,7 @@ Ext.define("InAcc.view.west.Search_saneob", {
 			xtype:"combobox",
 			colName: "ASGB_CDE",
 			editable: false,
-			lCode: "ASG",
+			//lCode: "ASG",
 			comparison: "="
 		}]
 	},{
@@ -194,7 +196,12 @@ Ext.define("InAcc.view.west.Search_saneob", {
 			width:200,
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			editable: false
+			editable: false,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "ORG_NAM_OB",
+			colName: "ORGN_NAM",
+			comparison: "="
 		}]
 	},{
 		xtype:"panel",
@@ -236,14 +243,22 @@ Ext.define("InAcc.view.west.Search_saneob", {
 		style:"background:url('./resources/images/design/btn_search.gif'); margin-left:170px; margin-top:10px;",
 		border:false,
 		handler:function(){
-			var dataStore = InAcc.global.Function.getGeoNurisStore("nongjiWindow");
-			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
+			var dataStore = InAcc.global.Function.getGeoNurisStore("saneobWindow");
+			console.info(dataStore);
+			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridSaneob.conf");
 
 		}
 	}],
 	
 	initComponent:function(){
-		this.callParent();		
+		this.callParent();
+		InAcc.global.Function.setComboStore(this);
 		this.x = Ext.getBody().getWidth() - this.width;
+	},
+	listeners:{
+		'close':function(val){
+			InAcc.global.Function.comboArray=[];
+		}
+
 	}
 });

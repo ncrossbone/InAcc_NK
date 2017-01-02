@@ -167,6 +167,90 @@
          }
       ]
    },
+   {
+      L_CODE:"ORG_NAM_NON",
+      L_NAME:"출처",
+      S_ITEM:[  
+         {  
+            S_CODE:"KOMPSAT-2",
+            S_SEQ:"001",
+            S_NAME:"KOMPSAT-2",
+            S_ABBR:""
+         }
+      ]
+   },
+   {
+      L_CODE:"ORG_NAM_OB",
+      L_NAME:"산업 출처",
+      S_ITEM:[  
+         {  
+            S_CODE:"KOMPSAT-2",
+            S_SEQ:"001",
+            S_NAME:"KOMPSAT-2",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"북한정보포털",
+            S_SEQ:"001",
+            S_NAME:"북한정보포털",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"남북교류협렵지원협회",
+            S_SEQ:"001",
+            S_NAME:"남북교류협렵지원협회",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"통일연구원",
+            S_SEQ:"001",
+            S_NAME:"통일연구원",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"한국교통연구원",
+            S_SEQ:"001",
+            S_NAME:"한국교통연구원",
+            S_ABBR:""
+         }
+      ]
+   },
+   {
+      L_CODE:"ORG_NAM_SAN",
+      L_NAME:"산지출처",
+      S_ITEM:[  
+         {  
+            S_CODE:"KOMPSAT-2",
+            S_SEQ:"001",
+            S_NAME:"KOMPSAT-2",
+            S_ABBR:""
+         }
+      ]
+   },
+   {
+      L_CODE:"ORG_NAM_CITY",
+      L_NAME:"주택도시 출처",
+      S_ITEM:[  
+         {  
+            S_CODE:"KOMPSAT-2",
+            S_SEQ:"001",
+            S_NAME:"KOMPSAT-2",
+            S_ABBR:""
+         }
+      ]
+   },
+   {
+      L_CODE:"ORG_NAM_HWAN",
+      L_NAME:"환경 출처",
+      S_ITEM:[  
+         {  
+            S_CODE:"KOMPSAT-2",
+            S_SEQ:"001",
+            S_NAME:"KOMPSAT-2",
+            S_ABBR:""
+         }
+      ]
+   },
    {  
       L_CODE:"FSG",
       L_NAME:"산지 세부 구분",
@@ -209,6 +293,7 @@
          }
       ]
    },
+   
    {  
       L_CODE:"ESG",
       L_NAME:"환경 세부 구분",
@@ -373,6 +458,48 @@
             S_CODE:"CUS003",
             S_SEQ:"999",
             S_NAME:"기타",
+            S_ABBR:""
+         }
+      ]
+   },
+   {  
+      L_CODE:"DEMOADM",
+      L_NAME:"시범지역",
+      S_ITEM:[  
+         {  
+            S_CODE:"나선",
+            S_SEQ:"000",
+            S_NAME:"나선",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"남포",
+            S_SEQ:"001",
+            S_NAME:"남포",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"무산",
+            S_SEQ:"002",
+            S_NAME:"무산",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"신의주",
+            S_SEQ:"003",
+            S_NAME:"신의주",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"원산",
+            S_SEQ:"004",
+            S_NAME:"원산",
+            S_ABBR:""
+         },
+         {  
+            S_CODE:"청진",
+            S_SEQ:"005",
+            S_NAME:"청진",
             S_ABBR:""
          }
       ]
@@ -695,32 +822,32 @@
          },
          {  
             S_CODE:"BLDGCITY_2JY",
-            S_SEQ:"제2종전용",
-            S_NAME:"논",
+            S_SEQ:"002",
+            S_NAME:"제2종전용",
             S_ABBR:""
          },
          {  
             S_CODE:"BLDGCITY_JUN",
-            S_SEQ:"준주거",
-            S_NAME:"과수원",
+            S_SEQ:"003",
+            S_NAME:"준주거",
             S_ABBR:""
          },
          {  
             S_CODE:"BLDGCITY_1IB",
-            S_SEQ:"제1종일반",
-            S_NAME:"논",
+            S_SEQ:"004",
+            S_NAME:"제1종일반",
             S_ABBR:""
          },
          {  
             S_CODE:"BLDGCITY_2IB",
-            S_SEQ:"제2종일반",
-            S_NAME:"과수원",
+            S_SEQ:"005",
+            S_NAME:"제2종일반",
             S_ABBR:""
          },
          {  
             S_CODE:"BLDGCITY_3IB",
-            S_SEQ:"제3종일반",
-            S_NAME:"논",
+            S_SEQ:"006",
+            S_NAME:"제3종일반",
             S_ABBR:""
          }
       ]

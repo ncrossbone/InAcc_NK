@@ -34,9 +34,8 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map1'>&nbsp&nbspMap Box&nbsp&nbsp</a>" +
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map2'>&nbsp&nbspMap BOx(위성)&nbsp&nbsp</a>" +
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map3'>&nbsp&nbspOSM&nbsp&nbsp</a>" +*/
-		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map4'>&nbsp&nbsp위성사진&nbsp&nbsp</a>" +
-		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map5'>&nbsp&nbsp일반지도&nbsp&nbsp</a>" +
-		 	"<a onclick=InAcc.global.Function.openSplitMap(); id='map6'>&nbsp&nbsp맵분할&nbsp&nbsp</a>" +
+		 	"<a style='margin-left:50px;'onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map4' class='mapClick'>&nbsp&nbsp위성사진&nbsp&nbsp</a>" +
+		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map5' class='mapDefault'>&nbsp&nbsp일반지도&nbsp&nbsp</a>" +
 		 	//"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map6'>&nbsp&nbspMangoBaseMap&nbsp&nbsp</a>" +
 		 "</span>",
 		 /*"<span style='width: 60px; height: 20px; border: 1px solid #d0d0d0; color: #333; background: #fff; letter-spacing: -1px; font-size: 12px;'> 맵종류 A </span>" +

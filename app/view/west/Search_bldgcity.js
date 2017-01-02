@@ -10,7 +10,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 
 	title:"주택도시 속성 조회",
 	
-	itemId: "bldgityhWindow",
+	itemId: "bldgcityWindow",
 
 	height:640,
 	width:400,
@@ -32,6 +32,9 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			xtype:"combobox",
 			width:200,
 			editable: false,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "DEMOADM",
 			colName: "SLTE_NAM",
 			comparison: "=",
 		}]
@@ -91,7 +94,7 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			//colName: "LYGB_NAM",
 			displayField: 'S_NAME',
 			valueField: 'S_CODE',
-			lCode: "LAY01",
+			lCode: "LAY04",
 			comparison: "=",
 			listeners:{
 				select: function(combo){
@@ -119,9 +122,9 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			colName: "ASGB_CDE",
+			colName: "BSGB_CDE",
 			editable: false,
-			lCode: "ASG",
+			lCode: "BSG",
 			comparison: "="
 		}]
 	},{
@@ -176,7 +179,12 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			width:200,
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			editable: false
+			editable: false,
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "ORG_NAM_CITY",
+			colName: "ORGN_NAM",
+			comparison: "="
 		}]
 	},{
 		xtype:"panel",
@@ -194,9 +202,9 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			colName: "ASGB_CDE",
+			colName: "BDTY_CDE",
 			editable: false,
-			lCode: "ASG",
+			lCode: "BDT",
 			comparison: "="
 		}]
 	},{
@@ -216,9 +224,9 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 			valueField: 'S_CODE',
 			labelStyle:"font-weight: bold;",
 			xtype:"combobox",
-			colName: "ASGB_CDE",
+			colName: "DNST_CDE",
 			editable: false,
-			lCode: "ASG",
+			lCode: "DNT",
 			comparison: "="
 		}]
 	},{
@@ -410,14 +418,21 @@ Ext.define("InAcc.view.west.Search_bldgcity", {
 		style:"background:url('./resources/images/design/btn_search.gif'); margin-left:170px; margin-top:10px;",
 		border:false,
 		handler:function(){
-			var dataStore = InAcc.global.Function.getGeoNurisStore("nongjiWindow");
-			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridNongji.conf");
+			var dataStore = InAcc.global.Function.getGeoNurisStore("bldgcityWindow");
+			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridBldgcity.conf");
 
 		}
 	}],
 	
 	initComponent:function(){
 		this.callParent();		
+		InAcc.global.Function.setComboStore(this);
 		this.x = Ext.getBody().getWidth() - this.width;
+	},
+	listeners:{
+		'close':function(val){
+			InAcc.global.Function.comboArray=[];
+		}
+
 	}
 });

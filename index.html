@@ -2,6 +2,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>Insert title here</title>
 
 <script type="text/javascript" src="./openLayers-3.19.1/ol-debug.js"></script>
@@ -240,18 +241,19 @@ div {
 	resize: both;
 }
 
-#mapSelect a {
+#mapSelect .mapDefault {
 	width: 100px;
 	height: 20px;
 	border: 1px solid #d0d0d0;
 	color: #333;
 	background: #fff;
-	//letter-spacing: -1px;
+	letter-spacing: -1px;
 	font-size: 12px;
+	cursor: pointer;
 }
 
-#mapSelect a:hover {
-	width: 60px;
+#mapSelect .mapClick {
+	width: 100px;
 	height: 20px;
 	border: 1px solid #126dae;
 	color: #fff;
@@ -265,6 +267,55 @@ div {
 	font-weight: bold;
 	letter-spacing: -1px;
 	cursor: pointer;
+}
+
+select::-ms-expand { 
+  display: none;
+}
+
+select {
+  -webkit-appearance: none;  /* 네이티브 외형 감추기 */
+  -moz-appearance: none;
+  appearance: none;
+  background: url('./resources/images/button/arrow.jpg') no-repeat 98% 50%; /* 화살표 모양의 이미지 */
+  background-size: 20px 20px; 
+}
+
+.x-panel-header-default {
+    background-image: none;
+    border-width: 0;
+	border-color: transparent;
+    background-color: #445676;
+}
+
+.zoomPart div{
+	position: absolute;
+	width: 6px;
+	height: 1px;
+	background-color: darkgrey;
+	left: 37px;
+}
+
+.zoomPartClick div{
+	position: absolute;
+	width: 16px;
+	height: 10px;
+	left: 32px;
+}
+
+.zoomText {
+	margin: 20px 0px 0px -30px;
+	background-size: 515px 26px;
+	width: 30px;
+	height: 126px;
+}
+
+.zoomText div {
+	position: absolute;
+	width: 29px;
+	left: 0px;
+	height: 15px;
+	margin: -6px 0px 0px;
 }
 </style>
 </head>
