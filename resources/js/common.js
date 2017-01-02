@@ -92,5 +92,6 @@ DemonLocation = function(val){
 
 
 BuildDataSet = function(buildStore){
+	
 	console.info(buildStore);
 }

@@ -2,7 +2,7 @@ Ext.define('InAcc.store.west.BuildDataSearchName', {
 	
 	extend: 'Ext.data.Store',
 	
-	fields: ['id', 'name'],
+	fields: ['name'],
 
 	remoteSort: true,
 	autoload: true,
@@ -16,7 +16,7 @@ Ext.define('InAcc.store.west.BuildDataSearchName', {
 			
 			var featureRequest = new ol.format.WFS().writeGetFeature({
                 srsName : "EPSG:5179",
-                featureTypes : ['NKGIS_POI'],
+                featureTypes : ['POI'],
                 outputFormat : 'application/json',
                 geometryName : 'SHAPE',
                 maxFeatures : 300,
@@ -38,10 +38,9 @@ Ext.define('InAcc.store.west.BuildDataSearchName', {
 					Ext.each(features, function(media, index) {
 			            
 			            
-						var nameVal = media.values_.SD_NM;
-						var idVal= media.values_.SD_CD;
+						var nameVal = media.values_.Name;
 						
-						receiveData.push({id: idVal, name: nameVal});
+						receiveData.push({name: nameVal});
 						
 					});
 					store.setData(receiveData);
