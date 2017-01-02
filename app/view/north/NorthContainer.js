@@ -36,6 +36,7 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map3'>&nbsp&nbspOSM&nbsp&nbsp</a>" +*/
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map4'>&nbsp&nbsp위성사진&nbsp&nbsp</a>" +
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map5'>&nbsp&nbsp일반지도&nbsp&nbsp</a>" +
+		 	"<a onclick=InAcc.global.Function.openSplitMap(); id='map6'>&nbsp&nbsp맵분할&nbsp&nbsp</a>" +
 		 	//"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map6'>&nbsp&nbspMangoBaseMap&nbsp&nbsp</a>" +
 		 "</span>",
 		 /*"<span style='width: 60px; height: 20px; border: 1px solid #d0d0d0; color: #333; background: #fff; letter-spacing: -1px; font-size: 12px;'> 맵종류 A </span>" +

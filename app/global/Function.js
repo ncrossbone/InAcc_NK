@@ -341,7 +341,7 @@ Ext.define("InAcc.global.Function", {
 			}
 		}
 
-		// console.info(andFilter);
+		console.info(andFilter);
 		return andFilter;
 	},
 	getMapStore : function(queryFilter) {
@@ -446,89 +446,86 @@ Ext.define("InAcc.global.Function", {
 	
 	getSido: function(){
 
-		//$('#sidoSelect').append('<option>aaa</option>');
+		var	proxyUrl = InAcc.global.Variable.getProxyUrl();
+		var serviceUrl = InAcc.global.Variable.getMapServiceUrl();
 		
+		var params = "&SERVICE=WFS&VERSION=1.1.0";
+		params += "&REQUEST=GetFeature";
+		params += "&MAXFEATURES=300";
+		params += "&TYPENAME=NK_SIDO";
+		params += "&PROPERTYNAME=SD_NM,SD_CD";
 		
-		var coreMap = Ext.getCmp("_mapDiv_");
-		coreMap.sidoGeometry = [];
-		
-		var	proxy = "./resources/Proxy.jsp?url="
-		//var	proxy = "./resources/proxy/proxy.jsp?";
-		
-		var featureRequest = new ol.format.WFS().writeGetFeature({
-            srsName : "EPSG:5179",
-            featureTypes : ['NK_SIDO'],
-            outputFormat : 'application/json',
-            geometryName : 'SHAPE',
-            maxFeatures : 300,
-            //startIndex: 11
-            //REQUEST: "GetFeatureInfo"
-            //BBOX: "124.25909313725815,37.652186963089804,130.73356445774925,42.98988702473548"
-        });
-		
-		//console.info(featureRequest);
-        //console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
-		
-		/*fetch(proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml', {
-			method: "POST",
-			body: new XMLSerializer().serializeToString(featureRequest)
-		}).then(function(response){
-			console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
-			//console.info(new ol.format.GeoJSON().readFeatures(response.json()));
-			window.setInterval(function(){
-				
-				console.info(response.json().PromiseStatus);
-			}, 1000);
-			Ext.defer(function(){
-				console.info(response.json());
-			}, 1000);
-			
-			return response.json();
-		}).then(function(json){
-			console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
-			var features = new ol.format.GeoJSON().readFeatures(json);
-			console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
-			console.info(features);
-		});*/
+		var url = proxyUrl + serviceUrl + params;
 		
         $.ajax({
-            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
-        	//url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml&request=GetFeature&typename=NK_SIDO&outputformat=application/json&format_options=geometry:reference_no&SRS=EPSG:5179&BBOX=124.25909313725815,37.652186963089804,130.73356445774925,42.98988702473548',
-            type : 'POST',
-            data : new XMLSerializer().serializeToString( featureRequest ),
+        	url: url,
+            type : 'GET',
             async : false,
             contentType : 'text/xml',
             success : function(response_) {
-            	//console.info(Ext.Date.format(new Date(), 'Y-m-d H:M:s'));
-		        var features = new ol.format.GeoJSON().readFeatures( response_ );
-		        //console.info(features);
-		        var receiveData = [];
-		
-		        //containsXY
-				Ext.each(features, function(media, index) {
-		            
-		            coreMap.sidoGeometry.push(media.values_);
-		            
-		            
-					var nameVal = media.values_.SD_NM;
-					var idVal= media.values_.SD_CD;
+            	
+            	var receiveData = [];
+            	
+            	$(response_).find("NK_SIDO").each(function(){
+            		
+            		var nameVal = $(this).find("SD_NM").text();
+					var idVal= $(this).find("SD_CD").text();
 					
 					receiveData.push({id: idVal, name: nameVal});
-					
-				});
+            	});
 				
 				for(var i = 0 ; i < receiveData.length ; i++){
 					$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
 				}
-				
             }
-        
         });
-		
-        
-		
 	},
-	
+	/*getSgg: function(sidoCd){
+		
+		var	proxyUrl = InAcc.global.Variable.getProxyUrl();
+		var serviceUrl = InAcc.global.Variable.getMapServiceUrl();
+		console.info(sidoCd);
+		//var filter = '<Filter xmlns:gml="http://www.opengis.net/gml"><And><BBOX><PropertyName>way</PropertyName><gml:Box srsName="urn:x-ogc:def:crs:EPSG:3857"><gml:coord><gml:X>' + extent[0] + '</gml:X> <gml:Y>' + extent[1] + '</gml:Y></gml:coord><gml:coord><gml:X>' + extent[2] + '</gml:X><gml:Y>' + extent[3] + '</gml:Y></gml:coord></gml:Box></BBOX><PropertyIsEqualTo><PropertyName>landuse</PropertyName><Literal>basin</Literal></PropertyIsEqualTo></And></Filter>'
+		//var filter = "<Filter xmlns:gml='http://www.opengis.net/gml'><And><Like><PropertyName>ADMCD</PropertyName><Literal>" + sidoCd + "*</Literal></Like></And></Filter>"
+		//var filter = "<Filter><PropertyIsEqualTo><PropertyName>ADMCD</PropertyName><Literal>3320400000</Literal></PropertyIsEqualTo></Filter>"
+		var filter = "<ogc:Filter><ogc:PropertyIsLike wildCard='%' singleChar='_' escapeChar='\'><ogc:PropertyName>ADMCD</ogc:PropertyName><ogc:Literal>" + sidoCd + "%</ogc:Literal></ogc:PropertyIsLike></ogc:Filter>"
+		//var filter = ol.format.filter.like('ADMCD',sidoCd+'*');
+		
+		var params = "&SERVICE=WFS&VERSION=1.1.0";
+		params += "&REQUEST=GetFeature";
+		params += "&MAXFEATURES=300";
+		params += "&TYPENAME=NK_SGG";
+		params += "&PROPERTYNAME=ADMCD,SGG_NM";
+		params += "&FILTER=" + filter;
+		
+		var url = proxyUrl + serviceUrl + params;
+            
+        $.ajax({
+            url : url,
+            type : 'GET',
+            async : false,
+            contentType : 'text/xml',
+            success : function(response_) {
+            	console.info(response_);
+	            var receiveData = [];
+	            
+	            $(response_).find("NK_SGG").each(function(){
+            		
+            		var nameVal = $(this).find("SGG_NM").text();
+					var idVal= $(this).find("ADMCD").text();
+					
+					receiveData.push({id: idVal, name: nameVal});
+            	});
+	            
+				$('#sggSelect *').remove();
+				$('#sggSelect').append('<option>시군구</option>');
+				
+				for(var i = 0 ; i < receiveData.length ; i++){
+					$('#sggSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
+				}
+           }
+       });
+	},*/
 	getSgg: function(sidoCd){
 		
 		var coreMap = Ext.getCmp("_mapDiv_");
@@ -552,7 +549,7 @@ Ext.define("InAcc.global.Function", {
                 async : false,
                 contentType : 'text/xml',
 	            success : function(response_) {
-	            	
+	            	console.info(response_);
 		            var features = new ol.format.GeoJSON().readFeatures( response_ );
 		            
 		            var receiveData = [];
@@ -573,6 +570,60 @@ Ext.define("InAcc.global.Function", {
 					}
 	           }
        });
+	},
+	openSplitMap: function(){
 		
+		var width = Ext.getBody().getWidth();
+		var height = Ext.getBody().getHeight();
+		
+		var splitWindow = Ext.create("Ext.window.Window", {
+			width: width,
+			height: height,
+			preWidth: null,
+			preHeight: null,
+			layout: {
+				type: "fit"
+			},
+			items: [{
+				xtype: "inacc-main-splitter"
+			}],
+	        tools: [{
+	        	type: "minimize",
+	        	handler: function(evt, toolEl, owner, tool){
+	        		
+	        		var window = owner.up('window');
+	        		
+	        		preWidth = window.getWidth();
+	        		preHeight = window.getHeight();
+	        		
+	        		window.collapse();
+	                window.setWidth(150);
+	                window.alignTo(Ext.getBody(), 'bl-bl')
+	        	}
+	        }, {
+	            type: 'restore',
+	            handler: function (evt, toolEl, owner, tool) {
+	            	
+	                var window = owner.up('window');
+	                
+	                var width = Ext.getBody().getWidth();
+	                var height = Ext.getBody().getHeight();
+	                
+	                if(preWidth != null){
+	                	width = preWidth;
+	                }
+	                
+	                if(preHeight != null){
+	                	height = preHeight;
+	                }
+	                
+	                window.setWidth(width);
+	                window.setHeight(height);
+	                
+	                window.expand('', false);
+	                window.center();
+	            }
+	        }]
+		}).show();
 	}
 });

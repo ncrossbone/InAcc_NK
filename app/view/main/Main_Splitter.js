@@ -26,7 +26,7 @@ Ext.define("InAcc.view.main.Main_Splitter", {
 		region: "west"
 	},{
 		xtype: "inacc-main-splitter-right",
-		width: "55%",
+		width: "52%",
 		region: "east"
 	}]
 });
