@@ -127,6 +127,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 			border:false,
 			items:[{
 				style:"margin-left:15px; margin-top:15px;",
+				itemId:"poisearchname",
 				xtype:"textfield",
 				width:240
 			},{
@@ -134,55 +135,54 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 				xtype:"button",
 				width:60,
 				text:"검색",
-				handler:function(){
-					//http://map.vworld.kr/search.do?apiKey=인증키&[검색 파라미터]
+				handler:function(val){
+						var poisearchname = Ext.ComponentQuery.query("#poisearchname")[0];
 						
-						var encString = encodeURIComponent("나진");
-						var responseArr = [];
-						//console.info(testString);
-						$.ajax({
-			                url : './resources/Proxy.jsp?url=http://map.vworld.kr/search.do?',
-			                type : 'GET',
-			                contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
-			                data : {
-			                	apiKey:"E1FC5A1A-C63D-3D29-B716-F64596DEF9E8",
-			                	q:encString,
-			                	category:"Poi",
-			                	output:"json",
-			                	pageUnit:100
-			                },
-			                contentType : 'text/xml',
-			                success : function(response_) {
-			                	var parse = JSON.parse(response_);
-			                	var poisearchresult = Ext.ComponentQuery.query("#poisearchresult")[0];
-			                	var poisearchresultgrid = Ext.ComponentQuery.query("#poisearchresultgrid")[0];
-			                	
-			                	var resultArr =[];
-			                	if(poisearchresult.isVisible()==false){
-			                		poisearchresult.show();	
-			                	}
-			                	
-			                	Ext.each(parse.LIST, function(media, index) {
-			        	            
-			                		if(media.nameDp=="북한"){
-			        	        	   console.info(media.nameFull);
-			        	        	   console.info(media.xpos);
-			        	        	   console.info(media.ypos);
-			        	        	   resultArr.push(media);
-			        	           }
-			                		
-			                		
-			        			});
-			                	
-			                	console.info(resultArr);
-			                	
-			                	poisearchresultgrid.setStore(resultArr);
-			                }
-			            
-			            });
-						
-						
-					
+						var searchStr = poisearchname.lastValue;
+						if(searchStr!=""){
+							var encString = encodeURIComponent(searchStr);
+							var responseArr = [];
+							//console.info(testString);
+							$.ajax({
+								url : './resources/Proxy.jsp?url=http://map.vworld.kr/search.do?',
+								type : 'GET',
+								contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
+								data : {
+									apiKey:"E1FC5A1A-C63D-3D29-B716-F64596DEF9E8",
+									q:encString,
+									category:"Poi",
+									output:"json",
+									pageUnit:100
+								},
+								contentType : 'text/xml',
+								success : function(response_) {
+									var parse = JSON.parse(response_);
+									var poisearchresult = Ext.ComponentQuery.query("#poisearchresult")[0];
+									var poisearchresultgrid = Ext.ComponentQuery.query("#poisearchresultgrid")[0];
+
+									var resultArr =[];
+									if(poisearchresult.isVisible()==false){
+										poisearchresult.show();	
+									}
+
+									Ext.each(parse.LIST, function(media, index) {
+
+										if(media.nameDp=="북한"){
+											resultArr.push(media);
+										}
+
+									});
+
+									var userStore = Ext.create('Ext.data.Store');
+									//console.info(resultArr);
+									userStore.setData(resultArr);
+									poisearchresultgrid.setStore(userStore);
+								}
+
+							});
+						}else{
+							alert("검색어를 입력하세요");
+						}
 				}
 			}]
 		},{
@@ -193,36 +193,37 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 			title:"검색결과",
 			itemId:"poisearchresult",
 			hidden:true,
-			width:360,
+			width:330,
+			
 			items:[{
 				xtype:"grid",
 				itemId:"poisearchresultgrid",
 				//store: [{},{},{}],
+				height:300,
 				columnLines: true,
 				hideHeaders: true,
+				//autoScroll:true,
 				columns:[{
-					align:'center',
+					align:'left',
 					dataIndex:'nameFull',
-					//displayField:'nameFull',
 					text:'이름',
 					width: 200
-				}/*,{
-					renderer: function(val,meta,rec) {
-						// generate unique id for an element
-						var id = Ext.id();
-						Ext.defer(function() {
-							Ext.widget('button', {
-								renderTo: id,
-								text: 'DELETE',
-								scale: 'small',
-								handler: function() {
-									Ext.Msg.alert("Hello World")
-								}
-							});
-						}, 50);
-						return Ext.String.format('<div id="{0}"></div>', id);
-					}
-				}*/]
+				},{    
+		            text:'이동',
+		            align:'center',
+		            xtype:'actioncolumn',
+		            width:50,
+		            items:[{ 
+		               icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
+		                   tooltip: 'Edit',
+		                   handler: function(grid, rowIndex, colIndex) {
+		                       var rec = grid.getStore().getAt(rowIndex);
+		                       var coreMap = Ext.getCmp("_mapDiv_");
+		                       coreMap.map.getView().setCenter(ol.proj.transform([rec.data.xpos,rec.data.ypos], 'EPSG:4326', 'EPSG:5179'));
+		                       coreMap.map.getView().setZoom(9);
+		                   }   
+		            }]
+		         }]
 			}]
 		}]
 	},{
