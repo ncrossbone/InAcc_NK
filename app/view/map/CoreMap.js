@@ -503,19 +503,27 @@ Ext.define('InAcc.view.map.CoreMap', {
     		            	var childs = $(response_).find(layerName).children();
     		            	
     		            	if(childs.length > 0){
-    		            		popContent.innerHTML += "<p>Layer Name : " + layerName + "</p>";
+    		            		popContent.innerHTML += "<img src='./resources/images/popup/information.png' style='margin-bottom:-3px;' /> <span style='color:black; font-weight: bold; margin-left:3px;'>레이어 객체 정보</span>";
+    		            		popContent.innerHTML += "<div style='margin-top:10px; background: #eff8ff; height: 20px; border-top: 2px solid #167dcc; border-bottom: 1px solid #cfcfcf; color: #003471;'>" +
+    		            				"<img src='./resources/images/popup/blit_st_01.png' style='margin-left:5px; margin-bottom: 2px; margin-right:7px;' />Layer Name &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + layerName + "</div>";
     		            	}
     		            	
     		            	Ext.each($(childs), function(child, cnt){
     		            		
 		            			if($(child)[0].localName != "SHAPE" && $(child)[0].localName != "boundedBy"){
-			            			popContent.innerHTML += $(child)[0].localName + " : " + $(child).text() + "<br>";
+			            			popContent.innerHTML += "<div>" +
+			            					"<div style='position: absolute; width:100px; background: #f6f6f6; height: 20px; border-top: 1px solid #cfcfcf; border-bottom: 1px solid #cfcfcf; color: #000;'>" +
+			            					"<img src='./resources/images/popup/blit_st_01.png' style='margin-left:5px; margin-bottom: 2px; margin-right:7px;' />" + $(child)[0].localName + "</div>" +
+			            							"<div style='position:relative; left:100px; color: #545454;'>&nbsp&nbsp&nbsp" + $(child).text() + "</div>" +
+			            									"</div>";
 			            		}
 		            			
-		            			if(cnt == $(child).length - 1){
+		            			/*if(cnt == $(child).length - 1){
 			            			popContent.innerHTML += "<br>";
-			            		}
+			            		}*/
     		            	});
+    		            	
+    		            	popContent.innerHTML +="<div style='height:10px;'></div>";
     		           }
     		       });
     				
