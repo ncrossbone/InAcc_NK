@@ -130,7 +130,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 		listeners:{
 			el:{
 				click:function(){
-					
+					$("#popup").show();
 					var me = this;
 					var coreMap = Ext.getCmp("_mapDiv_");
 					
@@ -199,15 +199,15 @@ Ext.define("InAcc.view.center.CenterContainer", {
 				    		            	var childs = $(response_).find(layerName).children();
 				    		            	
 				    		            	if(childs.length > 0){
-				    		            		popContent.innerHTML += "<img src='./resources/images/popup/information.png' style='margin-bottom:-3px;' /> <span style='color:black; font-weight: bold; margin-left:3px;'>레이어 객체 정보</span>";
-				    		            		popContent.innerHTML += "<div style='margin-top:10px; background: #eff8ff; height: 20px; border-top: 2px solid #167dcc; border-bottom: 1px solid #cfcfcf; color: #003471;'>" +
+				    		            		coreMap.popContent.innerHTML += "<img src='./resources/images/popup/information.png' style='margin-bottom:-3px;' /> <span style='color:black; font-weight: bold; margin-left:3px;'>레이어 객체 정보</span>";
+				    		            		coreMap.popContent.innerHTML += "<div style='margin-top:10px; background: #eff8ff; height: 20px; border-top: 2px solid #167dcc; border-bottom: 1px solid #cfcfcf; color: #003471;'>" +
 				    		            				"<img src='./resources/images/popup/blit_st_01.png' style='margin-left:5px; margin-bottom: 2px; margin-right:7px;' />Layer Name &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + layerName + "</div>";
 				    		            	}
 				    		            	
 				    		            	Ext.each($(childs), function(child, cnt){
 				    		            		
 						            			if($(child)[0].localName != "SHAPE" && $(child)[0].localName != "boundedBy"){
-							            			popContent.innerHTML += "<div>" +
+						            				coreMap.popContent.innerHTML += "<div>" +
 							            					"<div style='position: absolute; width:100px; background: #f6f6f6; height: 20px; border-top: 1px solid #cfcfcf; border-bottom: 1px solid #cfcfcf; color: #000;'>" +
 							            					"<img src='./resources/images/popup/blit_st_01.png' style='margin-left:5px; margin-bottom: 2px; margin-right:7px;' />" + $(child)[0].localName + "</div>" +
 							            							"<div style='position:relative; left:100px; color: #545454;'>&nbsp&nbsp&nbsp" + $(child).text() + "</div>" +
@@ -219,7 +219,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 							            		}*/
 				    		            	});
 				    		            	
-				    		            	popContent.innerHTML +="<div style='height:10px;'></div>";
+				    		            	coreMap.popContent.innerHTML +="<div style='height:10px;'></div>";
 				    		           }
 				    		       });
 				    				
