@@ -61,11 +61,38 @@ Ext.define("InAcc.global.Function", {
 
 		return false;
 	},
+	/*getSLP : function(code){
+		var slpIdx = 0;
+		var getfilter = "";
+		this.tableInfo.load(function(record) {
+			slpIdx = record.map(function(obj){
+				return obj.data.L_CODE;
+			}).indexOf("SLP");
+			
+			getfilter = record[slpIdx].data.S_ITEM.filter(function(obj){
+			    return obj.S_CODE === code.SLOP_CDE;
+			});
+		});
+		
+		
+		
+		console.info(getfilter);
+	},*/
 	createGrid : function(data, confUrl) {
-		//console.info(data);
+		//console.info(data[0].SLOP_CDE);
 		//SLOP_CDE("SLP001"), ASGB_CDE("ASG003")
-
 		var me = this;
+		
+		/*Ext.each(data, function(media, index) {
+			me.getSLP(media.SLOP_CDE);
+			
+		});*/
+		
+		
+		
+		
+		
+		
 
 		var recordData = null;
 		var gridStore = null;
@@ -90,7 +117,6 @@ Ext.define("InAcc.global.Function", {
 			});
 
 			recordData = record[0].data;
-			
 		});
 		
 		
@@ -116,7 +142,6 @@ Ext.define("InAcc.global.Function", {
 				
 				
 				var gridId = Ext.getCmp("gridNongji");
-				console.info(gridId);
 				if(data == undefined){
 					gridId.getStore().removeAll();
 					return;
