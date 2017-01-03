@@ -103,7 +103,10 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 				/*var searchResultWindow = Ext.create("InAcc.view.south.SouthContainer");
 
 				searchResultWindow.show();*/
-				ZoomToExtentSearchTab();
+				var sidoCd = Ext.getCmp("cmd_sido").value;
+				var sggCd = Ext.getCmp("cmd_sgg").value;
+				
+				ZoomToExtent(sidoCd,sggCd);
 
 			}
 		}]
@@ -124,6 +127,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 			border:false,
 			items:[{
 				style:"margin-left:15px; margin-top:15px;",
+				itemId:"poisearchname",
 				xtype:"textfield",
 				width:240
 			},{
@@ -132,54 +136,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 				width:60,
 				text:"검색",
 				handler:function(){
-					//http://map.vworld.kr/search.do?apiKey=인증키&[검색 파라미터]
-						
-						var encString = encodeURIComponent("나진");
-						var responseArr = [];
-						//console.info(testString);
-						$.ajax({
-			                url : './resources/Proxy.jsp?url=http://map.vworld.kr/search.do?',
-			                type : 'GET',
-			                contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
-			                data : {
-			                	apiKey:"E1FC5A1A-C63D-3D29-B716-F64596DEF9E8",
-			                	q:encString,
-			                	category:"Poi",
-			                	output:"json",
-			                	pageUnit:100
-			                },
-			                contentType : 'text/xml',
-			                success : function(response_) {
-			                	var parse = JSON.parse(response_);
-			                	var poisearchresult = Ext.ComponentQuery.query("#poisearchresult")[0];
-			                	var poisearchresultgrid = Ext.ComponentQuery.query("#poisearchresultgrid")[0];
-			                	
-			                	var resultArr =[];
-			                	if(poisearchresult.isVisible()==false){
-			                		poisearchresult.show();	
-			                	}
-			                	
-			                	Ext.each(parse.LIST, function(media, index) {
-			        	            
-			                		if(media.nameDp=="북한"){
-			        	        	   console.info(media.nameFull);
-			        	        	   console.info(media.xpos);
-			        	        	   console.info(media.ypos);
-			        	        	   resultArr.push(media);
-			        	           }
-			                		
-			                		
-			        			});
-			                	
-			                	console.info(resultArr);
-			                	
-			                	poisearchresultgrid.setStore(resultArr);
-			                }
-			            
-			            });
-						
-						
-					
+					InAcc.global.Function.getVworldPoi();
 				}
 			}]
 		},{
@@ -190,56 +147,101 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 			title:"검색결과",
 			itemId:"poisearchresult",
 			hidden:true,
-			width:360,
+			width:330,
+			
 			items:[{
 				xtype:"grid",
 				itemId:"poisearchresultgrid",
 				//store: [{},{},{}],
+				height:300,
 				columnLines: true,
 				hideHeaders: true,
+				//autoScroll:true,
 				columns:[{
-					align:'center',
+					align:'left',
 					dataIndex:'nameFull',
-					//displayField:'nameFull',
 					text:'이름',
 					width: 200
-				}/*,{
-					renderer: function(val,meta,rec) {
-						// generate unique id for an element
-						var id = Ext.id();
-						Ext.defer(function() {
-							Ext.widget('button', {
-								renderTo: id,
-								text: 'DELETE',
-								scale: 'small',
-								handler: function() {
-									Ext.Msg.alert("Hello World")
-								}
-							});
-						}, 50);
-						return Ext.String.format('<div id="{0}"></div>', id);
-					}
-				}*/]
+				},{    
+		            text:'이동',
+		            align:'center',
+		            xtype:'actioncolumn',
+		            width:110,
+		            items:[{ 
+		            	icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
+		            	tooltip: 'move',
+		            	handler: function(grid, rowIndex, colIndex) {
+		            		var rec = grid.getStore().getAt(rowIndex);
+		            		var coreMap = Ext.getCmp("_mapDiv_");
+		            		coreMap.map.getView().setCenter(ol.proj.transform([rec.data.xpos,rec.data.ypos], 'EPSG:4326', 'EPSG:5179'));
+		            		coreMap.map.getView().setZoom(11);
+		            	}   
+		            }]
+		         }]
 			}]
 		}]
 	},{
 		xtype:"panel",
 		//style:"margin-left:5px;",
 		title:"<img src='./resources/images/design/blit_st_02_02.png' style='margin-bottom:-3px;'/> 구축Data 통합명칭 검색",
-		width:330,
+		width:360,
+		id:"buildSearch",
 		height:130,
 		layout:{
-			type:'hbox'
+			type:'vbox'
 		},
 		items:[{
-			style:"margin-left:15px; margin-top:15px;",
-			xtype:"textfield",
-			width:240
-		},{
-			style:"margin-top:15px; background : #555; border: 1px solid #303030",
-			xtype:"button",
-			width:60,
-			text:"검색"
+			xtype:"panel",
+			border: false,
+			layout:{
+				type:'hbox'
+			},
+			items:[{
+				style:"margin-left:15px; margin-top:15px;",
+				xtype:"textfield",
+				id: "bildData",
+				width:240
+			},{
+				style:"margin-top:15px; background : #555; border: 1px solid #303030",
+				xtype:"button",
+				width:60,
+				text:"검색",
+				handler: function(){
+					//InAcc.store.west.BuildDataSeachName
+					var bildData = Ext.getCmp("bildData").value;
+					console.info(bildData);
+					var buildStore = Ext.create("InAcc.store.west.BuildDataSearchName",{
+						buildData: bildData
+					});
+					buildStore.load();
+					
+					
+					
+					var timerCnt = 0;
+					var timerId = window.setInterval(function(){
+						
+						if(buildStore.data.items.length > 0 && buildStore.data.items.length > 0){
+
+							window.clearInterval(timerId);
+							
+							BuildDataSet(buildStore);
+							
+						}
+						else{
+							
+							timerCnt++;
+							
+							if(timerCnt > 5){
+								alert("데이터가 없습니다");
+								window.clearInterval(timerId);
+							}
+						}
+					}, 500);
+					
+					
+					
+				}
+			}]
 		}]
 
 	}]

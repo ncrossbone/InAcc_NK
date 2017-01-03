@@ -15,7 +15,20 @@ Ext.define("InAcc.view.center.CenterContainer", {
 	items:[{
 		xtype:"image",
 		src:"resources/images/icons/util_01.png",
-		style:"border:solid 1px; border-color: #dbdbdb; cursor:pointer;"
+		style:"border:solid 1px; border-color: #dbdbdb; cursor:pointer;",
+		listeners:{
+			el:{
+				click:function(){
+					var dragPan = new ol.interaction.DragPan();
+					var coreMap = Ext.getCmp("_mapDiv_");
+					coreMap.map.getInteractions().forEach(function(interaction) {
+						if (interaction instanceof ol.interaction.DragPan) {
+						    interaction.setActive(true);
+						}
+					}, this);
+				}
+			}
+		}
 	},{
 		xtype:"image",
 		src:"resources/images/icons/util_02.png",
@@ -112,7 +125,22 @@ Ext.define("InAcc.view.center.CenterContainer", {
 		src:"resources/images/icons/util_07.png",
 		style:"border:solid 1px; border-color: #dbdbdb; cursor:pointer;",
 		width:27,
-		height:27
+		height:27,
+		listeners:{
+			el:{
+				click:function(){
+					
+					var dragPan = new ol.interaction.DragPan();
+					var coreMap = Ext.getCmp("_mapDiv_");
+					
+					coreMap.map.getInteractions().forEach(function(interaction) {
+						if (interaction instanceof ol.interaction.DragPan) {
+						    interaction.setActive(false);
+						}
+					}, this);
+				}
+			}
+		}
 	}/*,{
 		xtype:'splitbutton',
 		text:'배경지도',

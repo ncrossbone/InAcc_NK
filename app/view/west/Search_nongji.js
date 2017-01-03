@@ -28,7 +28,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 		border:false,
 		height:42,
 		items:[{
-			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 시범지역",
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 시범지역 <span style='color: red;'>*</span>",
 			labelSeparator : '',
 			labelStyle:"font-weight: bold;",
 			style:"margin-top:5px;",
@@ -44,7 +44,37 @@ Ext.define("InAcc.view.west.Search_nongji", {
 	},{
 		xtype:"panel",
 		border:false,
+		layout:{
+			type:"hbox"
+		},
 		bodyStyle:"background-color:#f6f6f6;",
+		height:42,
+		items:[{
+			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 구분 <span style='color: red;'>*</span>",
+			labelSeparator : '',
+			width:200,
+			style:"margin-top:5px;",
+			displayField: 'name',
+			labelStyle:"font-weight: bold;",
+			xtype:"combobox",
+			editable: false,
+			//colName: "LYGB_NAM",
+			displayField: 'S_NAME',
+			valueField: 'S_CODE',
+			lCode: "LAY01",
+			comparison: "=",
+			listeners:{
+				select: function(combo){
+
+					//alert(combo.getValue());
+					this.up("window").queryLayerName = combo.getValue();
+				}
+			}
+		}]
+	},{
+		xtype:"panel",
+		border:false,
+		
 		layout:{
 			type:"hbox"
 		},
@@ -77,35 +107,6 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			text:"(Km^2)"
 		}]
 
-	},{
-		xtype:"panel",
-		border:false,
-		layout:{
-			type:"hbox"
-		},
-		height:42,
-		items:[{
-			fieldLabel: "<img src='./resources/images/design/blit_st_02.png' style='margin-left:10px;'> 구분",
-			labelSeparator : '',
-			width:200,
-			style:"margin-top:5px;",
-			displayField: 'name',
-			labelStyle:"font-weight: bold;",
-			xtype:"combobox",
-			editable: false,
-			//colName: "LYGB_NAM",
-			displayField: 'S_NAME',
-			valueField: 'S_CODE',
-			lCode: "LAY01",
-			comparison: "=",
-			listeners:{
-				select: function(combo){
-
-					//alert(combo.getValue());
-					this.up("window").queryLayerName = combo.getValue();
-				}
-			}
-		}]
 	},{
 		xtype:"panel",
 		border:false,

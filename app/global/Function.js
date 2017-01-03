@@ -45,17 +45,26 @@ Ext.define("InAcc.global.Function", {
 			// console.info(this.colMapArray);
 			var queryFilter = this.getQueryFilter();
 			// console.info(queryWhere);
+			//console.info(queryFilter);
+			if(queryFilter.conditionA == undefined || queryFilter.conditionB == undefined){
+				alert("검색조건을 2가지 이상 선택하세요");
+				return ;
+			}
 			var dataStore = this.getMapStore(queryFilter);
 
 			this.colMapArray = [];
 
+			
+			
 			return dataStore;
 		}
 
 		return false;
 	},
 	createGrid : function(data, confUrl) {
-		console.info(data);
+		//console.info(data);
+		//SLOP_CDE("SLP001"), ASGB_CDE("ASG003")
+
 		var me = this;
 
 		var recordData = null;
@@ -72,6 +81,7 @@ Ext.define("InAcc.global.Function", {
 			}
 		});
 
+		
 		confStore.load(function(record) {
 
 			gridStore = Ext.create("Ext.data.Store", {
@@ -80,8 +90,13 @@ Ext.define("InAcc.global.Function", {
 			});
 
 			recordData = record[0].data;
+			
 		});
-
+		
+		
+		
+		
+		
 		var interval = 10; // 타이머 interval
 		var interCnt = 0; // 타이머 실행 횟수
 		var limitSec = 5; // 타이머 실행 제한 (초)
@@ -89,12 +104,30 @@ Ext.define("InAcc.global.Function", {
 													// 횟수
 
 		var timer = window.setInterval(function() {
-
+			
+			
+			
+			
 			if (recordData != null) {
 
 				// 타이머 중지
 				window.clearInterval(timer);
-
+				
+				
+				
+				var gridId = Ext.getCmp("gridNongji");
+				console.info(gridId);
+				if(data == undefined){
+					gridId.getStore().removeAll();
+					return;
+				}
+				if(data == false){
+					alert("검색결과가 없습니다");
+					gridId.getStore().removeAll();
+					return ;
+				}
+				
+				
 				var bodyWidth = Ext.getBody().getWidth();
 				var bodyHeight = Ext.getBody().getHeight();
 				var windowWidth = bodyWidth - 350;
@@ -143,6 +176,11 @@ Ext.define("InAcc.global.Function", {
 				// tabContainer.setWidth(windowContainer.body.getWidth());
 				// tabContainer.setHeight(windowContainer.body.getHeight());
 
+				
+				
+				
+				
+				
 				var grid = tabContainer.query("#" + recordData.itemId)[0];
 
 				if (grid == undefined) {
@@ -150,6 +188,7 @@ Ext.define("InAcc.global.Function", {
 					var grid = Ext.create("Ext.grid.Panel", {
 						closable : true,
 						itemId : recordData.itemId,
+						id: recordData.itemId,
 						title : recordData.title,
 						width : recordData.width,
 						height : recordData.height,
@@ -648,5 +687,137 @@ Ext.define("InAcc.global.Function", {
 	            }
 	        }]
 		}).show();
+	},
+	
+
+	getVworldPoi:function(){
+		var poisearchname = Ext.ComponentQuery.query("#poisearchname")[0];
+		
+		var searchStr = poisearchname.lastValue;
+		if(searchStr!=""){
+			var encString = encodeURIComponent(searchStr);
+			var responseArr = [];
+			//console.info(testString);
+			$.ajax({
+				url : './resources/Proxy.jsp?url=http://map.vworld.kr/search.do?',
+				type : 'GET',
+				contentType: "application/x-www-form-urlencoded; charset=EUC-KR",
+				data : {
+					apiKey:"E1FC5A1A-C63D-3D29-B716-F64596DEF9E8",
+					q:encString,
+					category:"Poi",
+					output:"json",
+					pageUnit:100
+				},
+				contentType : 'text/xml',
+				success : function(response_) {
+					var parse = JSON.parse(response_);
+					var poisearchresult = Ext.ComponentQuery.query("#poisearchresult")[0];
+					var poisearchresultgrid = Ext.ComponentQuery.query("#poisearchresultgrid")[0];
+
+					var resultArr =[];
+					if(poisearchresult.isVisible()==false){
+						poisearchresult.show();	
+					}
+
+					Ext.each(parse.LIST, function(media, index) {
+
+						if(media.nameDp=="북한"){
+							resultArr.push(media);
+						}
+
+					});
+
+					var userStore = Ext.create('Ext.data.Store');
+					//console.info(resultArr);
+					userStore.setData(resultArr);
+					poisearchresultgrid.setStore(userStore);
+				}
+
+			});
+		}else{
+			alert("검색어를 입력하세요");
+		}
+	
+	},
+	
+	
+	
+	sidoExtent: function(sidoCd){
+		
+		console.info(sidoCd);
+		
+		var	proxy = "./resources/Proxy.jsp?url=";
+		
+		var featureRequest = new ol.format.WFS().writeGetFeature({
+            srsName : "EPSG:5179",
+            featureTypes : ['NK_SIDO'],
+            outputFormat : 'application/json',
+            geometryName : 'SHAPE',
+            maxFeatures : 300,
+            filter: ol.format.filter.like('SD_CD',sidoCd+'*')
+        });
+		
+		//console.info(coreMap.map.getExtent());
+		var extent = "";
+        $.ajax({
+            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+            type : 'POST',
+            data : new XMLSerializer().serializeToString( featureRequest ),
+            async : false,
+            contentType : 'text/xml',
+            success : function(response_) {
+		        var features = new ol.format.GeoJSON().readFeatures( response_ );
+		        Ext.each(features, function(media, index) {
+		            
+		        	//media.values_.geometry.getExtent();
+		        	extent = media.values_.geometry.getExtent();
+		        	
+				});
+		        
+				
+            }
+        
+        });	
+        
+        return extent;
+	},
+	
+	sggExtent: function(sggCd){
+		
+		var	proxy = "./resources/Proxy.jsp?url=";
+		
+		var featureRequest = new ol.format.WFS().writeGetFeature({
+            srsName : "EPSG:5179",
+            featureTypes : ['NK_SGG'],
+            outputFormat : 'application/json',
+            geometryName : 'SHAPE',
+            maxFeatures : 300,
+            filter: ol.format.filter.like('ADMCD',sggCd+'*')
+        });
+		
+		//console.info(coreMap.map.getExtent());
+		var extent = "";
+        $.ajax({
+            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+            type : 'POST',
+            data : new XMLSerializer().serializeToString( featureRequest ),
+            async : false,
+            contentType : 'text/xml',
+            success : function(response_) {
+		        var features = new ol.format.GeoJSON().readFeatures( response_ );
+		        Ext.each(features, function(media, index) {
+		            
+		        	extent = media.values_.geometry.getExtent();
+		        	
+				});
+		        
+				
+            }
+        
+        });	
+        
+        return extent;
 	}
+	
 });
