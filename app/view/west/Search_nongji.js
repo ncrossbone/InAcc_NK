@@ -247,7 +247,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 		bodyStyle:"border-bottom: 1px solid #e9e9e9;",
 		labelSeparator : '',
 		style:"margin-top:5px;",
-		width:200,
+		width:270,
 		labelStyle:"font-weight: bold;",
 		xtype:"combobox",
 		editable: false,

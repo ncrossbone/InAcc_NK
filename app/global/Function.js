@@ -55,11 +55,38 @@ Ext.define("InAcc.global.Function", {
 
 		return false;
 	},
+	/*getSLP : function(code){
+		var slpIdx = 0;
+		var getfilter = "";
+		this.tableInfo.load(function(record) {
+			slpIdx = record.map(function(obj){
+				return obj.data.L_CODE;
+			}).indexOf("SLP");
+			
+			getfilter = record[slpIdx].data.S_ITEM.filter(function(obj){
+			    return obj.S_CODE === code.SLOP_CDE;
+			});
+		});
+		
+		
+		
+		console.info(getfilter);
+	},*/
 	createGrid : function(data, confUrl) {
-		//console.info(data);
+		//console.info(data[0].SLOP_CDE);
 		//SLOP_CDE("SLP001"), ASGB_CDE("ASG003")
-
 		var me = this;
+		
+		/*Ext.each(data, function(media, index) {
+			me.getSLP(media.SLOP_CDE);
+			
+		});*/
+		
+		
+		
+		
+		
+		
 
 		var recordData = null;
 		var gridStore = null;
@@ -84,7 +111,6 @@ Ext.define("InAcc.global.Function", {
 			});
 
 			recordData = record[0].data;
-			
 		});
 		
 		
@@ -120,7 +146,7 @@ Ext.define("InAcc.global.Function", {
 					if(data == false){
 						alert("검색결과가 없습니다");	
 					}
-					
+
 					return;
 				}
 				
@@ -534,8 +560,9 @@ Ext.define("InAcc.global.Function", {
 		var wildCard = " wildCard=\"%\"";
 		wildCard = encodeURIComponent(wildCard);
 		
+		// 필터 포멧 참조 http://www.mangosystem.com:8080/gxt/docs/community/ogc_standards/filter_encoding/index.html
 		var filter = "<Filter><PropertyIsLike wildCard=\"%\"><PropertyName>ADMCD</PropertyName><Literal>" + sidoCd + "%" + "</Literal></PropertyIsLike></Filter>";
-		filter = encodeURIComponent(filter);
+		filter = encodeURIComponent(filter); // 특수문자 Encoding
 		//var filter = "<Filter><PropertyIsLike" + wildCard + "><PropertyName>ADMCD</PropertyName><Literal>" + likeVal + "</Literal></PropertyIsLike></Filter>";
 		//var filter = "<Filter><PropertyIsLike%20wildCard%3D%22%25%22><PropertyName>ADMCD</PropertyName><Literal>37%25</Literal></PropertyIsLike></Filter>";
 		//var filter = ol.format.filter.like('ADMCD',sidoCd+'*');
@@ -556,8 +583,6 @@ Ext.define("InAcc.global.Function", {
 		console.info(encFilter);*/
 		
 		var url = proxyUrl + serviceUrl + params;
-		
-		
             
         $.ajax({
             url : url,

@@ -420,9 +420,27 @@ Ext.define('InAcc.view.map.CoreMap', {
     	
     	
     	Ext.create("InAcc.view.map.Layer");
-    	 
-		
+    	
+    	var popContainer = document.getElementById('popup');
+    	var popContent = document.getElementById('popup-content');
+    	var popCloser = document.getElementById('popup-closer');
+    	
+    	popCloser.onclick = function(){
+    		popup.setPosition(undefined);
+    		popCloser.blur();
+    		return false;
+    	}
+    	
+    	var popup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+    		element: popContainer,
+    		autoPan: true,
+    		autoPanAnimation: {
+    			duration: 250
+    		}
+    	}));
+    	
     	me.map = new ol.Map({
+    		overlays: [popup], // 팝업창 설정
     		target: '_mapDiv_',
     		layers: this.baseMapLayers,
     		controls : [],
@@ -445,7 +463,79 @@ Ext.define('InAcc.view.map.CoreMap', {
 
     	InAcc.global.Function.getSido();
 
-    	
+    	//me.map.events.register('click', map, onClick);
+    	// 이벤트 생성
+    	var mapClickEvt = me.map.on('click', function(evt){
+    		
+    		var layers = me.map.getLayers().getArray();
+    		var layerNames = "";
+    		var coordinate = evt.coordinate;
+    		var resolution = me.map.getView().getResolution();
+    		
+    		popup.setPosition(coordinate);
+    		
+    		popContent.innerHTML = "";
+    		
+    		Ext.each(layers, function(layer){
+    			
+    			if(layer.values_.type != "base"){
+    				
+    				var layerSource = layer.getSource();
+    				var layerName = layerSource.params_.LAYERS;
+    				
+    				/*console.info(layerSource.getGetFeatureInfoUrl(evt.coordinate, me.map.getView().getResolution(), "EPSG:5179", {
+    					'INFO_FORMAT': 'text/html',
+                        'FEATURE_COUNT': '300'
+    				}));*/
+    				
+    				var tmpUrl = layerSource.getGetFeatureInfoUrl(coordinate, resolution, "EPSG:5179", {
+    					'INFO_FORMAT': 'text/xml',
+                        'FEATURE_COUNT': '300'
+    				});
+    				
+    				$.ajax({
+    		            url : InAcc.global.Variable.getProxyUrl() + tmpUrl,
+    		            type : 'GET',
+    		            async : false,
+    		            contentType : 'text/xml',
+    		            success : function(response_) {
+    		            	
+    		            	var childs = $(response_).find(layerName).children();
+    		            	
+    		            	if(childs.length > 0){
+    		            		popContent.innerHTML += "<p>Layer Name : " + layerName + "</p>";
+    		            	}
+    		            	
+    		            	Ext.each($(childs), function(child, cnt){
+    		            		
+		            			if($(child)[0].localName != "SHAPE" && $(child)[0].localName != "boundedBy"){
+			            			popContent.innerHTML += $(child)[0].localName + " : " + $(child).text() + "<br>";
+			            		}
+		            			
+		            			if(cnt == $(child).length - 1){
+			            			popContent.innerHTML += "<br>";
+			            		}
+    		            	});
+    		           }
+    		       });
+    				
+    				//console.info(layerSource.params_.LAYERS);
+    				//console.info(layerSource.urls[0]);
+    				layerNames += layerSource.params_.LAYERS + ",";
+    			}
+    		});
+    		
+    		/*if(layerNames != ""){
+    			layerNames = layerNames.substring(0, layerNames.length - 1);
+    		}
+    		else{
+    			alert("활성화된 레이어가 없습니다.");
+    			return false;
+    		}*/
+    		
+    		//me.map.unByKey(mapClickEvt); // 이벤트 삭제
+    	});
+
     	me.map.getView().on('change:resolution', function(evt){
     		
     		var zoomLevel = me.map.getView().getZoom();
