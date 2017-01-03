@@ -66,7 +66,7 @@ BuildDataSet = function(buildStore){
 	console.info(buildStore.data.items);
 	
 	buildSearch.remove("build");
-	buildSearch.add({
+	buildSearch.add({xtype:"container",height:50},{
         xtype:"panel",
         id:"build",
         title:"검색결과",
@@ -80,15 +80,15 @@ BuildDataSet = function(buildStore){
            columns:[{
                align:'center',
                dataIndex:'name',
-               width: 280
+               width: 200
             },{	 
 				text:'이동',
 				align:'center',
 				xtype:'actioncolumn',
-				width:50,
+				width:110,
 				items:[{ 
 					icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
-	                tooltip: 'Edit',
+	                tooltip: 'move',
 	                handler: function(grid, rowIndex, colIndex) {
 	                	var rec = grid.getStore().getAt(rowIndex);
                         var x = Number(rec.data.x);

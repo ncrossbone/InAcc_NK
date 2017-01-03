@@ -169,7 +169,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 		            width:110,
 		            items:[{ 
 		            	icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
-		            	tooltip: 'Edit',
+		            	tooltip: 'move',
 		            	handler: function(grid, rowIndex, colIndex) {
 		            		var rec = grid.getStore().getAt(rowIndex);
 		            		var coreMap = Ext.getCmp("_mapDiv_");

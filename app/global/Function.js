@@ -55,7 +55,8 @@ Ext.define("InAcc.global.Function", {
 		return false;
 	},
 	createGrid : function(data, confUrl) {
-		console.info(data);
+		//console.info(data);
+		//SLOP_CDE("SLP001"), ASGB_CDE("ASG003")
 		var me = this;
 
 		var recordData = null;
@@ -80,6 +81,7 @@ Ext.define("InAcc.global.Function", {
 			});
 
 			recordData = record[0].data;
+			
 		});
 
 		var interval = 10; // 타이머 interval
