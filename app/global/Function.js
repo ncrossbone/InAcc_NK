@@ -30,7 +30,6 @@ Ext.define("InAcc.global.Function", {
 		// console.info(Ext.isNumeric(0.3232));
 
 		var container = this.chkContainer(pContainer);
-
 		if (container) {
 			// console.info(container.queryLayerName);
 			if (container.queryLayerName == "") {
@@ -44,12 +43,7 @@ Ext.define("InAcc.global.Function", {
 			this.getColArray(container);
 			// console.info(this.colMapArray);
 			var queryFilter = this.getQueryFilter();
-			// console.info(queryWhere);
-			//console.info(queryFilter);
-			if(queryFilter.conditionA == undefined || queryFilter.conditionB == undefined){
-				alert("검색조건을 2가지 이상 선택하세요");
-				return ;
-			}
+			
 			var dataStore = this.getMapStore(queryFilter);
 
 			this.colMapArray = [];
@@ -61,11 +55,38 @@ Ext.define("InAcc.global.Function", {
 
 		return false;
 	},
+	/*getSLP : function(code){
+		var slpIdx = 0;
+		var getfilter = "";
+		this.tableInfo.load(function(record) {
+			slpIdx = record.map(function(obj){
+				return obj.data.L_CODE;
+			}).indexOf("SLP");
+			
+			getfilter = record[slpIdx].data.S_ITEM.filter(function(obj){
+			    return obj.S_CODE === code.SLOP_CDE;
+			});
+		});
+		
+		
+		
+		console.info(getfilter);
+	},*/
 	createGrid : function(data, confUrl) {
-		//console.info(data);
+		//console.info(data[0].SLOP_CDE);
 		//SLOP_CDE("SLP001"), ASGB_CDE("ASG003")
-
 		var me = this;
+		
+		/*Ext.each(data, function(media, index) {
+			me.getSLP(media.SLOP_CDE);
+			
+		});*/
+		
+		
+		
+		
+		
+		
 
 		var recordData = null;
 		var gridStore = null;
@@ -90,7 +111,6 @@ Ext.define("InAcc.global.Function", {
 			});
 
 			recordData = record[0].data;
-			
 		});
 		
 		
@@ -116,15 +136,18 @@ Ext.define("InAcc.global.Function", {
 				
 				
 				var gridId = Ext.getCmp("gridNongji");
-				console.info(gridId);
-				if(data == undefined){
-					gridId.getStore().removeAll();
+				if(data == undefined || data == false){
+					
+					if(gridId != undefined){
+						gridId.setTitle(recordData.title+"(0)");
+						gridId.getStore().removeAll();
+					}
+				
+					if(data == false){
+						alert("검색결과가 없습니다");	
+					}
+
 					return;
-				}
-				if(data == false){
-					alert("검색결과가 없습니다");
-					gridId.getStore().removeAll();
-					return ;
 				}
 				
 				
@@ -175,11 +198,6 @@ Ext.define("InAcc.global.Function", {
 
 				// tabContainer.setWidth(windowContainer.body.getWidth());
 				// tabContainer.setHeight(windowContainer.body.getHeight());
-
-				
-				
-				
-				
 				
 				var grid = tabContainer.query("#" + recordData.itemId)[0];
 
@@ -189,7 +207,7 @@ Ext.define("InAcc.global.Function", {
 						closable : true,
 						itemId : recordData.itemId,
 						id: recordData.itemId,
-						title : recordData.title,
+						title : recordData.title + "("+gridStore.data.length+")",
 						width : recordData.width,
 						height : recordData.height,
 						columns : recordData.columns,
@@ -364,7 +382,7 @@ Ext.define("InAcc.global.Function", {
 					}
 				}
 
-				// console.info(orFilter);
+				
 				tmpFilter = orFilter;
 			}
 
@@ -383,14 +401,17 @@ Ext.define("InAcc.global.Function", {
 			}
 		}
 
-		console.info(andFilter);
+		if(andFilter.conditionB == undefined){
+			andFilter = andFilter.conditionA
+		}
+		
 		return andFilter;
 	},
 	getMapStore : function(queryFilter) {
 		
-		console.info(queryFilter);
+		
 		var me = this;
-		console.info(me.queryLayerName);
+		
 
 		// return;
 		/* 조건설정 완료 후 삭제할 것 */
@@ -409,7 +430,7 @@ Ext.define("InAcc.global.Function", {
 			maxFeatures : 300,
 			filter : queryFilter,
 		});
-
+		
 		var data = [];
 
 		$.ajax({
@@ -419,6 +440,7 @@ Ext.define("InAcc.global.Function", {
 			async : false,
 			contentType : 'text/xml',
 			success : function(response_) {
+				
 				var features = new ol.format.GeoJSON().readFeatures(response_);
 				 console.log( features );
 
@@ -428,7 +450,7 @@ Ext.define("InAcc.global.Function", {
 				}
 			}
 		});
-		console.info(data);
+		
 		return data;
 	},
 	getComboArray : function(container) {
@@ -744,8 +766,6 @@ Ext.define("InAcc.global.Function", {
 	
 	
 	sidoExtent: function(sidoCd){
-		
-		console.info(sidoCd);
 		
 		var	proxy = "./resources/Proxy.jsp?url=";
 		
