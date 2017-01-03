@@ -45,10 +45,17 @@ Ext.define("InAcc.global.Function", {
 			// console.info(this.colMapArray);
 			var queryFilter = this.getQueryFilter();
 			// console.info(queryWhere);
+			//console.info(queryFilter);
+			if(queryFilter.conditionA == undefined || queryFilter.conditionB == undefined){
+				alert("검색조건을 2가지 이상 선택하세요");
+				return ;
+			}
 			var dataStore = this.getMapStore(queryFilter);
 
 			this.colMapArray = [];
 
+			
+			
 			return dataStore;
 		}
 
@@ -57,6 +64,7 @@ Ext.define("InAcc.global.Function", {
 	createGrid : function(data, confUrl) {
 		//console.info(data);
 		//SLOP_CDE("SLP001"), ASGB_CDE("ASG003")
+
 		var me = this;
 
 		var recordData = null;
@@ -73,6 +81,7 @@ Ext.define("InAcc.global.Function", {
 			}
 		});
 
+		
 		confStore.load(function(record) {
 
 			gridStore = Ext.create("Ext.data.Store", {
@@ -83,7 +92,11 @@ Ext.define("InAcc.global.Function", {
 			recordData = record[0].data;
 			
 		});
-
+		
+		
+		
+		
+		
 		var interval = 10; // 타이머 interval
 		var interCnt = 0; // 타이머 실행 횟수
 		var limitSec = 5; // 타이머 실행 제한 (초)
@@ -91,12 +104,30 @@ Ext.define("InAcc.global.Function", {
 													// 횟수
 
 		var timer = window.setInterval(function() {
-
+			
+			
+			
+			
 			if (recordData != null) {
 
 				// 타이머 중지
 				window.clearInterval(timer);
-
+				
+				
+				
+				var gridId = Ext.getCmp("gridNongji");
+				console.info(gridId);
+				if(data == undefined){
+					gridId.getStore().removeAll();
+					return;
+				}
+				if(data == false){
+					alert("검색결과가 없습니다");
+					gridId.getStore().removeAll();
+					return ;
+				}
+				
+				
 				var bodyWidth = Ext.getBody().getWidth();
 				var bodyHeight = Ext.getBody().getHeight();
 				var windowWidth = bodyWidth - 350;
@@ -145,6 +176,11 @@ Ext.define("InAcc.global.Function", {
 				// tabContainer.setWidth(windowContainer.body.getWidth());
 				// tabContainer.setHeight(windowContainer.body.getHeight());
 
+				
+				
+				
+				
+				
 				var grid = tabContainer.query("#" + recordData.itemId)[0];
 
 				if (grid == undefined) {
@@ -152,6 +188,7 @@ Ext.define("InAcc.global.Function", {
 					var grid = Ext.create("Ext.grid.Panel", {
 						closable : true,
 						itemId : recordData.itemId,
+						id: recordData.itemId,
 						title : recordData.title,
 						width : recordData.width,
 						height : recordData.height,
