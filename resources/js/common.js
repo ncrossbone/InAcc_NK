@@ -2,6 +2,7 @@ ZoomToExtent = function(sidoCd,sggCd){
    var coreMap = Ext.getCmp("_mapDiv_");
    console.info(sidoCd);
    console.info(sggCd);
+   console.info(coreMap.map.getSize());
    var extent = "";
 	if(sggCd != null && sggCd != "시군구"){
 		console.info("시군구");
@@ -18,7 +19,7 @@ ZoomToExtent = function(sidoCd,sggCd){
 		}
 		
 	}
-   
+	
    coreMap.map.getView().fit(extent, coreMap.map.getSize());
       
 }
@@ -54,6 +55,7 @@ DemonLocation = function(val){
    }
    
    coreMap.map.getView().fit(extent, coreMap.map.getSize());
+   
    
 }
 

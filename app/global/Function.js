@@ -30,7 +30,6 @@ Ext.define("InAcc.global.Function", {
 		// console.info(Ext.isNumeric(0.3232));
 
 		var container = this.chkContainer(pContainer);
-
 		if (container) {
 			// console.info(container.queryLayerName);
 			if (container.queryLayerName == "") {
@@ -44,12 +43,7 @@ Ext.define("InAcc.global.Function", {
 			this.getColArray(container);
 			// console.info(this.colMapArray);
 			var queryFilter = this.getQueryFilter();
-			// console.info(queryWhere);
-			//console.info(queryFilter);
-			if(queryFilter.conditionA == undefined || queryFilter.conditionB == undefined){
-				alert("검색조건을 2가지 이상 선택하세요");
-				return ;
-			}
+			
 			var dataStore = this.getMapStore(queryFilter);
 
 			this.colMapArray = [];
@@ -116,15 +110,18 @@ Ext.define("InAcc.global.Function", {
 				
 				
 				var gridId = Ext.getCmp("gridNongji");
-				console.info(gridId);
-				if(data == undefined){
-					gridId.getStore().removeAll();
+				if(data == undefined || data == false){
+					
+					if(gridId != undefined){
+						gridId.setTitle(recordData.title+"(0)");
+						gridId.getStore().removeAll();
+					}
+				
+					if(data == false){
+						alert("검색결과가 없습니다");	
+					}
+					
 					return;
-				}
-				if(data == false){
-					alert("검색결과가 없습니다");
-					gridId.getStore().removeAll();
-					return ;
 				}
 				
 				
@@ -175,11 +172,6 @@ Ext.define("InAcc.global.Function", {
 
 				// tabContainer.setWidth(windowContainer.body.getWidth());
 				// tabContainer.setHeight(windowContainer.body.getHeight());
-
-				
-				
-				
-				
 				
 				var grid = tabContainer.query("#" + recordData.itemId)[0];
 
@@ -189,7 +181,7 @@ Ext.define("InAcc.global.Function", {
 						closable : true,
 						itemId : recordData.itemId,
 						id: recordData.itemId,
-						title : recordData.title,
+						title : recordData.title + "("+gridStore.data.length+")",
 						width : recordData.width,
 						height : recordData.height,
 						columns : recordData.columns,
@@ -364,7 +356,7 @@ Ext.define("InAcc.global.Function", {
 					}
 				}
 
-				// console.info(orFilter);
+				
 				tmpFilter = orFilter;
 			}
 
@@ -383,14 +375,17 @@ Ext.define("InAcc.global.Function", {
 			}
 		}
 
-		console.info(andFilter);
+		if(andFilter.conditionB == undefined){
+			andFilter = andFilter.conditionA
+		}
+		
 		return andFilter;
 	},
 	getMapStore : function(queryFilter) {
 		
-		console.info(queryFilter);
+		
 		var me = this;
-		console.info(me.queryLayerName);
+		
 
 		// return;
 		/* 조건설정 완료 후 삭제할 것 */
@@ -409,7 +404,7 @@ Ext.define("InAcc.global.Function", {
 			maxFeatures : 300,
 			filter : queryFilter,
 		});
-
+		
 		var data = [];
 
 		$.ajax({
@@ -419,6 +414,7 @@ Ext.define("InAcc.global.Function", {
 			async : false,
 			contentType : 'text/xml',
 			success : function(response_) {
+				
 				var features = new ol.format.GeoJSON().readFeatures(response_);
 				 console.log( features );
 
@@ -428,7 +424,7 @@ Ext.define("InAcc.global.Function", {
 				}
 			}
 		});
-		console.info(data);
+		
 		return data;
 	},
 	getComboArray : function(container) {
@@ -529,7 +525,7 @@ Ext.define("InAcc.global.Function", {
 		
 		var	proxyUrl = InAcc.global.Variable.getProxyUrl();
 		var serviceUrl = InAcc.global.Variable.getMapServiceUrl();
-		console.info(sidoCd);
+		
 		//var filter = '<Filter xmlns:gml="http://www.opengis.net/gml"><And><BBOX><PropertyName>way</PropertyName><gml:Box srsName="urn:x-ogc:def:crs:EPSG:3857"><gml:coord><gml:X>' + extent[0] + '</gml:X> <gml:Y>' + extent[1] + '</gml:Y></gml:coord><gml:coord><gml:X>' + extent[2] + '</gml:X><gml:Y>' + extent[3] + '</gml:Y></gml:coord></gml:Box></BBOX><PropertyIsEqualTo><PropertyName>landuse</PropertyName><Literal>basin</Literal></PropertyIsEqualTo></And></Filter>'
 		//var filter = "<Filter xmlns:gml='http://www.opengis.net/gml'><And><Like><PropertyName>ADMCD</PropertyName><Literal>" + sidoCd + "*</Literal></Like></And></Filter>"
 		//var filter = "<Filter><PropertyIsEqualTo><PropertyName>ADMCD</PropertyName><Literal>3320400000</Literal></PropertyIsEqualTo></Filter>"
@@ -561,8 +557,7 @@ Ext.define("InAcc.global.Function", {
 		
 		var url = proxyUrl + serviceUrl + params;
 		
-		console.info(params);
-		console.info(url);
+		
             
         $.ajax({
             url : url,
@@ -570,7 +565,7 @@ Ext.define("InAcc.global.Function", {
             async : false,
             contentType : 'text/xml',
             success : function(response_) {
-            	console.info(response_);
+            	
 	            var receiveData = [];
 	            
 	            $(response_).find("NK_SGG").each(function(){
@@ -746,8 +741,6 @@ Ext.define("InAcc.global.Function", {
 	
 	
 	sidoExtent: function(sidoCd){
-		
-		console.info(sidoCd);
 		
 		var	proxy = "./resources/Proxy.jsp?url=";
 		
