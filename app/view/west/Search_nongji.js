@@ -40,6 +40,34 @@ Ext.define("InAcc.view.west.Search_nongji", {
 			lCode: "DEMOADM",
 			colName: "SLTE_NAM",
 			comparison: "=",
+			listeners:{
+				render: function(field){
+					
+					var me = this;
+					var timerCnt = 0;
+					var timerId = window.setInterval(function(){
+						
+						if(field.store.data.length > 0 && field.store.data.length > 0){
+							
+							window.clearInterval(timerId);
+							console.info(field.store.data.items[0].data.S_CODE);
+							field.setValue(field.store.data.items[0].data.S_CODE);
+							me.up("window").queryLayerName = field.getValue();
+						}
+						else{
+							
+							timerCnt++;
+							
+							if(timerCnt > 5){
+								alert("데이터가 없습니다");
+								window.clearInterval(timerId);
+							}
+						}
+					}, 300);
+					
+				}
+			}
+			
 		}]
 	},{
 		xtype:"panel",
@@ -67,7 +95,33 @@ Ext.define("InAcc.view.west.Search_nongji", {
 				select: function(combo){
 
 					//alert(combo.getValue());
+					console.info(combo.getValue());
 					this.up("window").queryLayerName = combo.getValue();
+				},
+				render: function(field){
+					
+					var me = this;
+					var timerCnt = 0;
+					var timerId = window.setInterval(function(){
+						
+						if(field.store.data.length > 0 && field.store.data.length > 0){
+							
+							window.clearInterval(timerId);
+							console.info(field.store.data.items[0].data.S_CODE);
+							field.setValue(field.store.data.items[0].data.S_CODE);
+							me.up("window").queryLayerName = field.getValue();
+						}
+						else{
+							
+							timerCnt++;
+							
+							if(timerCnt > 5){
+								alert("데이터가 없습니다");
+								window.clearInterval(timerId);
+							}
+						}
+					}, 300);
+					
 				}
 			}
 		}]

@@ -421,26 +421,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     	
     	Ext.create("InAcc.view.map.Layer");
     	
-    	var popContainer = document.getElementById('popup');
-    	var popContent = document.getElementById('popup-content');
-    	var popCloser = document.getElementById('popup-closer');
-    	
-    	popCloser.onclick = function(){
-    		popup.setPosition(undefined);
-    		popCloser.blur();
-    		return false;
-    	}
-    	
-    	var popup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
-    		element: popContainer,
-    		autoPan: true,
-    		autoPanAnimation: {
-    			duration: 250
-    		}
-    	}));
-    	
     	me.map = new ol.Map({
-    		overlays: [popup], // 팝업창 설정
     		target: '_mapDiv_',
     		layers: this.baseMapLayers,
     		controls : [],
@@ -456,93 +437,15 @@ Ext.define('InAcc.view.map.CoreMap', {
     		})
     	});
     	
+    	// 속성 팝업 설정
+    	me.setInfoPopup();
+    	
     	//var mapHistory = new ol.navigationHistory( this.map );
     	this.map.on('moveend', this.mapExtentChange, this);
     	//console.info(ol.MOUSEWHEELZOOM_TIMEOUT_DURATION);
     	//this.map.on('mouse-wheel', this.test, this);
 
     	InAcc.global.Function.getSido();
-
-    	//me.map.events.register('click', map, onClick);
-    	// 이벤트 생성
-    	var mapClickEvt = me.map.on('click', function(evt){
-    		
-    		var layers = me.map.getLayers().getArray();
-    		var layerNames = "";
-    		var coordinate = evt.coordinate;
-    		var resolution = me.map.getView().getResolution();
-    		
-    		popup.setPosition(coordinate);
-    		
-    		popContent.innerHTML = "";
-    		
-    		Ext.each(layers, function(layer){
-    			
-    			if(layer.values_.type != "base"){
-    				
-    				var layerSource = layer.getSource();
-    				var layerName = layerSource.params_.LAYERS;
-    				
-    				/*console.info(layerSource.getGetFeatureInfoUrl(evt.coordinate, me.map.getView().getResolution(), "EPSG:5179", {
-    					'INFO_FORMAT': 'text/html',
-                        'FEATURE_COUNT': '300'
-    				}));*/
-    				
-    				var tmpUrl = layerSource.getGetFeatureInfoUrl(coordinate, resolution, "EPSG:5179", {
-    					'INFO_FORMAT': 'text/xml',
-                        'FEATURE_COUNT': '300'
-    				});
-    				
-    				$.ajax({
-    		            url : InAcc.global.Variable.getProxyUrl() + tmpUrl,
-    		            type : 'GET',
-    		            async : false,
-    		            contentType : 'text/xml',
-    		            success : function(response_) {
-    		            	
-    		            	var childs = $(response_).find(layerName).children();
-    		            	
-    		            	if(childs.length > 0){
-    		            		popContent.innerHTML += "<img src='./resources/images/popup/information.png' style='margin-bottom:-3px;' /> <span style='color:black; font-weight: bold; margin-left:3px;'>레이어 객체 정보</span>";
-    		            		popContent.innerHTML += "<div style='margin-top:10px; background: #eff8ff; height: 20px; border-top: 2px solid #167dcc; border-bottom: 1px solid #cfcfcf; color: #003471;'>" +
-    		            				"<img src='./resources/images/popup/blit_st_01.png' style='margin-left:5px; margin-bottom: 2px; margin-right:7px;' />Layer Name &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp" + layerName + "</div>";
-    		            	}
-    		            	
-    		            	Ext.each($(childs), function(child, cnt){
-    		            		
-		            			if($(child)[0].localName != "SHAPE" && $(child)[0].localName != "boundedBy"){
-			            			popContent.innerHTML += "<div>" +
-			            					"<div style='position: absolute; width:100px; background: #f6f6f6; height: 20px; border-top: 1px solid #cfcfcf; border-bottom: 1px solid #cfcfcf; color: #000;'>" +
-			            					"<img src='./resources/images/popup/blit_st_01.png' style='margin-left:5px; margin-bottom: 2px; margin-right:7px;' />" + $(child)[0].localName + "</div>" +
-			            							"<div style='position:relative; left:100px; color: #545454;'>&nbsp&nbsp&nbsp" + $(child).text() + "</div>" +
-			            									"</div>";
-			            		}
-		            			
-		            			/*if(cnt == $(child).length - 1){
-			            			popContent.innerHTML += "<br>";
-			            		}*/
-    		            	});
-    		            	
-    		            	popContent.innerHTML +="<div style='height:10px;'></div>";
-    		           }
-    		       });
-    				
-    				//console.info(layerSource.params_.LAYERS);
-    				//console.info(layerSource.urls[0]);
-    				layerNames += layerSource.params_.LAYERS + ",";
-    			}
-    		});
-    		
-    		/*if(layerNames != ""){
-    			layerNames = layerNames.substring(0, layerNames.length - 1);
-    		}
-    		else{
-    			alert("활성화된 레이어가 없습니다.");
-    			return false;
-    		}*/
-    		
-    		//me.map.unByKey(mapClickEvt); // 이벤트 삭제
-    	});
 
     	me.map.getView().on('change:resolution', function(evt){
     		
@@ -652,5 +555,31 @@ Ext.define('InAcc.view.map.CoreMap', {
     	}
     	
     	/*me.baseMapLayers[].setVisible(true);*/
+    },
+    setInfoPopup: function(){
+    	
+    	var me = this;
+    	
+    	me.popContainer = document.getElementById('popup');
+    	me.popContent = document.getElementById('popup-content');
+    	me.popCloser = document.getElementById('popup-closer');
+    	
+    	me.popCloser.onclick = function(){
+    		me.popup.setPosition(undefined);
+    		me.popCloser.blur();
+    		return false;
+    	}
+    	
+    	me.popup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+    		element: me.popContainer,
+    		autoPan: true,
+    		autoPanAnimation: {
+    			duration: 250
+    		}
+    	}));
+    	
+    	if(me.map != undefined && me.map != null){
+    		me.map.addOverlay(me.popup);
+    	}
     }
 });
