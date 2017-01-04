@@ -11,6 +11,7 @@ Ext.define("InAcc.global.Function", {
 	comboArray : [],
 
 	tableInfo : Ext.create('Ext.data.Store', {
+		autoLoad: true,
 		proxy : {
 			type : 'ajax',
 			url : './resources/data/tableInfo.json',
@@ -55,42 +56,13 @@ Ext.define("InAcc.global.Function", {
 
 		return false;
 	},
-	/*getSLP : function(code){
-		var slpIdx = 0;
-		var getfilter = "";
-		this.tableInfo.load(function(record) {
-			slpIdx = record.map(function(obj){
-				return obj.data.L_CODE;
-			}).indexOf("SLP");
-			
-			getfilter = record[slpIdx].data.S_ITEM.filter(function(obj){
-			    return obj.S_CODE === code.SLOP_CDE;
-			});
-		});
-		
-		
-		
-		console.info(getfilter);
-	},*/
+	
 	createGrid : function(data, confUrl) {
-		//console.info(data[0].SLOP_CDE);
-		//SLOP_CDE("SLP001"), ASGB_CDE("ASG003")
+		
 		var me = this;
 		
-		/*Ext.each(data, function(media, index) {
-			me.getSLP(media.SLOP_CDE);
-			
-		});*/
-		
-		
-		
-		
-		
-		
-
 		var recordData = null;
 		var gridStore = null;
-
 		var confStore = Ext.create('Ext.data.Store', {
 
 			proxy : {
@@ -111,6 +83,43 @@ Ext.define("InAcc.global.Function", {
 			});
 
 			recordData = record[0].data;
+			//console.info(gridStore.data.items[0]);
+			//console.info(recordData);
+			//console.info(me.tableInfo.data.items);
+			
+			for(var i = 0; i < recordData.columns.length; i++){
+				
+				if(recordData.columns[i].lCode != undefined){
+					
+					//console.info(recordData.columns[i]);
+					
+					var tmpIdx = me.tableInfo.data.items.map(function(itemObj){
+						
+						return itemObj.data.L_CODE;
+					}).indexOf(recordData.columns[i].lCode);
+					
+					var codeTbl = me.tableInfo.data.items[tmpIdx];
+					//console.info(me.tableInfo.data.items[tmpIdx]);
+					
+					var tmpGData = gridStore.data.items.map(function(gDataObj){
+						
+						var columnName = recordData.columns[i].dataIndex;
+						var columnValue = eval("gDataObj.data." + columnName);
+						
+						var tmpCTblIdx = codeTbl.data.S_ITEM.map(function(sItem){
+							
+							return sItem.S_CODE;
+						}).indexOf(columnValue);
+						//console.info(codeTbl.data.S_ITEM[tmpCTblIdx].S_NAME);
+						
+						console.info(columnName);
+						eval("gDataObj.data." + columnName + " = '" + codeTbl.data.S_ITEM[tmpCTblIdx].S_NAME + "'");
+						return gDataObj;
+					});
+					
+					//console.info(tmpGData);
+				}
+			}
 		});
 		
 		
@@ -427,7 +436,7 @@ Ext.define("InAcc.global.Function", {
 			featureTypes : [ me.queryLayerName ],
 			outputFormat : 'application/json',
 			geometryName : 'SHAPE',
-			maxFeatures : 300,
+			maxFeatures : 1000,
 			filter : queryFilter,
 		});
 		
@@ -714,7 +723,6 @@ Ext.define("InAcc.global.Function", {
 
 	getVworldPoi:function(){
 		var poisearchname = Ext.ComponentQuery.query("#poisearchname")[0];
-		
 		var searchStr = poisearchname.lastValue;
 		if(searchStr!=""){
 			var encString = encodeURIComponent(searchStr);

@@ -129,12 +129,22 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 				style:"margin-left:15px; margin-top:15px;",
 				itemId:"poisearchname",
 				xtype:"textfield",
-				width:240
+				enableKeyEvents: true,
+				width:240,
+				listeners:{
+					keydown:function(t,e){
+						if(e.keyCode == 13){
+							var poisearchbtn = Ext.ComponentQuery.query("#poisearchbtn")[0];
+							poisearchbtn.el.dom.click();
+						}
+					}
+				}
 			},{
 				style:"margin-top:15px; background : #555; border: 1px solid #303030",
 				xtype:"button",
 				width:60,
 				text:"검색",
+				itemId:"poisearchbtn",
 				handler:function(){
 					InAcc.global.Function.getVworldPoi();
 				}
@@ -174,7 +184,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 		            		var rec = grid.getStore().getAt(rowIndex);
 		            		var coreMap = Ext.getCmp("_mapDiv_");
 		            		coreMap.map.getView().setCenter(ol.proj.transform([rec.data.xpos,rec.data.ypos], 'EPSG:4326', 'EPSG:5179'));
-		            		coreMap.map.getView().setZoom(11);
+		            		coreMap.map.getView().setZoom(17);
 		            	}   
 		            }]
 		         }]

@@ -48,8 +48,32 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		 "<span style='width: 60px; height: 20px; border: 1px solid #126dae; color: #fff; background: #126dae; font-weight: bold; letter-spacing: -1px; font-size: 12px;'> 맵종류 G </span>",*/
 	items:[{
 		xtype:"container",
-		width:200,
+		width:"65%",
 		height:36
+	},{
+		xtype:"slider",
+		width: 200,
+        minValue: 0,
+        labelWidth: 50,
+        value:100,
+        itemId:"slider",
+        fieldLabel: "투명도",
+        labelSeparator : '',
+        hideLabel: false,
+        useTips: false,
+        maxValue: 100,
+        listeners: {
+    		change: function(slider, thumb, oldValue, newValue) {
+    			var layer = Ext.getCmp("Layer_");
+    			layer.opacity = thumb/100;
+    			if(layer.layers!=""){
+    				
+    				for(var i = 0; i < layer.layers.length; i++){
+    					layer.layers[i].layer.setProperties({opacity: thumb/100});
+    				}
+    			}
+    		}
+    	}
 	}]
 });
 

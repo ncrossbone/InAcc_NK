@@ -4,7 +4,7 @@ Ext.define('InAcc.view.map.Layer', {
 	layers: [],
 	
 	id: "Layer_",
-	
+	opacity: 1.0,
 	initComponent: function(){
 		this.callParent();    
 	},
@@ -34,7 +34,8 @@ Ext.define('InAcc.view.map.Layer', {
 		                 TEXT_ANTI : 'true'
 		             }
 					//serverType: 'geoserver'
-				})
+				}),
+				opacity: me.opacity
 			});
 
 			coreMap.map.addLayer(layer);
