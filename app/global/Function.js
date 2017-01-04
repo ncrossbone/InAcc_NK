@@ -72,6 +72,10 @@ Ext.define("InAcc.global.Function", {
 		
 		console.info(getfilter);
 	},*/
+	
+	
+	
+	
 	createGrid : function(data, confUrl) {
 		//console.info(data[0].SLOP_CDE);
 		//SLOP_CDE("SLP001"), ASGB_CDE("ASG003")
@@ -144,7 +148,9 @@ Ext.define("InAcc.global.Function", {
 					}
 				
 					if(data == false){
-						alert("검색결과가 없습니다");	
+						
+						 Ext.example.msg('검색결과', '데이터가 존재하지 않습니다');
+						
 					}
 
 					return;
@@ -219,6 +225,7 @@ Ext.define("InAcc.global.Function", {
 				} else {
 
 					grid.setStore(gridStore);
+					grid.setTitle(recordData.title+"("+gridStore.data.length+")");
 				}
 			} else {
 
@@ -427,7 +434,7 @@ Ext.define("InAcc.global.Function", {
 			featureTypes : [ me.queryLayerName ],
 			outputFormat : 'application/json',
 			geometryName : 'SHAPE',
-			maxFeatures : 300,
+			maxFeatures : 1000,
 			filter : queryFilter,
 		});
 		
