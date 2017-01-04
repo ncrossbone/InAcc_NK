@@ -56,6 +56,7 @@ Ext.define("InAcc.global.Function", {
 
 		return false;
 	},
+
 	
 	createGrid : function(data, confUrl) {
 		
@@ -153,7 +154,9 @@ Ext.define("InAcc.global.Function", {
 					}
 				
 					if(data == false){
-						alert("검색결과가 없습니다");	
+						
+						 Ext.example.msg('검색결과', '데이터가 존재하지 않습니다');
+						
 					}
 
 					return;
@@ -228,6 +231,7 @@ Ext.define("InAcc.global.Function", {
 				} else {
 
 					grid.setStore(gridStore);
+					grid.setTitle(recordData.title+"("+gridStore.data.length+")");
 				}
 			} else {
 

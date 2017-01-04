@@ -25,6 +25,8 @@
 <link rel="stylesheet" type="text/css" href="./ext-6.2.0/build/classic/theme-triton/resources/theme-triton-all.css">
 <script type="text/javascript" src="proj4-src.js"></script>
 <script type="text/javascript" src="./resources/js/common.js"></script>
+<script type="text/javascript" src="./resources/js/examples.js"></script>
+<link rel="stylesheet" type="text/css" href="./resources/js/examples.css"/>
 <script type ="text/javascript" src="app.js"></script>
 <script type="text/javascript">
 ol.ProxyHost = "./resources/Proxy.jsp?resourceUrl="; // 크로스도메인 해결
@@ -48,6 +50,44 @@ ol.ProxyHost = "./resources/Proxy.jsp?resourceUrl="; // 크로스도메인 해�
 .ol-zoom .ol-zoom-out {
 	margin-top: 204px;
 } */
+
+
+.msg .x-box-mc {
+    font-size:14px;
+}
+#msg-div {
+    position:absolute;
+    left:50%;
+    top:10px;
+    width:400px;
+    margin-left:-200px;
+    z-index:20000;
+}
+#msg-div .msg {
+    border-radius: 8px;
+    -moz-border-radius: 8px;
+    background: #F6F6F6;
+    border: 2px solid #ccc;
+    margin-top: 2px;
+    padding: 10px 15px;
+    color: #555;
+}
+#msg-div .msg h3 {
+    margin: 0 0 8px;
+    font-weight: bold;
+    font-size: 15px;
+}
+#msg-div .msg p {
+    margin: 0;
+}
+
+
+
+.x-grid-cell-inner-row-numberer {
+	color: blue;
+	text-decoration: underline;
+}
+
 #westcontainer_header-innerCt {
 	position: absolute;
 	top: 300px;
