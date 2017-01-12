@@ -558,7 +558,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     },
     setInfoPopup: function(){
     	
-    	var me = this;
+    	/*var me = this;
     	
     	me.popContainer = document.getElementById('popup');
     	me.popContent = document.getElementById('popup-content');
@@ -570,7 +570,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     		return false;
     	}
     	
-    	me.popup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+    	me.popup = new ol.Overlay(*//** @type {olx.OverlayOptions} *//* ({
     		element: me.popContainer,
     		autoPan: true,
     		autoPanAnimation: {
@@ -580,6 +580,6 @@ Ext.define('InAcc.view.map.CoreMap', {
     	
     	if(me.map != undefined && me.map != null){
     		me.map.addOverlay(me.popup);
-    	}
+    	}*/
     }
 });

@@ -14,6 +14,8 @@ Ext.define("InAcc.view.main.Main", {
 	
 	xtype: "inacc-main",
 	
+	id: "main",
+	
 	title: "",
 	
 	layout: {
@@ -101,5 +103,70 @@ Ext.define("InAcc.view.main.Main", {
 			southContainer.setY(height - southContainer.height);
 		}
 		
+	},
+	onSplitMapClick: function(){
+		
+		console.info(this);
+		console.info(this.query("#_mapDiv_")[0]);
+		console.info(this.down("inacc-coremap"));
+		
+		var coreMap = this.down("inacc-coremap");
+		//coreMap.removeAll();
+		//this.remove(mapDiv);
+		this.removeAll();
+		
+		var splitMapContainer = Ext.create("Ext.panel.Panel", {
+			
+			width: 1000,
+			height: 700,
+			//title: "split test",
+			header: false/*,
+			defaults: {
+				split: true
+			},
+			layout: {
+				type: "border"
+			}*/
+			/*initComponent: function(){
+				
+				this.callParent();
+				
+				this.add(coreMap);
+				this.add({
+					xtype: "panel",
+					title: "panel2",
+					height: 500,
+					width: 500,
+					region: "east"
+				});
+			}*/
+		});
+		
+		var panelEast = Ext.create("Ext.panel.Panel", {
+			title: "panel1",
+			height: 500,
+			width: 500,
+			region: "east"
+		});
+		
+		//panelEast.add(coreMap);
+		//splitMapContainer.add(panelEast);
+		console.info(coreMap.map.getLayers());
+		console.info(coreMap.map.getView().calculateExtent(coreMap.map.getSize()));
+		console.info(coreMap.map.getView().getZoom());
+		console.info(coreMap.map.getView().getCenter());
+		splitMapContainer.add({xtype: "inacc-coremap"});
+		splitMapContainer.add({
+			xtype: "panel",
+			title: "panel2",
+			height: 500,
+			width: 500,
+			region: "east"
+		});
+		
+		this.add(splitMapContainer);
+		
+		//var splitMap = Ext.create("InAcc.view.main.Main_Splitter");
+		//this.add(splitMap);
 	}
 });

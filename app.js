@@ -31,6 +31,7 @@ Ext.application({
     		
     		main.setWidth(width);
     		main.setHeight(height);
+    	});
     		
     }
 });
