@@ -314,7 +314,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     initBaseMap: function(val){
     	var me = this; 
     
-    	me.baseMapLayers.push(new ol.layer.Tile({
+    	/*me.baseMapLayers.push(new ol.layer.Tile({
     		title : 'MS 빙맵(위성)',
     		type : 'base',
     		visible : false,
@@ -421,7 +421,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     							url : 'http://1.234.82.19:8080/editor/v1/{z}/{x}/{y}.png'
     				})
     	})
-    	)
+    	)*/
     	
     	//console.info(this.baseMapLayers);
     	proj4.defs("EPSG:5179", "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs");
@@ -470,30 +470,11 @@ Ext.define('InAcc.view.map.CoreMap', {
     		me.wheelZoom(zoomLevel);
     		
     	});
-    	/*
     	
-    	var layer = new ol.layer.Tile({
-			source: new ol.source.TileWMS({
-				url: 'http://202.68.238.120:8880/geonuris/wms?GDX=Hillshade5m.xml',
-				params : {
-					LAYERS : "OffLineMap_GM",
-					CRS : "EPSG:5179",
-					format : 'image/png',
-					bgcolor : '0xffffff', 
-					exceptions : 'BLANK',
-					label : 'HIDE_OVERLAP',
-					graphic_buffer : '64',
-					ANTI : 'true',
-					TEXT_ANTI : 'true'
-				}
-			//serverType: 'geoserver'
-			})
-		});
-
-		this.map.addLayer(layer);
-		layer.setVisible(true);*/
-
-		
+    	var dLayer = Ext.getCmp("Layer_");
+    	dLayer.layerOn("NK_SGG");
+    	dLayer.layerOn("NK_SIDO");
+    	dLayer.layerOn("H0040000");
     },
     
     wheelZoom:function(zoomLevel){
