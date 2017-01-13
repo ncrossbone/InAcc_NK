@@ -793,7 +793,7 @@ Ext.define("InAcc.global.Function", {
 		//console.info(coreMap.map.getExtent());
 		var extent = "";
         $.ajax({
-            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+            url : proxy + InAcc.global.Variable.getMapServiceUrl(),
             type : 'POST',
             data : new XMLSerializer().serializeToString( featureRequest ),
             async : false,
@@ -831,7 +831,7 @@ Ext.define("InAcc.global.Function", {
 		//console.info(coreMap.map.getExtent());
 		var extent = "";
         $.ajax({
-            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+            url : proxy + InAcc.global.Variable.getMapServiceUrl(),
             type : 'POST',
             data : new XMLSerializer().serializeToString( featureRequest ),
             async : false,

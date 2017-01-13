@@ -60,12 +60,10 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		bufferedRenderer: false,
 		listeners: {
 			checkchange:function(node){
-				var dLayer = Ext.getCmp("Layer_");
-				
 				if(node.data.checked==false){
-					dLayer.layerOff(node.id);
+					offImgLyr(node.id);
 				}else{
-					dLayer.layerOn(node.id);
+					imgLyr(node.id);
 				}
 			}
 		}
@@ -137,46 +135,12 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		bufferedRenderer: false,
 		listeners: {
 			checkchange:function(node){
-				/*var coreMap = Ext.getCmp("_mapDiv_");
-				
-				var layer = new ol.layer.Tile({
-					source: new ol.source.TileWMS({
-						url: 'http://202.68.238.120:8880/geonuris/wms?GDX=NK_Test_2.xml',
-						params : {
-			            	 LAYERS : "suj_C3.tif.prmd",
-			                 CRS : "EPSG:5179",
-			                 format : 'image/png',
-			                 bgcolor : '0xffffff', 
-			                 exceptions : 'BLANK',
-			                 label : 'HIDE_OVERLAP',
-			                 graphic_buffer : '64',
-			                 ANTI : 'true',
-			                 TEXT_ANTI : 'true'
-			             }
-						//serverType: 'geoserver'
-					})
-				})
-				
-				
-				
-				
-				coreMap.map.addLayer(layer);
-				layer.setVisible(true);*/
-			
-				/*var wmsSource = new ol.source.TileWMS({
-		            url : serviceUrl,
-		            params : {
-		                LAYERS : 'ROOT',
-		                CRS : mapCRS,
-		                format : 'image/png',
-		                bgcolor : '0xffffff', 
-		                exceptions : 'BLANK',
-		                label : 'HIDE_OVERLAP',
-		                graphic_buffer : '64',
-		                ANTI : 'true',
-		                TEXT_ANTI : 'true'
-		            }
-		        });*/
+
+				if(node.data.checked==false){
+					offImgLyr(node.id);
+				}else{
+					imgLyr(node.id);
+				}
 			}
 		}
 	},{

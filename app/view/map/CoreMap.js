@@ -354,17 +354,24 @@ Ext.define('InAcc.view.map.CoreMap', {
     	)
 
     	me.baseMapLayers.push(new ol.layer.Tile({
-    		title : 'OSM',
-    		type : 'base',
+    		title : '오프라인',
     		visible : false,
-    		source : new ol.source.OSM(
-    				{
-    					attributions : [ new ol.Attribution(
-    							{
-    								html : 'Tiles &copy; <a href="http://www.opencyclemap.org/">OpenCycleMap</a>'
-    							}) ]
-    				})
-    	})
+    		type : 'base',
+			source: new ol.source.TileWMS({
+				url: InAcc.global.Variable.getMapServiceWmsUrl() + 'OffLineMap.xml',
+				params : {
+					LAYERS : "OffLineMap_GM_1.tif.prmd",
+					CRS : "EPSG:5179",
+					format : 'image/png',
+					bgcolor : '0xffffff', 
+					exceptions : 'BLANK',
+					label : 'HIDE_OVERLAP',
+					graphic_buffer : '64',
+					ANTI : 'true',
+					TEXT_ANTI : 'true'
+				}
+			})
+		})
     	)
 
     	me.baseMapLayers.push(new ol.layer.Tile({
@@ -453,7 +460,30 @@ Ext.define('InAcc.view.map.CoreMap', {
     		me.wheelZoom(zoomLevel);
     		
     	});
+    	/*
     	
+    	var layer = new ol.layer.Tile({
+			source: new ol.source.TileWMS({
+				url: 'http://202.68.238.120:8880/geonuris/wms?GDX=Hillshade5m.xml',
+				params : {
+					LAYERS : "OffLineMap_GM",
+					CRS : "EPSG:5179",
+					format : 'image/png',
+					bgcolor : '0xffffff', 
+					exceptions : 'BLANK',
+					label : 'HIDE_OVERLAP',
+					graphic_buffer : '64',
+					ANTI : 'true',
+					TEXT_ANTI : 'true'
+				}
+			//serverType: 'geoserver'
+			})
+		});
+
+		this.map.addLayer(layer);
+		layer.setVisible(true);*/
+
+		
     },
     
     wheelZoom:function(zoomLevel){
@@ -538,7 +568,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     		$("#map5").removeClass("mapClick");
     		$("#map4").addClass("mapClick");
     		$("#map5").addClass("mapDefault");
-    	}else{
+    	}else if(val.id=="map5"){
     		$("#map5").removeClass("mapDefault");
     		$("#map4").removeClass("mapClick");
     		$("#map5").addClass("mapClick");

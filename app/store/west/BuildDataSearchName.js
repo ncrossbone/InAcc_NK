@@ -9,7 +9,6 @@ Ext.define('InAcc.store.west.BuildDataSearchName', {
 	listeners: {
 		load: function(store) {
 			
-			console.info(store.buildData);
 			var coreMap = Ext.getCmp("_mapDiv_");
 			
 			var	proxy = "./resources/Proxy.jsp?url="
@@ -24,7 +23,7 @@ Ext.define('InAcc.store.west.BuildDataSearchName', {
             });
             
             $.ajax({
-                url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+                url : proxy + InAcc.global.Variable.getMapServiceUrl(),
                 type : 'POST',
                 data : new XMLSerializer().serializeToString( featureRequest ),
                 async : true,
