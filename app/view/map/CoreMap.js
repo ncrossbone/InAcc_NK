@@ -314,7 +314,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     initBaseMap: function(val){
     	var me = this; 
     
-    	me.baseMapLayers.push(new ol.layer.Tile({
+    	/*me.baseMapLayers.push(new ol.layer.Tile({
     		title : 'MS 빙맵(위성)',
     		type : 'base',
     		visible : false,
@@ -414,7 +414,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     							url : 'http://1.234.82.19:8080/editor/v1/{z}/{x}/{y}.png'
     				})
     	})
-    	)
+    	)*/
     	
     	//console.info(this.baseMapLayers);
     	proj4.defs("EPSG:5179", "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs");
@@ -464,6 +464,10 @@ Ext.define('InAcc.view.map.CoreMap', {
     		
     	});
     	
+    	var dLayer = Ext.getCmp("Layer_");
+    	dLayer.layerOn("NK_SGG");
+    	dLayer.layerOn("NK_SIDO");
+    	dLayer.layerOn("H0040000");
     },
     
     wheelZoom:function(zoomLevel){
