@@ -19,7 +19,7 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		 "</select>"+
 		 "<button id='selectButton' style='width: 60px; border: transparent; font-family: notokr; color:gray;'>" +
 		 "이동</button>"+
-		 "<select id='demonLocation' style='margin-left:100px; width: 130px; border: transparent; font-family: notokr; color:gray;'>" +
+		 "<select id='demonLocation' style='margin-left:50px; width: 130px; border: transparent; font-family: notokr; color:gray;'>" +
 			"<option selected disabled >시범지역위치이동</option>" +
 			"<option value='na'>나선</option>" +
 			"<option value='nam'>남포</option>" +

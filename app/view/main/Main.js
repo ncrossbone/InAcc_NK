@@ -57,9 +57,9 @@ Ext.define("InAcc.view.main.Main", {
 		
 		WestContainer.setHeight(height - 65);
 		coreMap.map.updateSize();
-		
 		var slider = Ext.ComponentQuery.query("#slider")[0];
-		if(width<1334){
+		
+		if(width<1280){
 			
 			slider.hide();
 			//console.info(slider.isVisible(false));

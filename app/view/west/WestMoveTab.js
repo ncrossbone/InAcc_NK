@@ -210,10 +210,20 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 				style:"margin-left:15px; margin-top:15px;",
 				xtype:"textfield",
 				id: "bildData",
-				width:240
+				width:240,
+				enableKeyEvents: true,
+				listeners:{
+					keydown:function(t,e){
+						if(e.keyCode == 13){
+							var alldatabtn = Ext.ComponentQuery.query("#alldatabtn")[0];
+							alldatabtn.el.dom.click();
+						}
+					}
+				}
 			},{
 				style:"margin-top:15px; background : #555; border: 1px solid #303030",
 				xtype:"button",
+				itemId:"alldatabtn",
 				width:60,
 				text:"검색",
 				handler: function(){

@@ -98,7 +98,7 @@ BuildDataSet = function(buildStore){
                         var coreMap = Ext.getCmp("_mapDiv_");
                         
                         coreMap.map.getView().setCenter([x,y]);
-                        coreMap.map.getView().setZoom(11);
+                        coreMap.map.getView().setZoom(17);
                         
                         //coreMap.map.getView().setCenter([rec.data.x,rec.data.y]);
 	                }
@@ -109,7 +109,7 @@ BuildDataSet = function(buildStore){
      
      var buildList = Ext.getCmp("buildList");
      buildList.setStore(buildStore);
-	
+
 }
 
 aaa = function(){
