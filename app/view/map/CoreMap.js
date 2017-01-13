@@ -15,6 +15,7 @@ Ext.define('InAcc.view.map.CoreMap', {
 	
 	width: "100%",
 	height: "100%",
+	
 	html:"<div style='position:absolute; top:8%; left:96%; width:60px; z-index:20000; height:200px;'>" +
 	  "<div class='zoomText'>" +
 	  	//"<div style='top:75px; background: url(./resources/images/zoom.png) -216px 0px;'></div>" +
@@ -419,10 +420,19 @@ Ext.define('InAcc.view.map.CoreMap', {
     	proj4.defs("EPSG:5179", "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs");
     	
     	
-    	Ext.create("InAcc.view.map.Layer");
+    	Ext.create("InAcc.view.map.Layer", {
+    		id: "Layer_",
+    		mapId: "_mapDiv_"
+    	});
+    	
+    	Ext.create("InAcc.view.map.Layer", {
+    		id: "Layer_East",
+    		mapId: "_mapDiv_East"
+    	});
     	
     	me.map = new ol.Map({
-    		target: '_mapDiv_',
+    		//target: '_mapDiv_',
+    		target: me.id,
     		layers: this.baseMapLayers,
     		controls : [],
     		//interactions:[new ol.interaction.MouseWheelZoom()],

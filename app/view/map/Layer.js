@@ -4,19 +4,20 @@ Ext.define('InAcc.view.map.Layer', {
 	layers: [],
 	
 	id: "Layer_",
+	mapId: "_mapDiv_",
 	opacity: 1.0,
 	initComponent: function(){
 		this.callParent();    
 	},
 	layerOn: function(id){
 		var me = this;
-		var coreMap = Ext.getCmp("_mapDiv_");
+		var coreMap = Ext.getCmp(me.mapId);
 
-
+//console.info(me.mapId);
 		var layerIdx = this.layers.map(function(layer){
 			return layer.id;
-		}).indexOf(id);
-		
+		}).indexOf(me.mapId + "_" + id);
+		//console.info(this.layers);
 		if(layerIdx==-1){
 
 			var layer = new ol.layer.Tile({
@@ -41,7 +42,7 @@ Ext.define('InAcc.view.map.Layer', {
 			coreMap.map.addLayer(layer);
 			layer.setVisible(true);
 
-			var layerObj = {id: id, layer: layer};
+			var layerObj = {id: me.mapId + "_" + id, layer: layer};
 			me.layers.push(layerObj);
 
 		}else{
@@ -55,7 +56,7 @@ Ext.define('InAcc.view.map.Layer', {
 
 		var layerIdx = this.layers.map(function(layer){
 			return layer.id;
-		}).indexOf(id);
+		}).indexOf(this.mapId + "_" + id);
 
 		this.layers[layerIdx].layer.setVisible(false);
 	}
