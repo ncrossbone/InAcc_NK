@@ -6,7 +6,7 @@ Ext.application({
     requires: [
     	"InAcc.global.Function",
     	"InAcc.global.Variable",
-    	"InAcc.view.main.Main_Splitter"
+    	"InAcc.view.map.ZoomBar"
     ],
 
     launch : function() {
@@ -14,13 +14,7 @@ Ext.application({
     	var main = Ext.create("InAcc.view.main.Main", {
     		renderTo: Ext.getBody()
     	});
-
-    	/*var mainSplitter = Ext.create("InAcc.view.main.Main_Splitter", {
-    		renderTo: Ext.getBody(),
-    		width: Ext.getBody().getWidth(),
-    		height: Ext.getBody().getHeight()
-    	});*/
-
+    	
     	Ext.on('resize', function(){
 
     		var width = Ext.getBody().getWidth();
@@ -31,7 +25,6 @@ Ext.application({
 
     		main.setWidth(width);
     		main.setHeight(height);
-
     	});
     }
 });

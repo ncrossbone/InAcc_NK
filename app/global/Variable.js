@@ -33,6 +33,7 @@ Ext.define("InAcc.global.Variable", {
 			
 			//console.info(record);
 			me.setMapServiceUrl(record[0].data.mapServiceUrl);
+			//console.info(record[0].data.mapServiceUrl);
 			me.setProxyUrl(record[0].data.proxyUrl);
 			me.setMapServiceWmsUrl(record[0].data.mapServiceWmsUrl);
 			me.setMapServiceWfsUrl(record[0].data.mapServiceWfsUrl);

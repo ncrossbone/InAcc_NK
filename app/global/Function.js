@@ -526,39 +526,58 @@ Ext.define("InAcc.global.Function", {
 	
 	getSido: function(){
 
-		var	proxyUrl = InAcc.global.Variable.getProxyUrl();
-		var serviceUrl = InAcc.global.Variable.getMapServiceUrl();
+		var timerCnt = 0;
 		
-		var params = "&SERVICE=WFS&VERSION=1.1.0";
-		params += "&REQUEST=GetFeature";
-		params += "&MAXFEATURES=300";
-		params += "&TYPENAME=NK_SIDO";
-		params += "&PROPERTYNAME=SD_NM,SD_CD";
-		
-		var url = proxyUrl + serviceUrl + params;
-		
-        $.ajax({
-        	url: url,
-            type : 'GET',
-            async : false,
-            contentType : 'text/xml',
-            success : function(response_) {
-            	
-            	var receiveData = [];
-            	
-            	$(response_).find("NK_SIDO").each(function(){
-            		
-            		var nameVal = $(this).find("SD_NM").text();
-					var idVal= $(this).find("SD_CD").text();
-					
-					receiveData.push({id: idVal, name: nameVal});
-            	});
+		var timer = setInterval(function(){
+			
+			timerCnt++;
+			
+			var	proxyUrl = InAcc.global.Variable.getProxyUrl();
+			var serviceUrl = InAcc.global.Variable.getMapServiceUrl();
+			
+			if(proxyUrl != undefined && proxyUrl != null && serviceUrl != undefined && serviceUrl != null){
 				
-				for(var i = 0 ; i < receiveData.length ; i++){
-					$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
-				}
-            }
-        });
+				clearInterval(timer);
+				
+				console.info(serviceUrl);
+				var params = "&SERVICE=WFS&VERSION=1.1.0";
+				params += "&REQUEST=GetFeature";
+				params += "&MAXFEATURES=300";
+				params += "&TYPENAME=NK_SIDO";
+				params += "&PROPERTYNAME=SD_NM,SD_CD";
+				
+				var url = proxyUrl + serviceUrl + params;
+				
+		        $.ajax({
+		        	url: url,
+		            type : 'GET',
+		            async : false,
+		            contentType : 'text/xml',
+		            success : function(response_) {
+		            	
+		            	var receiveData = [];
+		            	
+		            	$(response_).find("NK_SIDO").each(function(){
+		            		
+		            		var nameVal = $(this).find("SD_NM").text();
+							var idVal= $(this).find("SD_CD").text();
+							
+							receiveData.push({id: idVal, name: nameVal});
+		            	});
+						
+						for(var i = 0 ; i < receiveData.length ; i++){
+							$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
+						}
+		            }
+		        });
+			}
+			
+			if(timerCnt > 2000){
+				
+				clearInterval(timer);
+				alert("시/도 조회 시간초과!!");
+			}
+		}, 1);
 	},
 	getSgg: function(sidoCd){
 		
