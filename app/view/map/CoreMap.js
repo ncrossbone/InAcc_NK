@@ -454,6 +454,9 @@ Ext.define('InAcc.view.map.CoreMap', {
     		
     	});
     	
+    	
+    	
+    	
     },
     
     wheelZoom:function(zoomLevel){
@@ -581,5 +584,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     	if(me.map != undefined && me.map != null){
     		me.map.addOverlay(me.popup);
     	}
+    	
+    	
     }
 });
