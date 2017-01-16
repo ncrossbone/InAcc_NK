@@ -1,20 +1,17 @@
-Ext.define("InAcc.view.west.WestLayerTab", {
+Ext.define("InAcc.view.east.EastLayerTab", {
 
-	extend: "Ext.Panel",
-	xtype: "inacc-westlayertab",
+	extend: "Ext.panel.Panel",
+	xtype: "inacc-eastlayertab",
 	layout:{
 		type:'accordion'
 	},
-	id: "westLayerTab",
-	linkedLayerId: "Layer_",
+	id: "eastLayerTab",
+	linkedLayerId: "Layer_East",
 	border:false,
 	title:"주제도",
 	bodyStyle:"background-color:#f6f6f6;",
 	setChecked: function(parentNode, chkNode, layerObj){
 		
-		console.info(parentNode);
-		console.info(chkNode);
-		console.info(layerObj);
 		if(parentNode.id == chkNode.id){
 		
 			if(parentNode.childNodes.length > 0){
@@ -64,10 +61,9 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		listeners: {
 			checkchange:function(node){
 				
-				var layerTab = this.up("inacc-westlayertab");
+				var layerTab = this.up("inacc-eastlayertab");
 				var parentNode = this.items.items[0].node
-				var linkedLayerId = layerTab.linkedLayerId;
-				var layerObj = Ext.getCmp("Layer_");
+				var layerObj = Ext.getCmp("Layer_East");
 				console.info(layerObj);
 				layerTab.setChecked(parentNode, node, layerObj);
 //console.info(dLayer);
