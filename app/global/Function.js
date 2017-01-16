@@ -11,6 +11,7 @@ Ext.define("InAcc.global.Function", {
 	comboArray : [],
 
 	tableInfo : Ext.create('Ext.data.Store', {
+		autoLoad: true,
 		proxy : {
 			type : 'ajax',
 			url : './resources/data/tableInfo.json',
@@ -55,46 +56,14 @@ Ext.define("InAcc.global.Function", {
 
 		return false;
 	},
-	/*getSLP : function(code){
-		var slpIdx = 0;
-		var getfilter = "";
-		this.tableInfo.load(function(record) {
-			slpIdx = record.map(function(obj){
-				return obj.data.L_CODE;
-			}).indexOf("SLP");
-			
-			getfilter = record[slpIdx].data.S_ITEM.filter(function(obj){
-			    return obj.S_CODE === code.SLOP_CDE;
-			});
-		});
-		
-		
-		
-		console.info(getfilter);
-	},*/
-	
-	
-	
+
 	
 	createGrid : function(data, confUrl) {
-		//console.info(data[0].SLOP_CDE);
-		//SLOP_CDE("SLP001"), ASGB_CDE("ASG003")
+		
 		var me = this;
 		
-		/*Ext.each(data, function(media, index) {
-			me.getSLP(media.SLOP_CDE);
-			
-		});*/
-		
-		
-		
-		
-		
-		
-
 		var recordData = null;
 		var gridStore = null;
-
 		var confStore = Ext.create('Ext.data.Store', {
 
 			proxy : {
@@ -115,6 +84,43 @@ Ext.define("InAcc.global.Function", {
 			});
 
 			recordData = record[0].data;
+			//console.info(gridStore.data.items[0]);
+			//console.info(recordData);
+			//console.info(me.tableInfo.data.items);
+			
+			for(var i = 0; i < recordData.columns.length; i++){
+				
+				if(recordData.columns[i].lCode != undefined){
+					
+					//console.info(recordData.columns[i]);
+					
+					var tmpIdx = me.tableInfo.data.items.map(function(itemObj){
+						
+						return itemObj.data.L_CODE;
+					}).indexOf(recordData.columns[i].lCode);
+					
+					var codeTbl = me.tableInfo.data.items[tmpIdx];
+					//console.info(me.tableInfo.data.items[tmpIdx]);
+					
+					var tmpGData = gridStore.data.items.map(function(gDataObj){
+						
+						var columnName = recordData.columns[i].dataIndex;
+						var columnValue = eval("gDataObj.data." + columnName);
+						
+						var tmpCTblIdx = codeTbl.data.S_ITEM.map(function(sItem){
+							
+							return sItem.S_CODE;
+						}).indexOf(columnValue);
+						//console.info(codeTbl.data.S_ITEM[tmpCTblIdx].S_NAME);
+						
+						console.info(columnName);
+						eval("gDataObj.data." + columnName + " = '" + codeTbl.data.S_ITEM[tmpCTblIdx].S_NAME + "'");
+						return gDataObj;
+					});
+					
+					//console.info(tmpGData);
+				}
+			}
 		});
 		
 		
@@ -520,39 +526,58 @@ Ext.define("InAcc.global.Function", {
 	
 	getSido: function(){
 
-		var	proxyUrl = InAcc.global.Variable.getProxyUrl();
-		var serviceUrl = InAcc.global.Variable.getMapServiceUrl();
+		var timerCnt = 0;
 		
-		var params = "&SERVICE=WFS&VERSION=1.1.0";
-		params += "&REQUEST=GetFeature";
-		params += "&MAXFEATURES=300";
-		params += "&TYPENAME=NK_SIDO";
-		params += "&PROPERTYNAME=SD_NM,SD_CD";
-		
-		var url = proxyUrl + serviceUrl + params;
-		
-        $.ajax({
-        	url: url,
-            type : 'GET',
-            async : false,
-            contentType : 'text/xml',
-            success : function(response_) {
-            	
-            	var receiveData = [];
-            	
-            	$(response_).find("NK_SIDO").each(function(){
-            		
-            		var nameVal = $(this).find("SD_NM").text();
-					var idVal= $(this).find("SD_CD").text();
-					
-					receiveData.push({id: idVal, name: nameVal});
-            	});
+		var timer = setInterval(function(){
+			
+			timerCnt++;
+			
+			var	proxyUrl = InAcc.global.Variable.getProxyUrl();
+			var serviceUrl = InAcc.global.Variable.getMapServiceUrl();
+			
+			if(proxyUrl != undefined && proxyUrl != null && serviceUrl != undefined && serviceUrl != null){
 				
-				for(var i = 0 ; i < receiveData.length ; i++){
-					$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
-				}
-            }
-        });
+				clearInterval(timer);
+				
+				//console.info(serviceUrl);
+				var params = "&SERVICE=WFS&VERSION=1.1.0";
+				params += "&REQUEST=GetFeature";
+				params += "&MAXFEATURES=300";
+				params += "&TYPENAME=NK_SIDO";
+				params += "&PROPERTYNAME=SD_NM,SD_CD";
+				
+				var url = proxyUrl + serviceUrl + params;
+				
+		        $.ajax({
+		        	url: url,
+		            type : 'GET',
+		            async : false,
+		            contentType : 'text/xml',
+		            success : function(response_) {
+		            	
+		            	var receiveData = [];
+		            	
+		            	$(response_).find("NK_SIDO").each(function(){
+		            		
+		            		var nameVal = $(this).find("SD_NM").text();
+							var idVal= $(this).find("SD_CD").text();
+							
+							receiveData.push({id: idVal, name: nameVal});
+		            	});
+						
+						for(var i = 0 ; i < receiveData.length ; i++){
+							$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
+						}
+		            }
+		        });
+			}
+			
+			if(timerCnt > 2000){
+				
+				clearInterval(timer);
+				alert("시/도 조회 시간초과!!");
+			}
+		}, 1);
 	},
 	getSgg: function(sidoCd){
 		
@@ -721,7 +746,6 @@ Ext.define("InAcc.global.Function", {
 
 	getVworldPoi:function(){
 		var poisearchname = Ext.ComponentQuery.query("#poisearchname")[0];
-		
 		var searchStr = poisearchname.lastValue;
 		if(searchStr!=""){
 			var encString = encodeURIComponent(searchStr);
@@ -788,7 +812,7 @@ Ext.define("InAcc.global.Function", {
 		//console.info(coreMap.map.getExtent());
 		var extent = "";
         $.ajax({
-            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+            url : proxy + InAcc.global.Variable.getMapServiceUrl(),
             type : 'POST',
             data : new XMLSerializer().serializeToString( featureRequest ),
             async : false,
@@ -826,7 +850,7 @@ Ext.define("InAcc.global.Function", {
 		//console.info(coreMap.map.getExtent());
 		var extent = "";
         $.ajax({
-            url : proxy+'http://202.68.238.120:8880/geonuris/wfs?GDX=NK_Test.xml',
+            url : proxy + InAcc.global.Variable.getMapServiceUrl(),
             type : 'POST',
             data : new XMLSerializer().serializeToString( featureRequest ),
             async : false,

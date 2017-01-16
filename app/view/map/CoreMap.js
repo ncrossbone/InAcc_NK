@@ -15,6 +15,7 @@ Ext.define('InAcc.view.map.CoreMap', {
 	
 	width: "100%",
 	height: "100%",
+	
 	html:"<div style='position:absolute; top:8%; left:96%; width:60px; z-index:20000; height:200px;'>" +
 	  "<div class='zoomText'>" +
 	  	//"<div style='top:75px; background: url(./resources/images/zoom.png) -216px 0px;'></div>" +
@@ -313,7 +314,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     initBaseMap: function(val){
     	var me = this; 
     
-    	me.baseMapLayers.push(new ol.layer.Tile({
+    	/*me.baseMapLayers.push(new ol.layer.Tile({
     		title : 'MS 빙맵(위성)',
     		type : 'base',
     		visible : false,
@@ -354,17 +355,24 @@ Ext.define('InAcc.view.map.CoreMap', {
     	)
 
     	me.baseMapLayers.push(new ol.layer.Tile({
-    		title : 'OSM',
-    		type : 'base',
+    		title : '오프라인',
     		visible : false,
-    		source : new ol.source.OSM(
-    				{
-    					attributions : [ new ol.Attribution(
-    							{
-    								html : 'Tiles &copy; <a href="http://www.opencyclemap.org/">OpenCycleMap</a>'
-    							}) ]
-    				})
-    	})
+    		type : 'base',
+			source: new ol.source.TileWMS({
+				url: InAcc.global.Variable.getMapServiceWmsUrl() + 'OffLineMap.xml',
+				params : {
+					LAYERS : "OffLineMap_GM_1.tif.prmd",
+					CRS : "EPSG:5179",
+					format : 'image/png',
+					bgcolor : '0xffffff', 
+					exceptions : 'BLANK',
+					label : 'HIDE_OVERLAP',
+					graphic_buffer : '64',
+					ANTI : 'true',
+					TEXT_ANTI : 'true'
+				}
+			})
+		})
     	)
 
     	me.baseMapLayers.push(new ol.layer.Tile({
@@ -413,16 +421,25 @@ Ext.define('InAcc.view.map.CoreMap', {
     							url : 'http://1.234.82.19:8080/editor/v1/{z}/{x}/{y}.png'
     				})
     	})
-    	)
+    	)*/
     	
     	//console.info(this.baseMapLayers);
     	proj4.defs("EPSG:5179", "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs");
     	
     	
-    	Ext.create("InAcc.view.map.Layer");
+    	Ext.create("InAcc.view.map.Layer", {
+    		id: "Layer_",
+    		mapId: "_mapDiv_"
+    	});
+    	
+    	Ext.create("InAcc.view.map.Layer", {
+    		id: "Layer_East",
+    		mapId: "_mapDiv_East"
+    	});
     	
     	me.map = new ol.Map({
-    		target: '_mapDiv_',
+    		//target: '_mapDiv_',
+    		target: me.id,
     		layers: this.baseMapLayers,
     		controls : [],
     		//interactions:[new ol.interaction.MouseWheelZoom()],
@@ -454,9 +471,11 @@ Ext.define('InAcc.view.map.CoreMap', {
     		
     	});
     	
-    	
-    	
-    	
+
+    	var dLayer = Ext.getCmp("Layer_");
+    	dLayer.layerOn("NK_SGG");
+    	dLayer.layerOn("NK_SIDO");
+    	dLayer.layerOn("H0040000");
     },
     
     wheelZoom:function(zoomLevel){
@@ -541,7 +560,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     		$("#map5").removeClass("mapClick");
     		$("#map4").addClass("mapClick");
     		$("#map5").addClass("mapDefault");
-    	}else{
+    	}else if(val.id=="map5"){
     		$("#map5").removeClass("mapDefault");
     		$("#map4").removeClass("mapClick");
     		$("#map5").addClass("mapClick");
@@ -561,7 +580,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     },
     setInfoPopup: function(){
     	
-    	var me = this;
+    	/*var me = this;
     	
     	me.popContainer = document.getElementById('popup');
     	me.popContent = document.getElementById('popup-content');
@@ -573,7 +592,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     		return false;
     	}
     	
-    	me.popup = new ol.Overlay(/** @type {olx.OverlayOptions} */ ({
+    	me.popup = new ol.Overlay(*//** @type {olx.OverlayOptions} *//* ({
     		element: me.popContainer,
     		autoPan: true,
     		autoPanAnimation: {
@@ -583,8 +602,11 @@ Ext.define('InAcc.view.map.CoreMap', {
     	
     	if(me.map != undefined && me.map != null){
     		me.map.addOverlay(me.popup);
+<<<<<<< HEAD
     	}
     	
     	
+=======
+    	}*/
     }
 });

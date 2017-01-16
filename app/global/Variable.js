@@ -10,7 +10,9 @@ Ext.define("InAcc.global.Variable", {
 	singleton : true, // 요게 있어야 set, get 메서드 사용가능..
 	config: {
 		mapServiceUrl: null,
-		proxyUrl: null
+		proxyUrl: null,
+		mapServiceWmsUrl: null,
+		mapServiceWfsUrl: null,
 	},
 	constructor: function(){
 		
@@ -31,7 +33,10 @@ Ext.define("InAcc.global.Variable", {
 			
 			//console.info(record);
 			me.setMapServiceUrl(record[0].data.mapServiceUrl);
+			//console.info(record[0].data.mapServiceUrl);
 			me.setProxyUrl(record[0].data.proxyUrl);
+			me.setMapServiceWmsUrl(record[0].data.mapServiceWmsUrl);
+			me.setMapServiceWfsUrl(record[0].data.mapServiceWfsUrl);
 			
 			//console.info(me.getMapServiceUrl());
 		});

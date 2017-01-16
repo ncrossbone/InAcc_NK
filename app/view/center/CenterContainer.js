@@ -153,8 +153,8 @@ Ext.define("InAcc.view.center.CenterContainer", {
 				    		var layerCnt = 0;
 				    		var featureCnt = 0;
 				    		
+				    		
 				    		Ext.each(layers, function(layer){
-				    			
 				    			if(layer.values_.type != "base" && layer.state_.visible == true){
 				    				
 				    				layerCnt++;
@@ -166,7 +166,6 @@ Ext.define("InAcc.view.center.CenterContainer", {
 				    					'INFO_FORMAT': 'text/xml',
 				                        'FEATURE_COUNT': '300'
 				    				});
-				    				
 				    				/*$.ajax({
 				    		            url : InAcc.global.Variable.getProxyUrl() + tmpUrl,
 				    		            type : 'GET',
@@ -198,9 +197,10 @@ Ext.define("InAcc.view.center.CenterContainer", {
 				    		            async : false,
 				    		            contentType : 'text/xml',
 				    		            success : function(response_) {
-				    		            	
+				    		            	console.info(response_);
 				    		            	var childs = $(response_).find(layerName).children();
 				    		            	
+				    		            	//console.info(childs);
 				    		            	if(childs.length > 0){
 				    		            		
 				    		            		featureCnt++;

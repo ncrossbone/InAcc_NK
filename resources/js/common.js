@@ -1,8 +1,6 @@
 ZoomToExtent = function(sidoCd,sggCd){
    var coreMap = Ext.getCmp("_mapDiv_");
-   console.info(sidoCd);
-   console.info(sggCd);
-   console.info(coreMap.map.getSize());
+   
    var extent = "";
 	if(sggCd != null && sggCd != "시군구"){
 		console.info("시군구");
@@ -19,7 +17,6 @@ ZoomToExtent = function(sidoCd,sggCd){
 		}
 		
 	}
-	
    coreMap.map.getView().fit(extent, coreMap.map.getSize());
       
 }
@@ -98,7 +95,7 @@ BuildDataSet = function(buildStore){
                         var coreMap = Ext.getCmp("_mapDiv_");
                         
                         coreMap.map.getView().setCenter([x,y]);
-                        coreMap.map.getView().setZoom(11);
+                        coreMap.map.getView().setZoom(17);
                         
                         console.info(x);
                         console.info(y);
@@ -112,7 +109,99 @@ BuildDataSet = function(buildStore){
      
      var buildList = Ext.getCmp("buildList");
      buildList.setStore(buildStore);
-	
+
 }
 
+msg = function(title, format){
+    if(!msgCt){
+        msgCt = Ext.DomHelper.insertFirst(document.body, {id:'msg-div'}, true);
+    }
+    var s = Ext.String.format.apply(String, Array.prototype.slice.call(arguments, 1));
+    var m = Ext.DomHelper.append(msgCt, createBox(title, s), true);
+    m.hide();
+    m.slideIn('t').ghost("t", { delay: 1000, remove: true});
+}
 
+_lyrId = [];
+_offLyr = [];
+
+imgLyr = function(id){
+	var dlayer = Ext.getCmp("Layer_");
+	var idIdx = this._offLyr.map(function(layer){
+		return layer.id
+	}).indexOf(id);
+	
+	
+	if(idIdx==-1){
+	var	proxyUrl = InAcc.global.Variable.getProxyUrl();
+	var coreMap = Ext.getCmp("_mapDiv_");
+	var params = InAcc.global.Variable.getMapServiceWmsUrl() + id + "&REQUEST=GetCapabilities&SERVICE=WMS";
+
+
+	var url = proxyUrl + params;
+	var strArr = [];
+	var lyrs = [];
+	$.ajax({
+		url: url,
+		type : 'GET',
+		async : false,
+		contentType : 'text/xml',
+		success : function(response_) {
+
+			$(response_).find("Layer").each(function(idx,obj){
+				if(idx!=0){
+					strArr.push($(this).find("title"));
+				}
+			});
+			for(var i=0; i < strArr.length; i++){
+				if(strArr[i].prevObject[0].childNodes[1].innerHTML!="OffLineMap_GM"){
+					_lyrId.push(strArr[i].prevObject[0].childNodes[1].innerHTML);
+				}
+			}
+
+		}
+	});
+	for(var i=0; i<_lyrId.length; i++){
+		var layer = new ol.layer.Tile({
+			source: new ol.source.TileWMS({
+				url: InAcc.global.Variable.getMapServiceWmsUrl() + id,
+				params : {
+					LAYERS : _lyrId[i],
+					CRS : "EPSG:5179",
+					format : 'image/png',
+					bgcolor : '0xffffff', 
+					exceptions : 'BLANK',
+					label : 'HIDE_OVERLAP',
+					graphic_buffer : '64',
+					ANTI : 'true',
+					TEXT_ANTI : 'true'
+				}
+			}),
+			opacity: dlayer.opacity
+		});
+		coreMap.map.addLayer(layer);
+		layer.setVisible(true);
+		lyrs.push(layer);
+	}
+
+
+	_offLyr.push({id:id, layer:lyrs});
+	lyrs = new Object
+	_lyrId = [];
+	}else{
+		for(var i=0; i < _offLyr[idIdx].layer.length; i++){
+			_offLyr[idIdx].layer[i].setVisible(true);
+		}
+	}
+}
+
+offImgLyr = function(id){
+	
+	var idIdx = this._offLyr.map(function(layer){
+		return layer.id
+	}).indexOf(id);
+	
+	for(var i=0; i < _offLyr[idIdx].layer.length; i++){
+		_offLyr[idIdx].layer[i].setVisible(false);
+	}
+}

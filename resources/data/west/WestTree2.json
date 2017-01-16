@@ -3,7 +3,7 @@
 	"text": "환경부",
 	"expanded": false,
 	"children": [{
-		"id": "1",
+		"id": "ME_2010y.xml",
 		"text": "토지피복도",
 		"iconCls": "layerIconSize layer1",
 		"leaf": true,
@@ -14,7 +14,7 @@
 	"text": "산림청",
 	"expanded": false,
 	"children": [{
-		"id": "3",
+		"id": "FOREST_NASEON.xml",
 		"text": "산림황폐도",
 		"iconCls": "layerIconSize layer9",
 		"leaf": true,

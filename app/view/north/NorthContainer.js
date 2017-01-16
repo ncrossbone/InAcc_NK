@@ -19,7 +19,7 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		 "</select>"+
 		 "<button id='selectButton' style='width: 60px; border: transparent; font-family: notokr; color:gray;'>" +
 		 "이동</button>"+
-		 "<select id='demonLocation' style='margin-left:100px; width: 130px; border: transparent; font-family: notokr; color:gray;'>" +
+		 "<select id='demonLocation' style='margin-left:50px; width: 130px; border: transparent; font-family: notokr; color:gray;'>" +
 			"<option selected disabled >시범지역위치이동</option>" +
 			"<option value='na'>나선</option>" +
 			"<option value='nam'>남포</option>" +
@@ -33,9 +33,10 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		 	/*"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map0'>&nbsp&nbspMS빙맵(위성)&nbsp&nbsp</a>" +
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map1'>&nbsp&nbspMap Box&nbsp&nbsp</a>" +
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map2'>&nbsp&nbspMap BOx(위성)&nbsp&nbsp</a>" +
-		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map3'>&nbsp&nbspOSM&nbsp&nbsp</a>" +*/
-		 	"<a class='mapDefault'>&nbsp&nbsp지도분할&nbsp&nbsp</a>" +
-		 	"<a style='margin-left:50px;'onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map4' class='mapClick'>&nbsp&nbsp위성사진&nbsp&nbsp</a>" +
+		 	*/
+		 "<a class='mapDefault' onclick=Ext.getCmp('main').onSplitMapClick();>&nbsp&nbsp지도분할&nbsp&nbsp</a>" +
+		 	/*"<a style='margin-left:50px;' onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map3' class='mapDefault'>&nbsp&nbsp오프라인&nbsp&nbsp</a>" +*/
+		 	"<a style='margin-left:50px;' onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map4' class='mapClick'>&nbsp&nbsp위성사진&nbsp&nbsp</a>" +
 		 	"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map5' class='mapDefault'>&nbsp&nbsp일반지도&nbsp&nbsp</a>" +
 		 	//"<a onclick=Ext.getCmp('_mapDiv_').onclickMapSelect(this); id='map6'>&nbsp&nbspMangoBaseMap&nbsp&nbsp</a>" +
 		 "</span>",
@@ -48,8 +49,40 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		 "<span style='width: 60px; height: 20px; border: 1px solid #126dae; color: #fff; background: #126dae; font-weight: bold; letter-spacing: -1px; font-size: 12px;'> 맵종류 G </span>",*/
 	items:[{
 		xtype:"container",
-		width:200,
+		width:"65%",
 		height:36
+	},{
+		xtype:"slider",
+		width: 200,
+        minValue: 0,
+        labelWidth: 50,
+        value:100,
+        itemId:"slider",
+        fieldLabel: "투명도",
+        labelSeparator : '',
+        hideLabel: false,
+        useTips: false,
+        maxValue: 100,
+        listeners: {
+    		change: function(slider, thumb, oldValue, newValue) {
+    			var layer = Ext.getCmp("Layer_");
+    			layer.opacity = thumb/100;
+    			if(layer.layers!=""){
+    				
+    				for(var i = 0; i < layer.layers.length; i++){
+    					layer.layers[i].layer.setProperties({opacity: thumb/100});
+    				}
+    			}
+    			
+    			if(_offLyr!=""){
+    				for(var i=0; i<_offLyr.length; i++){
+    					for(var j=0; j<_offLyr[i].layer.length; j++){
+    						_offLyr[i].layer[j].setProperties({opacity: thumb/100});
+    					}
+    				}
+    			}
+    		}
+    	}
 	}]
 });
 
