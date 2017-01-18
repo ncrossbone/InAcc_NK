@@ -539,7 +539,7 @@ Ext.define("InAcc.global.Function", {
 				
 				clearInterval(timer);
 				
-				console.info(serviceUrl);
+				//console.info(serviceUrl);
 				var params = "&SERVICE=WFS&VERSION=1.1.0";
 				params += "&REQUEST=GetFeature";
 				params += "&MAXFEATURES=300";

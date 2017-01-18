@@ -97,6 +97,9 @@ BuildDataSet = function(buildStore){
                         coreMap.map.getView().setCenter([x,y]);
                         coreMap.map.getView().setZoom(17);
                         
+                        console.info(x);
+                        console.info(y);
+                        
                         //coreMap.map.getView().setCenter([rec.data.x,rec.data.y]);
 	                }
 				}]
@@ -108,11 +111,6 @@ BuildDataSet = function(buildStore){
      buildList.setStore(buildStore);
 
 }
-
-aaa = function(){
-	alert("?");
-}
-
 
 msg = function(title, format){
     if(!msgCt){

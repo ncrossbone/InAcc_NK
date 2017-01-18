@@ -471,6 +471,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     		
     	});
     	
+
     	var dLayer = Ext.getCmp("Layer_");
     	dLayer.layerOn("NK_SGG");
     	dLayer.layerOn("NK_SIDO");
@@ -601,6 +602,11 @@ Ext.define('InAcc.view.map.CoreMap', {
     	
     	if(me.map != undefined && me.map != null){
     		me.map.addOverlay(me.popup);
+<<<<<<< HEAD
+    	}
+    	
+    	
+=======
     	}*/
     }
 });
