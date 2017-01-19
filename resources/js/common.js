@@ -3,7 +3,7 @@ ZoomToExtent = function(sidoCd,sggCd){
    
    var extent = "";
 	if(sggCd != null && sggCd != "시군구"){
-		console.info("시군구");
+		//console.info("시군구");
 		extent = InAcc.global.Function.sggExtent(sggCd);
 		
 	}else{
@@ -12,7 +12,7 @@ ZoomToExtent = function(sidoCd,sggCd){
 		}else if(sidoCd == null && sggCd == null){
 			return;
 		}else{
-			console.info("시도");
+			//console.info("시도");
 			extent = InAcc.global.Function.sidoExtent(sidoCd);
 		}
 		
@@ -62,7 +62,7 @@ BuildDataSet = function(buildStore){
 	
 	var buildSearch = Ext.getCmp("buildSearch");
 	
-	console.info(buildStore.data.items);
+	//console.info(buildStore.data.items);
 	
 	buildSearch.remove("build");
 	buildSearch.add({xtype:"container",height:50},{
@@ -97,8 +97,8 @@ BuildDataSet = function(buildStore){
                         coreMap.map.getView().setCenter([x,y]);
                         coreMap.map.getView().setZoom(17);
                         
-                        console.info(x);
-                        console.info(y);
+                       //console.info(x);
+                        //console.info(y);
                         
                         //coreMap.map.getView().setCenter([rec.data.x,rec.data.y]);
 	                }
@@ -153,6 +153,7 @@ imgLyr = function(id){
 					strArr.push($(this).find("title"));
 				}
 			});
+			
 			for(var i=0; i < strArr.length; i++){
 				if(strArr[i].prevObject[0].childNodes[1].innerHTML!="OffLineMap_GM"){
 					_lyrId.push(strArr[i].prevObject[0].childNodes[1].innerHTML);
