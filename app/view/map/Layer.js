@@ -34,8 +34,8 @@ Ext.define('InAcc.view.map.Layer', {
 
 					if(layerIdx==-1){
 						//console.info(mapServiceWmsUrl);
-						var layer = new ol.layer.Tile({
-							source: new ol.source.TileWMS({
+						var layer = new ol.layer.Image({
+							source: new ol.source.ImageWMS({
 								url: mapServiceWmsUrl + "NK_Test.xml",
 								params : {
 									LAYERS : id,
@@ -46,7 +46,7 @@ Ext.define('InAcc.view.map.Layer', {
 									label : 'HIDE_OVERLAP',
 									graphic_buffer : '64',
 									ANTI : 'true',
-									TEXT_ANTI : 'true'
+									TEXT_ANTI : 'false'
 								}
 							}),
 							opacity: me.opacity

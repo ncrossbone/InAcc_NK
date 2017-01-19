@@ -76,9 +76,7 @@ Ext.define("InAcc.view.north.NorthContainer", {
     			
     			if(_offLyr!=""){
     				for(var i=0; i<_offLyr.length; i++){
-    					for(var j=0; j<_offLyr[i].layer.length; j++){
-    						_offLyr[i].layer[j].setProperties({opacity: thumb/100});
-    					}
+    						_offLyr[i].layer.setProperties({opacity: thumb/100});
     				}
     			}
     		}

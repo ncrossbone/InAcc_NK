@@ -425,7 +425,11 @@ Ext.define('InAcc.view.map.CoreMap', {
     	
     	//console.info(this.baseMapLayers);
     	proj4.defs("EPSG:5179", "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs");
+    	//proj4.defs("EPSG:5179","+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs");
     	
+    	var proj5179 = ol.proj.get('EPSG:3857');
+    	
+    	console.info(proj5179);
     	Ext.create("InAcc.view.map.Layer", {
     		id: "Layer_",
     		mapId: "_mapDiv_"
@@ -446,14 +450,14 @@ Ext.define('InAcc.view.map.CoreMap', {
     		//extent : ol.proj.get( "EPSG:4326" ).getExtent(),
     		view: new ol.View({
     			projection : "EPSG:5179",
-    	        center: [956850.644712,2192378.418181],
+    	        center: ol.proj.transform([127, 40], 'EPSG:4326', 'EPSG:5179'),
     	        //resolutions:[1222.99245256249,611.496226281245,305.7481131406225,152.87405657031124,76.43702828515562,38.21851414257781,19.109257071288905,9.554628535644452,4.777314267822226,2.388657133911113,1.1943285669555566,0.5971642834777783],
     	        zoom: 7,
     	        minZoom: 7,
     	        maxZoom: 18
     		})
     	});
-    
+    	
     	// 속성 팝업 설정
     	//me.setInfoPopup();
     	
