@@ -45,6 +45,34 @@ Ext.define("InAcc.view.east.EastLayerTab", {
 			}
 		}
 	},
+	setInitChecked: function(layerObj, ids){
+		
+		var layerTab = this;
+    	var treeCtls = layerTab.items.items;
+    	
+    	for(var i = 0; i < treeCtls.length; i++){
+    		
+    		var parentNode = treeCtls[i].items.items[0].node;
+    		
+    		for(var j = 0; j < ids.length; j++){
+    			
+    			this.setChecked(parentNode, {id: ids[j], data: {checked: true}}, layerObj);
+    		}
+    		
+    		/*var idIdx = ids.map(function(obj){
+    			return obj;
+    		}).indexOf(parentNode.id);
+    		
+    		if(idIdx > -1){
+    			
+    			console.info(parentNode);
+    		}
+    		else{
+    			
+    			
+    		}*/
+    	}
+	},
 	items:[{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> 실태DB",
 		xtype:"treepanel",
@@ -64,9 +92,9 @@ Ext.define("InAcc.view.east.EastLayerTab", {
 				var layerTab = this.up("inacc-eastlayertab");
 				var parentNode = this.items.items[0].node
 				var layerObj = Ext.getCmp("Layer_East");
-				console.info(layerObj);
+				
 				layerTab.setChecked(parentNode, node, layerObj);
-//console.info(dLayer);
+
 				/*if(node.childNodes.length!=0){
 					for(var i = 0; i < node.childNodes.length; i++){
 						if(node.data.checked==false){
@@ -124,13 +152,19 @@ Ext.define("InAcc.view.east.EastLayerTab", {
 		listeners: {
 			checkchange:function(node){
 
-				var dLayer = Ext.getCmp("Layer_");
+				var layerTab = this.up("inacc-eastlayertab");
+				var parentNode = this.items.items[0].node
+				var layerObj = Ext.getCmp("Layer_East");
+				
+				layerTab.setChecked(parentNode, node, layerObj);
+				
+				/*var dLayer = Ext.getCmp("Layer_");
 
-					if(node.data.checked==false){
-						dLayer.layerOff(node.id);
-					}else{
-						dLayer.layerOn(node.id);
-					}
+				if(node.data.checked==false){
+					dLayer.layerOff(node.id);
+				}else{
+					dLayer.layerOn(node.id);
+				}*/
 			}
 		}
 

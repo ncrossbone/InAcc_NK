@@ -545,24 +545,63 @@ Ext.define("InAcc.global.Function", {
 				params += "&MAXFEATURES=300";
 				params += "&TYPENAME=NK_SIDO";
 				params += "&PROPERTYNAME=SD_NM,SD_CD";
+				params += "&outputFormat=gml"; // IE 보안 문제로 gml 사용
+				//params += "&outputFormat=text/xml";
+				//params += "&outputFormat=application/json";
+				
+				/*var featureRequest = new ol.format.WFS().writeGetFeature({
+	                srsName : "EPSG:5179",
+	                featureTypes : ['NK_SIDO'],
+	                outputFormat : 'application/json',
+	                //geometryName : 'SHAPE',
+	                //PropertyName: ["SD_NM","SD_CD"],
+	                maxFeatures : 300
+	                //filter: ol.format.filter.like('ADMCD',sidoCd+'*')
+	            });*/
 				
 				//var url = proxyUrl + serviceUrl + params;
 				var url = proxyUrl + serviceUrl + params;
+				//var url = proxyUrl + serviceUrl + "&PROPERTYNAME=SD_NM,SD_CD";
 				
 		        $.ajax({
 		        	url: url,
 		            type : 'GET',
+		        	//type : 'POST',
+		        	//data : new XMLSerializer().serializeToString( featureRequest ),
 		            async : false,
 		            contentType : 'text/xml',
 		            success : function(response_) {
+		            
+		            	//console.info(response_);
+		            	//console.info($($(response_)[2]).find("NK_SIDO"));
+		            	var resObj = $(response_)[2];
 		            	var receiveData = [];
 		            	
-		            	$(response_).find("NK_SIDO").each(function(a,b,c){
+		            	$(resObj).find("NK_SIDO").each(function(){
 		            		
-		            		var nameVal = $(this).find("SD_NM").text();
-							var idVal = $(this).find("SD_CD").text();
+		            		var nameVal = "";
+		            		var idVal = "";
+		            		
+		            		var tags = $($(this)[0].innerHTML);
+		            		
+		            		for(var i = 0; i < tags.length; i++){
+		            			
+		            			//console.info(tags[i].tagName);
+		            			var tagName = tags[i].tagName;
+		            			var text = tags[i].innerHTML;
+		            			
+		            			if(tagName == "SF:SD_NM"){
+		            				nameVal = text;
+		            			}
+		            			
+		            			if(tagName == "SF:SD_CD"){
+		            				idVal = text;
+		            			}
+		            		}
 							
-							receiveData.push({id: idVal, name: nameVal});
+		            		if(idVal != "" && nameVal != ""){
+		            			receiveData.push({id: idVal, name: nameVal});
+		            		}
 		            	});
 						for(var i = 0 ; i < receiveData.length ; i++){
 							$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
@@ -607,6 +646,7 @@ Ext.define("InAcc.global.Function", {
 		params += "&TYPENAME=NK_SGG";
 		params += "&PROPERTYNAME=ADMCD,SGG_NM";
 		params += "&FILTER=" + filter;
+		params += "&outputFormat=gml"; // IE 보안 문제로 gml 사용
 		
 		//params = encodeURIComponent(params);
 		
@@ -615,7 +655,7 @@ Ext.define("InAcc.global.Function", {
 		console.info(encFilter);*/
 		
 		var url = proxyUrl + serviceUrl + params;
-            
+		
         $.ajax({
             url : url,
             type : 'GET',
@@ -623,14 +663,34 @@ Ext.define("InAcc.global.Function", {
             contentType : 'text/xml',
             success : function(response_) {
             	
+            	var resObj = $(response_)[2];
 	            var receiveData = [];
 	            
-	            $(response_).find("NK_SGG").each(function(){
+	            $(resObj).find("NK_SGG").each(function(){
             		
-            		var nameVal = $(this).find("SGG_NM").text();
-					var idVal= $(this).find("ADMCD").text();
+	            	var nameVal = "";
+            		var idVal = "";
+            		
+            		var tags = $($(this)[0].innerHTML);
+            		
+            		for(var i = 0; i < tags.length; i++){
+            			
+            			//console.info(tags[i].tagName);
+            			var tagName = tags[i].tagName;
+            			var text = tags[i].innerHTML;
+            			
+            			if(tagName == "SF:SGG_NM"){
+            				nameVal = text;
+            			}
+            			
+            			if(tagName == "SF:ADMCD"){
+            				idVal = text;
+            			}
+            		}
 					
-					receiveData.push({id: idVal, name: nameVal});
+            		if(idVal != "" && nameVal != ""){
+            			receiveData.push({id: idVal, name: nameVal});
+            		}
             	});
 	            
 				$('#sggSelect *').remove();
