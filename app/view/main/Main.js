@@ -458,7 +458,7 @@ Ext.define("InAcc.view.main.Main", {
 	      me.popContainer = document.getElementById('popup');
 	      me.popContent = document.getElementById('popup-content');
 	      me.popCloser = document.getElementById('popup-closer');
-console.info(me.popContainer);
+console.info(me.popContainer)
 	      me.popCloser.onclick = function(){
 	         me.popup.setPosition(undefined);
 	         me.popCloser.blur();

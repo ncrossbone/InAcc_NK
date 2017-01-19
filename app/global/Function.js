@@ -455,7 +455,7 @@ Ext.define("InAcc.global.Function", {
 			success : function(response_) {
 				
 				var features = new ol.format.GeoJSON().readFeatures(response_);
-				 console.log( features );
+				 //console.log( features );
 
 				for (var i = 0; i < features.length; i++) {
 
@@ -525,7 +525,7 @@ Ext.define("InAcc.global.Function", {
 	},
 	
 	getSido: function(){
-
+		var me = this;
 		var timerCnt = 0;
 		
 		var timer = setInterval(function(){
@@ -559,6 +559,7 @@ Ext.define("InAcc.global.Function", {
 	                //filter: ol.format.filter.like('ADMCD',sidoCd+'*')
 	            });*/
 				
+				//var url = proxyUrl + serviceUrl + params;
 				var url = proxyUrl + serviceUrl + params;
 				//var url = proxyUrl + serviceUrl + "&PROPERTYNAME=SD_NM,SD_CD";
 				
@@ -570,6 +571,7 @@ Ext.define("InAcc.global.Function", {
 		            async : false,
 		            contentType : 'text/xml',
 		            success : function(response_) {
+		            
 		            	//console.info(response_);
 		            	//console.info($($(response_)[2]).find("NK_SIDO"));
 		            	var resObj = $(response_)[2];
@@ -601,7 +603,6 @@ Ext.define("InAcc.global.Function", {
 		            			receiveData.push({id: idVal, name: nameVal});
 		            		}
 		            	});
-						
 						for(var i = 0 ; i < receiveData.length ; i++){
 							$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
 						}
@@ -616,6 +617,7 @@ Ext.define("InAcc.global.Function", {
 			}
 		}, 1);
 	},
+	
 	getSgg: function(sidoCd){
 		
 		var	proxyUrl = InAcc.global.Variable.getProxyUrl();
@@ -838,7 +840,6 @@ Ext.define("InAcc.global.Function", {
 						}
 
 					});
-
 					var userStore = Ext.create('Ext.data.Store');
 					//console.info(resultArr);
 					userStore.setData(resultArr);

@@ -78,7 +78,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 						sidoCd : sidoCd
 					});
 					sggStore.load();
-					console.info(sggStore);
+					//console.info(sggStore);
 
 					cmd_sgg.setStore(sggStore);
 				}
@@ -229,7 +229,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 				handler: function(){
 					//InAcc.store.west.BuildDataSeachName
 					var bildData = Ext.getCmp("bildData").value;
-					console.info(bildData);
+					//console.info(bildData);
 					var buildStore = Ext.create("InAcc.store.west.BuildDataSearchName",{
 						buildData: bildData
 					});
@@ -254,6 +254,10 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 							if(timerCnt > 5){
 								alert("데이터가 없습니다");
 								window.clearInterval(timerId);
+								
+								var builddatasearchresult = Ext.ComponentQuery.query("#builddatasearchresult")[0];
+								builddatasearchresult.setHidden(true);
+								
 							}
 						}
 					}, 500);
@@ -261,6 +265,49 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 					
 					
 				}
+			}]
+		},{
+			xtype:"container",
+			height:50
+		},{
+			xtype:"panel",
+			title:"검색결과",
+			itemId:"builddatasearchresult",
+			hidden:true,
+			width:330,
+			
+			items:[{
+				xtype:"grid",
+				itemId:"builddatasearchresultgrid",
+				//store: [{},{},{}],
+				height:300,
+				columnLines: true,
+				hideHeaders: true,
+				//autoScroll:true,
+				columns:[{
+					align:'left',
+					dataIndex:'name',
+					text:'이름',
+					width: 200
+				},{    
+		            text:'이동',
+		            align:'center',
+		            xtype:'actioncolumn',
+		            width:110,
+		            items:[{ 
+		            	icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
+		            	tooltip: 'move',
+		            	handler: function(grid, rowIndex, colIndex) {
+		            		var rec = grid.getStore().getAt(rowIndex);
+	                        var x = Number(rec.data.x);
+	                        var y = Number(rec.data.y);
+	                        var coreMap = Ext.getCmp("_mapDiv_");
+	                        
+	                        coreMap.map.getView().setCenter([x,y]);
+	                        coreMap.map.getView().setZoom(17);
+		            	}   
+		            }]
+		         }]
 			}]
 		}]
 

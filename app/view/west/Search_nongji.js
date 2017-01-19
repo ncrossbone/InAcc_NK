@@ -50,7 +50,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 						if(field.store.data.length > 0 && field.store.data.length > 0){
 							
 							window.clearInterval(timerId);
-							console.info(field.store.data.items[0].data.S_CODE);
+							//console.info(field.store.data.items[0].data.S_CODE);
 							field.setValue(field.store.data.items[0].data.S_CODE);
 							me.up("window").queryLayerName = field.getValue();
 						}
@@ -95,7 +95,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 				select: function(combo){
 
 					//alert(combo.getValue());
-					console.info(combo.getValue());
+					//console.info(combo.getValue());
 					this.up("window").queryLayerName = combo.getValue();
 				},
 				render: function(field){
@@ -107,7 +107,7 @@ Ext.define("InAcc.view.west.Search_nongji", {
 						if(field.store.data.length > 0 && field.store.data.length > 0){
 							
 							window.clearInterval(timerId);
-							console.info(field.store.data.items[0].data.S_CODE);
+							//console.info(field.store.data.items[0].data.S_CODE);
 							field.setValue(field.store.data.items[0].data.S_CODE);
 							me.up("window").queryLayerName = field.getValue();
 						}

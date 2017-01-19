@@ -14,7 +14,7 @@ Ext.define('InAcc.view.map.Layer', {
 		var me = this;
 		
 		var coreMap = Ext.getCmp(me.mapId);
-		console.info(coreMap);
+		//console.info(coreMap);
 		
 		var timerCnt = 0;
 		
@@ -33,9 +33,9 @@ Ext.define('InAcc.view.map.Layer', {
 				}).indexOf(me.mapId + "_" + id);
 
 					if(layerIdx==-1){
-						console.info(mapServiceWmsUrl);
-						var layer = new ol.layer.Tile({
-							source: new ol.source.TileWMS({
+						//console.info(mapServiceWmsUrl);
+						var layer = new ol.layer.Image({
+							source: new ol.source.ImageWMS({
 								url: mapServiceWmsUrl + "NK_Test.xml",
 								params : {
 									LAYERS : id,
@@ -46,7 +46,7 @@ Ext.define('InAcc.view.map.Layer', {
 									label : 'HIDE_OVERLAP',
 									graphic_buffer : '64',
 									ANTI : 'true',
-									TEXT_ANTI : 'true'
+									TEXT_ANTI : 'false'
 								}
 							}),
 							opacity: me.opacity

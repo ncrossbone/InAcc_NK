@@ -47,7 +47,7 @@ Ext.define("InAcc.view.west.Search_saneob", {
 						if(field.store.data.length > 0 && field.store.data.length > 0){
 							
 							window.clearInterval(timerId);
-							console.info(field.store.data.items[0].data.S_CODE);
+							//console.info(field.store.data.items[0].data.S_CODE);
 							field.setValue(field.store.data.items[0].data.S_CODE);
 							me.up("window").queryLayerName = field.getValue();
 						}
@@ -102,7 +102,7 @@ Ext.define("InAcc.view.west.Search_saneob", {
 						if(field.store.data.length > 0 && field.store.data.length > 0){
 							
 							window.clearInterval(timerId);
-							console.info(field.store.data.items[0].data.S_CODE);
+							//console.info(field.store.data.items[0].data.S_CODE);
 							field.setValue(field.store.data.items[0].data.S_CODE);
 							me.up("window").queryLayerName = field.getValue();
 						}
@@ -296,7 +296,7 @@ Ext.define("InAcc.view.west.Search_saneob", {
 		border:false,
 		handler:function(){
 			var dataStore = InAcc.global.Function.getGeoNurisStore("saneobWindow");
-			console.info(dataStore);
+			//console.info(dataStore);
 			InAcc.global.Function.createGrid(dataStore, "./resources/config/GridSaneob.conf");
 
 		}

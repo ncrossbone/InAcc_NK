@@ -135,8 +135,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 					var coreMap = Ext.getCmp("_mapDiv_");
 					var main = Ext.getCmp("main");
 					main.setInfoPopup();
-					//coreMap.setInfoPopup();
-					console.info(document.getElementById('popup'));
+					
 					
 					if(me.btnOnOff == undefined || me.btnOnOff == "off"){
 						

@@ -47,7 +47,7 @@ Ext.define("InAcc.view.west.Search_hwan", {
 						if(field.store.data.length > 0 && field.store.data.length > 0){
 							
 							window.clearInterval(timerId);
-							console.info(field.store.data.items[0].data.S_CODE);
+							//console.info(field.store.data.items[0].data.S_CODE);
 							field.setValue(field.store.data.items[0].data.S_CODE);
 							me.up("window").queryLayerName = field.getValue();
 						}
@@ -103,7 +103,7 @@ Ext.define("InAcc.view.west.Search_hwan", {
 						if(field.store.data.length > 0 && field.store.data.length > 0){
 							
 							window.clearInterval(timerId);
-							console.info(field.store.data.items[0].data.S_CODE);
+							//console.info(field.store.data.items[0].data.S_CODE);
 							field.setValue(field.store.data.items[0].data.S_CODE);
 							me.up("window").queryLayerName = field.getValue();
 						}

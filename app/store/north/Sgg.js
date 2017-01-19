@@ -33,8 +33,8 @@ Ext.define('InAcc.store.north.Sgg', {
 			
 			var url = proxyUrl + serviceUrl + params;
 			
-			console.info(params);
-			console.info(url);
+			//console.info(params);
+			//console.info(url);
 	            
 	        $.ajax({
 	            url : url,
@@ -42,7 +42,7 @@ Ext.define('InAcc.store.north.Sgg', {
 	            async : false,
 	            contentType : 'text/xml',
 	            success : function(response_) {
-	            	console.info(response_);
+	            	//console.info(response_);
 		            var receiveData = [];
 		            
 		            $(response_).find("NK_SGG").each(function(){

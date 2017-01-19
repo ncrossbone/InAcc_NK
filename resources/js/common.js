@@ -3,7 +3,7 @@ ZoomToExtent = function(sidoCd,sggCd){
    
    var extent = "";
 	if(sggCd != null && sggCd != "시군구"){
-		console.info("시군구");
+		//console.info("시군구");
 		extent = InAcc.global.Function.sggExtent(sggCd);
 		
 	}else{
@@ -12,7 +12,7 @@ ZoomToExtent = function(sidoCd,sggCd){
 		}else if(sidoCd == null && sggCd == null){
 			return;
 		}else{
-			console.info("시도");
+			//console.info("시도");
 			extent = InAcc.global.Function.sidoExtent(sidoCd);
 		}
 		
@@ -60,55 +60,14 @@ DemonLocation = function(val){
 
 BuildDataSet = function(buildStore){
 	
-	var buildSearch = Ext.getCmp("buildSearch");
-	
-	console.info(buildStore.data.items);
-	
-	buildSearch.remove("build");
-	buildSearch.add({xtype:"container",height:50},{
-        xtype:"panel",
-        id:"build",
-        title:"검색결과",
-        width:360,
-        items:[{
-           xtype:"grid",
-           id: "buildList",
-           height: 300,
-           columnLines: true,
-           hideHeaders: true,
-           columns:[{
-               align:'center',
-               dataIndex:'name',
-               width: 200
-            },{	 
-				text:'이동',
-				align:'center',
-				xtype:'actioncolumn',
-				width:110,
-				items:[{ 
-					icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
-	                tooltip: 'move',
-	                handler: function(grid, rowIndex, colIndex) {
-	                	var rec = grid.getStore().getAt(rowIndex);
-                        var x = Number(rec.data.x);
-                        var y = Number(rec.data.y);
-                        var coreMap = Ext.getCmp("_mapDiv_");
-                        
-                        coreMap.map.getView().setCenter([x,y]);
-                        coreMap.map.getView().setZoom(17);
-                        
-                        console.info(x);
-                        console.info(y);
-                        
-                        //coreMap.map.getView().setCenter([rec.data.x,rec.data.y]);
-	                }
-				}]
-			}]
-        }]
-     });
-     
-     var buildList = Ext.getCmp("buildList");
-     buildList.setStore(buildStore);
+	var builddatasearchresult = Ext.ComponentQuery.query("#builddatasearchresult")[0];
+	var builddatasearchresultgrid = Ext.ComponentQuery.query("#builddatasearchresultgrid")[0];
+
+	if(builddatasearchresult.isVisible()==false){
+		builddatasearchresult.show();	
+	}
+	builddatasearchresultgrid.setStore(buildStore);
+
 
 }
 
@@ -127,46 +86,21 @@ _offLyr = [];
 
 imgLyr = function(id){
 	var dlayer = Ext.getCmp("Layer_");
+	
 	var idIdx = this._offLyr.map(function(layer){
 		return layer.id
 	}).indexOf(id);
 	
 	
 	if(idIdx==-1){
-	var	proxyUrl = InAcc.global.Variable.getProxyUrl();
-	var coreMap = Ext.getCmp("_mapDiv_");
-	var params = InAcc.global.Variable.getMapServiceWmsUrl() + id + "&REQUEST=GetCapabilities&SERVICE=WMS";
+		var	proxyUrl = InAcc.global.Variable.getProxyUrl();
+		var coreMap = Ext.getCmp("_mapDiv_");
 
-
-	var url = proxyUrl + params;
-	var strArr = [];
-	var lyrs = [];
-	$.ajax({
-		url: url,
-		type : 'GET',
-		async : false,
-		contentType : 'text/xml',
-		success : function(response_) {
-
-			$(response_).find("Layer").each(function(idx,obj){
-				if(idx!=0){
-					strArr.push($(this).find("title"));
-				}
-			});
-			for(var i=0; i < strArr.length; i++){
-				if(strArr[i].prevObject[0].childNodes[1].innerHTML!="OffLineMap_GM"){
-					_lyrId.push(strArr[i].prevObject[0].childNodes[1].innerHTML);
-				}
-			}
-
-		}
-	});
-	for(var i=0; i<_lyrId.length; i++){
-		var layer = new ol.layer.Tile({
-			source: new ol.source.TileWMS({
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
 				url: InAcc.global.Variable.getMapServiceWmsUrl() + id,
 				params : {
-					LAYERS : _lyrId[i],
+					LAYERS : "ROOT",
 					CRS : "EPSG:5179",
 					format : 'image/png',
 					bgcolor : '0xffffff', 
@@ -174,24 +108,19 @@ imgLyr = function(id){
 					label : 'HIDE_OVERLAP',
 					graphic_buffer : '64',
 					ANTI : 'true',
-					TEXT_ANTI : 'true'
+					TEXT_ANTI : 'false'
 				}
 			}),
 			opacity: dlayer.opacity
 		});
 		coreMap.map.addLayer(layer);
 		layer.setVisible(true);
-		lyrs.push(layer);
-	}
 
 
-	_offLyr.push({id:id, layer:lyrs});
-	lyrs = new Object
-	_lyrId = [];
+		_offLyr.push({id:id, layer:layer});
+		_lyrId = [];
 	}else{
-		for(var i=0; i < _offLyr[idIdx].layer.length; i++){
-			_offLyr[idIdx].layer[i].setVisible(true);
-		}
+		_offLyr[idIdx].layer.setVisible(true);
 	}
 }
 
@@ -201,7 +130,5 @@ offImgLyr = function(id){
 		return layer.id
 	}).indexOf(id);
 	
-	for(var i=0; i < _offLyr[idIdx].layer.length; i++){
-		_offLyr[idIdx].layer[i].setVisible(false);
-	}
+	_offLyr[idIdx].layer.setVisible(false);
 }
