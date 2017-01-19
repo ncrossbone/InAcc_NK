@@ -12,9 +12,9 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 	bodyStyle:"background-color:#f6f6f6;",
 	setChecked: function(parentNode, chkNode, layerObj){
 		
-		console.info(parentNode);
-		console.info(chkNode);
-		console.info(layerObj);
+		//console.info(parentNode);
+		//console.info(chkNode);
+		//console.info(layerObj);
 		if(parentNode.id == chkNode.id){
 		
 			if(parentNode.childNodes.length > 0){
@@ -26,6 +26,8 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 				}
 			}
 			else{
+				
+				parentNode.set('checked', chkNode.data.checked);
 				
 				if(chkNode.data.checked == true){
 					
@@ -48,6 +50,34 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 			}
 		}
 	},
+	setInitChecked: function(layerObj, ids){
+		
+		var layerTab = this;
+    	var treeCtls = layerTab.items.items;
+    	
+    	for(var i = 0; i < treeCtls.length; i++){
+    		
+    		var parentNode = treeCtls[i].items.items[0].node;
+    		
+    		for(var j = 0; j < ids.length; j++){
+    			
+    			this.setChecked(parentNode, {id: ids[j], data: {checked: true}}, layerObj);
+    		}
+    		
+    		/*var idIdx = ids.map(function(obj){
+    			return obj;
+    		}).indexOf(parentNode.id);
+    		
+    		if(idIdx > -1){
+    			
+    			console.info(parentNode);
+    		}
+    		else{
+    			
+    			
+    		}*/
+    	}
+	},
 	items:[{
 		title:"<img src='./resources/images/design/icon_folder_close.png'/> 실태DB",
 		xtype:"treepanel",
@@ -65,12 +95,11 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 			checkchange:function(node){
 				
 				var layerTab = this.up("inacc-westlayertab");
-				var parentNode = this.items.items[0].node
-				var linkedLayerId = layerTab.linkedLayerId;
+				var parentNode = this.items.items[0].node;
 				var layerObj = Ext.getCmp("Layer_");
-				console.info(layerObj);
+				
 				layerTab.setChecked(parentNode, node, layerObj);
-//console.info(dLayer);
+
 				/*if(node.childNodes.length!=0){
 					for(var i = 0; i < node.childNodes.length; i++){
 						if(node.data.checked==false){
@@ -127,14 +156,20 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 		bufferedRenderer: false,
 		listeners: {
 			checkchange:function(node){
+				
+				var layerTab = this.up("inacc-westlayertab");
+				var parentNode = this.items.items[0].node;
+				var layerObj = Ext.getCmp("Layer_");
+				
+				layerTab.setChecked(parentNode, node, layerObj);
 
-				var dLayer = Ext.getCmp("Layer_");
-
-					if(node.data.checked==false){
-						dLayer.layerOff(node.id);
-					}else{
-						dLayer.layerOn(node.id);
-					}
+				/*var dLayer = Ext.getCmp("Layer_");
+				
+				if(node.data.checked==false){
+					dLayer.layerOff(node.id);
+				}else{
+					dLayer.layerOn(node.id);
+				}*/
 			}
 		}
 

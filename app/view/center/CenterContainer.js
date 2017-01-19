@@ -133,12 +133,16 @@ Ext.define("InAcc.view.center.CenterContainer", {
 					$("#popup").show();
 					var me = this;
 					var coreMap = Ext.getCmp("_mapDiv_");
+					var main = Ext.getCmp("main");
+					main.setInfoPopup();
+					//coreMap.setInfoPopup();
+					console.info(document.getElementById('popup'));
 					
 					if(me.btnOnOff == undefined || me.btnOnOff == "off"){
 						
 						me.btnOnOff = "on";
 						
-						coreMap.setStyle('cursor','url(./resources/images/icons/information.png) 8 8,auto');
+						//coreMap.setStyle('cursor','url(./resources/images/icons/information.png) 8 8,auto');
 						
 				    	// 이벤트 생성
 				    	me.mapClickEvt = coreMap.map.on('click', function(evt){
@@ -197,7 +201,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 				    		            async : false,
 				    		            contentType : 'text/xml',
 				    		            success : function(response_) {
-				    		            	console.info(response_);
+				    		            	//console.info(response_);
 				    		            	var childs = $(response_).find(layerName).children();
 				    		            	
 				    		            	//console.info(childs);

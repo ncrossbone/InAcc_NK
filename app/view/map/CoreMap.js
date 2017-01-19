@@ -314,7 +314,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     initBaseMap: function(val){
     	var me = this; 
     
-    	/*me.baseMapLayers.push(new ol.layer.Tile({
+    	me.baseMapLayers.push(new ol.layer.Tile({
     		title : 'MS 빙맵(위성)',
     		type : 'base',
     		visible : false,
@@ -421,7 +421,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     							url : 'http://1.234.82.19:8080/editor/v1/{z}/{x}/{y}.png'
     				})
     	})
-    	)*/
+    	)
     	
     	//console.info(this.baseMapLayers);
     	proj4.defs("EPSG:5179", "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs");
@@ -473,9 +473,28 @@ Ext.define('InAcc.view.map.CoreMap', {
     	
 
     	var dLayer = Ext.getCmp("Layer_");
-    	dLayer.layerOn("NK_SGG");
-    	dLayer.layerOn("NK_SIDO");
-    	dLayer.layerOn("H0040000");
+    	//dLayer.layerOn("NK_SGG");
+    	//dLayer.layerOn("NK_SIDO");
+    	//dLayer.layerOn("H0040000");
+    	
+    	var westLayerTab = Ext.getCmp("westLayerTab");
+    	
+    	if(westLayerTab != undefined){
+    		
+    		westLayerTab.setInitChecked(dLayer, ["NK_SGG", "NK_SIDO", "H0040000"])
+    	}
+    	
+    	//var eLayer = Ext.getCmp("Layer_East");
+    	//dLayer.layerOn("NK_SGG");
+    	//dLayer.layerOn("NK_SIDO");
+    	//dLayer.layerOn("H0040000");
+    	
+    	/*var eastLayerTab = Ext.getCmp("eastLayerTab");
+    	
+    	if(eastLayerTab != undefined){
+    		
+    		eastLayerTab.setInitChecked(eLayer, ["NK_SGG", "NK_SIDO", "H0040000"])
+    	}*/
     },
     
     wheelZoom:function(zoomLevel){
@@ -580,33 +599,41 @@ Ext.define('InAcc.view.map.CoreMap', {
     },
     setInfoPopup: function(){
     	
-    	/*var me = this;
+    	var me = this;
     	
     	me.popContainer = document.getElementById('popup');
     	me.popContent = document.getElementById('popup-content');
     	me.popCloser = document.getElementById('popup-closer');
+    	console.info(me.popContainer);
+    	console.info(me.popContent);
+    	console.info(me.popCloser);
     	
-    	me.popCloser.onclick = function(){
-    		me.popup.setPosition(undefined);
-    		me.popCloser.blur();
-    		return false;
+    	if(me.popCloser != undefined && me.popCloser != null){
+    		
+	    	me.popCloser.onclick = function(){
+	    		me.popup.setPosition(undefined);
+	    		me.popCloser.blur();
+	    		return false;
+	    	}
     	}
     	
-    	me.popup = new ol.Overlay(*//** @type {olx.OverlayOptions} *//* ({
-    		element: me.popContainer,
-    		autoPan: true,
-    		autoPanAnimation: {
-    			duration: 250
-    		}
-    	}));
+    	if(me.popup != undefined && me.popup != null){
+    		
+	    	me.popup = new ol.Overlay(({
+	    		element: me.popContainer,
+	    		autoPan: true,
+	    		autoPanAnimation: {
+	    			duration: 250
+	    		}
+	    	}));
+    	}
     	
     	if(me.map != undefined && me.map != null){
-    		me.map.addOverlay(me.popup);
-<<<<<<< HEAD
+    		
+    		if(me.popup != undefined && me.popup != null){
+    			
+    			me.map.addOverlay(me.popup);
+    		}
     	}
-    	
-    	
-=======
-    	}*/
     }
 });
