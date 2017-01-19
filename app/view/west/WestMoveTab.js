@@ -78,7 +78,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 						sidoCd : sidoCd
 					});
 					sggStore.load();
-					console.info(sggStore);
+					//console.info(sggStore);
 
 					cmd_sgg.setStore(sggStore);
 				}
@@ -229,7 +229,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 				handler: function(){
 					//InAcc.store.west.BuildDataSeachName
 					var bildData = Ext.getCmp("bildData").value;
-					console.info(bildData);
+					//console.info(bildData);
 					var buildStore = Ext.create("InAcc.store.west.BuildDataSearchName",{
 						buildData: bildData
 					});

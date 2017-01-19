@@ -455,7 +455,7 @@ Ext.define("InAcc.global.Function", {
 			success : function(response_) {
 				
 				var features = new ol.format.GeoJSON().readFeatures(response_);
-				 console.log( features );
+				 //console.log( features );
 
 				for (var i = 0; i < features.length; i++) {
 
@@ -525,7 +525,7 @@ Ext.define("InAcc.global.Function", {
 	},
 	
 	getSido: function(){
-
+		var me = this;
 		var timerCnt = 0;
 		
 		var timer = setInterval(function(){
@@ -546,6 +546,7 @@ Ext.define("InAcc.global.Function", {
 				params += "&TYPENAME=NK_SIDO";
 				params += "&PROPERTYNAME=SD_NM,SD_CD";
 				
+				//var url = proxyUrl + serviceUrl + params;
 				var url = proxyUrl + serviceUrl + params;
 				
 		        $.ajax({
@@ -554,17 +555,15 @@ Ext.define("InAcc.global.Function", {
 		            async : false,
 		            contentType : 'text/xml',
 		            success : function(response_) {
-		            	
 		            	var receiveData = [];
 		            	
-		            	$(response_).find("NK_SIDO").each(function(){
+		            	$(response_).find("NK_SIDO").each(function(a,b,c){
 		            		
 		            		var nameVal = $(this).find("SD_NM").text();
-							var idVal= $(this).find("SD_CD").text();
+							var idVal = $(this).find("SD_CD").text();
 							
 							receiveData.push({id: idVal, name: nameVal});
 		            	});
-						
 						for(var i = 0 ; i < receiveData.length ; i++){
 							$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
 						}
@@ -579,6 +578,7 @@ Ext.define("InAcc.global.Function", {
 			}
 		}, 1);
 	},
+	
 	getSgg: function(sidoCd){
 		
 		var	proxyUrl = InAcc.global.Variable.getProxyUrl();

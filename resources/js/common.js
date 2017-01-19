@@ -3,7 +3,7 @@ ZoomToExtent = function(sidoCd,sggCd){
    
    var extent = "";
 	if(sggCd != null && sggCd != "시군구"){
-		console.info("시군구");
+		//console.info("시군구");
 		extent = InAcc.global.Function.sggExtent(sggCd);
 		
 	}else{
@@ -12,7 +12,7 @@ ZoomToExtent = function(sidoCd,sggCd){
 		}else if(sidoCd == null && sggCd == null){
 			return;
 		}else{
-			console.info("시도");
+			//console.info("시도");
 			extent = InAcc.global.Function.sidoExtent(sidoCd);
 		}
 		
@@ -60,8 +60,6 @@ DemonLocation = function(val){
 
 BuildDataSet = function(buildStore){
 	
-	console.info(buildStore);
-	
 	var builddatasearchresult = Ext.ComponentQuery.query("#builddatasearchresult")[0];
 	var builddatasearchresultgrid = Ext.ComponentQuery.query("#builddatasearchresultgrid")[0];
 
@@ -69,6 +67,7 @@ BuildDataSet = function(buildStore){
 		builddatasearchresult.show();	
 	}
 	builddatasearchresultgrid.setStore(buildStore);
+
 
 }
 
@@ -113,6 +112,7 @@ imgLyr = function(id){
 					strArr.push($(this).find("title"));
 				}
 			});
+			
 			for(var i=0; i < strArr.length; i++){
 				if(strArr[i].prevObject[0].childNodes[1].innerHTML!="OffLineMap_GM"){
 					_lyrId.push(strArr[i].prevObject[0].childNodes[1].innerHTML);
