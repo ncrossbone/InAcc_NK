@@ -60,55 +60,15 @@ DemonLocation = function(val){
 
 BuildDataSet = function(buildStore){
 	
-	var buildSearch = Ext.getCmp("buildSearch");
+	console.info(buildStore);
 	
-	console.info(buildStore.data.items);
-	
-	buildSearch.remove("build");
-	buildSearch.add({xtype:"container",height:50},{
-        xtype:"panel",
-        id:"build",
-        title:"검색결과",
-        width:360,
-        items:[{
-           xtype:"grid",
-           id: "buildList",
-           height: 300,
-           columnLines: true,
-           hideHeaders: true,
-           columns:[{
-               align:'center',
-               dataIndex:'name',
-               width: 200
-            },{	 
-				text:'이동',
-				align:'center',
-				xtype:'actioncolumn',
-				width:110,
-				items:[{ 
-					icon: './resources/images/button/btn_move.png',  // Use a URL in the icon config
-	                tooltip: 'move',
-	                handler: function(grid, rowIndex, colIndex) {
-	                	var rec = grid.getStore().getAt(rowIndex);
-                        var x = Number(rec.data.x);
-                        var y = Number(rec.data.y);
-                        var coreMap = Ext.getCmp("_mapDiv_");
-                        
-                        coreMap.map.getView().setCenter([x,y]);
-                        coreMap.map.getView().setZoom(17);
-                        
-                        console.info(x);
-                        console.info(y);
-                        
-                        //coreMap.map.getView().setCenter([rec.data.x,rec.data.y]);
-	                }
-				}]
-			}]
-        }]
-     });
-     
-     var buildList = Ext.getCmp("buildList");
-     buildList.setStore(buildStore);
+	var builddatasearchresult = Ext.ComponentQuery.query("#builddatasearchresult")[0];
+	var builddatasearchresultgrid = Ext.ComponentQuery.query("#builddatasearchresultgrid")[0];
+
+	if(builddatasearchresult.isVisible()==false){
+		builddatasearchresult.show();	
+	}
+	builddatasearchresultgrid.setStore(buildStore);
 
 }
 

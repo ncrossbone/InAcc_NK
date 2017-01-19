@@ -780,7 +780,6 @@ Ext.define("InAcc.global.Function", {
 						}
 
 					});
-
 					var userStore = Ext.create('Ext.data.Store');
 					//console.info(resultArr);
 					userStore.setData(resultArr);
