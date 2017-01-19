@@ -11,7 +11,8 @@ Ext.define("InAcc.view.main.Main", {
 	           "InAcc.view.north.NorthContainer",
 	           "InAcc.view.north.NorthLogo",
 	           "InAcc.view.center.CenterContainer",
-	           "InAcc.view.west.WestLayerTab"],
+	           "InAcc.view.west.WestLayerTab",
+	           "InAcc.view.east.EastLayerTab"],
 	
 	xtype: "inacc-main",
 	
@@ -158,23 +159,62 @@ Ext.define("InAcc.view.main.Main", {
 			}
 		});
 		
-		var eastLayerPanel = Ext.create("InAcc.view.west.WestLayerTab", {
+		var eatLayerWindow = Ext.create("Ext.TabPanel", {
+			id: "eastcontainer",
+			collapsible: true,
+		    collapseDirection: 'right',
+		    headerPosition: 'left',
+			style:"border-bottom:solid 5px #445676;",
+		    header:{
+		    	width:8,
+		    	style:"background-color : #445676;",
+		    	titlePosition:1
+		    },
+		    width: 350,
+		    height: Ext.getBody().getHeight() - 35,
+		    x: Ext.getBody().getWidth() - 350,
+			y: 35,
+		    border:false,
+		    requires: ["InAcc.view.west.EastLayerTab"],
+		    tabBarPosition: 'top',
+		    defaults: {
+		        styleHtmlContent: true
+		    },
+		    items:[{
+		    	xtype:"inacc-eastlayertab"
+		    }],
+		    listeners:{
+		    	collapse:{
+		    		fn: function(el){
+		    			Ext.get("westcontainer_header-innerCt").setStyle("background","url('./resources/images/button/btn_arrow_close.png') no-repeat");
+		    		}
+		    	},
+		    	expand:{
+		    		fn: function(el){
+
+		    			Ext.get("westcontainer_header-innerCt").setStyle("background","url('./resources/images/button/btn_arrow_open.png') no-repeat");
+		    		}
+		    	}
+		    }
+		});
+		
+		/*var eastLayerPanel = Ext.create("InAcc.view.east.EastLayerTab", {
 			//id: "eastLayer",
 			//collapsible: true,
 		    //collapseDirection: 'top',
 			id: "eastLayerTab",
 			linkedLayerId: "Layer_East",
-		    headerPosition: 'top',
+		    headerPosition: 'left',
 			width: 350,
-			height: 700,
+			height: Ext.getBody().getHeight() - 35,
 			x: Ext.getBody().getWidth() - 350,
-			y: 30,
-			floating: true,
-			draggable: true
-		}).show();
+			y: 35,
+			floating: true
+		}).show();*/
 		
 		splitMapMain.add(splitMapContainer);
-		splitMapMain.add(eastLayerPanel);
+		//splitMapMain.add(eastLayerPanel);
+		this.add(eatLayerWindow);
 		
 		var splitMapLeft = Ext.create("InAcc.view.map.CoreMap", {
 			id: "_mapDiv_",
