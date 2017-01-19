@@ -243,27 +243,31 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 				}else{
 					imgLyr(node.id);
 				}
+				/*var imageLyr = ["ImageData_ch.xml","ImageData_na.xml","ImageData_sin.xml","ImageData_sun.xml","ImageData_won.xml"];
 				
-				/*var layer = new ol.layer.Image({
-					source: new ol.source.ImageWMS({
-						url: "http://202.68.238.120:8880/geonuris/wms?GDX=Aspect5m.xml",
-						params : {
-							LAYERS : "ROOT",
-							CRS : "EPSG:5179",
-							format : 'image/png',
-							bgcolor : '0xffffff', 
-							exceptions : 'BLANK',
-							label : 'HIDE_OVERLAP',
-							graphic_buffer : '64',
-							ANTI : 'true',
-							TEXT_ANTI : 'true'
-						}
-					})
-				});
+				for(var i =0; i < 5; i++){
+					
+					console.info(imageLyr[i]);
+					var layer = new ol.layer.Image({
+						source: new ol.source.ImageWMS({
+							url: "http://202.68.238.120:8880/geonuris/wms?GDX=" + imageLyr[i],
+							params : {
+								LAYERS : "ROOT",
+								CRS : "EPSG:5179",
+								format : 'image/png',
+								bgcolor : '0xffffff', 
+								exceptions : 'BLANK',
+								label : 'HIDE_OVERLAP',
+								graphic_buffer : '64',
+								ANTI : 'true',
+								TEXT_ANTI : 'true'
+							}
+						})
+					});
 
-				coreMap.map.addLayer(layer);
-				layer.setVisible(true);*/
-				
+					coreMap.map.addLayer(layer);
+					layer.setVisible(true);
+				}*/
 				
 			}
 		}

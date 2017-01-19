@@ -108,7 +108,7 @@ imgLyr = function(id){
 					label : 'HIDE_OVERLAP',
 					graphic_buffer : '64',
 					ANTI : 'true',
-					TEXT_ANTI : 'false'
+					TEXT_ANTI : 'true'
 				}
 			}),
 			opacity: dlayer.opacity
