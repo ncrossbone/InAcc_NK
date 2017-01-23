@@ -200,7 +200,7 @@ Ext.define("InAcc.view.center.CenterContainer", {
 				    		            async : false,
 				    		            contentType : 'text/xml',
 				    		            success : function(response_) {
-				    		            	//console.info(response_);
+				    		            	console.info(response_);
 				    		            	var childs = $(response_).find(layerName).children();
 				    		            	
 				    		            	//console.info(childs);
@@ -253,7 +253,18 @@ Ext.define("InAcc.view.center.CenterContainer", {
 				    			return false;
 				    		}
 				    		else{
+				    			var yoffset = resolution * 15;
+				    			var beforeCenter = coreMap.map.getView().getCenter();
+				    			
 				    			coreMap.popup.setPosition(coordinate);
+				    			
+				    			var afterCenter = coreMap.map.getView().getCenter();
+				    			
+				    			if(beforeCenter != afterCenter){
+				    				afterCenter[1] = afterCenter[1] + yoffset;
+					    			//console.info(afterCenter);
+					    			coreMap.map.getView().setCenter(afterCenter);
+				    			}
 				    		}
 				    	});
 					}

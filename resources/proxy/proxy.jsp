@@ -13,7 +13,7 @@ try {
 	if(request.getContentType() != null) {
 	  con.setRequestProperty("Content-Type", request.getContentType());
     }
-	System.out.println(reqUrl);
+	//System.out.println(reqUrl);
 	int clength = request.getContentLength();
 	if(clength > 0) {
 		con.setDoInput(true);
@@ -42,6 +42,8 @@ try {
   	while ((bytesRead = in.read(bytes, 0, length)) > 0) {
     	ostream.write(bytes, 0, bytesRead);
   	}
+  	
+  	System.out.println(ostream.toString());
 }catch(Exception e) {
 	response.setStatus(200);
 }
