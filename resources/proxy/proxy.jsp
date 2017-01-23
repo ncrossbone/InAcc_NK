@@ -43,7 +43,7 @@ try {
     	ostream.write(bytes, 0, bytesRead);
   	}
   	
-  	System.out.println(ostream.toString());
+  	//System.out.println(ostream.toString());
 }catch(Exception e) {
 	response.setStatus(200);
 }
