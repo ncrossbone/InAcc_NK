@@ -472,12 +472,12 @@ Ext.define('InAcc.view.map.CoreMap', {
     	});
     	
 
-    	/*var dLayer = Ext.getCmp("Layer_");
+
     	//dLayer.layerOn("NK_SGG");
     	//dLayer.layerOn("NK_SIDO");
     	//dLayer.layerOn("H0040000");
     	
-    	var westLayerTab = Ext.getCmp("westLayerTab");
+    	/*var westLayerTab = Ext.getCmp("westLayerTab");
     	
     	if(westLayerTab != undefined){
     		
@@ -600,6 +600,26 @@ Ext.define('InAcc.view.map.CoreMap', {
     setInfoPopup: function(){
     	
     	var me = this;
+    	
+    	var popup = document.createElement("div");
+    	popup.id = "popup";
+    	popup.className = "ol-popup";
+    	
+    	//<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    	var popupCloser = document.createElement("a");
+    	popupCloser.id = "popup-closer";
+    	popupCloser.className = "ol-popup-closer";
+    	
+    	popup.appendChild(popupCloser);
+    	
+    	var popContent = document.createElement("div");
+    	popContent.id = "popup-content";
+    	
+    	popup.appendChild(popContent);
+    	
+    	document.body.appendChild(popup);
+    	
+    	console.info(document.getElementById("popup"));
     	
     	me.popContainer = document.getElementById('popup');
     	me.popContent = document.getElementById('popup-content');
