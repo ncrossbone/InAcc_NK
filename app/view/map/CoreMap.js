@@ -476,25 +476,25 @@ Ext.define('InAcc.view.map.CoreMap', {
     	//dLayer.layerOn("NK_SGG");
     	//dLayer.layerOn("NK_SIDO");
     	//dLayer.layerOn("H0040000");
-    	
-    	/*var westLayerTab = Ext.getCmp("westLayerTab");
+    	var dLayer = Ext.getCmp("Layer_");
+    	var westLayerTab = Ext.getCmp("westLayerTab");
     	
     	if(westLayerTab != undefined){
     		
     		westLayerTab.setInitChecked(dLayer, ["NK_SGG", "NK_SIDO", "H0040000"])
-    	}*/
+    	}
     	
-    	//var eLayer = Ext.getCmp("Layer_East");
+    	var eLayer = Ext.getCmp("Layer_East");
     	//dLayer.layerOn("NK_SGG");
     	//dLayer.layerOn("NK_SIDO");
     	//dLayer.layerOn("H0040000");
     	
-    	/*var eastLayerTab = Ext.getCmp("eastLayerTab");
+    	var eastLayerTab = Ext.getCmp("eastLayerTab");
     	
     	if(eastLayerTab != undefined){
     		
     		eastLayerTab.setInitChecked(eLayer, ["NK_SGG", "NK_SIDO", "H0040000"])
-    	}*/
+    	}
     },
     
     wheelZoom:function(zoomLevel){
@@ -586,9 +586,36 @@ Ext.define('InAcc.view.map.CoreMap', {
     		$("#map4").addClass("mapDefault");
     	}
     	
-    	var result = parseInt(val.id.split('map')[1]);
-    	me.baseMapLayers[result].setVisible(true);
     	
+    	
+    	var result = parseInt(val.id.split('map')[1]);
+    	
+    	/*if(result=="3"){
+    		var layer = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: "http://202.68.238.120:8880/geonuris/wms?GDX=OffLineMap.xml",
+					projection:"EPSG:5179",
+					params : {
+						LAYERS : "ROOT",
+						CRS : "EPSG:5179",
+						format : 'image/png',
+						bgcolor : '0xffffff', 
+						exceptions : 'BLANK',
+						label : 'HIDE_OVERLAP',
+						graphic_buffer : '64',
+						ANTI : 'true',
+						TEXT_ANTI : 'false'
+					}
+				})
+			});
+    		
+    		this.map.addLayer(layer);
+			layer.setVisible(true);
+    	}else{
+    		me.baseMapLayers[result].setVisible(true);
+    	}*/
+    	
+    	me.baseMapLayers[result].setVisible(true);
     	for(var i =0; i<me.baseMapLayers.length; i++){
     		if(result != i){
     			me.baseMapLayers[i].setVisible(false);

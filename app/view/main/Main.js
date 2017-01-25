@@ -295,7 +295,7 @@ Ext.define("InAcc.view.main.Main", {
 						LAYERS : "ROOT",
 						CRS : "EPSG:5179",
 						format : 'image/png',
-						bgcolor : '0xffffff', 
+						bgcolor : '0x000000', 
 						exceptions : 'BLANK',
 						label : 'HIDE_OVERLAP',
 						graphic_buffer : '64',
