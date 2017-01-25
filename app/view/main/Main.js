@@ -287,6 +287,34 @@ Ext.define("InAcc.view.main.Main", {
 				delay :350
 			});
 			
+			var layerRight = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: InAcc.global.Variable.getMapServiceWmsUrl() + "ImageData.xml",
+					projection:"EPSG:5179",
+					params : {
+						LAYERS : "ROOT",
+						CRS : "EPSG:5179",
+						format : 'image/png',
+						bgcolor : '0xffffff', 
+						exceptions : 'BLANK',
+						label : 'HIDE_OVERLAP',
+						graphic_buffer : '64',
+						ANTI : 'true',
+						TEXT_ANTI : 'true'
+					}
+				})
+			});
+			
+			var rightTimer = setInterval(function(){
+				//console.info(Ext.getCmp("_mapDiv_East").map);
+				var mapRight = Ext.getCmp("_mapDiv_East").map;
+				if(mapRight != undefined && mapRight != null){
+					clearInterval(rightTimer);
+					mapRight.addLayer(layerRight);
+					layerRight.setVisible(true);
+				}
+			}, 1);
+			
 			var panelEast = Ext.create("Ext.panel.Panel", {
 				//title: "panel1",
 				header: false,

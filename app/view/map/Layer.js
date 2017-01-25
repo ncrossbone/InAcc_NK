@@ -37,6 +37,7 @@ Ext.define('InAcc.view.map.Layer', {
 						var layer = new ol.layer.Image({
 							source: new ol.source.ImageWMS({
 								url: mapServiceWmsUrl + "NK_Test.xml",
+								projection:"EPSG:5179",
 								params : {
 									LAYERS : id,
 									CRS : "EPSG:5179",

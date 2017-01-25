@@ -603,6 +603,7 @@ Ext.define("InAcc.global.Function", {
 		            			receiveData.push({id: idVal, name: nameVal});
 		            		}
 		            	});
+		            	
 						for(var i = 0 ; i < receiveData.length ; i++){
 							$('#sidoSelect').append('<option value='+receiveData[i].id+' >'+receiveData[i].name+'</option>');
 						}

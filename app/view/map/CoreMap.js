@@ -446,8 +446,8 @@ Ext.define('InAcc.view.map.CoreMap', {
     		//extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
     		//extent : ol.proj.get( "EPSG:4326" ).getExtent(),
     		view: new ol.View({
-    			projection : "EPSG:5179",
-    	        center: ol.proj.transform([127, 40], 'EPSG:4326', 'EPSG:5179'),
+    			projection : "EPSG:3857",
+    	        center: ol.proj.transform([127, 40], 'EPSG:4326', 'EPSG:3857'),
     	        zoom: 7,
     	        minZoom: 7,
     	        maxZoom: 18
@@ -472,7 +472,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     	});
     	
 
-    	var dLayer = Ext.getCmp("Layer_");
+    	/*var dLayer = Ext.getCmp("Layer_");
     	//dLayer.layerOn("NK_SGG");
     	//dLayer.layerOn("NK_SIDO");
     	//dLayer.layerOn("H0040000");
@@ -482,7 +482,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     	if(westLayerTab != undefined){
     		
     		westLayerTab.setInitChecked(dLayer, ["NK_SGG", "NK_SIDO", "H0040000"])
-    	}
+    	}*/
     	
     	//var eLayer = Ext.getCmp("Layer_East");
     	//dLayer.layerOn("NK_SGG");
@@ -604,9 +604,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     	me.popContainer = document.getElementById('popup');
     	me.popContent = document.getElementById('popup-content');
     	me.popCloser = document.getElementById('popup-closer');
-    	console.info(me.popContainer);
-    	console.info(me.popContent);
-    	console.info(me.popCloser);
+    	
     	
     	if(me.popCloser != undefined && me.popCloser != null){
     		

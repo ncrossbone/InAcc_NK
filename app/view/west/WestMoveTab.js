@@ -183,8 +183,52 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 		            	handler: function(grid, rowIndex, colIndex) {
 		            		var rec = grid.getStore().getAt(rowIndex);
 		            		var coreMap = Ext.getCmp("_mapDiv_");
-		            		coreMap.map.getView().setCenter(ol.proj.transform([rec.data.xpos,rec.data.ypos], 'EPSG:4326', 'EPSG:5179'));
+		            		
+		            		var coord = ol.proj.transform([parseInt(rec.data.xpos),parseInt(rec.data.ypos)], 'EPSG:4326', 'EPSG:3857');
+		            		
+		            		coreMap.map.getView().setCenter(coord);
 		            		coreMap.map.getView().setZoom(17);
+		            		
+		            		
+		            		var iconFeature = new ol.Feature({
+	                            geometry: new ol.geom.Point(coord),
+	                            name: 'Null Island',
+	                            population: 4000,
+	                            rainfall: 500
+	                          });
+		            		
+		            		 var iconStyle = new ol.style.Style({
+		                         image: new ol.style.Icon(({
+		                           anchor: [0.5, 46],
+		                           anchorXUnits: 'fraction',
+		                           anchorYUnits: 'pixels',
+		                           src: './resources/images/symbol/symbol_01.png'
+		                         }))
+		                       });
+		            		 
+		            		 iconFeature.setStyle(iconStyle);
+		            		 
+		            		 var vectorSource = new ol.source.Vector({
+		                         features: [iconFeature]
+		                       });
+		                     
+		                     var vectorLayer = new ol.layer.Vector({
+		                     	id: "symbolLayer",
+		                         source: vectorSource
+		                       });
+		                     
+		                     var layerName = coreMap.map.getLayers();
+		                     
+		                     for(var i = 0 ; i < layerName.array_.length  ; i++){
+		                     	if(layerName.array_[i].values_.id == "symbolLayer"){
+		                     		//symbol layer 초기화
+		                     		coreMap.map.removeLayer(layerName.array_[i]);
+		                     	}
+		                     }
+		                     
+		                     //symbol layer 추가
+		                     coreMap.map.addLayer(vectorLayer);
+		            		
 		            	}   
 		            }]
 		         }]
@@ -303,7 +347,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 	                        var y = Number(rec.data.y);
 	                        var coreMap = Ext.getCmp("_mapDiv_");
 	                        
-	                        coreMap.map.getView().setCenter([x,y]);
+	                        coreMap.map.getView().setCenter(ol.proj.transform([x,y], 'EPSG:5179', 'EPSG:3857'));
 	                        coreMap.map.getView().setZoom(17);
 		            	}   
 		            }]

@@ -9,6 +9,21 @@ Ext.define("InAcc.view.west.WestLayerTab", {
 	linkedLayerId: "Layer_",
 	border:false,
 	title:"주제도",
+	tabConfig: {
+        listeners: {
+            click: function() {
+            	var coreMap = Ext.getCmp("_mapDiv_");
+            	var layerName = coreMap.map.getLayers();
+                
+                for(var i = 0 ; i < layerName.array_.length  ; i++){
+                	if(layerName.array_[i].values_.id == "symbolLayer"){
+                		//symbol layer 초기화
+                		coreMap.map.removeLayer(layerName.array_[i]);
+                	}
+                }
+            }
+        }
+    },
 	bodyStyle:"background-color:#f6f6f6;",
 	setChecked: function(parentNode, chkNode, layerObj){
 

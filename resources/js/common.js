@@ -17,7 +17,8 @@ ZoomToExtent = function(sidoCd,sggCd){
 		}
 		
 	}
-   coreMap.map.getView().fit(extent, coreMap.map.getSize());
+	var extentResult = ol.proj.transformExtent(extent, 'EPSG:5179', 'EPSG:3857');
+   coreMap.map.getView().fit(extentResult, coreMap.map.getSize());
       
 }
 
@@ -51,7 +52,9 @@ DemonLocation = function(val){
       extent = [1153278.2609002688, 2411216.215598996, 1225104.9896020433, 2479789.3484978527];
    }
    
-   coreMap.map.getView().fit(extent, coreMap.map.getSize());
+   var extentResult = ol.proj.transformExtent(extent, 'EPSG:5179', 'EPSG:3857');
+   
+   coreMap.map.getView().fit(extentResult, coreMap.map.getSize());
    
    
 }
@@ -99,11 +102,12 @@ imgLyr = function(id){
 		var layer = new ol.layer.Image({
 			source: new ol.source.ImageWMS({
 				url: InAcc.global.Variable.getMapServiceWmsUrl() + id,
+				projection:"EPSG:5179",
 				params : {
 					LAYERS : "ROOT",
 					CRS : "EPSG:5179",
 					format : 'image/png',
-					bgcolor : '0xffffff', 
+					bgcolor : '0x000000', 
 					exceptions : 'BLANK',
 					label : 'HIDE_OVERLAP',
 					graphic_buffer : '64',
