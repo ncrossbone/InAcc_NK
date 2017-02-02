@@ -17,7 +17,8 @@ ZoomToExtent = function(sidoCd,sggCd){
 		}
 		
 	}
-   coreMap.map.getView().fit(extent, coreMap.map.getSize());
+	var extentResult = ol.proj.transformExtent(extent, 'EPSG:5179', 'EPSG:3857');
+   coreMap.map.getView().fit(extentResult, coreMap.map.getSize());
       
 }
 
@@ -51,7 +52,9 @@ DemonLocation = function(val){
       extent = [1153278.2609002688, 2411216.215598996, 1225104.9896020433, 2479789.3484978527];
    }
    
-   coreMap.map.getView().fit(extent, coreMap.map.getSize());
+   var extentResult = ol.proj.transformExtent(extent, 'EPSG:5179', 'EPSG:3857');
+   
+   coreMap.map.getView().fit(extentResult, coreMap.map.getSize());
    
    
 }
@@ -86,50 +89,25 @@ _offLyr = [];
 
 imgLyr = function(id){
 	var dlayer = Ext.getCmp("Layer_");
+	
 	var idIdx = this._offLyr.map(function(layer){
 		return layer.id
 	}).indexOf(id);
 	
 	
 	if(idIdx==-1){
-	var	proxyUrl = InAcc.global.Variable.getProxyUrl();
-	var coreMap = Ext.getCmp("_mapDiv_");
-	var params = InAcc.global.Variable.getMapServiceWmsUrl() + id + "&REQUEST=GetCapabilities&SERVICE=WMS";
+		var	proxyUrl = InAcc.global.Variable.getProxyUrl();
+		var coreMap = Ext.getCmp("_mapDiv_");
 
-
-	var url = proxyUrl + params;
-	var strArr = [];
-	var lyrs = [];
-	$.ajax({
-		url: url,
-		type : 'GET',
-		async : false,
-		contentType : 'text/xml',
-		success : function(response_) {
-
-			$(response_).find("Layer").each(function(idx,obj){
-				if(idx!=0){
-					strArr.push($(this).find("title"));
-				}
-			});
-			
-			for(var i=0; i < strArr.length; i++){
-				if(strArr[i].prevObject[0].childNodes[1].innerHTML!="OffLineMap_GM"){
-					_lyrId.push(strArr[i].prevObject[0].childNodes[1].innerHTML);
-				}
-			}
-
-		}
-	});
-	for(var i=0; i<_lyrId.length; i++){
-		var layer = new ol.layer.Tile({
-			source: new ol.source.TileWMS({
+		var layer = new ol.layer.Image({
+			source: new ol.source.ImageWMS({
 				url: InAcc.global.Variable.getMapServiceWmsUrl() + id,
+				projection:"EPSG:5179",
 				params : {
-					LAYERS : _lyrId[i],
+					LAYERS : "ROOT",
 					CRS : "EPSG:5179",
 					format : 'image/png',
-					bgcolor : '0xffffff', 
+					bgcolor : '0x000000', 
 					exceptions : 'BLANK',
 					label : 'HIDE_OVERLAP',
 					graphic_buffer : '64',
@@ -141,17 +119,12 @@ imgLyr = function(id){
 		});
 		coreMap.map.addLayer(layer);
 		layer.setVisible(true);
-		lyrs.push(layer);
-	}
 
 
-	_offLyr.push({id:id, layer:lyrs});
-	lyrs = new Object
-	_lyrId = [];
+		_offLyr.push({id:id, layer:layer});
+		_lyrId = [];
 	}else{
-		for(var i=0; i < _offLyr[idIdx].layer.length; i++){
-			_offLyr[idIdx].layer[i].setVisible(true);
-		}
+		_offLyr[idIdx].layer.setVisible(true);
 	}
 }
 
@@ -161,7 +134,5 @@ offImgLyr = function(id){
 		return layer.id
 	}).indexOf(id);
 	
-	for(var i=0; i < _offLyr[idIdx].layer.length; i++){
-		_offLyr[idIdx].layer[i].setVisible(false);
-	}
+	_offLyr[idIdx].layer.setVisible(false);
 }

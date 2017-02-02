@@ -426,6 +426,7 @@ Ext.define('InAcc.view.map.CoreMap', {
     	//console.info(this.baseMapLayers);
     	proj4.defs("EPSG:5179", "+proj=tmerc +lat_0=38 +lon_0=127.5 +k=0.9996 +x_0=1000000 +y_0=2000000 +ellps=GRS80 +units=m +no_defs");
     	
+    	
     	Ext.create("InAcc.view.map.Layer", {
     		id: "Layer_",
     		mapId: "_mapDiv_"
@@ -445,17 +446,16 @@ Ext.define('InAcc.view.map.CoreMap', {
     		//extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
     		//extent : ol.proj.get( "EPSG:4326" ).getExtent(),
     		view: new ol.View({
-    			projection : "EPSG:5179",
-    	        center: [956850.644712,2192378.418181],
-    	        //resolutions:[1222.99245256249,611.496226281245,305.7481131406225,152.87405657031124,76.43702828515562,38.21851414257781,19.109257071288905,9.554628535644452,4.777314267822226,2.388657133911113,1.1943285669555566,0.5971642834777783],
+    			projection : "EPSG:3857",
+    	        center: ol.proj.transform([127, 40], 'EPSG:4326', 'EPSG:3857'),
     	        zoom: 7,
     	        minZoom: 7,
     	        maxZoom: 18
     		})
     	});
-    
+    	
     	// 속성 팝업 설정
-    	//me.setInfoPopup();
+    	me.setInfoPopup();
     	
     	//var mapHistory = new ol.navigationHistory( this.map );
     	this.map.on('moveend', this.mapExtentChange, this);
@@ -472,10 +472,29 @@ Ext.define('InAcc.view.map.CoreMap', {
     	});
     	
 
-    	/*var dLayer = Ext.getCmp("Layer_");
-    	dLayer.layerOn("NK_SGG");
-    	dLayer.layerOn("NK_SIDO");
-    	dLayer.layerOn("H0040000");*/
+
+    	//dLayer.layerOn("NK_SGG");
+    	//dLayer.layerOn("NK_SIDO");
+    	//dLayer.layerOn("H0040000");
+    	var dLayer = Ext.getCmp("Layer_");
+    	var westLayerTab = Ext.getCmp("westLayerTab");
+    	
+    	if(westLayerTab != undefined){
+    		
+    		westLayerTab.setInitChecked(dLayer, ["NK_SGG", "NK_SIDO", "H0040000"])
+    	}
+    	
+    	var eLayer = Ext.getCmp("Layer_East");
+    	//dLayer.layerOn("NK_SGG");
+    	//dLayer.layerOn("NK_SIDO");
+    	//dLayer.layerOn("H0040000");
+    	
+    	var eastLayerTab = Ext.getCmp("eastLayerTab");
+    	
+    	if(eastLayerTab != undefined){
+    		
+    		eastLayerTab.setInitChecked(eLayer, ["NK_SGG", "NK_SIDO", "H0040000"])
+    	}
     },
     
     wheelZoom:function(zoomLevel){
@@ -567,9 +586,36 @@ Ext.define('InAcc.view.map.CoreMap', {
     		$("#map4").addClass("mapDefault");
     	}
     	
-    	var result = parseInt(val.id.split('map')[1]);
-    	me.baseMapLayers[result].setVisible(true);
     	
+    	
+    	var result = parseInt(val.id.split('map')[1]);
+    	
+    	/*if(result=="3"){
+    		var layer = new ol.layer.Image({
+				source: new ol.source.ImageWMS({
+					url: "http://202.68.238.120:8880/geonuris/wms?GDX=OffLineMap.xml",
+					projection:"EPSG:5179",
+					params : {
+						LAYERS : "ROOT",
+						CRS : "EPSG:5179",
+						format : 'image/png',
+						bgcolor : '0xffffff', 
+						exceptions : 'BLANK',
+						label : 'HIDE_OVERLAP',
+						graphic_buffer : '64',
+						ANTI : 'true',
+						TEXT_ANTI : 'false'
+					}
+				})
+			});
+    		
+    		this.map.addLayer(layer);
+			layer.setVisible(true);
+    	}else{
+    		me.baseMapLayers[result].setVisible(true);
+    	}*/
+    	
+    	me.baseMapLayers[result].setVisible(true);
     	for(var i =0; i<me.baseMapLayers.length; i++){
     		if(result != i){
     			me.baseMapLayers[i].setVisible(false);
@@ -582,27 +628,57 @@ Ext.define('InAcc.view.map.CoreMap', {
     	
     	var me = this;
     	
+    	var popup = document.createElement("div");
+    	popup.id = "popup";
+    	popup.className = "ol-popup";
+    	
+    	//<a href="#" id="popup-closer" class="ol-popup-closer"></a>
+    	var popupCloser = document.createElement("a");
+    	popupCloser.id = "popup-closer";
+    	popupCloser.className = "ol-popup-closer";
+    	
+    	popup.appendChild(popupCloser);
+    	
+    	var popContent = document.createElement("div");
+    	popContent.id = "popup-content";
+    	
+    	popup.appendChild(popContent);
+    	
+    	document.body.appendChild(popup);
+    	
+    	console.info(document.getElementById("popup"));
+    	
     	me.popContainer = document.getElementById('popup');
     	me.popContent = document.getElementById('popup-content');
     	me.popCloser = document.getElementById('popup-closer');
     	
-    		me.popCloser.onclick = function(){
-    			me.popup.setPosition(undefined);
-    			me.popCloser.blur();
-    			return false;
-    		}
-
-    		me.popup = new ol.Overlay(({
-    			element: me.popContainer,
-    			autoPan: true,
-    			autoPanAnimation: {
-    				duration: 250
-    			}
-    		}));
-
-    		if(me.map != undefined && me.map != null){
+    	
+    	if(me.popCloser != undefined && me.popCloser != null){
+    		
+	    	me.popCloser.onclick = function(){
+	    		me.popup.setPosition(undefined);
+	    		me.popCloser.blur();
+	    		return false;
+	    	}
+    	}
+    	
+    	if(me.popup != undefined && me.popup != null){
+    		
+	    	me.popup = new ol.Overlay(({
+	    		element: me.popContainer,
+	    		autoPan: true,
+	    		autoPanAnimation: {
+	    			duration: 250
+	    		}
+	    	}));
+    	}
+    	
+    	if(me.map != undefined && me.map != null){
+    		
+    		if(me.popup != undefined && me.popup != null){
+    			
     			me.map.addOverlay(me.popup);
     		}
     	}
-    
+    }
 });
