@@ -17,8 +17,8 @@ ZoomToExtent = function(sidoCd,sggCd){
 		}
 		
 	}
-	var extentResult = ol.proj.transformExtent(extent, 'EPSG:5179', 'EPSG:3857');
-   coreMap.map.getView().fit(extentResult, coreMap.map.getSize());
+	//var extentResult = ol.proj.transformExtent(extent, 'EPSG:5179', 'EPSG:3857');
+   coreMap.map.getView().fit(extent, coreMap.map.getSize());
       
 }
 
@@ -52,9 +52,8 @@ DemonLocation = function(val){
       extent = [1153278.2609002688, 2411216.215598996, 1225104.9896020433, 2479789.3484978527];
    }
    
-   var extentResult = ol.proj.transformExtent(extent, 'EPSG:5179', 'EPSG:3857');
-   
-   coreMap.map.getView().fit(extentResult, coreMap.map.getSize());
+   //var extentResult = ol.proj.transformExtent(extent, 'EPSG:5179', 'EPSG:3857');
+   coreMap.map.getView().fit(extent, coreMap.map.getSize());
    
    
 }
@@ -107,7 +106,7 @@ imgLyr = function(id){
 					LAYERS : "ROOT",
 					CRS : "EPSG:5179",
 					format : 'image/png',
-					bgcolor : '0x000000', 
+					bgcolor : '0x000001', 
 					exceptions : 'BLANK',
 					label : 'HIDE_OVERLAP',
 					graphic_buffer : '64',

@@ -34,8 +34,8 @@ Ext.define('InAcc.view.map.Layer', {
 
 					if(layerIdx==-1){
 						//console.info(mapServiceWmsUrl);
-						var layer = new ol.layer.Image({
-							source: new ol.source.ImageWMS({
+						var layer = new ol.layer.Tile({
+							source: new ol.source.TileWMS({
 								url: mapServiceWmsUrl + "NK_Test.xml",
 								projection:"EPSG:5179",
 								params : {

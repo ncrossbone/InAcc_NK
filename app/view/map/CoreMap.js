@@ -446,14 +446,15 @@ Ext.define('InAcc.view.map.CoreMap', {
     		//extent : [118.81636217878827,34.18199192485683,136.35748315880258,46.992671531968845],
     		//extent : ol.proj.get( "EPSG:4326" ).getExtent(),
     		view: new ol.View({
-    			projection : "EPSG:3857",
-    	        center: ol.proj.transform([127, 40], 'EPSG:4326', 'EPSG:3857'),
+    			projection : "EPSG:5179",
+    	        center: ol.proj.transform([127, 40], 'EPSG:4326', 'EPSG:5179'),
     	        zoom: 7,
     	        minZoom: 7,
     	        maxZoom: 18
     		})
     	});
     	
+    	console.info(me.map.getView());
     	// 속성 팝업 설정
     	me.setInfoPopup();
     	

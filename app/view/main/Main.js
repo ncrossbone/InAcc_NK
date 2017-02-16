@@ -42,13 +42,22 @@ Ext.define("InAcc.view.main.Main", {
 	}],
 	
 	initComponent: function(){
-		
+		var me = this;
 		this.callParent();
 		this.setWidth(Ext.getBody().getWidth());
 		this.setHeight(Ext.getBody().getHeight());
 		Ext.EventManager.onWindowResize( this.onBrowserResize, this );
+		
+		Ext.defer(function(){
+			
+			me.onSplitMapClick("load");
+			
+			Ext.defer(function(){
+				
+				me.onSplitMapClick();
+			}, 500);
+    	}, 500);
 	},
-	
 	
 	onBrowserResize: function( width, height ) {
 		console.info(width);
@@ -106,7 +115,7 @@ Ext.define("InAcc.view.main.Main", {
 		}
 		
 	},
-	onSplitMapClick: function(){
+	onSplitMapClick: function(callType){
 		
 		var me = this;
 		var splitMapCont = Ext.getCmp("splitMapContainer");
@@ -142,22 +151,40 @@ Ext.define("InAcc.view.main.Main", {
 				}
 			});
 			
-			var splitMapContainer = Ext.create("Ext.panel.Panel", {
-				id: "splitMapContainer",
-				width: contWidth,
-				height: contHeight,
-				//title: "split test",
-				header: false,
-				defaults: {
-					split: true
-				},
-				layout: {
-					type: "border"
-				},
-				style: {
-					"z-index": -2
-				}
-			});
+			var splitMapContainer = null;
+			
+			if(callType == "load"){
+				
+				splitMapContainer = Ext.create("Ext.panel.Panel", {
+					id: "splitMapContainer",
+					width: contWidth,
+					height: contHeight,
+					//title: "split test",
+					header: false,
+					style: {
+						"z-index": -2
+					}
+				});
+			}
+			else{
+				
+				splitMapContainer = Ext.create("Ext.panel.Panel", {
+					id: "splitMapContainer",
+					width: contWidth,
+					height: contHeight,
+					//title: "split test",
+					header: false,
+					defaults: {
+						split: true
+					},
+					layout: {
+						type: "border"
+					},
+					style: {
+						"z-index": -2
+					}
+				});
+			}
 			
 			var eatLayerWindow = Ext.create("Ext.TabPanel", {
 				id: "eastcontainer",
@@ -295,7 +322,7 @@ Ext.define("InAcc.view.main.Main", {
 						LAYERS : "ROOT",
 						CRS : "EPSG:5179",
 						format : 'image/png',
-						bgcolor : '0x000000', 
+						bgcolor : '0x000001', 
 						exceptions : 'BLANK',
 						label : 'HIDE_OVERLAP',
 						graphic_buffer : '64',
@@ -486,7 +513,6 @@ Ext.define("InAcc.view.main.Main", {
 	      me.popContainer = document.getElementById('popup');
 	      me.popContent = document.getElementById('popup-content');
 	      me.popCloser = document.getElementById('popup-closer');
-console.info(me.popContainer)
 	      me.popCloser.onclick = function(){
 	         me.popup.setPosition(undefined);
 	         me.popCloser.blur();

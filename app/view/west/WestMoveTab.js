@@ -184,8 +184,8 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 		            		var rec = grid.getStore().getAt(rowIndex);
 		            		var coreMap = Ext.getCmp("_mapDiv_");
 		            		
-		            		var coord = ol.proj.transform([parseInt(rec.data.xpos),parseInt(rec.data.ypos)], 'EPSG:4326', 'EPSG:3857');
-		            		
+		            		var coord2 = ol.proj.transform([parseFloat(rec.data.xpos),parseFloat(rec.data.ypos)], 'EPSG:4326', 'EPSG:3857');
+		            		var coord = ol.proj.transform(coord2, 'EPSG:3857', 'EPSG:5179');
 		            		coreMap.map.getView().setCenter(coord);
 		            		coreMap.map.getView().setZoom(17);
 		            		
@@ -347,7 +347,7 @@ Ext.define("InAcc.view.west.WestMoveTab", {
 	                        var y = Number(rec.data.y);
 	                        var coreMap = Ext.getCmp("_mapDiv_");
 	                        
-	                        coreMap.map.getView().setCenter(ol.proj.transform([x,y], 'EPSG:5179', 'EPSG:3857'));
+	                        coreMap.map.getView().setCenter([x,y]);
 	                        coreMap.map.getView().setZoom(17);
 		            	}   
 		            }]
