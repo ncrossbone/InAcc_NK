@@ -19,14 +19,14 @@ Ext.define("InAcc.view.north.NorthContainer", {
 		 "</select>"+
 		 "<button id='selectButton' style='width: 60px; border: transparent; font-family: notokr; color:gray;'>" +
 		 "이동</button>"+
-		 "<select id='demonLocation' style='margin-left:50px; width: 130px; border: transparent; font-family: notokr; color:gray;'>" +
-			"<option selected disabled >시범지역위치이동</option>" +
-			"<option value='na'>나선</option>" +
-			"<option value='nam'>남포</option>" +
-			"<option value='moo'>무산</option>" +
-			"<option value='sin'>신의주</option>" +
-			"<option value='won'>원산</option>" +
-			"<option value='chang'>청진</option>" +
+		 "<select id='demonLocation'  name='demonLocation' class='demonLocation' style='margin-left:50px; width: 130px; border: transparent; font-family: notokr; color:gray;'>" +
+			"<option selected disabled hidden text='시작위치이동' >시범지역위치이동</option>" +
+			"<option class='demonLocation_option' value='na' text='나선'>나선</option>" +
+			"<option class='demonLocation_option' value='nam' text ='남포'>남포</option>" +
+			"<option class='demonLocation_option' value='moo' text = '무산'>무산</option>" +
+			"<option class='demonLocation_option' value='sin' text = '신의주'>신의주</option>" +
+			"<option class='demonLocation_option' value='won' text ='원산'>원산</option>" +
+			"<option class='demonLocation_option' value='chang' text='청진'>청진</option>" +
 		 "</select>" +
 		 "</div>" +
 		 "<span id='mapSelect'>" +
@@ -107,9 +107,15 @@ Ext.onReady(function(){
 	});
 	
 	//demonLocation
+	$('#demonLocation').click(function() {
+		var selectText = $("#demonLocation option:selected").text();
+		$(this).find("option:eq(0)").prop("selected", true);
+		$(this).find("option:eq(0)").prop("text", selectText);
+    });
+	
 	
 	$('#demonLocation').change(function() {
-		var val = $("#demonLocation option:selected");
+		var val = $("#demonLocation");
 		DemonLocation(val);
 	});
 });
